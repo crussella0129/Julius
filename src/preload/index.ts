@@ -10,6 +10,7 @@ export interface JuliusAPI {
   loadModule: (moduleId: string) => Promise<unknown>
   loadLesson: (moduleId: string, lessonId: string) => Promise<unknown>
   loadExercise: (moduleId: string, lessonId: string, exerciseFile: string) => Promise<unknown>
+  listExercises: (moduleId: string, lessonId: string) => Promise<string[]>
 
   // Python execution
   runPython: (code: string, timeout?: number) => Promise<{
@@ -49,6 +50,8 @@ export interface JuliusAPI {
   getLessonProgress: (lessonId: string) => Promise<unknown>
   updateLessonProgress: (lessonId: string, moduleId: string, completed: boolean) => Promise<{ ok: boolean }>
   getAllLessonProgress: () => Promise<unknown[]>
+  getExerciseAttempts: (exerciseId: string) => Promise<unknown[]>
+  getLessonAttempts: (lessonId: string) => Promise<{ exercise_id: string; best_success: number }[]>
 }
 
 const api: JuliusAPI = {
@@ -60,6 +63,8 @@ const api: JuliusAPI = {
   loadLesson: (moduleId, lessonId) => ipcRenderer.invoke('load-lesson', moduleId, lessonId),
   loadExercise: (moduleId, lessonId, exerciseFile) =>
     ipcRenderer.invoke('load-exercise', moduleId, lessonId, exerciseFile),
+  listExercises: (moduleId, lessonId) =>
+    ipcRenderer.invoke('list-exercises', moduleId, lessonId),
 
   runPython: (code, timeout) => ipcRenderer.invoke('run-python', code, timeout),
 
@@ -72,7 +77,9 @@ const api: JuliusAPI = {
   getLessonProgress: (lessonId) => ipcRenderer.invoke('db-get-lesson-progress', lessonId),
   updateLessonProgress: (lessonId, moduleId, completed) =>
     ipcRenderer.invoke('db-update-lesson-progress', lessonId, moduleId, completed),
-  getAllLessonProgress: () => ipcRenderer.invoke('db-get-all-lesson-progress')
+  getAllLessonProgress: () => ipcRenderer.invoke('db-get-all-lesson-progress'),
+  getExerciseAttempts: (exerciseId) => ipcRenderer.invoke('db-get-exercise-attempts', exerciseId),
+  getLessonAttempts: (lessonId) => ipcRenderer.invoke('db-get-lesson-attempts', lessonId)
 }
 
 contextBridge.exposeInMainWorld('julius', api)

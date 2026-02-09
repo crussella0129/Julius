@@ -7,6 +7,7 @@ interface JuliusAPI {
   loadModule: (moduleId: string) => Promise<ModuleMeta | null>
   loadLesson: (moduleId: string, lessonId: string) => Promise<LessonMeta | null>
   loadExercise: (moduleId: string, lessonId: string, exerciseFile: string) => Promise<ExerciseData | null>
+  listExercises: (moduleId: string, lessonId: string) => Promise<string[]>
   runPython: (code: string, timeout?: number) => Promise<PythonResult>
   getProgress: () => Promise<unknown[]>
   getConceptMastery: () => Promise<ConceptMasteryRow[]>
@@ -17,6 +18,8 @@ interface JuliusAPI {
   getLessonProgress: (lessonId: string) => Promise<LessonProgressRow | undefined>
   updateLessonProgress: (lessonId: string, moduleId: string, completed: boolean) => Promise<{ ok: boolean }>
   getAllLessonProgress: () => Promise<LessonProgressRow[]>
+  getExerciseAttempts: (exerciseId: string) => Promise<unknown[]>
+  getLessonAttempts: (lessonId: string) => Promise<{ exercise_id: string; best_success: number }[]>
 }
 
 interface ModuleMeta {

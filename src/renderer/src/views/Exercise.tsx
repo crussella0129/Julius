@@ -3,6 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom'
 import CodeEditor from '../components/CodeEditor'
 import Feedback from '../components/Feedback'
 import { useProgressStore } from '../stores/progress'
+import { createNewCard } from '../lib/fsrs'
 
 // Parsons: simple sortable without full dnd-kit for initial version
 function ParsonsExercise({ exercise, onResult }: { exercise: ExerciseData; onResult: (correct: boolean) => void }): JSX.Element {
@@ -257,18 +258,20 @@ function WriteExercise({ exercise, onResult }: { exercise: ExerciseData; onResul
 
     // Run tests if defined
     if (exercise.tests && exercise.tests.length > 0 && result.exitCode === 0) {
-      const testCode = `
-output = ${JSON.stringify(result.stdout)}
-results = []
-${exercise.tests.map((t, i) => `
-try:
-    passed = bool(${t.check})
-    results.append(f"${i}:{'1' if True else '0'}" if passed else f"${i}:0")
-except Exception as e:
-    results.append(f"${i}:0")
-`).join('')}
-print("TESTS:" + ",".join(results))
-`
+      const checks = exercise.tests.map((t) => t.check)
+      const testCode = [
+        `output = ${JSON.stringify(result.stdout)}`,
+        `results = []`,
+        ...checks.map((check, i) => [
+          `try:`,
+          `    _passed = bool(${check})`,
+          `    results.append("${i}:" + ("1" if _passed else "0"))`,
+          `except Exception:`,
+          `    results.append("${i}:0")`
+        ].join('\n')),
+        `print("TESTS:" + ",".join(results))`
+      ].join('\n')
+
       const testResult = await window.julius.runPython(testCode)
       const testLine = testResult.stdout.split('\n').find((l) => l.startsWith('TESTS:'))
       if (testLine) {
@@ -339,7 +342,7 @@ export default function Exercise(): JSX.Element {
   const [completed, setCompleted] = useState(false)
   const startTime = useRef(Date.now())
   const navigate = useNavigate()
-  const { recordAttempt, updateMastery, loadAll } = useProgressStore()
+  const { recordAttempt, updateMastery, upsertFsrsCard, updateLessonProgress, loadAll } = useProgressStore()
 
   useEffect(() => {
     if (!moduleId || !lessonId || !exerciseFile) return
@@ -367,10 +370,53 @@ export default function Exercise(): JSX.Element {
 
     if (correct) {
       setCompleted(true)
+
+      // Create FSRS card for spaced repetition review
+      const now = new Date()
+      const card = createNewCard()
+      await upsertFsrsCard({
+        exerciseId: exercise.id,
+        due: card.due.toISOString(),
+        stability: card.stability,
+        difficulty: card.difficulty,
+        elapsed_days: card.elapsed_days,
+        scheduled_days: card.scheduled_days,
+        reps: card.reps,
+        lapses: card.lapses,
+        state: card.state,
+        last_review: now.toISOString()
+      })
+
       // Update mastery for each concept
       for (const concept of exercise.concept_tags) {
         await updateMastery(concept, 'learning')
       }
+
+      // Check if all exercises in this lesson are now completed
+      const lessonAttempts = await window.julius.getLessonAttempts(lessonId)
+      const exercises = await window.julius.listExercises(moduleId, lessonId)
+      const passedExercises = new Set(
+        lessonAttempts.filter((a) => a.best_success === 1).map((a) => a.exercise_id)
+      )
+
+      // Load all exercises to get their IDs for comparison
+      let allPassed = exercises.length > 0
+      for (const exFile of exercises) {
+        const exData = await window.julius.loadExercise(moduleId, lessonId, exFile)
+        if (exData && !passedExercises.has(exData.id)) {
+          allPassed = false
+          break
+        }
+      }
+
+      if (allPassed && exercises.length > 0) {
+        await updateLessonProgress(lessonId, moduleId, true)
+        // Upgrade concepts to proficient when lesson is complete
+        for (const concept of exercise.concept_tags) {
+          await updateMastery(concept, 'proficient')
+        }
+      }
+
       await loadAll()
     }
   }

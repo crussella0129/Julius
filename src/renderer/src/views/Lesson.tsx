@@ -23,17 +23,9 @@ export default function Lesson(): JSX.Element {
       setLoading(false)
     })
 
-    // Load exercise file list
-    window.julius.loadModule(moduleId).then(() => {
-      // We'll discover exercises through the content loader
-      // For now, try common exercise filenames
-      const exerciseFiles = [
-        '01-trace.yaml',
-        '02-parsons.yaml',
-        '03-fill-in.yaml',
-        '04-write.yaml'
-      ]
-      setExercises(exerciseFiles)
+    // Load exercise file list from content directory
+    window.julius.listExercises(moduleId, lessonId).then((files) => {
+      setExercises(files)
     })
   }, [moduleId, lessonId])
 

@@ -3,7 +3,7 @@ import { join } from 'path'
 import { electronApp, optimizer, is } from '@electron-toolkit/utils'
 import { initDatabase, getDb } from './db'
 import { runPython } from './python-runner'
-import { loadModule, loadLesson, loadExercise, listModules } from './content-loader'
+import { loadModule, loadLesson, loadExercise, listModules, listExercises } from './content-loader'
 
 function createWindow(): void {
   const mainWindow = new BrowserWindow({
@@ -55,6 +55,9 @@ function setupIPC(): void {
   ipcMain.handle('load-exercise', (_event, moduleId: string, lessonId: string, exerciseFile: string) =>
     loadExercise(moduleId, lessonId, exerciseFile)
   )
+  ipcMain.handle('list-exercises', (_event, moduleId: string, lessonId: string) =>
+    listExercises(moduleId, lessonId)
+  )
 
   // Python execution
   ipcMain.handle('run-python', (_event, code: string, timeout?: number) =>
@@ -64,7 +67,7 @@ function setupIPC(): void {
   // Progress database
   ipcMain.handle('db-get-progress', () => {
     const db = getDb()
-    return db.prepare('SELECT * FROM progress').all()
+    return db.prepare('SELECT * FROM exercise_attempts').all()
   })
 
   ipcMain.handle('db-get-concept-mastery', () => {
@@ -152,6 +155,18 @@ function setupIPC(): void {
   ipcMain.handle('db-get-all-lesson-progress', () => {
     const db = getDb()
     return db.prepare('SELECT * FROM lesson_progress').all()
+  })
+
+  ipcMain.handle('db-get-exercise-attempts', (_event, exerciseId: string) => {
+    const db = getDb()
+    return db.prepare('SELECT * FROM exercise_attempts WHERE exercise_id = ? ORDER BY attempted_at DESC').all(exerciseId)
+  })
+
+  ipcMain.handle('db-get-lesson-attempts', (_event, lessonId: string) => {
+    const db = getDb()
+    return db.prepare(
+      'SELECT exercise_id, MAX(success) as best_success FROM exercise_attempts WHERE lesson_id = ? GROUP BY exercise_id'
+    ).all(lessonId)
   })
 }
 
