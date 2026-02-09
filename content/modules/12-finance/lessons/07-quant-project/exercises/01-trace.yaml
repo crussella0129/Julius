@@ -1,0 +1,88 @@
+type: trace
+id: "07-quant-project-trace-01"
+prompt: "Trace through this simplified backtest engine and predict the output."
+code: |
+  prices  = [100, 110, 105, 115, 120]
+  signals = [0,   1,   0,   0,   -1]
+  capital = 1000
+  shares = 0
+  trades = 0
+
+  for i in range(len(prices)):
+      if signals[i] == 1 and shares == 0:
+          shares = capital / prices[i]
+          capital = 0
+          trades += 1
+      elif signals[i] == -1 and shares > 0:
+          capital = shares * prices[i]
+          shares = 0
+          trades += 1
+
+  final = capital + shares * prices[-1]
+  ret = (final / 1000 - 1) * 100
+  print(f"Trades: {trades}")
+  print(f"Final: ${final:.0f}")
+  print(f"Return: {ret:+.1f}%")
+steps:
+  - line: 1
+    variables: {"prices": "[100, 110, 105, 115, 120]", "signals": "[0, 1, 0, 0, -1]"}
+    output: ""
+    explanation: "Prices and signals for 5 days."
+  - line: 3
+    variables: {"capital": 1000, "shares": 0, "trades": 0}
+    output: ""
+    explanation: "Start with $1000, no shares, no trades."
+  - line: 7
+    variables: {"i": 0}
+    output: ""
+    explanation: "Day 0: signal=0, no action."
+  - line: 7
+    variables: {"i": 1}
+    output: ""
+    explanation: "Day 1: signal=1 (buy), shares=0 so we buy."
+  - line: 9
+    variables: {"shares": 9.090909090909092, "capital": 0, "trades": 1}
+    output: ""
+    explanation: "Buy: 1000/110 = 9.0909 shares. Capital goes to 0."
+  - line: 7
+    variables: {"i": 2}
+    output: ""
+    explanation: "Day 2: signal=0, hold position."
+  - line: 7
+    variables: {"i": 3}
+    output: ""
+    explanation: "Day 3: signal=0, hold position."
+  - line: 7
+    variables: {"i": 4}
+    output: ""
+    explanation: "Day 4: signal=-1 (sell), we have shares."
+  - line: 13
+    variables: {"capital": 1090.909090909091, "shares": 0, "trades": 2}
+    output: ""
+    explanation: "Sell: 9.0909 * 120 = 1090.91. Shares go to 0."
+  - line: 17
+    variables: {"final": 1090.909090909091}
+    output: ""
+    explanation: "Final = capital (1090.91) + 0 shares."
+  - line: 19
+    variables: {}
+    output: "Trades: 2"
+    explanation: "One buy and one sell = 2 trades."
+  - line: 20
+    variables: {}
+    output: "Final: $1091"
+    explanation: "Final portfolio value rounded to nearest dollar."
+  - line: 21
+    variables: {}
+    output: "Return: +9.1%"
+    explanation: "(1090.91 / 1000 - 1) * 100 = 9.1%."
+expected_output: |
+  Trades: 2
+  Final: $1091
+  Return: +9.1%
+hints:
+  - "Buy at 110, sell at 120 for a profit."
+  - "Return = (final / initial - 1) * 100."
+concept_tags:
+  - strategy-implementation
+  - performance-analysis

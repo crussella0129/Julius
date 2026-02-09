@@ -1,0 +1,57 @@
+type: fill-in
+id: "05-context-managers-fill-in-01"
+prompt: "Fill in the blanks to complete this context manager class that tracks whether it is currently active."
+template: |
+  class Tracker:
+      def __init__(self):
+          self.active = False
+
+      def ____(self):
+          self.active = True
+          print("Activated")
+          return ____
+
+      def __exit__(self, exc_type, exc_val, exc_tb):
+          self.____ = False
+          print("Deactivated")
+          return False
+
+  with Tracker() as t:
+      print(t.active)
+  print(t.active)
+blanks:
+  - position: 0
+    answer: "enter"
+    hint: "dunder method for entering a with block"
+  - position: 1
+    answer: "self"
+    hint: "what to bind to the 'as' variable"
+  - position: 2
+    answer: "active"
+    hint: "the attribute to set back to False"
+solution: |
+  class Tracker:
+      def __init__(self):
+          self.active = False
+
+      def __enter__(self):
+          self.active = True
+          print("Activated")
+          return self
+
+      def __exit__(self, exc_type, exc_val, exc_tb):
+          self.active = False
+          print("Deactivated")
+          return False
+
+  with Tracker() as t:
+      print(t.active)
+  print(t.active)
+hints:
+  - "The method that runs when entering a 'with' block is __enter__."
+  - "__enter__ should return 'self' so it can be used as the 'as' variable."
+  - "In __exit__, set self.active back to False to clean up."
+concept_tags:
+  - enter-exit-methods
+  - with-statement
+  - resource-management

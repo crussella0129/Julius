@@ -1,0 +1,21 @@
+type: write
+id: "03-pandas-cleaning-write-01"
+prompt: "Write a function called `clean_students` that takes a list of dictionaries with keys 'name' (may have extra spaces or mixed case), 'grade' (may be None), and 'score' (string or None). The function should: strip and title-case names, convert score to float (None becomes 0.0), drop entries with missing names, and return the cleaned list. Test it with [{'name': '  alice ', 'grade': 'A', 'score': '95'}, {'name': None, 'grade': 'B', 'score': '80'}, {'name': 'BOB', 'grade': None, 'score': None}] and print the result."
+starter_code: |
+  # Write your function here
+tests:
+  - description: "Alice's name is cleaned to 'Alice'"
+    check: "'Alice' in output"
+  - description: "Bob's name is cleaned to 'Bob'"
+    check: "'Bob' in output"
+  - description: "None-name entry is dropped"
+    check: "output.count('{') == 2 or output.count('name') == 2"
+  - description: "Bob's score is 0.0"
+    check: "'0.0' in output or '0' in output"
+hints:
+  - "Check if name is None before processing; skip that entry."
+  - "Use str.strip().title() for name cleaning."
+  - "Convert score with float(score) if not None, else 0.0."
+concept_tags:
+  - missing-data
+  - string-methods

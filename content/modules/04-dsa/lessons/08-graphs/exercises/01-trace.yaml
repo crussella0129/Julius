@@ -1,0 +1,77 @@
+type: trace
+id: "08-graphs-trace-01"
+prompt: "Trace through this BFS traversal and predict the order in which nodes are visited."
+code: |
+  from collections import deque
+
+  graph = {
+      'A': ['B', 'C'],
+      'B': ['D'],
+      'C': ['D', 'E'],
+      'D': [],
+      'E': []
+  }
+
+  visited = set()
+  queue = deque(['A'])
+  visited.add('A')
+  result = []
+
+  while queue:
+      node = queue.popleft()
+      result.append(node)
+      for neighbor in graph[node]:
+          if neighbor not in visited:
+              visited.add(neighbor)
+              queue.append(neighbor)
+
+  print(result)
+steps:
+  - line: 11
+    variables: { "visited": "{'A'}", "queue": "deque(['A'])", "result": "[]" }
+    output: ""
+    explanation: "Initialize: start at A, mark visited, add to queue."
+  - line: 15
+    variables: { "node": "'A'", "result": "['A']" }
+    output: ""
+    explanation: "Dequeue A. Add A to result."
+  - line: 17
+    variables: { "visited": "{'A', 'B', 'C'}", "queue": "deque(['B', 'C'])" }
+    output: ""
+    explanation: "A's neighbors are B and C. Both unvisited, add to queue and visited."
+  - line: 15
+    variables: { "node": "'B'", "result": "['A', 'B']" }
+    output: ""
+    explanation: "Dequeue B. Add B to result."
+  - line: 17
+    variables: { "visited": "{'A', 'B', 'C', 'D'}", "queue": "deque(['C', 'D'])" }
+    output: ""
+    explanation: "B's neighbor is D. D is unvisited, add to queue and visited."
+  - line: 15
+    variables: { "node": "'C'", "result": "['A', 'B', 'C']" }
+    output: ""
+    explanation: "Dequeue C. Add C to result."
+  - line: 17
+    variables: { "visited": "{'A', 'B', 'C', 'D', 'E'}", "queue": "deque(['D', 'E'])" }
+    output: ""
+    explanation: "C's neighbors are D (already visited) and E (unvisited). Add E only."
+  - line: 15
+    variables: { "node": "'D'", "result": "['A', 'B', 'C', 'D']" }
+    output: ""
+    explanation: "Dequeue D. Add D to result. D has no neighbors."
+  - line: 15
+    variables: { "node": "'E'", "result": "['A', 'B', 'C', 'D', 'E']" }
+    output: ""
+    explanation: "Dequeue E. Add E to result. E has no neighbors. Queue is empty."
+  - line: 21
+    variables: { "result": "['A', 'B', 'C', 'D', 'E']" }
+    output: "['A', 'B', 'C', 'D', 'E']"
+    explanation: "Print the BFS traversal order."
+expected_output: |
+  ['A', 'B', 'C', 'D', 'E']
+hints:
+  - "BFS uses a queue (FIFO) -- it processes nodes in the order they were discovered."
+  - "Nodes at the same depth are visited before going deeper."
+concept_tags:
+  - bfs
+  - adjacency-list

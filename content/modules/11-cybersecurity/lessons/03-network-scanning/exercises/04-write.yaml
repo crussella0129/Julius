@@ -1,0 +1,20 @@
+type: write
+id: "03-network-scanning-write-01"
+prompt: "Write a program that defines a dictionary mapping at least 5 well-known ports to their service names (e.g., 22 -> 'SSH', 80 -> 'HTTP'). Then, given a list of 'scanned' ports [22, 25, 80, 443, 993, 8080], print each port and whether it's a known or unknown service. Finally, print the total number of known services found."
+starter_code: "# Write your code here\n"
+tests:
+  - description: "Output contains port 22"
+    check: "'22' in output"
+  - description: "Output contains port 80"
+    check: "'80' in output"
+  - description: "Output mentions at least one known service name"
+    check: "'ssh' in output.lower() or 'http' in output.lower()"
+  - description: "Output has at least 7 lines"
+    check: "len(output.strip().splitlines()) >= 7"
+hints:
+  - "Create a dictionary like {22: 'SSH', 80: 'HTTP', ...}."
+  - "Use dict.get(port, 'Unknown') to handle ports not in your dictionary."
+  - "Count how many ports had a known service name."
+concept_tags:
+  - port-scanning
+  - network-protocols

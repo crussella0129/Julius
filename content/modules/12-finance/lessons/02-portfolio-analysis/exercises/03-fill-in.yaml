@@ -1,0 +1,31 @@
+type: fill-in
+id: "02-portfolio-analysis-fill-in-01"
+prompt: "Fill in the blanks to calculate a weighted portfolio return from asset weights and returns."
+template: |
+  weights = [0.50, 0.30, 0.20]
+  returns = [0.10, 0.04, 0.02]
+
+  portfolio_ret = ____(w * r for w, r in ____(weights, returns))
+  print(f"Portfolio return: {portfolio_ret * ____:.1f}%")
+blanks:
+  - position: 0
+    answer: "sum"
+    hint: "built-in function to add up values"
+  - position: 1
+    answer: "zip"
+    hint: "function to pair up two lists"
+  - position: 2
+    answer: "100"
+    hint: "convert decimal to percentage"
+solution: |
+  weights = [0.50, 0.30, 0.20]
+  returns = [0.10, 0.04, 0.02]
+
+  portfolio_ret = sum(w * r for w, r in zip(weights, returns))
+  print(f"Portfolio return: {portfolio_ret * 100:.1f}%")
+hints:
+  - "sum() can take a generator expression to compute the dot product."
+  - "zip() pairs corresponding elements from weights and returns."
+concept_tags:
+  - portfolio-returns
+  - diversification

@@ -1,0 +1,21 @@
+type: parsons
+id: "06-cv-project-parsons-01"
+prompt: "Arrange these lines to create a function that computes precision and recall given lists of predictions and actual labels."
+blocks:
+  - "def precision_recall(predictions, actual, positive=1):"
+  - "    tp = sum(1 for p, a in zip(predictions, actual) if p == positive and a == positive)"
+  - "    fp = sum(1 for p, a in zip(predictions, actual) if p == positive and a != positive)"
+  - "    fn = sum(1 for p, a in zip(predictions, actual) if p != positive and a == positive)"
+  - "    precision = tp / (tp + fp) if (tp + fp) > 0 else 0"
+  - "    recall = tp / (tp + fn) if (tp + fn) > 0 else 0"
+  - "    return precision, recall"
+distractors:
+  - "    precision = tp / (tp + fn) if (tp + fn) > 0 else 0"
+  - "    fn = sum(1 for p, a in zip(predictions, actual) if p == positive and a != positive)"
+solution_order: [0, 1, 2, 3, 4, 5, 6]
+hints:
+  - "Precision = TP / (TP + FP): of all positive predictions, how many are correct?"
+  - "Recall = TP / (TP + FN): of all actual positives, how many did we find?"
+concept_tags:
+  - model-evaluation
+  - cv-pipeline

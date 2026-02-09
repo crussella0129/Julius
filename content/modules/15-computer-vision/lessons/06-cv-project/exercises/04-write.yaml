@@ -1,0 +1,27 @@
+type: write
+id: "06-cv-project-write-01"
+prompt: "Write a function called evaluate_classifier that takes two lists -- predictions and actual labels -- and returns a dictionary with keys 'accuracy', 'precision', and 'recall' (for positive_class=1). Test it with predictions=[1, 1, 0, 0, 1] and actual=[1, 0, 0, 1, 1] and print each metric formatted to 2 decimal places."
+starter_code: |
+  # Write your evaluate_classifier function here
+
+  preds = [1, 1, 0, 0, 1]
+  actual = [1, 0, 0, 1, 1]
+  metrics = evaluate_classifier(preds, actual)
+  for name, value in sorted(metrics.items()):
+      print(f"{name}: {value:.2f}")
+tests:
+  - description: "Accuracy is 0.60 (3 out of 5 correct)"
+    check: "'0.60' in output"
+  - description: "Precision is 0.67 (2 TP out of 3 predicted positive)"
+    check: "'0.67' in output"
+  - description: "Recall is 0.67 (2 TP out of 3 actual positive)"
+    check: "'0.67' in output"
+  - description: "Output has 3 lines"
+    check: "len(output.strip().splitlines()) == 3"
+hints:
+  - "Accuracy = correct predictions / total predictions."
+  - "TP: predicted 1 and actual 1. FP: predicted 1 but actual 0. FN: predicted 0 but actual 1."
+  - "Precision = TP / (TP + FP), Recall = TP / (TP + FN)."
+concept_tags:
+  - model-evaluation
+  - cv-pipeline

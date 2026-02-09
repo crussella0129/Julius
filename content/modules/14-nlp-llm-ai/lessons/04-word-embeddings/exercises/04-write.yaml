@@ -1,0 +1,27 @@
+type: write
+id: "04-word-embeddings-write-01"
+prompt: "Write a function called cosine_similarity that takes two lists of numbers (vectors) and returns their cosine similarity. Then write find_most_similar that takes a target word, a dictionary of word embeddings, and returns the most similar word (excluding the target itself). Test it with the embeddings: cat=[0.7,0.2,-0.1], dog=[0.6,0.3,-0.1], car=[-0.3,0.1,0.8], truck=[-0.2,0.2,0.7]. Print the most similar word to 'cat'."
+starter_code: |
+  import math
+
+  # Write cosine_similarity and find_most_similar here
+
+  embeddings = {
+      "cat": [0.7, 0.2, -0.1],
+      "dog": [0.6, 0.3, -0.1],
+      "car": [-0.3, 0.1, 0.8],
+      "truck": [-0.2, 0.2, 0.7],
+  }
+  print(find_most_similar("cat", embeddings))
+tests:
+  - description: "Most similar to cat is dog"
+    check: "'dog' in output"
+  - description: "Output is a single word"
+    check: "len(output.strip().splitlines()) == 1"
+hints:
+  - "Cosine similarity = dot product / (magnitude_a * magnitude_b)."
+  - "Iterate over all words in embeddings, skip the target, track the highest similarity."
+  - "math.sqrt(sum(x*x for x in v)) gives the magnitude."
+concept_tags:
+  - cosine-similarity
+  - word-embeddings

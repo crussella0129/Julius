@@ -1,0 +1,48 @@
+type: fill-in
+id: "06-automation-project-fill-in-01"
+prompt: "Fill in the blanks to classify a file into a category and handle duplicates by appending a number."
+template: |
+  from pathlib import Path
+
+  def get_unique_name(dest_dir, filename):
+      dest = Path(dest_dir) / filename
+      stem = Path(filename).____
+      suffix = Path(filename).____
+      counter = 1
+      while dest.____():
+          dest = Path(dest_dir) / f"{stem}_{counter}{suffix}"
+          counter += 1
+      return dest.name
+
+  print(get_unique_name("/tmp", "test.txt"))
+blanks:
+  - position: 0
+    answer: "stem"
+    hint: "filename without extension"
+  - position: 1
+    answer: "suffix"
+    hint: "file extension including the dot"
+  - position: 2
+    answer: "exists"
+    hint: "method to check if file already exists"
+solution: |
+  from pathlib import Path
+
+  def get_unique_name(dest_dir, filename):
+      dest = Path(dest_dir) / filename
+      stem = Path(filename).stem
+      suffix = Path(filename).suffix
+      counter = 1
+      while dest.exists():
+          dest = Path(dest_dir) / f"{stem}_{counter}{suffix}"
+          counter += 1
+      return dest.name
+
+  print(get_unique_name("/tmp", "test.txt"))
+hints:
+  - ".stem gives 'test' from 'test.txt'."
+  - ".suffix gives '.txt' from 'test.txt'."
+  - ".exists() returns True if the path already exists on disk."
+concept_tags:
+  - file-organization
+  - automation-patterns

@@ -1,0 +1,25 @@
+type: parsons
+id: "05-context-managers-parsons-01"
+prompt: "Arrange these lines to create a context manager using @contextmanager that prints 'START' before and 'END' after the with block."
+blocks:
+  - "from contextlib import contextmanager"
+  - ""
+  - "@contextmanager"
+  - "def announce():"
+  - "    print('START')"
+  - "    yield"
+  - "    print('END')"
+  - ""
+  - "with announce():"
+  - "    print('Working...')"
+solution_order: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+distractors:
+  - "    return"
+  - "def announce(self):"
+hints:
+  - "Import contextmanager from contextlib first."
+  - "The @contextmanager decorator goes right before the function definition."
+  - "'yield' separates the setup (before) from the teardown (after)."
+concept_tags:
+  - contextlib-contextmanager
+  - with-statement

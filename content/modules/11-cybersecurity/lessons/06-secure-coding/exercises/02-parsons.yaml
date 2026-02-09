@@ -1,0 +1,28 @@
+type: parsons
+id: "06-secure-coding-parsons-01"
+prompt: "Arrange these lines to create a secure function that loads configuration from environment variables with proper validation, raising an error if required variables are missing."
+blocks:
+  - "import os"
+  - "def load_config(required_keys):"
+  - "    config = {}"
+  - "    missing = []"
+  - "    for key in required_keys:"
+  - "        value = os.environ.get(key)"
+  - "        if value is None:"
+  - "            missing.append(key)"
+  - "        else:"
+  - "            config[key] = value"
+  - "    if missing:"
+  - "        raise RuntimeError(f'Missing env vars: {missing}')"
+  - "    return config"
+distractors:
+  - "        config[key] = os.environ[key]"
+  - "    return os.environ"
+solution_order: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+hints:
+  - "Start by importing os and defining the function."
+  - "Use os.environ.get() to safely check for each variable."
+  - "Collect all missing keys first, then raise a single error listing them all."
+concept_tags:
+  - secrets-management
+  - error-handling-security

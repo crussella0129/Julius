@@ -1,0 +1,45 @@
+type: trace
+id: "03-subprocess-trace-01"
+prompt: "Trace through this code and predict what will be printed."
+code: |
+  import subprocess
+
+  result = subprocess.run(
+      ["python3", "-c", "print(2 + 3)"],
+      capture_output=True,
+      text=True
+  )
+  print(result.stdout.strip())
+  print(result.returncode)
+  print(type(result.stdout).__name__)
+steps:
+  - line: 1
+    variables: {}
+    output: ""
+    explanation: "Import the subprocess module."
+  - line: 3
+    variables: {}
+    output: ""
+    explanation: "Run python3 with -c flag to execute 'print(2 + 3)'. capture_output captures stdout/stderr, text=True returns strings."
+  - line: 8
+    variables: { "result.stdout": "'5\\n'" }
+    output: "5"
+    explanation: "The subprocess printed '5\\n'. strip() removes the trailing newline."
+  - line: 9
+    variables: { "result.returncode": "0" }
+    output: "0"
+    explanation: "Return code 0 means the command succeeded."
+  - line: 10
+    variables: {}
+    output: "str"
+    explanation: "With text=True, stdout is a str. Without it, it would be bytes."
+expected_output: |
+  5
+  0
+  str
+hints:
+  - "capture_output=True captures the subprocess output instead of printing it."
+  - "text=True makes stdout a string; without it you'd get bytes."
+concept_tags:
+  - subprocess-run
+  - capturing-output

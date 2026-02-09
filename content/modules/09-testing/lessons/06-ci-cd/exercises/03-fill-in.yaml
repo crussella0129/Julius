@@ -1,0 +1,58 @@
+type: fill-in
+id: "06-ci-cd-fill-in-01"
+prompt: "Fill in the blanks to complete a Python dictionary that represents a GitHub Actions workflow structure."
+template: |
+  workflow = {
+      "name": "Python CI",
+      "____": ["push", "pull_request"],
+      "jobs": {
+          "test": {
+              "____": "ubuntu-latest",
+              "steps": [
+                  {"uses": "actions/____@v4"},
+                  {"run": "pip install pytest"},
+                  {"run": "pytest"},
+              ]
+          }
+      }
+  }
+
+  print(workflow["name"])
+  print(workflow["jobs"]["test"]["runs-on"])
+  print(len(workflow["jobs"]["test"]["steps"]))
+blanks:
+  - position: 0
+    answer: "on"
+    hint: "the key that defines trigger events"
+  - position: 1
+    answer: "runs-on"
+    hint: "the key specifying the virtual machine"
+  - position: 2
+    answer: "checkout"
+    hint: "the GitHub Action that clones the repository"
+solution: |
+  workflow = {
+      "name": "Python CI",
+      "on": ["push", "pull_request"],
+      "jobs": {
+          "test": {
+              "runs-on": "ubuntu-latest",
+              "steps": [
+                  {"uses": "actions/checkout@v4"},
+                  {"run": "pip install pytest"},
+                  {"run": "pytest"},
+              ]
+          }
+      }
+  }
+
+  print(workflow["name"])
+  print(workflow["jobs"]["test"]["runs-on"])
+  print(len(workflow["jobs"]["test"]["steps"]))
+hints:
+  - "'on' specifies what events trigger the workflow."
+  - "'runs-on' specifies the operating system for the job."
+  - "'actions/checkout' is the standard action to clone the repo."
+concept_tags:
+  - github-actions
+  - workflow-yaml

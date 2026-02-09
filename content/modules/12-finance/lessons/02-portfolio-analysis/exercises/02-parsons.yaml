@@ -1,0 +1,23 @@
+type: parsons
+id: "02-portfolio-analysis-parsons-01"
+prompt: "Arrange these lines to create a function that calculates the Sharpe ratio from a list of daily returns and a risk-free rate."
+blocks:
+  - "import math"
+  - "def sharpe_ratio(daily_returns, risk_free=0.02):"
+  - "    mean_ret = sum(daily_returns) / len(daily_returns)"
+  - "    daily_rf = risk_free / 252"
+  - "    excess = mean_ret - daily_rf"
+  - "    variance = sum((r - mean_ret) ** 2 for r in daily_returns) / (len(daily_returns) - 1)"
+  - "    daily_vol = math.sqrt(variance)"
+  - "    return (excess * 252) / (daily_vol * math.sqrt(252))"
+distractors:
+  - "    return excess / daily_vol"
+  - "    daily_vol = variance ** 2"
+solution_order: [0, 1, 2, 3, 4, 5, 6, 7]
+hints:
+  - "Compute mean return first, then daily risk-free rate."
+  - "Sample variance divides by (N-1), not N."
+  - "Annualize both excess return and volatility before dividing."
+concept_tags:
+  - sharpe-ratio
+  - portfolio-returns

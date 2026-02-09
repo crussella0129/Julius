@@ -1,0 +1,51 @@
+type: trace
+id: "04-object-detection-trace-01"
+prompt: "Trace through this IoU computation and predict the output."
+code: |
+  def compute_iou(box1, box2):
+      x1 = max(box1[0], box2[0])
+      y1 = max(box1[1], box2[1])
+      x2 = min(box1[2], box2[2])
+      y2 = min(box1[3], box2[3])
+      inter = max(0, x2 - x1) * max(0, y2 - y1)
+      area1 = (box1[2] - box1[0]) * (box1[3] - box1[1])
+      area2 = (box2[2] - box2[0]) * (box2[3] - box2[1])
+      union = area1 + area2 - inter
+      return inter / union if union > 0 else 0.0
+
+  a = (0, 0, 100, 100)
+  b = (50, 50, 150, 150)
+  print(f"{compute_iou(a, b):.4f}")
+steps:
+  - line: 11
+    variables: {"a": [0, 0, 100, 100], "b": [50, 50, 150, 150]}
+    output: ""
+    explanation: "Box a is a 100x100 square at origin. Box b is a 100x100 square offset by 50 pixels."
+  - line: 2
+    variables: {"x1": 50, "y1": 50, "x2": 100, "y2": 100}
+    output: ""
+    explanation: "Intersection top-left is (50,50), bottom-right is (100,100)."
+  - line: 6
+    variables: {"inter": 2500}
+    output: ""
+    explanation: "Intersection: (100-50) * (100-50) = 50 * 50 = 2500."
+  - line: 7
+    variables: {"area1": 10000, "area2": 10000}
+    output: ""
+    explanation: "Each box is 100*100 = 10000 pixels."
+  - line: 9
+    variables: {"union": 17500}
+    output: ""
+    explanation: "Union = 10000 + 10000 - 2500 = 17500."
+  - line: 13
+    variables: {}
+    output: "0.1429"
+    explanation: "IoU = 2500 / 17500 = 1/7 = 0.142857..."
+expected_output: |
+  0.1429
+hints:
+  - "The intersection is the overlapping region where both boxes cover."
+  - "Union = area1 + area2 - intersection (subtract intersection to avoid double counting)."
+concept_tags:
+  - iou
+  - bounding-boxes

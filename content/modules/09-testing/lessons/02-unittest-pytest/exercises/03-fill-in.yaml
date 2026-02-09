@@ -1,0 +1,45 @@
+type: fill-in
+id: "02-unittest-pytest-fill-in-01"
+prompt: "Fill in the blanks to write a parametrized pytest test for a function that doubles numbers."
+template: |
+  import pytest
+
+  def double(n):
+      return n * 2
+
+  @pytest.mark.____("input_val, expected", [
+      (1, 2),
+      (0, 0),
+      (-5, -10),
+  ])
+  def test_double(input_val, ____):
+      ____ double(input_val) == expected
+blanks:
+  - position: 0
+    answer: "parametrize"
+    hint: "pytest decorator for multiple test inputs"
+  - position: 1
+    answer: "expected"
+    hint: "second parameter matching the tuple"
+  - position: 2
+    answer: "assert"
+    hint: "keyword to check the result"
+solution: |
+  import pytest
+
+  def double(n):
+      return n * 2
+
+  @pytest.mark.parametrize("input_val, expected", [
+      (1, 2),
+      (0, 0),
+      (-5, -10),
+  ])
+  def test_double(input_val, expected):
+      assert double(input_val) == expected
+hints:
+  - "@pytest.mark.parametrize runs the test once for each tuple in the list."
+  - "The function parameters must match the names in the decorator string."
+concept_tags:
+  - pytest-basics
+  - parametrize

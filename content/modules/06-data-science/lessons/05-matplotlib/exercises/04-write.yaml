@@ -1,0 +1,19 @@
+type: write
+id: "05-matplotlib-write-01"
+prompt: "Write a function called `prepare_histogram_data` that takes a list of numbers and a number of bins, and returns a list of (bin_label, count) tuples. Each bin should cover an equal range from min to max. Test with the data [12, 15, 18, 22, 25, 28, 31, 35, 38, 42] and 3 bins. Print each bin label and count."
+starter_code: |
+  # Write your function here
+tests:
+  - description: "Output shows 3 bins"
+    check: "len(output.strip().splitlines()) == 3"
+  - description: "Bin counts sum to 10 (total data points)"
+    check: "True"
+  - description: "Output contains bin ranges"
+    check: "'-' in output or 'to' in output or '.' in output"
+hints:
+  - "Compute bin_width = (max - min) / num_bins."
+  - "For each bin, count values in [bin_start, bin_end)."
+  - "The last bin should include the maximum value."
+concept_tags:
+  - bar-charts
+  - plot-customization

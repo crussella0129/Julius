@@ -1,0 +1,11 @@
+id: "15-computer-vision"
+title: "Computer Vision"
+description: "Image processing, object detection, and segmentation with OpenCV"
+order: 15
+lessons:
+  - 01-opencv-basics
+  - 02-image-processing
+  - 03-feature-detection
+  - 04-object-detection
+  - 05-segmentation
+  - 06-cv-project

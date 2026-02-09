@@ -1,0 +1,61 @@
+type: trace
+id: "08-pytorch-intro-trace-01"
+prompt: "Trace through this tensor operations code and predict the output."
+code: |
+  # Simulating tensor operations with lists
+  def dot(a, b):
+      return sum(x * y for x, y in zip(a, b))
+
+  def add(a, b):
+      return [x + y for x, y in zip(a, b)]
+
+  def scale(a, s):
+      return [x * s for x in a]
+
+  x = [1.0, 2.0, 3.0]
+  y = [4.0, 5.0, 6.0]
+
+  print(f"dot: {dot(x, y)}")
+  print(f"add: {add(x, y)}")
+  print(f"scale: {scale(x, 2)}")
+
+  w = [0.1, 0.2, 0.3]
+  b = 0.5
+  output = dot(x, w) + b
+  print(f"linear: {output}")
+steps:
+  - line: 11
+    variables: {"x": "[1.0, 2.0, 3.0]", "y": "[4.0, 5.0, 6.0]"}
+    output: ""
+    explanation: "Define two vectors."
+  - line: 14
+    variables: {}
+    output: "dot: 32.0"
+    explanation: "1*4 + 2*5 + 3*6 = 4+10+18 = 32.0."
+  - line: 15
+    variables: {}
+    output: "add: [5.0, 7.0, 9.0]"
+    explanation: "Element-wise addition: [1+4, 2+5, 3+6]."
+  - line: 16
+    variables: {}
+    output: "scale: [2.0, 4.0, 6.0]"
+    explanation: "Multiply each element by 2."
+  - line: 18
+    variables: {"w": "[0.1, 0.2, 0.3]", "b": 0.5}
+    output: ""
+    explanation: "Define weights and bias for a linear layer."
+  - line: 20
+    variables: {"output": 1.9}
+    output: "linear: 1.9"
+    explanation: "dot(x,w) = 1*0.1+2*0.2+3*0.3 = 0.1+0.4+0.9 = 1.4. Plus bias 0.5 = 1.9."
+expected_output: |
+  dot: 32.0
+  add: [5.0, 7.0, 9.0]
+  scale: [2.0, 4.0, 6.0]
+  linear: 1.9
+hints:
+  - "Dot product sums element-wise products."
+  - "A linear layer computes dot(input, weights) + bias."
+concept_tags:
+  - tensors
+  - nn-module

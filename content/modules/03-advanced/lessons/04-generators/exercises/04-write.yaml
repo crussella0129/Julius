@@ -1,0 +1,30 @@
+type: write
+id: "04-generators-write-01"
+prompt: "Write a generator function called `fibonacci` that yields the Fibonacci sequence (starting 0, 1, 1, 2, 3, 5, ...). Then print the first 8 Fibonacci numbers, each on its own line."
+starter_code: |
+  # Define the fibonacci generator
+
+
+  # Print first 8 Fibonacci numbers
+  fib = fibonacci()
+  for _ in range(8):
+      print(next(fib))
+tests:
+  - description: "Output has exactly 8 lines"
+    check: "len(output.strip().splitlines()) == 8"
+  - description: "First value is 0"
+    check: "output.strip().splitlines()[0].strip() == '0'"
+  - description: "Second value is 1"
+    check: "output.strip().splitlines()[1].strip() == '1'"
+  - description: "Eighth value is 13"
+    check: "output.strip().splitlines()[7].strip() == '13'"
+  - description: "All 8 values are correct"
+    check: "[line.strip() for line in output.strip().splitlines()] == ['0', '1', '1', '2', '3', '5', '8', '13']"
+hints:
+  - "Start with a, b = 0, 1. Yield a, then update: a, b = b, a + b."
+  - "Use 'while True' for an infinite generator."
+  - "def fibonacci():\n    a, b = 0, 1\n    while True:\n        yield a\n        a, b = b, a + b"
+concept_tags:
+  - yield-keyword
+  - next-function
+  - lazy-evaluation

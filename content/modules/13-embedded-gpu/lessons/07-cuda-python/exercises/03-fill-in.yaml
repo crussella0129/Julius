@@ -1,0 +1,50 @@
+type: fill-in
+id: "07-cuda-python-fill-in-01"
+prompt: "Fill in the blanks to calculate the number of CUDA blocks needed and the global thread ID from block and thread indices."
+template: |
+  n = 1000
+  threads_per_block = 256
+
+  num_blocks = (n + threads_per_block - ____) // threads_per_block
+
+  block_id = 3
+  thread_id = 100
+  global_id = block_id * ____ + thread_id
+
+  in_bounds = global_id ____ n
+
+  print(f"Blocks: {num_blocks}")
+  print(f"Global ID: {global_id}")
+  print(f"In bounds: {in_bounds}")
+blanks:
+  - position: 0
+    answer: "1"
+    hint: "ceiling division adjustment"
+  - position: 1
+    answer: "threads_per_block"
+    hint: "number of threads in each block"
+  - position: 2
+    answer: "<"
+    hint: "bounds check comparison"
+solution: |
+  n = 1000
+  threads_per_block = 256
+
+  num_blocks = (n + threads_per_block - 1) // threads_per_block
+
+  block_id = 3
+  thread_id = 100
+  global_id = block_id * threads_per_block + thread_id
+
+  in_bounds = global_id < n
+
+  print(f"Blocks: {num_blocks}")
+  print(f"Global ID: {global_id}")
+  print(f"In bounds: {in_bounds}")
+hints:
+  - "Ceiling division: (n + d - 1) // d rounds up to ensure all elements are covered."
+  - "Global ID = block_id * threads_per_block + thread_id."
+  - "Bounds check ensures the thread doesn't access data beyond the array."
+concept_tags:
+  - thread-blocks
+  - cuda-kernels

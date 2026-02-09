@@ -1,0 +1,51 @@
+type: trace
+id: "01-strings-deep-trace-01"
+prompt: "Trace through this code and predict the final output."
+code: |
+  text = "Hello, World!"
+  first = text[0:5]
+  last = text[-6:-1]
+  reversed_text = text[::-1]
+  print(first)
+  print(last)
+  print(reversed_text[0:5])
+steps:
+  - line: 1
+    variables: { "text": "Hello, World!" }
+    output: ""
+    explanation: "text is assigned the string 'Hello, World!'."
+  - line: 2
+    variables: { "text": "Hello, World!", "first": "Hello" }
+    output: ""
+    explanation: "Slice [0:5] extracts characters at indices 0,1,2,3,4 which is 'Hello'."
+  - line: 3
+    variables: { "text": "Hello, World!", "first": "Hello", "last": "World" }
+    output: ""
+    explanation: "Slice [-6:-1] counts from the end: indices 7,8,9,10,11 which is 'World'."
+  - line: 4
+    variables: { "text": "Hello, World!", "first": "Hello", "last": "World", "reversed_text": "!dlroW ,olleH" }
+    output: ""
+    explanation: "[::-1] reverses the entire string to '!dlroW ,olleH'."
+  - line: 5
+    variables: { "text": "Hello, World!", "first": "Hello", "last": "World", "reversed_text": "!dlroW ,olleH" }
+    output: "Hello"
+    explanation: "Prints the value of first, which is 'Hello'."
+  - line: 6
+    variables: { "text": "Hello, World!", "first": "Hello", "last": "World", "reversed_text": "!dlroW ,olleH" }
+    output: "World"
+    explanation: "Prints the value of last, which is 'World'."
+  - line: 7
+    variables: { "text": "Hello, World!", "first": "Hello", "last": "World", "reversed_text": "!dlroW ,olleH" }
+    output: "!dlro"
+    explanation: "reversed_text[0:5] extracts the first 5 characters of '!dlroW ,olleH', which is '!dlro'."
+expected_output: |
+  Hello
+  World
+  !dlro
+hints:
+  - "Remember that slicing stop index is exclusive: text[0:5] gives indices 0 through 4."
+  - "Negative indices count from the end: -1 is the last character, -6 is 6 from the end."
+  - "[::-1] reverses the string, then [0:5] takes the first 5 characters of that reversed string."
+concept_tags:
+  - string-slicing
+  - negative-indexing

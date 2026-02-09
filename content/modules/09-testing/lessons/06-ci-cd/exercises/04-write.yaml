@@ -1,0 +1,19 @@
+type: write
+id: "06-ci-cd-write-01"
+prompt: "Write a function called `run_pipeline` that takes a list of tuples (step_name, step_function) and runs each step in order. If a step function returns False, print 'FAILED at: {step_name}' and return False. If all pass, print 'All steps passed!' and return True. Test it with steps: ('lint', lambda: True), ('test', lambda: True), ('deploy', lambda: True). Print the final result."
+starter_code: |
+  # Define run_pipeline function
+
+  # Test the pipeline
+tests:
+  - description: "Output contains 'All steps passed!'"
+    check: "'All steps passed!' in output"
+  - description: "Output contains True"
+    check: "'True' in output"
+hints:
+  - "Loop through the list of (name, func) tuples."
+  - "Call func() and check if it returns False."
+  - "If all pass, print success message and return True."
+concept_tags:
+  - continuous-integration
+  - automated-pipeline

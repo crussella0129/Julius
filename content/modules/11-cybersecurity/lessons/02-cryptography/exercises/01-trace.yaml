@@ -1,0 +1,78 @@
+type: trace
+id: "02-cryptography-trace-01"
+prompt: "Trace through this code that hashes messages and checks integrity, then predict the output."
+code: |
+  import hashlib
+
+  messages = ["hello", "world", "hello"]
+  hashes = []
+
+  for msg in messages:
+      h = hashlib.sha256(msg.encode()).hexdigest()[:8]
+      hashes.append(h)
+      print(f"{msg} -> {h}")
+
+  if hashes[0] == hashes[2]:
+      print("Match: same input, same hash")
+  else:
+      print("No match")
+steps:
+  - line: 3
+    variables: {"messages": "['hello', 'world', 'hello']"}
+    output: ""
+    explanation: "Create a list of three messages. Note 'hello' appears twice."
+  - line: 4
+    variables: {"hashes": "[]"}
+    output: ""
+    explanation: "Initialize an empty list to store hash values."
+  - line: 6
+    variables: {"msg": "hello"}
+    output: ""
+    explanation: "First iteration: msg is 'hello'."
+  - line: 7
+    variables: {"msg": "hello", "h": "2cf24dba"}
+    output: ""
+    explanation: "Hash 'hello' with SHA-256 and take the first 8 hex characters."
+  - line: 9
+    variables: {"hashes": "['2cf24dba']"}
+    output: "hello -> 2cf24dba"
+    explanation: "Append hash and print the message with its hash prefix."
+  - line: 6
+    variables: {"msg": "world"}
+    output: ""
+    explanation: "Second iteration: msg is 'world'."
+  - line: 7
+    variables: {"msg": "world", "h": "486ea46e"}
+    output: ""
+    explanation: "Hash 'world' -- different input produces different hash."
+  - line: 9
+    variables: {"hashes": "['2cf24dba', '486ea46e']"}
+    output: "world -> 486ea46e"
+    explanation: "Append and print."
+  - line: 6
+    variables: {"msg": "hello"}
+    output: ""
+    explanation: "Third iteration: msg is 'hello' again."
+  - line: 7
+    variables: {"msg": "hello", "h": "2cf24dba"}
+    output: ""
+    explanation: "Same input 'hello' produces the same hash -- deterministic."
+  - line: 9
+    variables: {"hashes": "['2cf24dba', '486ea46e', '2cf24dba']"}
+    output: "hello -> 2cf24dba"
+    explanation: "Append and print."
+  - line: 11
+    variables: {}
+    output: "Match: same input, same hash"
+    explanation: "hashes[0] and hashes[2] are both '2cf24dba', so they match."
+expected_output: |
+  hello -> 2cf24dba
+  world -> 486ea46e
+  hello -> 2cf24dba
+  Match: same input, same hash
+hints:
+  - "Cryptographic hash functions are deterministic -- same input always gives same output."
+  - "Different inputs produce different hashes (collision resistance)."
+concept_tags:
+  - hashing
+  - cia-triad

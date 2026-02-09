@@ -1,0 +1,73 @@
+type: trace
+id: "09-cnn-trace-01"
+prompt: "Trace through this 1D convolution and predict the output."
+code: |
+  signal = [1, 3, 2, 5, 4]
+  kernel = [1, -1]
+
+  output = []
+  for i in range(len(signal) - len(kernel) + 1):
+      value = 0
+      for j in range(len(kernel)):
+          value += signal[i + j] * kernel[j]
+      output.append(value)
+
+  print(f"Input:  {signal}")
+  print(f"Kernel: {kernel}")
+  print(f"Output: {output}")
+
+  # Max pooling with pool_size=2
+  pooled = [max(output[i], output[i+1]) for i in range(0, len(output)-1, 2)]
+  print(f"Pooled: {pooled}")
+steps:
+  - line: 1
+    variables: {"signal": "[1, 3, 2, 5, 4]", "kernel": "[1, -1]"}
+    output: ""
+    explanation: "Define input signal and edge-detection kernel."
+  - line: 4
+    variables: {"output": "[]"}
+    output: ""
+    explanation: "Start convolution. Output length = 5 - 2 + 1 = 4."
+  - line: 5
+    variables: {"i": 0, "value": -2}
+    output: ""
+    explanation: "i=0: 1*1 + 3*(-1) = 1-3 = -2."
+  - line: 5
+    variables: {"i": 1, "value": 1}
+    output: ""
+    explanation: "i=1: 3*1 + 2*(-1) = 3-2 = 1."
+  - line: 5
+    variables: {"i": 2, "value": -3}
+    output: ""
+    explanation: "i=2: 2*1 + 5*(-1) = 2-5 = -3."
+  - line: 5
+    variables: {"i": 3, "value": 1}
+    output: ""
+    explanation: "i=3: 5*1 + 4*(-1) = 5-4 = 1."
+  - line: 11
+    variables: {}
+    output: "Input:  [1, 3, 2, 5, 4]"
+    explanation: "Print input."
+  - line: 12
+    variables: {}
+    output: "Kernel: [1, -1]"
+    explanation: "Print kernel."
+  - line: 13
+    variables: {"output": "[-2, 1, -3, 1]"}
+    output: "Output: [-2, 1, -3, 1]"
+    explanation: "Print convolution output."
+  - line: 16
+    variables: {"pooled": "[1, 1]"}
+    output: "Pooled: [1, 1]"
+    explanation: "Max pool pairs: max(-2,1)=1, max(-3,1)=1."
+expected_output: |
+  Input:  [1, 3, 2, 5, 4]
+  Kernel: [1, -1]
+  Output: [-2, 1, -3, 1]
+  Pooled: [1, 1]
+hints:
+  - "Convolution: slide the kernel across the signal, multiply and sum."
+  - "The kernel [1, -1] computes the difference between adjacent elements."
+concept_tags:
+  - convolution
+  - pooling

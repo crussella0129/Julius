@@ -1,0 +1,35 @@
+type: fill-in
+id: "05-code-quality-fill-in-01"
+prompt: "Fill in the blanks to add type hints to this function that takes a list of integers and returns the sum as an integer."
+template: |
+  def total(numbers: ____[____]) -> ____:
+      result = 0
+      for n in numbers:
+          result += n
+      return result
+
+  print(total([1, 2, 3, 4, 5]))
+blanks:
+  - position: 0
+    answer: "list"
+    hint: "the container type"
+  - position: 1
+    answer: "int"
+    hint: "the type of elements in the list"
+  - position: 2
+    answer: "int"
+    hint: "the return type"
+solution: |
+  def total(numbers: list[int]) -> int:
+      result = 0
+      for n in numbers:
+          result += n
+      return result
+
+  print(total([1, 2, 3, 4, 5]))
+hints:
+  - "Type hints use list[element_type] syntax."
+  - "The function returns an integer sum, so the return type is int."
+concept_tags:
+  - type-hints
+  - linting

@@ -1,0 +1,66 @@
+type: trace
+id: "02-flask-intro-trace-01"
+prompt: "Trace through this Flask route-matching simulation and predict the output."
+code: |
+  routes = {"/": "home", "/about": "about", "/contact": "contact"}
+
+  requests = ["/", "/about", "/missing", "/contact"]
+
+  for path in requests:
+      if path in routes:
+          handler = routes[path]
+          print(f"200: {handler}")
+      else:
+          print(f"404: not found")
+steps:
+  - line: 1
+    variables: {"routes": "{'/': 'home', '/about': 'about', '/contact': 'contact'}"}
+    output: ""
+    explanation: "Define a dictionary mapping URL paths to handler names."
+  - line: 3
+    variables: {"requests": "['/', '/about', '/missing', '/contact']"}
+    output: ""
+    explanation: "Define a list of incoming request paths."
+  - line: 5
+    variables: {"path": "/"}
+    output: ""
+    explanation: "First iteration: path is '/'."
+  - line: 7
+    variables: {"path": "/", "handler": "home"}
+    output: "200: home"
+    explanation: "'/' is in routes, so look up the handler and print success."
+  - line: 5
+    variables: {"path": "/about"}
+    output: ""
+    explanation: "Second iteration: path is '/about'."
+  - line: 7
+    variables: {"path": "/about", "handler": "about"}
+    output: "200: about"
+    explanation: "'/about' is in routes, print success."
+  - line: 5
+    variables: {"path": "/missing"}
+    output: ""
+    explanation: "Third iteration: path is '/missing'."
+  - line: 10
+    variables: {"path": "/missing"}
+    output: "404: not found"
+    explanation: "'/missing' is NOT in routes, so print 404."
+  - line: 5
+    variables: {"path": "/contact"}
+    output: ""
+    explanation: "Fourth iteration: path is '/contact'."
+  - line: 7
+    variables: {"path": "/contact", "handler": "contact"}
+    output: "200: contact"
+    explanation: "'/contact' is in routes, print success."
+expected_output: |
+  200: home
+  200: about
+  404: not found
+  200: contact
+hints:
+  - "The 'in' operator checks if a key exists in a dictionary."
+  - "Only paths that match a route get a 200 response."
+concept_tags:
+  - routes
+  - flask-app

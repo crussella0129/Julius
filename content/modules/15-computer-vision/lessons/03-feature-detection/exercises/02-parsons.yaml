@@ -1,0 +1,25 @@
+type: parsons
+id: "03-feature-detection-parsons-01"
+prompt: "Arrange these lines to create a non-maximum suppression function that keeps only local maxima above a threshold from a 2D response map."
+blocks:
+  - "def nms(response, threshold):"
+  - "    h, w = response.shape"
+  - "    corners = []"
+  - "    for i in range(1, h - 1):"
+  - "        for j in range(1, w - 1):"
+  - "            if response[i, j] < threshold:"
+  - "                continue"
+  - "            local = response[i-1:i+2, j-1:j+2]"
+  - "            if response[i, j] == local.max():"
+  - "                corners.append((i, j))"
+  - "    return corners"
+distractors:
+  - "            if response[i, j] >= local.mean():"
+  - "    for i in range(h):"
+solution_order: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+hints:
+  - "We skip the border pixels by starting at 1 and ending at h-1."
+  - "A pixel is a local maximum only if it equals the max of its 3x3 neighborhood."
+concept_tags:
+  - harris-corners
+  - keypoints

@@ -1,0 +1,41 @@
+type: fill-in
+id: "05-numba-jit-fill-in-01"
+prompt: "Fill in the blanks to create a function that computes the dot product of two lists, suitable for Numba JIT compilation."
+template: |
+  def dot_product(a, b):
+      total = ____
+      for i in ____(len(a)):
+          total += a[i] * ____
+      return total
+
+  x = [1.0, 2.0, 3.0, 4.0]
+  y = [5.0, 6.0, 7.0, 8.0]
+  result = dot_product(x, y)
+  print(f"Dot product: {result}")
+blanks:
+  - position: 0
+    answer: "0.0"
+    hint: "initial value for float accumulation"
+  - position: 1
+    answer: "range"
+    hint: "function to generate indices"
+  - position: 2
+    answer: "b[i]"
+    hint: "corresponding element from the second array"
+solution: |
+  def dot_product(a, b):
+      total = 0.0
+      for i in range(len(a)):
+          total += a[i] * b[i]
+      return total
+
+  x = [1.0, 2.0, 3.0, 4.0]
+  y = [5.0, 6.0, 7.0, 8.0]
+  result = dot_product(x, y)
+  print(f"Dot product: {result}")
+hints:
+  - "Initialize total as 0.0 (float) for numeric type consistency."
+  - "Access corresponding elements a[i] and b[i] using the loop index."
+concept_tags:
+  - nopython-mode
+  - numba-types

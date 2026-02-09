@@ -1,0 +1,13 @@
+id: "14-nlp-llm-ai"
+title: "NLP, LLMs & AI Applications"
+description: "Natural language processing, transformers, and building AI apps"
+order: 14
+lessons:
+  - 01-nlp-fundamentals
+  - 02-spacy
+  - 03-text-classification
+  - 04-word-embeddings
+  - 05-transformers
+  - 06-huggingface
+  - 07-llm-from-scratch
+  - 08-langchain

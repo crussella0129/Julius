@@ -1,0 +1,41 @@
+type: fill-in
+id: "04-word-embeddings-fill-in-01"
+prompt: "Fill in the blanks to complete the word analogy function that computes vector arithmetic: a is to b as c is to ?"
+template: |
+  def analogy(embeddings, a, b, c):
+      result = []
+      for i in range(len(embeddings[a])):
+          val = embeddings[____][i] - embeddings[____][i] + embeddings[____][i]
+          result.append(val)
+      return result
+
+  emb = {"king": [0.5, 0.9], "queen": [0.5, -0.9],
+         "man": [0.1, 0.8], "woman": [0.1, -0.8]}
+  print(analogy(emb, "man", "king", "woman"))
+blanks:
+  - position: 0
+    answer: "b"
+    hint: "the second word in the analogy (king)"
+  - position: 1
+    answer: "a"
+    hint: "the first word to subtract (man)"
+  - position: 2
+    answer: "c"
+    hint: "the third word to add (woman)"
+solution: |
+  def analogy(embeddings, a, b, c):
+      result = []
+      for i in range(len(embeddings[a])):
+          val = embeddings[b][i] - embeddings[a][i] + embeddings[c][i]
+          result.append(val)
+      return result
+
+  emb = {"king": [0.5, 0.9], "queen": [0.5, -0.9],
+         "man": [0.1, 0.8], "woman": [0.1, -0.8]}
+  print(analogy(emb, "man", "king", "woman"))
+hints:
+  - "The formula is: result = b - a + c (king - man + woman)."
+  - "This gives a vector close to 'queen'."
+concept_tags:
+  - word-embeddings
+  - vector-semantics

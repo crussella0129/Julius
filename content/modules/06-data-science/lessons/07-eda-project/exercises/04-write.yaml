@@ -1,0 +1,21 @@
+type: write
+id: "07-eda-project-write-01"
+prompt: "Write a function called `eda_report` that takes a list of dictionaries (rows of data). It should print: total rows, number of rows with any None value, the unique values for each string column, and min/max/mean for each numeric column. Test with: [{'city': 'NYC', 'temp': 30, 'humidity': 65}, {'city': 'LA', 'temp': 72, 'humidity': 40}, {'city': 'NYC', 'temp': 28, 'humidity': None}, {'city': 'Chicago', 'temp': 15, 'humidity': 70}]."
+starter_code: |
+  # Write your function here
+tests:
+  - description: "Output shows total rows (4)"
+    check: "'4' in output"
+  - description: "Output shows missing data count (1)"
+    check: "'1' in output"
+  - description: "Output shows unique cities"
+    check: "'NYC' in output and 'LA' in output and 'Chicago' in output"
+  - description: "Output shows numeric statistics"
+    check: "'min' in output.lower() or '15' in output"
+hints:
+  - "Check isinstance(value, (int, float)) for numeric, isinstance(value, str) for string."
+  - "Collect values per column, skipping None, then compute stats."
+  - "Use set() to find unique string values."
+concept_tags:
+  - eda-workflow
+  - report-building

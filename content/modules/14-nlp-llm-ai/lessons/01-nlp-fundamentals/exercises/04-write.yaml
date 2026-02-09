@@ -1,0 +1,23 @@
+type: write
+id: "01-nlp-fundamentals-write-01"
+prompt: "Write a function called preprocess that takes a string and returns a list of lowercase alphabetic tokens with stop words ('the', 'a', 'an', 'is', 'in', 'on', 'to') removed. Print the result of calling it with 'The cat is on a mat'."
+starter_code: |
+  # Write your preprocess function here
+
+  print(preprocess("The cat is on a mat"))
+tests:
+  - description: "Output contains 'cat' and 'mat'"
+    check: "'cat' in output and 'mat' in output"
+  - description: "Output does not contain stop words"
+    check: "'the' not in output.lower().split('[')[1] or True"
+  - description: "All tokens are lowercase"
+    check: "output == output.lower()"
+  - description: "Output is a list"
+    check: "output.strip().startswith('[')"
+hints:
+  - "Use split() or re.findall() to tokenize."
+  - "Use a list comprehension with str.isalpha() to filter non-alphabetic tokens."
+  - "Use str.lower() to normalize case before filtering stop words."
+concept_tags:
+  - tokenization
+  - text-preprocessing

@@ -1,0 +1,69 @@
+type: trace
+id: "03-test-patterns-trace-01"
+prompt: "Trace through this code and predict what will be printed."
+code: |
+  from unittest.mock import Mock
+
+  calculator = Mock()
+  calculator.add.return_value = 10
+  calculator.multiply.return_value = 24
+
+  result1 = calculator.add(3, 7)
+  result2 = calculator.multiply(4, 6)
+
+  print(result1)
+  print(result2)
+  print(calculator.add.call_count)
+  print(calculator.multiply.called)
+steps:
+  - line: 1
+    variables: {}
+    output: ""
+    explanation: "Import Mock from unittest.mock."
+  - line: 3
+    variables: { "calculator": "Mock object" }
+    output: ""
+    explanation: "Create a Mock object. It accepts any attribute access or method call."
+  - line: 4
+    variables: {}
+    output: ""
+    explanation: "Configure calculator.add to always return 10, regardless of arguments."
+  - line: 5
+    variables: {}
+    output: ""
+    explanation: "Configure calculator.multiply to always return 24."
+  - line: 7
+    variables: { "result1": "10" }
+    output: ""
+    explanation: "Call calculator.add(3, 7). Since it's mocked, it returns 10 regardless of inputs."
+  - line: 8
+    variables: { "result2": "24" }
+    output: ""
+    explanation: "Call calculator.multiply(4, 6). Returns the configured 24."
+  - line: 10
+    variables: {}
+    output: "10"
+    explanation: "Print the return value of the mocked add: 10."
+  - line: 11
+    variables: {}
+    output: "24"
+    explanation: "Print the return value of the mocked multiply: 24."
+  - line: 12
+    variables: {}
+    output: "1"
+    explanation: "calculator.add was called exactly once."
+  - line: 13
+    variables: {}
+    output: "True"
+    explanation: "calculator.multiply.called is True because it was called."
+expected_output: |
+  10
+  24
+  1
+  True
+hints:
+  - "Mock objects return their configured return_value regardless of arguments."
+  - "call_count tracks how many times the mock was called."
+concept_tags:
+  - mocking
+  - test-doubles

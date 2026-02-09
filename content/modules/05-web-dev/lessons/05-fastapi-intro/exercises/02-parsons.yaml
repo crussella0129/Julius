@@ -1,0 +1,24 @@
+type: parsons
+id: "05-fastapi-intro-parsons-01"
+prompt: "Arrange these lines to create a FastAPI app with a Pydantic model for an Item and a POST endpoint that accepts and returns the item."
+blocks:
+  - "from fastapi import FastAPI"
+  - "from pydantic import BaseModel"
+  - "app = FastAPI()"
+  - "class Item(BaseModel):"
+  - "    name: str"
+  - "    price: float"
+  - "@app.post('/items')"
+  - "def create_item(item: Item):"
+  - "    return {'name': item.name, 'price': item.price}"
+distractors:
+  - "from flask import Flask"
+  - "    name = str"
+solution_order: [0, 1, 2, 3, 4, 5, 6, 7, 8]
+hints:
+  - "Import FastAPI and Pydantic's BaseModel first."
+  - "The Pydantic model uses type annotations with colons, not assignment."
+  - "The endpoint parameter type hint tells FastAPI to parse the request body."
+concept_tags:
+  - fastapi-app
+  - pydantic-models

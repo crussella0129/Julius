@@ -1,0 +1,22 @@
+type: parsons
+id: "06-automation-project-parsons-01"
+prompt: "Arrange these lines to write a function that counts files by extension in a given list and prints each extension with its count."
+blocks:
+  - "from collections import Counter"
+  - "from pathlib import Path"
+  - "def count_extensions(filenames):"
+  - "    exts = [Path(f).suffix.lower() for f in filenames]"
+  - "    counts = Counter(exts)"
+  - "    for ext, count in counts.most_common():"
+  - "        print(f'{ext}: {count}')"
+distractors:
+  - "    exts = [f.split('.') for f in filenames]"
+  - "    counts = len(exts)"
+solution_order: [0, 1, 2, 3, 4, 5, 6]
+hints:
+  - "Import Counter and Path at the top."
+  - "Use Path(f).suffix.lower() to get normalized extensions."
+  - "Counter counts occurrences; most_common() sorts by frequency."
+concept_tags:
+  - file-organization
+  - combining-modules

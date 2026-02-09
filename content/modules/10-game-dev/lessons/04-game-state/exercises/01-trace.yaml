@@ -1,0 +1,61 @@
+type: trace
+id: "04-game-state-trace-01"
+prompt: "Trace through this code simulating a game state machine and predict what will be printed."
+code: |
+  MENU = "menu"
+  PLAYING = "playing"
+  GAME_OVER = "game_over"
+
+  state = MENU
+  score = 0
+  events = ["start", "score", "score", "score", "die"]
+
+  for event in events:
+      if state == MENU and event == "start":
+          state = PLAYING
+          score = 0
+          print(f"State: {state}")
+      elif state == PLAYING and event == "score":
+          score += 10
+          print(f"Score: {score}")
+      elif state == PLAYING and event == "die":
+          state = GAME_OVER
+          print(f"Game Over! Final score: {score}")
+steps:
+  - line: 1
+    variables: { "state": "'menu'", "score": "0" }
+    output: ""
+    explanation: "Define state constants and initialize to MENU with score 0."
+  - line: 9
+    variables: { "event": "'start'" }
+    output: "State: playing"
+    explanation: "In MENU state, 'start' event transitions to PLAYING. Score reset to 0."
+  - line: 9
+    variables: { "event": "'score'" }
+    output: "Score: 10"
+    explanation: "In PLAYING state, 'score' event adds 10. Score is now 10."
+  - line: 9
+    variables: { "event": "'score'" }
+    output: "Score: 20"
+    explanation: "Another 'score' event. Score is now 20."
+  - line: 9
+    variables: { "event": "'score'" }
+    output: "Score: 30"
+    explanation: "Another 'score' event. Score is now 30."
+  - line: 9
+    variables: { "event": "'die'" }
+    output: "Game Over! Final score: 30"
+    explanation: "In PLAYING state, 'die' event transitions to GAME_OVER."
+expected_output: |
+  State: playing
+  Score: 10
+  Score: 20
+  Score: 30
+  Game Over! Final score: 30
+hints:
+  - "The state machine only responds to events valid for the current state."
+  - "'score' events only work in PLAYING state, not MENU or GAME_OVER."
+concept_tags:
+  - game-states
+  - state-machine
+  - score-tracking

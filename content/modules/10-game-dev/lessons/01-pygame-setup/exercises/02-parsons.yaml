@@ -1,0 +1,27 @@
+type: parsons
+id: "01-pygame-setup-parsons-01"
+prompt: "Arrange these lines to create the basic structure of a Pygame game loop that fills the screen blue and handles the quit event."
+blocks:
+  - "import pygame"
+  - "pygame.init()"
+  - "screen = pygame.display.set_mode((800, 600))"
+  - "running = True"
+  - "while running:"
+  - "    for event in pygame.event.get():"
+  - "        if event.type == pygame.QUIT:"
+  - "            running = False"
+  - "    screen.fill((0, 0, 255))"
+  - "    pygame.display.flip()"
+  - "pygame.quit()"
+distractors:
+  - "pygame.start()"
+  - "screen.update()"
+solution_order: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+hints:
+  - "Import and initialize Pygame first."
+  - "Create the screen, then enter the game loop."
+  - "Handle events, fill screen, flip display, then quit after the loop."
+concept_tags:
+  - pygame-init
+  - game-loop
+  - event-handling

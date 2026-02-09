@@ -1,0 +1,41 @@
+type: fill-in
+id: "04-web-security-fill-in-01"
+prompt: "Fill in the blanks to validate a username using a regex that only allows alphanumeric characters and underscores, between 3 and 20 characters."
+template: |
+  import re
+
+  def validate_username(username):
+      pattern = r'^[a-zA-Z0-9_]{____}$'
+      if re.____(____, username):
+          return True
+      return False
+
+  print(validate_username("alice_123"))
+  print(validate_username("a]b<c>d"))
+blanks:
+  - position: 0
+    answer: "3,20"
+    hint: "minimum and maximum length"
+  - position: 1
+    answer: "match"
+    hint: "re function to check from start of string"
+  - position: 2
+    answer: "pattern"
+    hint: "the regex variable"
+solution: |
+  import re
+
+  def validate_username(username):
+      pattern = r'^[a-zA-Z0-9_]{3,20}$'
+      if re.match(pattern, username):
+          return True
+      return False
+
+  print(validate_username("alice_123"))
+  print(validate_username("a]b<c>d"))
+hints:
+  - "The {3,20} quantifier means 'between 3 and 20 repetitions'."
+  - "re.match() checks the pattern against the beginning of the string."
+concept_tags:
+  - input-validation
+  - owasp-top-10

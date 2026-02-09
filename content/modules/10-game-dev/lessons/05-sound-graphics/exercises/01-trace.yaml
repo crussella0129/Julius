@@ -1,0 +1,68 @@
+type: trace
+id: "05-sound-graphics-trace-01"
+prompt: "Trace through this code simulating a frame animation cycle and predict what will be printed."
+code: |
+  frames = ["idle_0", "idle_1", "idle_2", "idle_3"]
+  current = 0
+  speed = 0.4
+  timer = 0.0
+
+  for tick in range(8):
+      dt = 0.2  # Simulated delta time
+      timer += dt
+      if timer >= speed:
+          timer = 0.0
+          current = (current + 1) % len(frames)
+      print(f"Tick {tick}: frame={frames[current]}")
+steps:
+  - line: 1
+    variables: { "frames": "['idle_0', 'idle_1', 'idle_2', 'idle_3']", "current": "0", "speed": "0.4", "timer": "0.0" }
+    output: ""
+    explanation: "Initialize 4 animation frames, starting at frame 0, advancing every 0.4 seconds."
+  - line: 7
+    variables: { "tick": "0", "timer": "0.2", "current": "0" }
+    output: "Tick 0: frame=idle_0"
+    explanation: "timer = 0.0 + 0.2 = 0.2. Not >= 0.4, so frame stays at idle_0."
+  - line: 7
+    variables: { "tick": "1", "timer": "0.0", "current": "1" }
+    output: "Tick 1: frame=idle_1"
+    explanation: "timer = 0.2 + 0.2 = 0.4. >= 0.4, so reset timer and advance to frame 1."
+  - line: 7
+    variables: { "tick": "2", "timer": "0.2", "current": "1" }
+    output: "Tick 2: frame=idle_1"
+    explanation: "timer = 0.0 + 0.2 = 0.2. Not >= 0.4, frame stays."
+  - line: 7
+    variables: { "tick": "3", "timer": "0.0", "current": "2" }
+    output: "Tick 3: frame=idle_2"
+    explanation: "timer = 0.2 + 0.2 = 0.4. Advance to frame 2."
+  - line: 7
+    variables: { "tick": "4", "timer": "0.2", "current": "2" }
+    output: "Tick 4: frame=idle_2"
+    explanation: "timer = 0.2. Not enough. Frame stays."
+  - line: 7
+    variables: { "tick": "5", "timer": "0.0", "current": "3" }
+    output: "Tick 5: frame=idle_3"
+    explanation: "timer = 0.4. Advance to frame 3."
+  - line: 7
+    variables: { "tick": "6", "timer": "0.2", "current": "3" }
+    output: "Tick 6: frame=idle_3"
+    explanation: "timer = 0.2. Frame stays."
+  - line: 7
+    variables: { "tick": "7", "timer": "0.0", "current": "0" }
+    output: "Tick 7: frame=idle_0"
+    explanation: "timer = 0.4. Advance: (3+1) % 4 = 0. Animation loops back to idle_0."
+expected_output: |
+  Tick 0: frame=idle_0
+  Tick 1: frame=idle_1
+  Tick 2: frame=idle_1
+  Tick 3: frame=idle_2
+  Tick 4: frame=idle_2
+  Tick 5: frame=idle_3
+  Tick 6: frame=idle_3
+  Tick 7: frame=idle_0
+hints:
+  - "The frame advances when the timer reaches the speed threshold."
+  - "Modulo % wraps the frame index back to 0 after the last frame."
+concept_tags:
+  - sprite-animation
+  - particle-effects

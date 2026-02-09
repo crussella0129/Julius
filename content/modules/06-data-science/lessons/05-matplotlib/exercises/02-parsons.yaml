@@ -1,0 +1,23 @@
+type: parsons
+id: "05-matplotlib-parsons-01"
+prompt: "Arrange these lines to prepare data for a bar chart showing average scores by subject."
+blocks:
+  - "subjects = ['Math', 'Science', 'English']"
+  - "scores = {'Math': [85, 90, 78], 'Science': [92, 88, 95], 'English': [76, 82, 80]}"
+  - "averages = []"
+  - "for subject in subjects:"
+  - "    avg = sum(scores[subject]) / len(scores[subject])"
+  - "    averages.append(avg)"
+  - "print(f'Subjects: {subjects}')"
+  - "print(f'Averages: {averages}')"
+distractors:
+  - "    avg = scores[subject].mean()"
+  - "averages = scores.values()"
+solution_order: [0, 1, 2, 3, 4, 5, 6, 7]
+hints:
+  - "Define subjects and scores data first."
+  - "Loop through subjects and compute each average with sum/len."
+  - "Append each average to the list."
+concept_tags:
+  - bar-charts
+  - plot-customization

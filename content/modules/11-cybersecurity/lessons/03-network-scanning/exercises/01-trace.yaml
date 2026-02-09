@@ -1,0 +1,109 @@
+type: trace
+id: "03-network-scanning-trace-01"
+prompt: "Trace through this code that simulates port scanning results and predict the output."
+code: |
+  well_known = {22: "SSH", 80: "HTTP", 443: "HTTPS", 3306: "MySQL"}
+  scan_results = [22, 53, 80, 443, 8080]
+  open_services = []
+
+  for port in scan_results:
+      service = well_known.get(port, "Unknown")
+      open_services.append((port, service))
+      print(f"Port {port}: {service}")
+
+  known_count = sum(1 for _, s in open_services if s != "Unknown")
+  print(f"Identified: {known_count}/{len(open_services)}")
+steps:
+  - line: 1
+    variables: {"well_known": "{22: 'SSH', 80: 'HTTP', 443: 'HTTPS', 3306: 'MySQL'}"}
+    output: ""
+    explanation: "Create a dictionary of well-known port-to-service mappings."
+  - line: 2
+    variables: {"scan_results": "[22, 53, 80, 443, 8080]"}
+    output: ""
+    explanation: "List of ports found open during the scan."
+  - line: 3
+    variables: {"open_services": "[]"}
+    output: ""
+    explanation: "Empty list to store (port, service) tuples."
+  - line: 5
+    variables: {"port": 22}
+    output: ""
+    explanation: "First iteration: port 22."
+  - line: 6
+    variables: {"port": 22, "service": "SSH"}
+    output: ""
+    explanation: "Port 22 is in well_known, so service is 'SSH'."
+  - line: 8
+    variables: {}
+    output: "Port 22: SSH"
+    explanation: "Print the port and its identified service."
+  - line: 5
+    variables: {"port": 53}
+    output: ""
+    explanation: "Second iteration: port 53."
+  - line: 6
+    variables: {"port": 53, "service": "Unknown"}
+    output: ""
+    explanation: "Port 53 is not in our well_known dict, so default 'Unknown'."
+  - line: 8
+    variables: {}
+    output: "Port 53: Unknown"
+    explanation: "Print port 53 as unknown service."
+  - line: 5
+    variables: {"port": 80}
+    output: ""
+    explanation: "Third iteration: port 80."
+  - line: 6
+    variables: {"port": 80, "service": "HTTP"}
+    output: ""
+    explanation: "Port 80 maps to 'HTTP'."
+  - line: 8
+    variables: {}
+    output: "Port 80: HTTP"
+    explanation: "Print the identified service."
+  - line: 5
+    variables: {"port": 443}
+    output: ""
+    explanation: "Fourth iteration: port 443."
+  - line: 6
+    variables: {"port": 443, "service": "HTTPS"}
+    output: ""
+    explanation: "Port 443 maps to 'HTTPS'."
+  - line: 8
+    variables: {}
+    output: "Port 443: HTTPS"
+    explanation: "Print the identified service."
+  - line: 5
+    variables: {"port": 8080}
+    output: ""
+    explanation: "Fifth iteration: port 8080."
+  - line: 6
+    variables: {"port": 8080, "service": "Unknown"}
+    output: ""
+    explanation: "Port 8080 is not in well_known, so 'Unknown'."
+  - line: 8
+    variables: {}
+    output: "Port 8080: Unknown"
+    explanation: "Print port 8080 as unknown."
+  - line: 10
+    variables: {"known_count": 3}
+    output: ""
+    explanation: "Count services that are not 'Unknown': SSH, HTTP, HTTPS = 3."
+  - line: 11
+    variables: {}
+    output: "Identified: 3/5"
+    explanation: "3 out of 5 open ports were identified."
+expected_output: |
+  Port 22: SSH
+  Port 53: Unknown
+  Port 80: HTTP
+  Port 443: HTTPS
+  Port 8080: Unknown
+  Identified: 3/5
+hints:
+  - "dict.get() returns the default value 'Unknown' when the port isn't in the dictionary."
+  - "The generator expression counts entries where the service is not 'Unknown'."
+concept_tags:
+  - port-scanning
+  - network-protocols

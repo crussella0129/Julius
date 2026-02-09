@@ -1,0 +1,19 @@
+type: write
+id: "04-pandas-aggregation-write-01"
+prompt: "Write code that simulates groupby without using pandas. Given a list of dictionaries with 'category' and 'value' keys, write a function `group_and_summarize(data)` that returns a dictionary mapping each category to a dict with 'count', 'sum', and 'avg'. Test with [{'category': 'A', 'value': 10}, {'category': 'B', 'value': 20}, {'category': 'A', 'value': 30}, {'category': 'B', 'value': 40}, {'category': 'A', 'value': 50}] and print the result."
+starter_code: |
+  # Write your function here
+tests:
+  - description: "Category A has count 3"
+    check: "'3' in output"
+  - description: "Category A has sum 90"
+    check: "'90' in output"
+  - description: "Category B has avg 30"
+    check: "'30' in output"
+hints:
+  - "Build a dict of lists, grouping values by category."
+  - "Then compute count, sum, and avg from each list."
+  - "avg = sum / count for each group."
+concept_tags:
+  - groupby
+  - aggregation-functions

@@ -1,0 +1,48 @@
+type: fill-in
+id: "02-spacy-fill-in-01"
+prompt: "Fill in the blanks to complete this Token class and a function that returns lemmas of non-stop-word tokens."
+template: |
+  class Token:
+      def __init__(self, text, pos, lemma, is_stop):
+          self.text = text
+          self.pos_ = pos
+          self.____ = lemma
+          self.is_stop = is_stop
+
+  def get_content_lemmas(tokens):
+      return [t.lemma_ for t in tokens if not t.____]
+
+  tokens = [
+      Token("The", "DET", "the", True),
+      Token("cats", "NOUN", "cat", False),
+  ]
+  print(get_content_lemmas(tokens))
+blanks:
+  - position: 0
+    answer: "lemma_"
+    hint: "spaCy convention uses trailing underscore for string attributes"
+  - position: 1
+    answer: "is_stop"
+    hint: "boolean attribute indicating stop words"
+solution: |
+  class Token:
+      def __init__(self, text, pos, lemma, is_stop):
+          self.text = text
+          self.pos_ = pos
+          self.lemma_ = lemma
+          self.is_stop = is_stop
+
+  def get_content_lemmas(tokens):
+      return [t.lemma_ for t in tokens if not t.is_stop]
+
+  tokens = [
+      Token("The", "DET", "the", True),
+      Token("cats", "NOUN", "cat", False),
+  ]
+  print(get_content_lemmas(tokens))
+hints:
+  - "spaCy uses trailing underscores like .lemma_ for the string form."
+  - "is_stop is a boolean -- use 'not' to filter stop words out."
+concept_tags:
+  - spacy
+  - lemmatization

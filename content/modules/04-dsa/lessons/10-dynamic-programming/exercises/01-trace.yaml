@@ -1,0 +1,67 @@
+type: trace
+id: "10-dynamic-programming-trace-01"
+prompt: "Trace through this bottom-up Fibonacci and predict the output."
+code: |
+  def fib(n):
+      if n <= 1:
+          return n
+      dp = [0] * (n + 1)
+      dp[1] = 1
+      for i in range(2, n + 1):
+          dp[i] = dp[i - 1] + dp[i - 2]
+      return dp[n]
+
+  print(fib(6))
+steps:
+  - line: 2
+    variables: { "n": "6" }
+    output: ""
+    explanation: "n=6, which is > 1, so skip the base case."
+  - line: 4
+    variables: { "dp": "[0, 0, 0, 0, 0, 0, 0]" }
+    output: ""
+    explanation: "Create dp array of size 7, all zeros."
+  - line: 5
+    variables: { "dp": "[0, 1, 0, 0, 0, 0, 0]" }
+    output: ""
+    explanation: "Set dp[1] = 1. Base cases: dp[0]=0, dp[1]=1."
+  - line: 6
+    variables: { "i": "2" }
+    output: ""
+    explanation: "Loop starts at i=2."
+  - line: 7
+    variables: { "dp": "[0, 1, 1, 0, 0, 0, 0]", "i": "2" }
+    output: ""
+    explanation: "dp[2] = dp[1] + dp[0] = 1 + 0 = 1."
+  - line: 7
+    variables: { "dp": "[0, 1, 1, 2, 0, 0, 0]", "i": "3" }
+    output: ""
+    explanation: "dp[3] = dp[2] + dp[1] = 1 + 1 = 2."
+  - line: 7
+    variables: { "dp": "[0, 1, 1, 2, 3, 0, 0]", "i": "4" }
+    output: ""
+    explanation: "dp[4] = dp[3] + dp[2] = 2 + 1 = 3."
+  - line: 7
+    variables: { "dp": "[0, 1, 1, 2, 3, 5, 0]", "i": "5" }
+    output: ""
+    explanation: "dp[5] = dp[4] + dp[3] = 3 + 2 = 5."
+  - line: 7
+    variables: { "dp": "[0, 1, 1, 2, 3, 5, 8]", "i": "6" }
+    output: ""
+    explanation: "dp[6] = dp[5] + dp[4] = 5 + 3 = 8."
+  - line: 8
+    variables: { "dp": "[0, 1, 1, 2, 3, 5, 8]" }
+    output: ""
+    explanation: "Return dp[6] = 8."
+  - line: 10
+    variables: {}
+    output: "8"
+    explanation: "Print 8. The 6th Fibonacci number is 8."
+expected_output: |
+  8
+hints:
+  - "Each dp[i] is the sum of the two previous values."
+  - "The sequence is: 0, 1, 1, 2, 3, 5, 8 -- so fib(6) = 8."
+concept_tags:
+  - tabulation
+  - optimal-substructure

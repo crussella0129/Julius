@@ -1,0 +1,19 @@
+type: write
+id: "07-web-scraping-write-01"
+prompt: "Write a function called `extract_items` that takes a list of dictionaries (each with 'tag', 'class', and 'text' keys) and two optional filter parameters: `tag` and `class_name`. Return a list of text values from elements that match both filters (skip a filter if it's None). Print the results of extracting all items with tag='p' and class_name='highlight' from this data: [{'tag': 'p', 'class': 'highlight', 'text': 'Important'}, {'tag': 'p', 'class': 'normal', 'text': 'Regular'}, {'tag': 'span', 'class': 'highlight', 'text': 'Note'}, {'tag': 'p', 'class': 'highlight', 'text': 'Also important'}]."
+starter_code: |
+  # Write your function here
+tests:
+  - description: "Output contains 'Important'"
+    check: "'Important' in output"
+  - description: "Output contains 'Also important'"
+    check: "'Also important' in output"
+  - description: "Output does not contain 'Regular' or 'Note'"
+    check: "'Regular' not in output and 'Note' not in output"
+hints:
+  - "Loop through elements and check each filter condition."
+  - "Use 'continue' to skip non-matching elements."
+  - "If tag is None, skip the tag check. Same for class_name."
+concept_tags:
+  - html-parsing
+  - css-selectors

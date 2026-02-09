@@ -1,0 +1,24 @@
+type: write
+id: "01-os-filesystem-write-01"
+prompt: "Write a script that takes a file path string '/home/user/projects/app/main.py' and prints: the filename, the file extension, and the parent directory name, each on a separate line."
+starter_code: |
+  from pathlib import Path
+
+  path = "/home/user/projects/app/main.py"
+  # Your code here
+tests:
+  - description: "Output has exactly 3 lines"
+    check: "len(output.strip().splitlines()) == 3"
+  - description: "First line is the filename 'main.py'"
+    check: "output.strip().splitlines()[0] == 'main.py'"
+  - description: "Second line is the extension '.py'"
+    check: "output.strip().splitlines()[1] == '.py'"
+  - description: "Third line is the parent directory 'app'"
+    check: "output.strip().splitlines()[2] == 'app'"
+hints:
+  - "Create a Path object from the string."
+  - "Use .name, .suffix, and .parent.name properties."
+  - "p = Path(path); print(p.name); print(p.suffix); print(p.parent.name)"
+concept_tags:
+  - pathlib
+  - file-operations

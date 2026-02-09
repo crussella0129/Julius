@@ -1,0 +1,45 @@
+type: fill-in
+id: "07-llm-from-scratch-fill-in-01"
+prompt: "Fill in the blanks to complete this cross-entropy loss function for next-token prediction."
+template: |
+  import math
+
+  def cross_entropy_loss(predicted_probs, target_ids):
+      loss = 0.0
+      for probs, target in zip(predicted_probs, target_ids):
+          p = max(probs[____], 1e-10)
+          loss -= math.____(p)
+      return loss / ____(target_ids)
+
+  probs = [[0.1, 0.7, 0.2]]  # model predicts 3 classes
+  targets = [1]               # correct class is 1
+  print(f"{cross_entropy_loss(probs, targets):.3f}")
+blanks:
+  - position: 0
+    answer: "target"
+    hint: "index into the probability at the correct class"
+  - position: 1
+    answer: "log"
+    hint: "natural logarithm for cross-entropy"
+  - position: 2
+    answer: "len"
+    hint: "average the loss over all examples"
+solution: |
+  import math
+
+  def cross_entropy_loss(predicted_probs, target_ids):
+      loss = 0.0
+      for probs, target in zip(predicted_probs, target_ids):
+          p = max(probs[target], 1e-10)
+          loss -= math.log(p)
+      return loss / len(target_ids)
+
+  probs = [[0.1, 0.7, 0.2]]  # model predicts 3 classes
+  targets = [1]               # correct class is 1
+  print(f"{cross_entropy_loss(probs, targets):.3f}")
+hints:
+  - "We want the probability the model assigned to the correct class."
+  - "Cross-entropy uses the negative log of that probability."
+concept_tags:
+  - cross-entropy-loss
+  - training-loop

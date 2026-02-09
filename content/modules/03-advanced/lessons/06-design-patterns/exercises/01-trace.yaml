@@ -1,0 +1,61 @@
+type: trace
+id: "06-design-patterns-trace-01"
+prompt: "Trace through this code and predict the final output."
+code: |
+  class Singleton:
+      _instance = None
+
+      def __new__(cls, value):
+          if cls._instance is None:
+              cls._instance = super().__new__(cls)
+          cls._instance.value = value
+          return cls._instance
+
+  a = Singleton("first")
+  b = Singleton("second")
+  print(a.value)
+  print(b.value)
+  print(a is b)
+steps:
+  - line: 1
+    variables: { "_instance": "None" }
+    output: ""
+    explanation: "The Singleton class is defined with _instance = None."
+  - line: 10
+    variables: {}
+    output: ""
+    explanation: "Singleton('first') calls __new__. _instance is None, so a new object is created."
+  - line: 7
+    variables: { "_instance.value": "first" }
+    output: ""
+    explanation: "The new instance's value is set to 'first'. _instance now points to this object."
+  - line: 11
+    variables: {}
+    output: ""
+    explanation: "Singleton('second') calls __new__. _instance is NOT None, so no new object is created."
+  - line: 7
+    variables: { "_instance.value": "second" }
+    output: ""
+    explanation: "The SAME instance's value is updated to 'second'."
+  - line: 12
+    variables: { "a.value": "second", "b.value": "second" }
+    output: "second"
+    explanation: "a.value is 'second' because a and b are the same object, and value was last set to 'second'."
+  - line: 13
+    variables: {}
+    output: "second"
+    explanation: "b.value is also 'second' -- same object."
+  - line: 14
+    variables: {}
+    output: "True"
+    explanation: "a is b is True because they are literally the same object in memory."
+expected_output: |
+  second
+  second
+  True
+hints:
+  - "In a Singleton, __new__ only creates a new object the first time."
+  - "Both a and b point to the same object, so setting value on one affects the other."
+  - "The 'is' operator checks identity (same object in memory), not equality."
+concept_tags:
+  - singleton-pattern

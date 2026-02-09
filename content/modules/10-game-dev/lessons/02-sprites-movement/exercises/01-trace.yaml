@@ -1,0 +1,75 @@
+type: trace
+id: "02-sprites-movement-trace-01"
+prompt: "Trace through this code simulating sprite movement and predict what will be printed."
+code: |
+  class Sprite:
+      def __init__(self, x, y, speed):
+          self.x = x
+          self.y = y
+          self.speed = speed
+
+      def move(self, dx, dy):
+          self.x += dx * self.speed
+          self.y += dy * self.speed
+
+      def clamp(self, max_x, max_y):
+          self.x = max(0, min(self.x, max_x))
+          self.y = max(0, min(self.y, max_y))
+
+  player = Sprite(100, 200, 5)
+  player.move(1, 0)
+  print(f"After move right: ({player.x}, {player.y})")
+
+  player.move(0, -1)
+  print(f"After move up: ({player.x}, {player.y})")
+
+  player.move(-100, 0)
+  player.clamp(800, 600)
+  print(f"After clamp: ({player.x}, {player.y})")
+steps:
+  - line: 1
+    variables: {}
+    output: ""
+    explanation: "Define a Sprite class with position, speed, move, and clamp methods."
+  - line: 15
+    variables: { "player.x": "100", "player.y": "200", "player.speed": "5" }
+    output: ""
+    explanation: "Create player at (100, 200) with speed 5."
+  - line: 16
+    variables: { "player.x": "105", "player.y": "200" }
+    output: ""
+    explanation: "move(1, 0): x += 1*5 = 5. New x = 105. y unchanged."
+  - line: 17
+    variables: {}
+    output: "After move right: (105, 200)"
+    explanation: "Print position after moving right."
+  - line: 19
+    variables: { "player.x": "105", "player.y": "195" }
+    output: ""
+    explanation: "move(0, -1): y += -1*5 = -5. New y = 195."
+  - line: 20
+    variables: {}
+    output: "After move up: (105, 195)"
+    explanation: "Print position after moving up."
+  - line: 22
+    variables: { "player.x": "-395", "player.y": "195" }
+    output: ""
+    explanation: "move(-100, 0): x += -100*5 = -500. New x = 105 - 500 = -395."
+  - line: 23
+    variables: { "player.x": "0", "player.y": "195" }
+    output: ""
+    explanation: "clamp: x = max(0, min(-395, 800)) = max(0, -395) = 0. y stays 195."
+  - line: 24
+    variables: {}
+    output: "After clamp: (0, 195)"
+    explanation: "x was clamped to 0 (the minimum). y was already in bounds."
+expected_output: |
+  After move right: (105, 200)
+  After move up: (105, 195)
+  After clamp: (0, 195)
+hints:
+  - "Movement multiplies direction by speed: dx * speed."
+  - "Clamp uses max(0, min(value, max)) to keep within bounds."
+concept_tags:
+  - velocity
+  - screen-bounds

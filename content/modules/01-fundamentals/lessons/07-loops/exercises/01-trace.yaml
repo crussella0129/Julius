@@ -1,0 +1,57 @@
+type: trace
+id: "07-loops-trace-01"
+prompt: "Trace through this code and predict the final output."
+code: |
+  total = 0
+  for i in range(1, 5):
+      total += i
+  print(total)
+steps:
+  - line: 1
+    variables: { "total": "0" }
+    output: ""
+    explanation: "total is initialized to 0."
+  - line: 2
+    variables: { "total": "0", "i": "1" }
+    output: ""
+    explanation: "First iteration: i = 1 (range(1,5) produces 1, 2, 3, 4)."
+  - line: 3
+    variables: { "total": "1", "i": "1" }
+    output: ""
+    explanation: "total += 1 → total is now 1."
+  - line: 2
+    variables: { "total": "1", "i": "2" }
+    output: ""
+    explanation: "Second iteration: i = 2."
+  - line: 3
+    variables: { "total": "3", "i": "2" }
+    output: ""
+    explanation: "total += 2 → total is now 3."
+  - line: 2
+    variables: { "total": "3", "i": "3" }
+    output: ""
+    explanation: "Third iteration: i = 3."
+  - line: 3
+    variables: { "total": "6", "i": "3" }
+    output: ""
+    explanation: "total += 3 → total is now 6."
+  - line: 2
+    variables: { "total": "6", "i": "4" }
+    output: ""
+    explanation: "Fourth iteration: i = 4."
+  - line: 3
+    variables: { "total": "10", "i": "4" }
+    output: ""
+    explanation: "total += 4 → total is now 10."
+  - line: 4
+    variables: { "total": "10", "i": "4" }
+    output: "10"
+    explanation: "Loop is done. Prints total = 10 (1+2+3+4)."
+expected_output: |
+  10
+hints:
+  - "range(1, 5) produces the numbers 1, 2, 3, 4 — NOT including 5."
+  - "+= adds the right side to the current value of total."
+concept_tags:
+  - for-loop
+  - range-function

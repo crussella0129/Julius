@@ -1,0 +1,21 @@
+type: parsons
+id: "01-security-fundamentals-parsons-01"
+prompt: "Arrange these lines to create a function that calculates an attack surface score: 3 points per open port, 2 points per API endpoint, 1 point per user role."
+blocks:
+  - "def attack_surface_score(system):"
+  - "    score = 0"
+  - "    score += len(system.get('open_ports', [])) * 3"
+  - "    score += len(system.get('api_endpoints', [])) * 2"
+  - "    score += len(system.get('user_roles', [])) * 1"
+  - "    return score"
+distractors:
+  - "    score += len(system['open_ports'])"
+  - "    return len(system)"
+solution_order: [0, 1, 2, 3, 4, 5]
+hints:
+  - "Start with the function definition, then initialize the score to 0."
+  - "Use dict.get() with a default empty list to avoid KeyError."
+  - "Each category has a different weight: ports are most critical."
+concept_tags:
+  - attack-surface
+  - threat-modeling

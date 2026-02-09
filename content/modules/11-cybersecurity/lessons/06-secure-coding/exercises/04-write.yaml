@@ -1,0 +1,18 @@
+type: write
+id: "06-secure-coding-write-01"
+prompt: "Write a RateLimiter class that tracks login attempts. It should have an __init__ method that takes max_attempts (default 3) and stores attempts in a dictionary. Add an is_allowed(username) method that returns True if the user has fewer than max_attempts, otherwise False. Each call increments the count. Test it by making 5 attempts for 'alice' and printing whether each attempt is allowed or blocked."
+starter_code: "# Write your code here\n"
+tests:
+  - description: "First three attempts are allowed"
+    check: "output.lower().count('allowed') >= 3 or output.lower().count('true') >= 3"
+  - description: "Last two attempts are blocked"
+    check: "'blocked' in output.lower() or 'false' in output.lower() or 'denied' in output.lower()"
+  - description: "Output has exactly 5 lines"
+    check: "len(output.strip().splitlines()) == 5"
+hints:
+  - "Use a dictionary to track how many attempts each username has made."
+  - "In is_allowed(), check the count against max_attempts before incrementing."
+  - "Use defaultdict(int) or dict.get(key, 0) for clean counting."
+concept_tags:
+  - error-handling-security
+  - input-sanitization

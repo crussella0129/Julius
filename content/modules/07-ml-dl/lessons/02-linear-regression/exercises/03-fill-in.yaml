@@ -1,0 +1,50 @@
+type: fill-in
+id: "02-linear-regression-fill-in-01"
+prompt: "Fill in the blanks to compute the slope and intercept of a simple linear regression."
+template: |
+  x = [1, 2, 3, 4]
+  y = [2, 4, 5, 4]
+
+  n = len(x)
+  x_mean = ____(x) / n
+  y_mean = sum(y) / n
+
+  num = sum((xi - x_mean) * (yi - y_mean) for xi, yi in ____(x, y))
+  den = sum((xi - x_mean) ** ____ for xi in x)
+
+  slope = num / den
+  intercept = y_mean - ____ * x_mean
+  print(f\"y = {slope:.1f}x + {intercept:.1f}\")
+blanks:
+  - position: 0
+    answer: "sum"
+    hint: "function to add all values"
+  - position: 1
+    answer: "zip"
+    hint: "function to pair x and y values"
+  - position: 2
+    answer: "2"
+    hint: "exponent for squaring"
+  - position: 3
+    answer: "slope"
+    hint: "the slope variable computed above"
+solution: |
+  x = [1, 2, 3, 4]
+  y = [2, 4, 5, 4]
+
+  n = len(x)
+  x_mean = sum(x) / n
+  y_mean = sum(y) / n
+
+  num = sum((xi - x_mean) * (yi - y_mean) for xi, yi in zip(x, y))
+  den = sum((xi - x_mean) ** 2 for xi in x)
+
+  slope = num / den
+  intercept = y_mean - slope * x_mean
+  print(f"y = {slope:.1f}x + {intercept:.1f}")
+hints:
+  - "The slope formula divides the covariance by the variance of x."
+  - "intercept = y_mean - slope * x_mean positions the line through the means."
+concept_tags:
+  - linear-model
+  - gradient-descent

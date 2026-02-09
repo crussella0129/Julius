@@ -1,0 +1,46 @@
+type: trace
+id: "01-nlp-fundamentals-trace-01"
+prompt: "Trace through this text preprocessing code and predict the final output."
+code: |
+  import re
+
+  text = "The Dogs were RUNNING quickly!"
+  tokens = re.findall(r"\w+|[^\w\s]", text)
+  tokens = [t.lower() for t in tokens]
+  tokens = [t for t in tokens if t.isalpha()]
+  stop_words = {"the", "were"}
+  tokens = [t for t in tokens if t not in stop_words]
+  print(tokens)
+steps:
+  - line: 3
+    variables: {"text": "The Dogs were RUNNING quickly!"}
+    output: ""
+    explanation: "The raw text string is assigned to the variable text."
+  - line: 4
+    variables: {"tokens": ["The", "Dogs", "were", "RUNNING", "quickly", "!"]}
+    output: ""
+    explanation: "re.findall splits text into word tokens and punctuation, producing 6 tokens."
+  - line: 5
+    variables: {"tokens": ["the", "dogs", "were", "running", "quickly", "!"]}
+    output: ""
+    explanation: "All tokens are lowercased. 'RUNNING' becomes 'running', 'The' becomes 'the'."
+  - line: 6
+    variables: {"tokens": ["the", "dogs", "were", "running", "quickly"]}
+    output: ""
+    explanation: "The '!' is removed because it is not alphabetic (isalpha() returns False)."
+  - line: 8
+    variables: {"tokens": ["dogs", "running", "quickly"]}
+    output: ""
+    explanation: "'the' and 'were' are in the stop_words set, so they are filtered out."
+  - line: 9
+    variables: {}
+    output: "['dogs', 'running', 'quickly']"
+    explanation: "The final filtered token list is printed."
+expected_output: |
+  ['dogs', 'running', 'quickly']
+hints:
+  - "re.findall(r'\\w+|[^\\w\\s]', text) splits on word characters and punctuation separately."
+  - "isalpha() returns False for '!' since it is not a letter."
+concept_tags:
+  - tokenization
+  - text-preprocessing

@@ -1,0 +1,37 @@
+type: fill-in
+id: "01-nlp-fundamentals-fill-in-01"
+prompt: "Fill in the blanks to create a simple stemmer that removes common suffixes from words."
+template: |
+  def simple_stem(word):
+      suffixes = ["ing", "ly", "ed", "s"]
+      for suffix in suffixes:
+          if word.____(____)  and len(word) - len(suffix) > 2:
+              return word[:____(suffix)]
+      return word
+
+  print(simple_stem("running"))
+blanks:
+  - position: 0
+    answer: "endswith"
+    hint: "string method that checks the ending"
+  - position: 1
+    answer: "suffix"
+    hint: "the variable from the loop"
+  - position: 2
+    answer: "-len"
+    hint: "negative slice to remove the suffix length"
+solution: |
+  def simple_stem(word):
+      suffixes = ["ing", "ly", "ed", "s"]
+      for suffix in suffixes:
+          if word.endswith(suffix) and len(word) - len(suffix) > 2:
+              return word[:-len(suffix)]
+      return word
+
+  print(simple_stem("running"))
+hints:
+  - "endswith() checks if a string ends with a given suffix."
+  - "To remove the last N characters, use word[:-N]."
+concept_tags:
+  - stemming
+  - text-preprocessing

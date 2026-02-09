@@ -1,0 +1,44 @@
+type: fill-in
+id: "03-game-physics-fill-in-01"
+prompt: "Fill in the blanks to check if two rectangles collide using AABB collision detection."
+template: |
+  def rects_collide(x1, y1, w1, h1, x2, y2, w2, h2):
+      return (x1 < x2 + ____ and
+              x1 + w1 > ____ and
+              y1 < y2 + ____ and
+              y1 + h1 > ____)
+
+  # Test: overlapping rectangles
+  print(rects_collide(0, 0, 50, 50, 25, 25, 50, 50))
+  # Test: non-overlapping rectangles
+  print(rects_collide(0, 0, 50, 50, 100, 100, 50, 50))
+blanks:
+  - position: 0
+    answer: "w2"
+    hint: "right edge of second rectangle"
+  - position: 1
+    answer: "x2"
+    hint: "left edge of second rectangle"
+  - position: 2
+    answer: "h2"
+    hint: "bottom edge of second rectangle"
+  - position: 3
+    answer: "y2"
+    hint: "top edge of second rectangle"
+solution: |
+  def rects_collide(x1, y1, w1, h1, x2, y2, w2, h2):
+      return (x1 < x2 + w2 and
+              x1 + w1 > x2 and
+              y1 < y2 + h2 and
+              y1 + h1 > y2)
+
+  # Test: overlapping rectangles
+  print(rects_collide(0, 0, 50, 50, 25, 25, 50, 50))
+  # Test: non-overlapping rectangles
+  print(rects_collide(0, 0, 50, 50, 100, 100, 50, 50))
+hints:
+  - "AABB checks if the left edge of rect1 is to the left of the right edge of rect2."
+  - "All four conditions must be True for the rectangles to overlap."
+concept_tags:
+  - aabb-collision
+  - collision-detection

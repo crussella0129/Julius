@@ -1,0 +1,58 @@
+type: trace
+id: "01-opencv-basics-trace-01"
+prompt: "Trace through this image creation and pixel manipulation code and predict the output."
+code: |
+  import numpy as np
+
+  img = np.zeros((3, 4, 3), dtype=np.uint8)
+  print(f"Shape: {img.shape}")
+
+  img[0, 0] = [255, 0, 0]   # Blue pixel (BGR)
+  img[1, 2] = [0, 255, 0]   # Green pixel
+  img[2, 3] = [0, 0, 255]   # Red pixel
+
+  print(f"Pixel (0,0): {img[0, 0].tolist()}")
+  print(f"Pixel (1,1): {img[1, 1].tolist()}")
+  print(f"Pixel (2,3): {img[2, 3].tolist()}")
+  print(f"Total non-zero: {np.count_nonzero(img)}")
+steps:
+  - line: 3
+    variables: {"img": "3x4x3 array of zeros"}
+    output: ""
+    explanation: "A 3-row, 4-column, 3-channel image is created, initialized to all zeros (black)."
+  - line: 4
+    variables: {}
+    output: "Shape: (3, 4, 3)"
+    explanation: "Image has 3 rows, 4 columns, 3 channels (BGR)."
+  - line: 6
+    variables: {}
+    output: ""
+    explanation: "Top-left pixel set to [255,0,0] (blue in BGR format)."
+  - line: 10
+    variables: {}
+    output: "Pixel (0,0): [255, 0, 0]"
+    explanation: "The blue pixel we set is at row 0, column 0."
+  - line: 11
+    variables: {}
+    output: "Pixel (1,1): [0, 0, 0]"
+    explanation: "Row 1, column 1 was never set, so it remains [0,0,0] (black)."
+  - line: 12
+    variables: {}
+    output: "Pixel (2,3): [0, 0, 255]"
+    explanation: "Row 2, column 3 was set to red [0,0,255]."
+  - line: 13
+    variables: {}
+    output: "Total non-zero: 3"
+    explanation: "Three individual channel values are non-zero: 255 in pixel(0,0), 255 in pixel(1,2), 255 in pixel(2,3)."
+expected_output: |
+  Shape: (3, 4, 3)
+  Pixel (0,0): [255, 0, 0]
+  Pixel (1,1): [0, 0, 0]
+  Pixel (2,3): [0, 0, 255]
+  Total non-zero: 3
+hints:
+  - "np.zeros creates an array of all zeros. Only pixels we explicitly set have non-zero values."
+  - "np.count_nonzero counts individual non-zero elements, not pixels."
+concept_tags:
+  - image-representation
+  - pixel-manipulation

@@ -1,0 +1,92 @@
+type: trace
+id: "06-complete-game-trace-01"
+prompt: "Trace through this code simulating a dodge game and predict what will be printed."
+code: |
+  import random
+  random.seed(0)
+
+  class Player:
+      def __init__(self):
+          self.x = 50
+          self.lives = 3
+
+  class Obstacle:
+      def __init__(self):
+          self.x = random.randint(0, 100)
+          self.y = 0
+
+  player = Player()
+  score = 0
+  obstacles = []
+
+  for frame in range(5):
+      # Spawn obstacle every other frame
+      if frame % 2 == 0:
+          obstacles.append(Obstacle())
+
+      # Move obstacles down
+      for obs in obstacles:
+          obs.y += 10
+
+      # Check collision (within 20 pixels on x, y > 40)
+      for obs in obstacles[:]:
+          if abs(obs.x - player.x) < 20 and obs.y > 40:
+              player.lives -= 1
+              obstacles.remove(obs)
+
+      score += 1
+
+  print(f"Score: {score}")
+  print(f"Lives: {player.lives}")
+  print(f"Obstacles on screen: {len(obstacles)}")
+steps:
+  - line: 2
+    variables: {}
+    output: ""
+    explanation: "Seed random for reproducible obstacle positions."
+  - line: 14
+    variables: { "player.x": "50", "player.lives": "3", "score": "0" }
+    output: ""
+    explanation: "Create player at x=50 with 3 lives."
+  - line: 18
+    variables: { "frame": "0" }
+    output: ""
+    explanation: "Frame 0: spawn obstacle (random x=49 with seed 0), move all down to y=10. x=49 is close to player(50) but y=10 < 40, no hit. score=1."
+  - line: 18
+    variables: { "frame": "1" }
+    output: ""
+    explanation: "Frame 1: no spawn (odd). Move obstacle to y=20. No hit (y<40). score=2."
+  - line: 18
+    variables: { "frame": "2" }
+    output: ""
+    explanation: "Frame 2: spawn new obstacle (x=97). Move all down: first to y=30, second to y=10. No hits. score=3."
+  - line: 18
+    variables: { "frame": "3" }
+    output: ""
+    explanation: "Frame 3: no spawn. Move: first y=40, second y=20. First obs: abs(49-50)=1 < 20 and y=40 not > 40, no hit. score=4."
+  - line: 18
+    variables: { "frame": "4" }
+    output: ""
+    explanation: "Frame 4: spawn new obstacle (x=53). Move: first y=50, second y=30, third y=10. First obs: abs(49-50)=1<20 and 50>40, HIT! lives=2, removed. score=5."
+  - line: 33
+    variables: { "score": "5", "player.lives": "2" }
+    output: "Score: 5"
+    explanation: "5 frames completed, score is 5."
+  - line: 34
+    variables: {}
+    output: "Lives: 2"
+    explanation: "Player was hit once, 3-1 = 2 lives remaining."
+  - line: 35
+    variables: {}
+    output: "Obstacles on screen: 2"
+    explanation: "3 spawned, 1 removed by collision, 2 remain."
+expected_output: |
+  Score: 5
+  Lives: 2
+  Obstacles on screen: 2
+hints:
+  - "random.seed(0) gives randint(0,100) values: 49, 97, 53, ..."
+  - "Collision requires both: close x AND y > 40."
+concept_tags:
+  - game-architecture
+  - gameplay-loop

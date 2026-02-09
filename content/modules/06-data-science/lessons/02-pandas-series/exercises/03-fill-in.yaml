@@ -1,0 +1,41 @@
+type: fill-in
+id: "02-pandas-series-fill-in-01"
+prompt: "Fill in the blanks to create a DataFrame, select rows by condition, and compute a statistic."
+template: |
+  import pandas as pd
+
+  df = pd.____({
+      \"city\": [\"NYC\", \"LA\", \"Chicago\", \"Houston\"],
+      \"population\": [8_336_817, 3_979_576, 2_693_976, 2_320_268],
+  })
+
+  big_cities = df[df[\"population\"] ____ 3_000_000]
+  print(len(big_cities))
+  print(df[\"population\"].____())
+blanks:
+  - position: 0
+    answer: "DataFrame"
+    hint: "constructor for a pandas table"
+  - position: 1
+    answer: ">"
+    hint: "comparison operator for greater than"
+  - position: 2
+    answer: "mean"
+    hint: "function that computes the average"
+solution: |
+  import pandas as pd
+
+  df = pd.DataFrame({
+      "city": ["NYC", "LA", "Chicago", "Houston"],
+      "population": [8_336_817, 3_979_576, 2_693_976, 2_320_268],
+  })
+
+  big_cities = df[df["population"] > 3_000_000]
+  print(len(big_cities))
+  print(df["population"].mean())
+hints:
+  - "pd.DataFrame() creates a new DataFrame from a dictionary."
+  - "Use > to filter rows with population above 3 million."
+concept_tags:
+  - dataframe
+  - dataframe-indexing

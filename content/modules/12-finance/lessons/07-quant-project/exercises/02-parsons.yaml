@@ -1,0 +1,28 @@
+type: parsons
+id: "07-quant-project-parsons-01"
+prompt: "Arrange these lines to create a function that generates a performance report from backtest results, including total return, max drawdown, and number of trades."
+blocks:
+  - "def report(values, trades, initial):"
+  - "    total_return = (values[-1] / initial - 1) * 100"
+  - "    peak = values[0]"
+  - "    max_dd = 0"
+  - "    for v in values:"
+  - "        if v > peak:"
+  - "            peak = v"
+  - "        dd = (peak - v) / peak"
+  - "        if dd > max_dd:"
+  - "            max_dd = dd"
+  - "    print(f'Return: {total_return:+.1f}%')"
+  - "    print(f'Max DD: {max_dd*100:.1f}%')"
+  - "    print(f'Trades: {trades}')"
+distractors:
+  - "    max_dd = min(values) / max(values)"
+  - "    total_return = values[-1] - initial"
+solution_order: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+hints:
+  - "Calculate total return first, then iterate through values for drawdown."
+  - "Update the peak whenever the value exceeds the current peak."
+  - "Drawdown = (peak - value) / peak, track the maximum."
+concept_tags:
+  - performance-analysis
+  - report-generation

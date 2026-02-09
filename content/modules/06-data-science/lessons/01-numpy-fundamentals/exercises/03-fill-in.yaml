@@ -1,0 +1,42 @@
+type: fill-in
+id: "01-numpy-fundamentals-fill-in-01"
+prompt: "Fill in the blanks to create a 2D NumPy array and compute column-wise sums."
+template: |
+  import numpy as ____
+
+  matrix = np.array([[1, 2, 3],
+                      [4, 5, 6],
+                      [7, 8, 9]])
+
+  col_sums = np.____(matrix, ____=0)
+  print(col_sums)
+  print(matrix.____)
+blanks:
+  - position: 0
+    answer: "np"
+    hint: "standard alias for numpy"
+  - position: 1
+    answer: "sum"
+    hint: "aggregation function for totals"
+  - position: 2
+    answer: "axis"
+    hint: "parameter that specifies dimension (0=columns, 1=rows)"
+  - position: 3
+    answer: "shape"
+    hint: "attribute showing array dimensions"
+solution: |
+  import numpy as np
+
+  matrix = np.array([[1, 2, 3],
+                      [4, 5, 6],
+                      [7, 8, 9]])
+
+  col_sums = np.sum(matrix, axis=0)
+  print(col_sums)
+  print(matrix.shape)
+hints:
+  - "axis=0 sums down each column, axis=1 sums across each row."
+  - ".shape returns a tuple like (3, 3) for a 3x3 matrix."
+concept_tags:
+  - array-operations
+  - broadcasting

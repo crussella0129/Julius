@@ -1,0 +1,40 @@
+type: fill-in
+id: "01-http-basics-fill-in-01"
+prompt: "Fill in the blanks to make a GET request and check if it was successful."
+template: |
+  import ____
+
+  response = requests.____(\"https://httpbin.org/get\")
+  if response.____:
+      data = response.____()
+      print(\"Got data\")
+  else:
+      print(f\"Error: {response.status_code}\")
+blanks:
+  - position: 0
+    answer: "requests"
+    hint: "the HTTP library to import"
+  - position: 1
+    answer: "get"
+    hint: "HTTP method to retrieve data"
+  - position: 2
+    answer: "ok"
+    hint: "boolean property that is True for 2xx status codes"
+  - position: 3
+    answer: "json"
+    hint: "method to parse the response body as JSON"
+solution: |
+  import requests
+
+  response = requests.get("https://httpbin.org/get")
+  if response.ok:
+      data = response.json()
+      print("Got data")
+  else:
+      print(f"Error: {response.status_code}")
+hints:
+  - "The requests library has methods named after HTTP verbs."
+  - "response.ok is True when the status code is in the 200 range."
+concept_tags:
+  - request-response
+  - http-methods

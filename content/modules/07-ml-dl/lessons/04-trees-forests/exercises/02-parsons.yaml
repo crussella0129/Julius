@@ -1,0 +1,24 @@
+type: parsons
+id: "04-trees-forests-parsons-01"
+prompt: "Arrange these lines to simulate a simple majority-vote ensemble of 3 classifiers."
+blocks:
+  - "def model_a(x): return 'cat' if x > 5 else 'dog'"
+  - "def model_b(x): return 'cat' if x > 3 else 'dog'"
+  - "def model_c(x): return 'cat' if x > 7 else 'dog'"
+  - "def ensemble(x):"
+  - "    votes = [model_a(x), model_b(x), model_c(x)]"
+  - "    from collections import Counter"
+  - "    return Counter(votes).most_common(1)[0][0]"
+  - "print(ensemble(4))"
+  - "print(ensemble(6))"
+distractors:
+  - "    return votes[0]"
+  - "    return max(votes)"
+solution_order: [0, 1, 2, 3, 4, 5, 6, 7, 8]
+hints:
+  - "Define three simple models with different thresholds."
+  - "The ensemble function collects votes from all models."
+  - "Counter.most_common(1) returns the most frequent vote."
+concept_tags:
+  - ensemble-methods
+  - random-forest

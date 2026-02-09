@@ -1,0 +1,23 @@
+type: write
+id: "05-input-output-write-01"
+prompt: "Create variables for a product name ('Widget'), price (19.99), and quantity (3). Calculate the total cost and print the result using an f-string formatted to 2 decimal places. Output should be: 'Widget x3 = $59.97'."
+starter_code: |
+  # Create variables for product, price, and quantity
+
+  # Calculate total
+
+  # Print formatted result
+tests:
+  - description: "Output contains 'Widget'"
+    check: "'Widget' in output"
+  - description: "Output contains '59.97'"
+    check: "'59.97' in output"
+  - description: "Output contains 'x3'"
+    check: "'x3' in output"
+hints:
+  - "total = price * quantity"
+  - "Use an f-string with :.2f to format the total to 2 decimal places."
+  - 'print(f"{name} x{quantity} = ${total:.2f}")'
+concept_tags:
+  - f-strings
+  - string-formatting

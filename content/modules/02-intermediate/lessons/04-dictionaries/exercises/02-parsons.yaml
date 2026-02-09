@@ -1,0 +1,22 @@
+type: parsons
+id: "04-dictionaries-parsons-01"
+prompt: "Arrange these lines to count the occurrences of each character in a string and print the result as sorted key-value pairs."
+blocks:
+  - "text = \"hello\""
+  - "counts = {}"
+  - "for char in text:"
+  - "    counts[char] = counts.get(char, 0) + 1"
+  - "for key, value in sorted(counts.items()):"
+  - "    print(f\"{key}: {value}\")"
+solution_order: [0, 1, 2, 3, 4, 5]
+distractors:
+  - "    counts[char] += 1"
+  - "for key in counts.keys().sort():"
+hints:
+  - "Start with an empty dictionary to store counts."
+  - ".get(char, 0) returns 0 if the character hasn't been counted yet, avoiding a KeyError."
+  - "sorted(counts.items()) sorts by key, and each item is a (key, value) tuple."
+concept_tags:
+  - dict-creation
+  - dict-methods
+  - dict-iteration

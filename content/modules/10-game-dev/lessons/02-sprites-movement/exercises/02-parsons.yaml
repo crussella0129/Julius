@@ -1,0 +1,26 @@
+type: parsons
+id: "02-sprites-movement-parsons-01"
+prompt: "Arrange these lines to create a Player class with position, speed, and an update method that moves based on direction input and stays within screen bounds (800x600)."
+blocks:
+  - "class Player:"
+  - "    def __init__(self, x, y):"
+  - "        self.x = x"
+  - "        self.y = y"
+  - "        self.speed = 5"
+  - "    def update(self, dx, dy):"
+  - "        self.x += dx * self.speed"
+  - "        self.y += dy * self.speed"
+  - "        self.x = max(0, min(self.x, 800))"
+  - "        self.y = max(0, min(self.y, 600))"
+distractors:
+  - "        self.x = dx * self.speed"
+  - "        self.x = min(0, max(self.x, 800))"
+solution_order: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+hints:
+  - "Define the class, then __init__, then update."
+  - "Movement adds direction * speed to position (not replaces)."
+  - "Clamping: max(0, min(value, max_value)) keeps value in range."
+concept_tags:
+  - sprite-class
+  - velocity
+  - screen-bounds

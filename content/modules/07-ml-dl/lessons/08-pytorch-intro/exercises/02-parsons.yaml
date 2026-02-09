@@ -1,0 +1,26 @@
+type: parsons
+id: "08-pytorch-intro-parsons-01"
+prompt: "Arrange these lines to implement a simple training step: forward pass, loss computation, and weight update."
+blocks:
+  - "def forward(x, w, b):"
+  - "    return sum(xi * wi for xi, wi in zip(x, w)) + b"
+  - "def mse_loss(predicted, actual):"
+  - "    return (predicted - actual) ** 2"
+  - "x, target = [1.0, 2.0], 5.0"
+  - "w, b, lr = [0.0, 0.0], 0.0, 0.1"
+  - "pred = forward(x, w, b)"
+  - "loss = mse_loss(pred, target)"
+  - "grad_w = [2 * (pred - target) * xi for xi in x]"
+  - "w = [wi - lr * gw for wi, gw in zip(w, grad_w)]"
+  - "print(f'Loss: {loss:.2f}, New weights: {w}')"
+distractors:
+  - "grad_w = [(pred - target) * xi for xi in x]"
+  - "w = [wi + lr * gw for wi, gw in zip(w, grad_w)]"
+solution_order: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+hints:
+  - "Define forward and loss functions first."
+  - "Gradient of MSE with respect to w is 2*(pred-target)*x."
+  - "Update weights by subtracting lr * gradient (gradient descent)."
+concept_tags:
+  - autograd
+  - training-loop

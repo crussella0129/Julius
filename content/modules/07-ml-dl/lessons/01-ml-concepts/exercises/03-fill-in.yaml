@@ -1,0 +1,39 @@
+type: fill-in
+id: "01-ml-concepts-fill-in-01"
+prompt: "Fill in the blanks to compute accuracy of predictions vs actual labels."
+template: |
+  predictions = [1, 0, 1, 1, 0, 1, 0, 0, 1, 1]
+  actual      = [1, 0, 0, 1, 0, 1, 1, 0, 1, 0]
+
+  correct = ____((p == a) for p, a in zip(predictions, actual))
+  total = ____(predictions)
+  accuracy = correct / ____
+
+  print(f\"Correct: {correct}/{total}\")
+  print(f\"Accuracy: {accuracy:.1%}\")
+blanks:
+  - position: 0
+    answer: "sum"
+    hint: "function that counts True values (True=1, False=0)"
+  - position: 1
+    answer: "len"
+    hint: "function to count total predictions"
+  - position: 2
+    answer: "total"
+    hint: "denominator for accuracy calculation"
+solution: |
+  predictions = [1, 0, 1, 1, 0, 1, 0, 0, 1, 1]
+  actual      = [1, 0, 0, 1, 0, 1, 1, 0, 1, 0]
+
+  correct = sum((p == a) for p, a in zip(predictions, actual))
+  total = len(predictions)
+  accuracy = correct / total
+
+  print(f"Correct: {correct}/{total}")
+  print(f"Accuracy: {accuracy:.1%}")
+hints:
+  - "sum() on a generator of booleans counts the True values."
+  - "Accuracy = correct predictions / total predictions."
+concept_tags:
+  - supervised-learning
+  - overfitting

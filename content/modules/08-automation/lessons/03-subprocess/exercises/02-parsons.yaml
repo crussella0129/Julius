@@ -1,0 +1,21 @@
+type: parsons
+id: "03-subprocess-parsons-01"
+prompt: "Arrange these lines to run a Python command in a subprocess, check if it succeeded, and print the output or an error message."
+blocks:
+  - "import subprocess"
+  - "result = subprocess.run(['python3', '-c', 'print(42)'], capture_output=True, text=True)"
+  - "if result.returncode == 0:"
+  - "    print(result.stdout.strip())"
+  - "else:"
+  - "    print('Error:', result.stderr.strip())"
+distractors:
+  - "result = subprocess.run('python3 -c print(42)')"
+  - "if result == 0:"
+solution_order: [0, 1, 2, 3, 4, 5]
+hints:
+  - "Import subprocess first."
+  - "run() returns a CompletedProcess object, not a number."
+  - "Check returncode to determine success (0) or failure (non-zero)."
+concept_tags:
+  - subprocess-run
+  - capturing-output

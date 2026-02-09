@@ -1,0 +1,29 @@
+type: trace
+id: "05-input-output-trace-01"
+prompt: "Trace through this code and predict the final output. Assume the user enters '7' when prompted."
+code: |
+  x = int(input("Number: "))
+  doubled = x * 2
+  print(f"{x} doubled is {doubled}")
+steps:
+  - line: 1
+    variables: { "x": "7" }
+    output: ""
+    explanation: "input() returns the string '7', then int() converts it to the integer 7."
+  - line: 2
+    variables: { "x": "7", "doubled": "14" }
+    output: ""
+    explanation: "7 * 2 = 14, stored in doubled."
+  - line: 3
+    variables: { "x": "7", "doubled": "14" }
+    output: "7 doubled is 14"
+    explanation: "The f-string substitutes x=7 and doubled=14 into the output."
+expected_output: |
+  7 doubled is 14
+hints:
+  - "input() always returns a string — int() converts it to an integer."
+  - "F-strings substitute the values of variables inside the curly braces."
+concept_tags:
+  - input-function
+  - f-strings
+  - type-conversion-input

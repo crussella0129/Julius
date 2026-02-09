@@ -1,0 +1,24 @@
+type: parsons
+id: "08-modules-packages-parsons-01"
+prompt: "Arrange these lines to import specific items from the math and random modules, use them to generate a random angle in degrees and convert it to radians, then print both values."
+blocks:
+  - "from math import pi, radians"
+  - "from random import randint"
+  - ""
+  - "angle_degrees = randint(0, 360)"
+  - "angle_radians = radians(angle_degrees)"
+  - "angle_radians_rounded = round(angle_radians, 4)"
+  - ""
+  - "print(f\"Degrees: {angle_degrees}\")"
+  - "print(f\"Radians: {angle_radians_rounded}\")"
+solution_order: [0, 1, 2, 3, 4, 5, 6, 7, 8]
+distractors:
+  - "import math, random"
+  - "angle_radians = angle_degrees * pi"
+hints:
+  - "'from module import item' lets you use the item directly without the module prefix."
+  - "math.radians() converts degrees to radians. It's different from just multiplying by pi."
+  - "round(value, 4) limits the decimal places for cleaner output."
+concept_tags:
+  - from-import
+  - standard-library

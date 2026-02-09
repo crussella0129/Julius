@@ -1,0 +1,84 @@
+type: trace
+id: "05-backtesting-trace-01"
+prompt: "Trace through this simplified backtest that buys on signal 1 and sells on signal -1, then predict the output."
+code: |
+  prices  = [100, 105, 110, 103, 108]
+  signals = [0,   1,   0,   -1,  0]
+  capital = 1000
+  shares = 0
+
+  for i in range(len(prices)):
+      if signals[i] == 1 and shares == 0:
+          shares = capital / prices[i]
+          capital = 0
+          print(f"BUY  at {prices[i]}, shares={shares:.2f}")
+      elif signals[i] == -1 and shares > 0:
+          capital = shares * prices[i]
+          shares = 0
+          print(f"SELL at {prices[i]}, capital={capital:.2f}")
+
+  final = capital + shares * prices[-1]
+  print(f"Final value: {final:.2f}")
+steps:
+  - line: 1
+    variables: {"prices": "[100, 105, 110, 103, 108]", "signals": "[0, 1, 0, -1, 0]"}
+    output: ""
+    explanation: "5 days of prices and trading signals."
+  - line: 3
+    variables: {"capital": 1000, "shares": 0}
+    output: ""
+    explanation: "Start with $1000 cash and no shares."
+  - line: 6
+    variables: {"i": 0}
+    output: ""
+    explanation: "Day 0: signal is 0, no action."
+  - line: 6
+    variables: {"i": 1}
+    output: ""
+    explanation: "Day 1: signal is 1 (buy) and we have no shares."
+  - line: 8
+    variables: {"shares": 9.523809523809524, "capital": 0}
+    output: ""
+    explanation: "Buy: 1000 / 105 = 9.5238 shares, capital goes to 0."
+  - line: 10
+    variables: {}
+    output: "BUY  at 105, shares=9.52"
+    explanation: "Print the buy action."
+  - line: 6
+    variables: {"i": 2}
+    output: ""
+    explanation: "Day 2: signal is 0, hold position."
+  - line: 6
+    variables: {"i": 3}
+    output: ""
+    explanation: "Day 3: signal is -1 (sell) and we have shares."
+  - line: 12
+    variables: {"capital": 981.0, "shares": 0}
+    output: ""
+    explanation: "Sell: 9.5238 * 103 = 980.95... capital, shares go to 0."
+  - line: 14
+    variables: {}
+    output: "SELL at 103, capital=980.95"
+    explanation: "Print the sell action."
+  - line: 6
+    variables: {"i": 4}
+    output: ""
+    explanation: "Day 4: signal is 0, no action."
+  - line: 16
+    variables: {"final": 980.9523809523809}
+    output: ""
+    explanation: "Final value: capital (980.95) + 0 shares."
+  - line: 17
+    variables: {}
+    output: "Final value: 980.95"
+    explanation: "Strategy lost money: bought at 105, sold at 103."
+expected_output: |
+  BUY  at 105, shares=9.52
+  SELL at 103, capital=980.95
+  Final value: 980.95
+hints:
+  - "The strategy buys at 105 and sells at 103, resulting in a loss."
+  - "Final value = remaining capital + shares * last price."
+concept_tags:
+  - backtesting-framework
+  - trading-strategy

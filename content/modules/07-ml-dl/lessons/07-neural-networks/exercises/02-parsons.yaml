@@ -1,0 +1,26 @@
+type: parsons
+id: "07-neural-networks-parsons-01"
+prompt: "Arrange these lines to implement a perceptron that learns the AND function using the perceptron learning rule."
+blocks:
+  - "weights = [0.0, 0.0]"
+  - "bias = 0.0"
+  - "learning_rate = 0.1"
+  - "data = [((0,0), 0), ((0,1), 0), ((1,0), 0), ((1,1), 1)]"
+  - "for epoch in range(10):"
+  - "    for inputs, target in data:"
+  - "        total = sum(x*w for x, w in zip(inputs, weights)) + bias"
+  - "        output = 1 if total >= 0.5 else 0"
+  - "        error = target - output"
+  - "        weights = [w + learning_rate * error * x for w, x in zip(weights, inputs)]"
+  - "        bias += learning_rate * error"
+distractors:
+  - "        weights = [w * error for w in weights]"
+  - "        output = total"
+solution_order: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+hints:
+  - "Initialize weights and bias to zero."
+  - "The learning rule updates: w += learning_rate * error * input."
+  - "Bias is updated similarly but without the input multiplier."
+concept_tags:
+  - perceptron
+  - backpropagation

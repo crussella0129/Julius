@@ -1,0 +1,51 @@
+type: trace
+id: "06-huggingface-trace-01"
+prompt: "Trace through this simple tokenizer encode/decode cycle and predict the output."
+code: |
+  class Tokenizer:
+      def __init__(self, vocab):
+          self.t2i = {t: i for i, t in enumerate(vocab)}
+          self.i2t = {i: t for i, t in enumerate(vocab)}
+
+      def encode(self, text):
+          return [self.t2i.get(w, self.t2i["[UNK]"]) for w in text.lower().split()]
+
+      def decode(self, ids):
+          return " ".join(self.i2t[i] for i in ids)
+
+  vocab = ["[UNK]", "the", "cat", "sat", "on", "a", "mat"]
+  tok = Tokenizer(vocab)
+
+  ids = tok.encode("The cat sat on a rug")
+  print(ids)
+  print(tok.decode(ids))
+steps:
+  - line: 12
+    variables: {"vocab": ["[UNK]", "the", "cat", "sat", "on", "a", "mat"]}
+    output: ""
+    explanation: "Vocabulary of 7 tokens is defined. [UNK] is at index 0."
+  - line: 13
+    variables: {"tok": "Tokenizer object"}
+    output: ""
+    explanation: "Tokenizer builds t2i: {[UNK]:0, the:1, cat:2, sat:3, on:4, a:5, mat:6}."
+  - line: 15
+    variables: {"ids": [1, 2, 3, 4, 5, 0]}
+    output: ""
+    explanation: "the=1, cat=2, sat=3, on=4, a=5. 'rug' is not in vocab, so it maps to [UNK]=0."
+  - line: 16
+    variables: {}
+    output: "[1, 2, 3, 4, 5, 0]"
+    explanation: "The encoded token IDs are printed."
+  - line: 17
+    variables: {}
+    output: "the cat sat on a [UNK]"
+    explanation: "Decoding maps each ID back: 1=the, 2=cat, 3=sat, 4=on, 5=a, 0=[UNK]."
+expected_output: |
+  [1, 2, 3, 4, 5, 0]
+  the cat sat on a [UNK]
+hints:
+  - "'rug' is not in the vocabulary, so it gets the [UNK] token ID."
+  - "The text is lowercased before encoding, so 'The' matches 'the'."
+concept_tags:
+  - tokenizers
+  - huggingface-pipeline

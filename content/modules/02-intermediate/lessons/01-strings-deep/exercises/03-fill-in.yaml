@@ -1,0 +1,43 @@
+type: fill-in
+id: "01-strings-deep-fill-in-01"
+prompt: "Fill in the blanks to reverse a string, check if it contains a substring, and replace part of it."
+template: |
+  word = "racecar"
+  backwards = word[____]
+  print(backwards)
+
+  sentence = "I love Python programming"
+  has_python = "Python" ____ sentence
+  print(has_python)
+
+  fixed = sentence.____("Python", "Java")
+  print(fixed)
+blanks:
+  - position: 0
+    answer: "::-1"
+    hint: "slice step of -1 reverses"
+  - position: 1
+    answer: "in"
+    hint: "membership operator"
+  - position: 2
+    answer: "replace"
+    hint: "string method that substitutes text"
+solution: |
+  word = "racecar"
+  backwards = word[::-1]
+  print(backwards)
+
+  sentence = "I love Python programming"
+  has_python = "Python" in sentence
+  print(has_python)
+
+  fixed = sentence.replace("Python", "Java")
+  print(fixed)
+hints:
+  - "To reverse a string, use slicing with a step of -1: [::-1]"
+  - "The 'in' operator checks if a substring exists within a string."
+  - "The .replace() method returns a new string with substitutions made."
+concept_tags:
+  - string-slicing
+  - string-methods
+  - string-immutability

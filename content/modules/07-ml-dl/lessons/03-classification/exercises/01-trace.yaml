@@ -1,0 +1,58 @@
+type: trace
+id: "03-classification-trace-01"
+prompt: "Trace through this KNN classifier simulation and predict the output."
+code: |
+  import math
+
+  train_data = [(1, 1, "A"), (2, 2, "A"), (8, 8, "B"), (9, 9, "B")]
+
+  def distance(p1, p2):
+      return math.sqrt((p1[0]-p2[0])**2 + (p1[1]-p2[1])**2)
+
+  def knn_predict(point, data, k=3):
+      distances = []
+      for x, y, label in data:
+          d = distance(point, (x, y))
+          distances.append((d, label))
+      distances.sort()
+      neighbors = [label for _, label in distances[:k]]
+      from collections import Counter
+      vote = Counter(neighbors).most_common(1)[0][0]
+      return vote
+
+  print(knn_predict((3, 3), train_data, k=3))
+  print(knn_predict((7, 7), train_data, k=3))
+steps:
+  - line: 3
+    variables: {}
+    output: ""
+    explanation: "Define 4 training points: two class A near (1,1)-(2,2), two class B near (8,8)-(9,9)."
+  - line: 19
+    variables: {"point": "(3, 3)"}
+    output: ""
+    explanation: "Predict for point (3,3). Distances: to (1,1)=2.83, (2,2)=1.41, (8,8)=7.07, (9,9)=8.49."
+  - line: 13
+    variables: {"distances": "[(1.41, 'A'), (2.83, 'A'), (7.07, 'B'), (8.49, 'B')]"}
+    output: ""
+    explanation: "Sorted by distance. 3 nearest: A, A, B."
+  - line: 16
+    variables: {"vote": "A"}
+    output: "A"
+    explanation: "Majority vote: 2 A vs 1 B = A."
+  - line: 20
+    variables: {"point": "(7, 7)"}
+    output: ""
+    explanation: "Predict for (7,7). Distances: to (1,1)=8.49, (2,2)=7.07, (8,8)=1.41, (9,9)=2.83."
+  - line: 16
+    variables: {"vote": "B"}
+    output: "B"
+    explanation: "3 nearest: B(1.41), B(2.83), A(7.07). Majority: 2 B vs 1 A = B."
+expected_output: |
+  A
+  B
+hints:
+  - "KNN finds the k closest training points and takes a majority vote."
+  - "Point (3,3) is closer to the A cluster; (7,7) is closer to B."
+concept_tags:
+  - knn-classifier
+  - classification-metrics

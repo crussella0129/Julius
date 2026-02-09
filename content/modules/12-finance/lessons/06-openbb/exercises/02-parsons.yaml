@@ -1,0 +1,25 @@
+type: parsons
+id: "06-openbb-parsons-01"
+prompt: "Arrange these lines to create a Watchlist class with methods to add tickers and check price alerts."
+blocks:
+  - "class Watchlist:"
+  - "    def __init__(self, name):"
+  - "        self.name = name"
+  - "        self.alerts = {}"
+  - "    def add(self, ticker, target_price):"
+  - "        self.alerts[ticker] = target_price"
+  - "    def check(self, current_prices):"
+  - "        for ticker, target in self.alerts.items():"
+  - "            if current_prices.get(ticker, 0) >= target:"
+  - "                print(f'{ticker} hit target ${target}')"
+distractors:
+  - "        self.alerts[ticker] = current_prices"
+  - "            if current_prices[ticker] == target:"
+solution_order: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+hints:
+  - "The __init__ method stores the name and an empty alerts dictionary."
+  - "add() maps a ticker to its target price."
+  - "check() iterates over alerts and compares with current prices using dict.get()."
+concept_tags:
+  - openbb-platform
+  - research-workflow

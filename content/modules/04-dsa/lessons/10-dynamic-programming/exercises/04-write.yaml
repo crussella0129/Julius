@@ -1,0 +1,16 @@
+type: write
+id: "10-dynamic-programming-write-01"
+prompt: "Write a function called coin_change(coins, amount) that returns the minimum number of coins needed to make the given amount, or -1 if it is impossible. Use dynamic programming (bottom-up tabulation). Print the result for coins=[1, 5, 10, 25] and amount=36."
+starter_code: |
+  # Write coin_change(coins, amount) using DP and print the result
+tests:
+  - description: "Output is 3 (25 + 10 + 1)"
+    check: "'3' in output.strip()"
+  - description: "Output is a single number"
+    check: "output.strip().lstrip('-').isdigit()"
+hints:
+  - "Create dp array of size amount+1, initialized to infinity, with dp[0] = 0."
+  - "For each amount i, try each coin: if coin <= i, check if dp[i-coin] + 1 is better than dp[i]."
+concept_tags:
+  - tabulation
+  - optimal-substructure

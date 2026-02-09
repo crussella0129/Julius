@@ -1,0 +1,82 @@
+type: trace
+id: "06-secure-coding-trace-01"
+prompt: "Trace through this code that sanitizes filenames and predict the output."
+code: |
+  import re
+
+  def sanitize(name):
+      name = name.replace("/", "").replace("\\", "")
+      name = re.sub(r'[^a-zA-Z0-9._-]', '', name)
+      name = name.lstrip(".")
+      return name or "unnamed"
+
+  filenames = ["report.pdf", "../secret.txt", "hello world.py", "..."]
+
+  for f in filenames:
+      result = sanitize(f)
+      print(f"{result}")
+steps:
+  - line: 9
+    variables: {"filenames": "['report.pdf', '../secret.txt', 'hello world.py', '...']"}
+    output: ""
+    explanation: "Four filenames to sanitize, including malicious and edge cases."
+  - line: 11
+    variables: {"f": "report.pdf"}
+    output: ""
+    explanation: "First filename: a normal, safe filename."
+  - line: 12
+    variables: {"result": "report.pdf"}
+    output: ""
+    explanation: "No dangerous characters, passes through unchanged."
+  - line: 13
+    variables: {}
+    output: "report.pdf"
+    explanation: "Print the sanitized result."
+  - line: 11
+    variables: {"f": "../secret.txt"}
+    output: ""
+    explanation: "Second filename: path traversal attempt."
+  - line: 12
+    variables: {"result": "secret.txt"}
+    output: ""
+    explanation: "Slashes removed -> '..secret.txt', dots stripped from left -> 'secret.txt'."
+  - line: 13
+    variables: {}
+    output: "secret.txt"
+    explanation: "Path traversal neutralized."
+  - line: 11
+    variables: {"f": "hello world.py"}
+    output: ""
+    explanation: "Third filename: contains a space."
+  - line: 12
+    variables: {"result": "helloworld.py"}
+    output: ""
+    explanation: "The space is not in the allowed character set, so it's removed."
+  - line: 13
+    variables: {}
+    output: "helloworld.py"
+    explanation: "Space removed from filename."
+  - line: 11
+    variables: {"f": "..."}
+    output: ""
+    explanation: "Fourth filename: only dots."
+  - line: 12
+    variables: {"result": "unnamed"}
+    output: ""
+    explanation: "After stripping leading dots, empty string remains, so default 'unnamed' is returned."
+  - line: 13
+    variables: {}
+    output: "unnamed"
+    explanation: "Empty result replaced with 'unnamed'."
+expected_output: |
+  report.pdf
+  secret.txt
+  helloworld.py
+  unnamed
+hints:
+  - "The regex [^a-zA-Z0-9._-] removes any character not in the allowed set."
+  - "lstrip('.') removes all leading dots to prevent hidden files."
+  - "An empty string after sanitization returns 'unnamed'."
+concept_tags:
+  - input-sanitization
+  - secrets-management

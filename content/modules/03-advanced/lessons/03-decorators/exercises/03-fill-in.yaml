@@ -1,0 +1,62 @@
+type: fill-in
+id: "03-decorators-fill-in-01"
+prompt: "Fill in the blanks to complete this decorator that counts how many times a function is called."
+template: |
+  from functools import wraps
+
+  def count_calls(____):
+      call_count = 0
+      @wraps(func)
+      def wrapper(*args, ____):
+          nonlocal call_count
+          call_count += 1
+          print(f"Call #{call_count}")
+          return ____(*args, **kwargs)
+      return ____
+
+  @count_calls
+  def say_hello():
+      print("Hello!")
+
+  say_hello()
+  say_hello()
+blanks:
+  - position: 0
+    answer: "func"
+    hint: "the function being decorated"
+  - position: 1
+    answer: "**kwargs"
+    hint: "keyword arguments"
+  - position: 2
+    answer: "func"
+    hint: "call the original function"
+  - position: 3
+    answer: "wrapper"
+    hint: "return the wrapped function"
+solution: |
+  from functools import wraps
+
+  def count_calls(func):
+      call_count = 0
+      @wraps(func)
+      def wrapper(*args, **kwargs):
+          nonlocal call_count
+          call_count += 1
+          print(f"Call #{call_count}")
+          return func(*args, **kwargs)
+      return wrapper
+
+  @count_calls
+  def say_hello():
+      print("Hello!")
+
+  say_hello()
+  say_hello()
+hints:
+  - "A decorator takes a function (func) as its argument."
+  - "The wrapper accepts *args and **kwargs to handle any arguments."
+  - "Inside the wrapper, call the original function and return its result."
+concept_tags:
+  - decorator-syntax
+  - closures
+  - functools-wraps

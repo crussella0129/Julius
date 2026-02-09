@@ -1,0 +1,21 @@
+type: parsons
+id: "04-numpy-performance-parsons-01"
+prompt: "Arrange these lines to compute pairwise distances between points using NumPy broadcasting instead of loops."
+blocks:
+  - "import numpy as np"
+  - "points = np.array([[0, 0], [3, 4], [1, 1]])"
+  - "diff = points[:, np.newaxis, :] - points[np.newaxis, :, :]"
+  - "sq_dist = np.sum(diff ** 2, axis=2)"
+  - "distances = np.sqrt(sq_dist)"
+  - "print(np.round(distances, 2))"
+distractors:
+  - "diff = points[:] - points[:]"
+  - "distances = np.sum(diff ** 2)"
+solution_order: [0, 1, 2, 3, 4, 5]
+hints:
+  - "Use np.newaxis to add dimensions for broadcasting: (N,1,2) - (1,N,2) = (N,N,2)."
+  - "Sum the squared differences along axis=2 (the coordinate axis)."
+  - "Take the square root of the summed squared differences."
+concept_tags:
+  - broadcasting
+  - vectorization

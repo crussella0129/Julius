@@ -1,0 +1,47 @@
+type: trace
+id: "01-os-filesystem-trace-01"
+prompt: "Trace through this code and predict what will be printed."
+code: |
+  from pathlib import Path
+
+  p = Path("/home/user/documents/report.csv")
+  print(p.name)
+  print(p.stem)
+  print(p.suffix)
+  print(p.parent.name)
+steps:
+  - line: 1
+    variables: {}
+    output: ""
+    explanation: "Import the Path class from pathlib."
+  - line: 3
+    variables: { "p": "Path('/home/user/documents/report.csv')" }
+    output: ""
+    explanation: "Create a Path object representing a file path."
+  - line: 4
+    variables: { "p": "Path('/home/user/documents/report.csv')" }
+    output: "report.csv"
+    explanation: "p.name returns the final component of the path: 'report.csv'."
+  - line: 5
+    variables: { "p": "Path('/home/user/documents/report.csv')" }
+    output: "report"
+    explanation: "p.stem returns the filename without the extension: 'report'."
+  - line: 6
+    variables: { "p": "Path('/home/user/documents/report.csv')" }
+    output: ".csv"
+    explanation: "p.suffix returns the file extension including the dot: '.csv'."
+  - line: 7
+    variables: { "p": "Path('/home/user/documents/report.csv')" }
+    output: "documents"
+    explanation: "p.parent is '/home/user/documents', and .name of that is 'documents'."
+expected_output: |
+  report.csv
+  report
+  .csv
+  documents
+hints:
+  - "Path.name gives the filename, Path.stem gives it without extension."
+  - "Path.parent returns the directory containing the file."
+concept_tags:
+  - pathlib
+  - file-operations

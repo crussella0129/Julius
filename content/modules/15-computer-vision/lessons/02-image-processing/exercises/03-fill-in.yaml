@@ -1,0 +1,51 @@
+type: fill-in
+id: "02-image-processing-fill-in-01"
+prompt: "Fill in the blanks to complete this erosion function for binary images."
+template: |
+  import numpy as np
+
+  def erode(binary, kernel_size=3):
+      h, w = binary.shape
+      pad = kernel_size // 2
+      padded = np.pad(binary, ____, mode='constant', constant_values=0)
+      output = np.zeros_like(binary)
+      for i in range(h):
+          for j in range(w):
+              region = padded[i:i + kernel_size, j:j + ____]
+              output[i, j] = 255 if region.____() > 0 else 0
+      return output
+
+  img = np.array([[0,255,0],[255,255,255],[0,255,0]], dtype=np.uint8)
+  print(erode(img).tolist())
+blanks:
+  - position: 0
+    answer: "pad"
+    hint: "the padding size variable"
+  - position: 1
+    answer: "kernel_size"
+    hint: "the slice should match the kernel dimensions"
+  - position: 2
+    answer: "min"
+    hint: "erosion keeps a pixel white only if ALL neighbors are white"
+solution: |
+  import numpy as np
+
+  def erode(binary, kernel_size=3):
+      h, w = binary.shape
+      pad = kernel_size // 2
+      padded = np.pad(binary, pad, mode='constant', constant_values=0)
+      output = np.zeros_like(binary)
+      for i in range(h):
+          for j in range(w):
+              region = padded[i:i + kernel_size, j:j + kernel_size]
+              output[i, j] = 255 if region.min() > 0 else 0
+      return output
+
+  img = np.array([[0,255,0],[255,255,255],[0,255,0]], dtype=np.uint8)
+  print(erode(img).tolist())
+hints:
+  - "Erosion requires ALL pixels in the region to be non-zero, so use min()."
+  - "Dilation uses max() (any non-zero pixel keeps the output white)."
+concept_tags:
+  - morphological-operations
+  - thresholding

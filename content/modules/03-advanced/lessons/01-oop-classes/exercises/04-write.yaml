@@ -1,0 +1,27 @@
+type: write
+id: "01-oop-classes-write-01"
+prompt: "Write a class called `Temperature` that stores a temperature in Celsius. It should have: an __init__ that takes celsius, a method `to_fahrenheit()` that returns the Fahrenheit equivalent (C * 9/5 + 32), and a `__str__` method that returns something like '25.0°C'. Test it by creating a Temperature(100) and printing both the object and its Fahrenheit conversion."
+starter_code: |
+  # Define Temperature class
+
+
+  # Test it
+  t = Temperature(100)
+  print(t)
+  print(t.to_fahrenheit())
+tests:
+  - description: "Output has exactly 2 lines"
+    check: "len(output.strip().splitlines()) == 2"
+  - description: "First line shows 100 in Celsius"
+    check: "'100' in output.strip().splitlines()[0]"
+  - description: "Second line shows 212.0 (Fahrenheit)"
+    check: "'212' in output.strip().splitlines()[1]"
+hints:
+  - "The formula is: fahrenheit = celsius * 9/5 + 32"
+  - "Define __str__(self) to control what print() shows."
+  - "class Temperature:\n    def __init__(self, celsius):\n        self.celsius = celsius\n    def to_fahrenheit(self):\n        return self.celsius * 9/5 + 32\n    def __str__(self):\n        return f'{self.celsius}°C'"
+concept_tags:
+  - class-definition
+  - init-method
+  - instance-methods
+  - self-parameter

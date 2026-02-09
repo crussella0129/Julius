@@ -1,0 +1,11 @@
+id: "09-testing"
+title: "Testing & Software Quality"
+description: "pytest, debugging, code quality, and CI/CD"
+order: 9
+lessons:
+  - 01-why-testing
+  - 02-unittest-pytest
+  - 03-test-patterns
+  - 04-debugging
+  - 05-code-quality
+  - 06-ci-cd

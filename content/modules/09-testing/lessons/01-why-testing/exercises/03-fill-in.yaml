@@ -1,0 +1,42 @@
+type: fill-in
+id: "01-why-testing-fill-in-01"
+prompt: "Fill in the blanks to use assert statements to test a function."
+template: |
+  def absolute(n):
+      if n < 0:
+          return -n
+      return n
+
+  ____ absolute(5) == 5
+  ____ absolute(-3) == 3
+  ____ absolute(0) == ____, "Zero should return zero"
+  print("All tests passed!")
+blanks:
+  - position: 0
+    answer: "assert"
+    hint: "keyword that checks a condition"
+  - position: 1
+    answer: "assert"
+    hint: "same keyword for each test"
+  - position: 2
+    answer: "assert"
+    hint: "same keyword again"
+  - position: 3
+    answer: "0"
+    hint: "absolute value of 0"
+solution: |
+  def absolute(n):
+      if n < 0:
+          return -n
+      return n
+
+  assert absolute(5) == 5
+  assert absolute(-3) == 3
+  assert absolute(0) == 0, "Zero should return zero"
+  print("All tests passed!")
+hints:
+  - "assert raises AssertionError if the condition is False."
+  - "You can add a message after the condition with a comma."
+concept_tags:
+  - testing-motivation
+  - manual-vs-automated

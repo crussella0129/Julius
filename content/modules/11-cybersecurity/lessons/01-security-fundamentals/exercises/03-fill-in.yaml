@@ -1,0 +1,31 @@
+type: fill-in
+id: "01-security-fundamentals-fill-in-01"
+prompt: "Fill in the blanks to complete a function that checks whether a user has the required permission using the principle of least privilege."
+template: |
+  def check_access(role, action, permissions):
+      allowed = permissions.____(role, ____)
+      if action in ____:
+          return True
+      return False
+blanks:
+  - position: 0
+    answer: "get"
+    hint: "dictionary method for safe lookup"
+  - position: 1
+    answer: "set()"
+    hint: "default value if role not found"
+  - position: 2
+    answer: "allowed"
+    hint: "variable holding the role's permissions"
+solution: |
+  def check_access(role, action, permissions):
+      allowed = permissions.get(role, set())
+      if action in allowed:
+          return True
+      return False
+hints:
+  - "Use dict.get() to safely look up a role, returning an empty set if the role doesn't exist."
+  - "Check if the action is a member of the allowed set."
+concept_tags:
+  - cia-triad
+  - defense-in-depth

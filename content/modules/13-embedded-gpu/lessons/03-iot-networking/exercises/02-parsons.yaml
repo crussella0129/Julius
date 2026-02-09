@@ -1,0 +1,26 @@
+type: parsons
+id: "03-iot-networking-parsons-01"
+prompt: "Arrange these lines to create a DataLogger that buffers sensor readings and syncs when the buffer is full."
+blocks:
+  - "class DataLogger:"
+  - "    def __init__(self, buffer_size=5):"
+  - "        self.buffer = []"
+  - "        self.buffer_size = buffer_size"
+  - "    def log(self, reading):"
+  - "        self.buffer.append(reading)"
+  - "        if len(self.buffer) >= self.buffer_size:"
+  - "            self.sync()"
+  - "    def sync(self):"
+  - "        print(f'Syncing {len(self.buffer)} readings')"
+  - "        self.buffer.clear()"
+distractors:
+  - "        self.buffer = reading"
+  - "        if self.buffer_size >= len(self.buffer):"
+solution_order: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+hints:
+  - "Initialize buffer as empty list and set buffer_size in __init__."
+  - "log() appends to buffer, then checks if it's time to sync."
+  - "sync() prints the count and clears the buffer."
+concept_tags:
+  - data-publishing
+  - mqtt

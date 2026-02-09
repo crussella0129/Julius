@@ -1,0 +1,23 @@
+type: parsons
+id: "05-backtesting-parsons-01"
+prompt: "Arrange these lines to create a buy-and-hold benchmark function that calculates portfolio values from an initial investment."
+blocks:
+  - "def buy_and_hold(prices, initial_capital=10000):"
+  - "    shares = initial_capital / prices[0]"
+  - "    values = []"
+  - "    for price in prices:"
+  - "        values.append(shares * price)"
+  - "    total_return = (values[-1] / values[0] - 1) * 100"
+  - "    print(f'Return: {total_return:.1f}%')"
+  - "    return values"
+distractors:
+  - "    shares = initial_capital * prices[0]"
+  - "    total_return = values[-1] - values[0]"
+solution_order: [0, 1, 2, 3, 4, 5, 6, 7]
+hints:
+  - "Buy shares on day 1 by dividing capital by the first price."
+  - "Each day's portfolio value = shares * that day's price."
+  - "Total return = (final / initial - 1) * 100."
+concept_tags:
+  - backtesting-framework
+  - performance-metrics

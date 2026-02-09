@@ -1,0 +1,21 @@
+type: write
+id: "01-numpy-fundamentals-write-01"
+prompt: "Write code that creates a NumPy array of integers from 1 to 20, reshapes it into a 4x5 matrix, then prints: the matrix, the sum of each row (axis=1), and the maximum value in each column (axis=0)."
+starter_code: |
+  import numpy as np
+
+  # Write your code here
+tests:
+  - description: "Array contains values 1 through 20"
+    check: "'1' in output and '20' in output"
+  - description: "Row sums are printed (15, 40, 65, 90)"
+    check: "'15' in output and '40' in output and '65' in output and '90' in output"
+  - description: "Column maxes are printed (16, 17, 18, 19, 20)"
+    check: "'16' in output and '17' in output and '18' in output and '19' in output"
+hints:
+  - "Use np.arange(1, 21) to create the array."
+  - "Use .reshape(4, 5) to make it 4 rows by 5 columns."
+  - "Use np.sum(matrix, axis=1) for row sums and np.max(matrix, axis=0) for column maxes."
+concept_tags:
+  - ndarray
+  - array-operations

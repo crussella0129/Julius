@@ -1,0 +1,45 @@
+type: fill-in
+id: "07-neural-networks-fill-in-01"
+prompt: "Fill in the blanks to implement sigmoid and its derivative for backpropagation."
+template: |
+  import math
+
+  def sigmoid(x):
+      return 1 / (1 + math.____(-x))
+
+  def sigmoid_derivative(x):
+      s = ____(x)
+      return s * (1 - ____)
+
+  values = [-2, 0, 2]
+  for v in values:
+      print(f\"sigmoid({v}) = {sigmoid(v):.4f}, derivative = {sigmoid_derivative(v):.4f}\")
+blanks:
+  - position: 0
+    answer: "exp"
+    hint: "e raised to a power"
+  - position: 1
+    answer: "sigmoid"
+    hint: "call the sigmoid function defined above"
+  - position: 2
+    answer: "s"
+    hint: "the sigmoid value computed on the line above"
+solution: |
+  import math
+
+  def sigmoid(x):
+      return 1 / (1 + math.exp(-x))
+
+  def sigmoid_derivative(x):
+      s = sigmoid(x)
+      return s * (1 - s)
+
+  values = [-2, 0, 2]
+  for v in values:
+      print(f"sigmoid({v}) = {sigmoid(v):.4f}, derivative = {sigmoid_derivative(v):.4f}")
+hints:
+  - "sigmoid(x) = 1 / (1 + e^(-x))."
+  - "The derivative of sigmoid is sigmoid(x) * (1 - sigmoid(x))."
+concept_tags:
+  - activation-functions
+  - gradient-computation

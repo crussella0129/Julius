@@ -1,0 +1,52 @@
+type: trace
+id: "02-lists-trace-01"
+prompt: "Trace through this code and predict the final output."
+code: |
+  fruits = ["apple", "banana", "cherry"]
+  fruits.append("date")
+  fruits.insert(1, "blueberry")
+  removed = fruits.pop(2)
+  print(fruits)
+  print(removed)
+  print(len(fruits))
+steps:
+  - line: 1
+    variables: { "fruits": "['apple', 'banana', 'cherry']" }
+    output: ""
+    explanation: "fruits is created with three elements."
+  - line: 2
+    variables: { "fruits": "['apple', 'banana', 'cherry', 'date']" }
+    output: ""
+    explanation: "append('date') adds 'date' to the end of the list."
+  - line: 3
+    variables: { "fruits": "['apple', 'blueberry', 'banana', 'cherry', 'date']" }
+    output: ""
+    explanation: "insert(1, 'blueberry') inserts 'blueberry' at index 1, shifting everything after it right."
+  - line: 4
+    variables: { "fruits": "['apple', 'blueberry', 'cherry', 'date']", "removed": "banana" }
+    output: ""
+    explanation: "pop(2) removes and returns the element at index 2. After the insert, index 2 is 'banana'."
+  - line: 5
+    variables: { "fruits": "['apple', 'blueberry', 'cherry', 'date']", "removed": "banana" }
+    output: "['apple', 'blueberry', 'cherry', 'date']"
+    explanation: "Prints the current state of the fruits list."
+  - line: 6
+    variables: { "fruits": "['apple', 'blueberry', 'cherry', 'date']", "removed": "banana" }
+    output: "banana"
+    explanation: "Prints the value returned by pop(), which was 'banana'."
+  - line: 7
+    variables: { "fruits": "['apple', 'blueberry', 'cherry', 'date']", "removed": "banana" }
+    output: "4"
+    explanation: "len(fruits) returns 4, the number of elements remaining."
+expected_output: |
+  ['apple', 'blueberry', 'cherry', 'date']
+  banana
+  4
+hints:
+  - "insert(1, x) shifts existing elements to the right, so the list grows by one."
+  - "After the insert, the list is ['apple', 'blueberry', 'banana', 'cherry', 'date']. Index 2 is 'banana'."
+  - "pop(index) removes and returns the element at that index."
+concept_tags:
+  - list-methods
+  - list-indexing
+  - list-mutability

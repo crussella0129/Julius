@@ -1,0 +1,25 @@
+type: parsons
+id: "07-file-io-parsons-01"
+prompt: "Arrange these lines to write three fruit names to a file, then read them back and print each one."
+blocks:
+  - "fruits = [\"apple\", \"banana\", \"cherry\"]"
+  - ""
+  - "with open(\"fruits.txt\", \"w\") as f:"
+  - "    for fruit in fruits:"
+  - "        f.write(fruit + \"\\n\")"
+  - ""
+  - "with open(\"fruits.txt\", \"r\") as f:"
+  - "    for line in f:"
+  - "        print(line.strip())"
+solution_order: [0, 1, 2, 3, 4, 5, 6, 7, 8]
+distractors:
+  - "with open(\"fruits.txt\") as f:"
+  - "        f.write(fruit)"
+hints:
+  - "First open the file in write mode ('w'), then open it again in read mode ('r')."
+  - "write() does not add newlines automatically, so you must add '\\n'."
+  - "When reading, strip() removes the trailing newline from each line."
+concept_tags:
+  - file-writing
+  - file-reading
+  - with-statement

@@ -1,0 +1,16 @@
+type: write
+id: "03-linked-lists-write-01"
+prompt: "Define a Node class with val and next attributes. Then write a function called list_to_string(head) that takes the head of a linked list and returns a string like '1 -> 2 -> 3'. Build the list 5 -> 10 -> 15 and print the result of list_to_string."
+starter_code: |
+  # Define Node class, list_to_string(head), build 5->10->15, and print
+tests:
+  - description: "Output contains '5 -> 10 -> 15'"
+    check: "'5 -> 10 -> 15' in output.strip()"
+  - description: "Uses arrow notation"
+    check: "'->' in output"
+hints:
+  - "Node.__init__ takes val and next_node (default None)."
+  - "Traverse the list collecting str(current.val), then join with ' -> '."
+concept_tags:
+  - singly-linked-list
+  - node-traversal

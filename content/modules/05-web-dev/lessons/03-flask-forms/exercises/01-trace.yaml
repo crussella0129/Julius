@@ -1,0 +1,80 @@
+type: trace
+id: "03-flask-forms-trace-01"
+prompt: "Trace through this form validation function and predict the output."
+code: |
+  def validate(form_data):
+      errors = []
+      name = form_data.get("name", "")
+      email = form_data.get("email", "")
+      age = form_data.get("age", "")
+
+      if len(name) < 2:
+          errors.append("Name too short")
+      if "@" not in email:
+          errors.append("Invalid email")
+      if not age.isdigit():
+          errors.append("Age must be a number")
+
+      return errors
+
+  result = validate({"name": "A", "email": "bob.com", "age": "25"})
+  for e in result:
+      print(e)
+steps:
+  - line: 1
+    variables: {}
+    output: ""
+    explanation: "Define the validate function."
+  - line: 16
+    variables: {"form_data": "{'name': 'A', 'email': 'bob.com', 'age': '25'}"}
+    output: ""
+    explanation: "Call validate with the test data."
+  - line: 2
+    variables: {"errors": "[]"}
+    output: ""
+    explanation: "Initialize empty errors list."
+  - line: 3
+    variables: {"errors": "[]", "name": "A"}
+    output: ""
+    explanation: "Get 'name' from form_data: 'A'."
+  - line: 4
+    variables: {"errors": "[]", "name": "A", "email": "bob.com"}
+    output: ""
+    explanation: "Get 'email' from form_data: 'bob.com'."
+  - line: 5
+    variables: {"errors": "[]", "name": "A", "email": "bob.com", "age": "25"}
+    output: ""
+    explanation: "Get 'age' from form_data: '25'."
+  - line: 7
+    variables: {"errors": "['Name too short']"}
+    output: ""
+    explanation: "len('A') is 1, which is < 2, so append error."
+  - line: 9
+    variables: {"errors": "['Name too short', 'Invalid email']"}
+    output: ""
+    explanation: "'@' is not in 'bob.com', so append error."
+  - line: 11
+    variables: {"errors": "['Name too short', 'Invalid email']"}
+    output: ""
+    explanation: "'25'.isdigit() is True, so no error added for age."
+  - line: 17
+    variables: {"result": "['Name too short', 'Invalid email']"}
+    output: ""
+    explanation: "Loop begins over the two errors."
+  - line: 18
+    variables: {"e": "Name too short"}
+    output: "Name too short"
+    explanation: "Print first error."
+  - line: 18
+    variables: {"e": "Invalid email"}
+    output: "Invalid email"
+    explanation: "Print second error."
+expected_output: |
+  Name too short
+  Invalid email
+hints:
+  - "Check each validation condition: name length, @ in email, age is digits."
+  - "'25'.isdigit() returns True, so age passes validation."
+concept_tags:
+  - form-validation
+  - post-requests

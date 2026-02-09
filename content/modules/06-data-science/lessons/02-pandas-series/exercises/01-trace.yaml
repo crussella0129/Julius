@@ -1,0 +1,53 @@
+type: trace
+id: "02-pandas-series-trace-01"
+prompt: "Trace through this pandas DataFrame code and predict the output."
+code: |
+  import pandas as pd
+
+  df = pd.DataFrame({
+      "name": ["Alice", "Bob", "Charlie", "Diana"],
+      "score": [85, 92, 78, 95],
+  })
+
+  high_scorers = df[df["score"] >= 90]
+  print(len(high_scorers))
+
+  df["grade"] = df["score"].apply(lambda s: "A" if s >= 90 else "B")
+  print(df["grade"].tolist())
+
+  print(df["score"].mean())
+steps:
+  - line: 3
+    variables: {"df": "DataFrame with 4 rows, columns: name, score"}
+    output: ""
+    explanation: "Create a DataFrame with name and score columns."
+  - line: 8
+    variables: {"high_scorers": "DataFrame with rows where score >= 90"}
+    output: ""
+    explanation: "Filter rows: Bob (92) and Diana (95) have scores >= 90."
+  - line: 9
+    variables: {}
+    output: "2"
+    explanation: "Two rows match the filter."
+  - line: 11
+    variables: {}
+    output: ""
+    explanation: "Apply lambda to each score: 85->B, 92->A, 78->B, 95->A."
+  - line: 12
+    variables: {}
+    output: "['B', 'A', 'B', 'A']"
+    explanation: "Print the grade column as a list."
+  - line: 14
+    variables: {}
+    output: "87.5"
+    explanation: "Mean of [85, 92, 78, 95] = 350/4 = 87.5."
+expected_output: |
+  2
+  ['B', 'A', 'B', 'A']
+  87.5
+hints:
+  - "Boolean indexing df[condition] returns rows where the condition is True."
+  - ".apply() runs a function on each element of a Series."
+concept_tags:
+  - dataframe
+  - column-operations

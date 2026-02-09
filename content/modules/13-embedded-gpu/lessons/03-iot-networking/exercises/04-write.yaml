@@ -1,0 +1,18 @@
+type: write
+id: "03-iot-networking-write-01"
+prompt: "Write an MQTTBroker class with subscribe(topic, callback) and publish(topic, message) methods. Callbacks should be stored in a dictionary of lists. Test it by subscribing two different handler functions to different topics, publishing messages to each, and showing that messages are only delivered to the correct subscribers. Include at least one publish to a topic with no subscribers."
+starter_code: "# Write your code here\n"
+tests:
+  - description: "Output shows message delivery to subscribers"
+    check: "len(output.strip().splitlines()) >= 2"
+  - description: "Output contains topic names"
+    check: "output.count('/') >= 1 or 'temp' in output.lower() or 'sensor' in output.lower()"
+  - description: "Output does not show unsubscribed topic messages"
+    check: "len(output.strip().splitlines()) <= 5"
+hints:
+  - "Use a dictionary mapping topics to lists of callback functions."
+  - "In publish(), get the list of callbacks for the topic and call each one."
+  - "If no callbacks exist for a topic, the message is silently dropped."
+concept_tags:
+  - mqtt
+  - data-publishing

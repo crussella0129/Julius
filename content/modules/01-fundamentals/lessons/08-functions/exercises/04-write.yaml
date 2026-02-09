@@ -1,0 +1,28 @@
+type: write
+id: "08-functions-write-01"
+prompt: "Write a function called `is_leap_year` that takes a year as a parameter and returns True if it's a leap year, False otherwise. A leap year is divisible by 4, except years divisible by 100 (unless also divisible by 400). Then test it by printing the results for 2000, 1900, and 2024."
+starter_code: |
+  # Define is_leap_year function
+
+
+  # Test it
+  print(is_leap_year(2000))
+  print(is_leap_year(1900))
+  print(is_leap_year(2024))
+tests:
+  - description: "Output has exactly 3 lines"
+    check: "len(output.strip().splitlines()) == 3"
+  - description: "2000 is a leap year (True)"
+    check: "output.strip().splitlines()[0] == 'True'"
+  - description: "1900 is NOT a leap year (False)"
+    check: "output.strip().splitlines()[1] == 'False'"
+  - description: "2024 is a leap year (True)"
+    check: "output.strip().splitlines()[2] == 'True'"
+hints:
+  - "A year is a leap year if divisible by 400, OR (divisible by 4 AND not divisible by 100)."
+  - "Use the modulo operator (%) to check divisibility: year % 4 == 0"
+  - "def is_leap_year(year): return (year % 400 == 0) or (year % 4 == 0 and year % 100 != 0)"
+concept_tags:
+  - function-definition
+  - return-values
+  - parameters-arguments

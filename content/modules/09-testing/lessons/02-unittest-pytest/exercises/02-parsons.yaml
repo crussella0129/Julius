@@ -1,0 +1,21 @@
+type: parsons
+id: "02-unittest-pytest-parsons-01"
+prompt: "Arrange these lines to write a pytest test with a fixture that provides a sample dictionary, and a test function that checks its length."
+blocks:
+  - "import pytest"
+  - "@pytest.fixture"
+  - "def sample_data():"
+  - "    return {'name': 'Alice', 'age': 30, 'city': 'Paris'}"
+  - "def test_data_length(sample_data):"
+  - "    assert len(sample_data) == 3"
+distractors:
+  - "def setup_data():"
+  - "    self.assertEqual(len(sample_data), 3)"
+solution_order: [0, 1, 2, 3, 4, 5]
+hints:
+  - "Import pytest, then define the fixture with @pytest.fixture decorator."
+  - "The fixture function returns the test data."
+  - "The test function receives the fixture by using its name as a parameter."
+concept_tags:
+  - pytest-basics
+  - fixtures

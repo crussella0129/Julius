@@ -1,0 +1,48 @@
+type: fill-in
+id: "04-trees-forests-fill-in-01"
+prompt: "Fill in the blanks to implement a simple decision stump (one-level decision tree)."
+template: |
+  def decision_stump(value, threshold, left_label, right_label):
+      if value ____ threshold:
+          return left_label
+      ____:
+          return right_label
+
+  test_values = [2, 5, 8, 3, 7]
+  threshold = ____
+
+  for v in test_values:
+      result = decision_stump(v, threshold, \"low\", \"high\")
+      ____(f\"{v} -> {result}\")
+blanks:
+  - position: 0
+    answer: "<="
+    hint: "comparison: values at or below threshold go left"
+  - position: 1
+    answer: "else"
+    hint: "keyword for the alternative branch"
+  - position: 2
+    answer: "5"
+    hint: "the splitting threshold value"
+  - position: 3
+    answer: "print"
+    hint: "function to display output"
+solution: |
+  def decision_stump(value, threshold, left_label, right_label):
+      if value <= threshold:
+          return left_label
+      else:
+          return right_label
+
+  test_values = [2, 5, 8, 3, 7]
+  threshold = 5
+
+  for v in test_values:
+      result = decision_stump(v, threshold, "low", "high")
+      print(f"{v} -> {result}")
+hints:
+  - "A decision stump splits on one threshold: left if <=, right if >."
+  - "Choose threshold=5 to split the test values roughly in half."
+concept_tags:
+  - decision-tree
+  - information-gain

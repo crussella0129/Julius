@@ -1,0 +1,13 @@
+id: "05-web-dev"
+title: "Web Development"
+description: "Build web apps and APIs with Flask and FastAPI"
+order: 5
+lessons:
+  - 01-http-basics
+  - 02-flask-intro
+  - 03-flask-forms
+  - 04-flask-database
+  - 05-fastapi-intro
+  - 06-rest-api
+  - 07-web-scraping
+  - 08-deployment

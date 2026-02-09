@@ -1,0 +1,57 @@
+type: fill-in
+id: "07-eda-project-fill-in-01"
+prompt: "Fill in the blanks to create a data summary function."
+template: |
+  def summarize(data, column):
+      values = [row[column] for row in data if row[column] is not ____]
+      if not values:
+          return \"No data\"
+      return {
+          \"count\": ____(values),
+          \"min\": min(values),
+          \"max\": ____(values),
+          \"mean\": sum(values) / len(values),
+      }
+
+  records = [
+      {\"name\": \"A\", \"score\": 80},
+      {\"name\": \"B\", \"score\": 95},
+      {\"name\": \"C\", \"score\": None},
+      {\"name\": \"D\", \"score\": 70},
+  ]
+  print(summarize(records, \"score\"))
+blanks:
+  - position: 0
+    answer: "None"
+    hint: "Python's null value to filter out"
+  - position: 1
+    answer: "len"
+    hint: "function to count items"
+  - position: 2
+    answer: "max"
+    hint: "function to find the largest value"
+solution: |
+  def summarize(data, column):
+      values = [row[column] for row in data if row[column] is not None]
+      if not values:
+          return "No data"
+      return {
+          "count": len(values),
+          "min": min(values),
+          "max": max(values),
+          "mean": sum(values) / len(values),
+      }
+
+  records = [
+      {"name": "A", "score": 80},
+      {"name": "B", "score": 95},
+      {"name": "C", "score": None},
+      {"name": "D", "score": 70},
+  ]
+  print(summarize(records, "score"))
+hints:
+  - "Filter out None values before computing statistics."
+  - "len() counts, min() and max() find extremes."
+concept_tags:
+  - eda-workflow
+  - report-building

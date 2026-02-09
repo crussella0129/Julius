@@ -1,0 +1,20 @@
+type: parsons
+id: "01-nlp-fundamentals-parsons-01"
+prompt: "Arrange these lines to build an n-gram function that takes a list of tokens and a number n, and returns all contiguous n-grams as tuples."
+blocks:
+  - "def ngrams(tokens, n):"
+  - "    result = []"
+  - "    for i in range(len(tokens) - n + 1):"
+  - "        gram = tuple(tokens[i:i+n])"
+  - "        result.append(gram)"
+  - "    return result"
+distractors:
+  - "    for i in range(len(tokens)):"
+  - "        gram = tokens[i:i+n]"
+solution_order: [0, 1, 2, 3, 4, 5]
+hints:
+  - "The loop range must stop early enough so the slice doesn't go past the end."
+  - "N-grams are typically returned as tuples, not lists."
+concept_tags:
+  - tokenization
+  - text-preprocessing

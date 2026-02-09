@@ -1,0 +1,63 @@
+type: trace
+id: "04-risk-management-trace-01"
+prompt: "Trace through this code that calculates historical VaR from a list of returns and predict the output."
+code: |
+  returns = [0.03, -0.04, 0.01, -0.02, 0.05, -0.06, 0.02, -0.01, 0.04, -0.03]
+  confidence = 0.90
+
+  sorted_returns = sorted(returns)
+  index = int((1 - confidence) * len(sorted_returns))
+  var = sorted_returns[index]
+
+  print(f"Sorted returns: {sorted_returns}")
+  print(f"VaR index: {index}")
+  print(f"90% VaR: {var*100:.1f}%")
+  print(f"On $50,000: ${abs(var)*50000:,.0f}")
+steps:
+  - line: 1
+    variables: {"returns": "[0.03, -0.04, 0.01, -0.02, 0.05, -0.06, 0.02, -0.01, 0.04, -0.03]"}
+    output: ""
+    explanation: "Ten daily returns with a mix of positive and negative values."
+  - line: 2
+    variables: {"confidence": 0.90}
+    output: ""
+    explanation: "90% confidence level for VaR."
+  - line: 4
+    variables: {"sorted_returns": "[-0.06, -0.04, -0.03, -0.02, -0.01, 0.01, 0.02, 0.03, 0.04, 0.05]"}
+    output: ""
+    explanation: "Sort returns from worst to best."
+  - line: 5
+    variables: {"index": 1}
+    output: ""
+    explanation: "(1 - 0.90) * 10 = 1.0, int(1.0) = 1."
+  - line: 6
+    variables: {"var": -0.04}
+    output: ""
+    explanation: "sorted_returns[1] = -0.04, the second worst return."
+  - line: 8
+    variables: {}
+    output: "Sorted returns: [-0.06, -0.04, -0.03, -0.02, -0.01, 0.01, 0.02, 0.03, 0.04, 0.05]"
+    explanation: "Print all sorted returns."
+  - line: 9
+    variables: {}
+    output: "VaR index: 1"
+    explanation: "The index into the sorted array for 90% confidence."
+  - line: 10
+    variables: {}
+    output: "90% VaR: -4.0%"
+    explanation: "At 90% confidence, the worst expected daily loss is 4%."
+  - line: 11
+    variables: {}
+    output: "On $50,000: $2,000"
+    explanation: "4% of $50,000 = $2,000 maximum expected daily loss."
+expected_output: |
+  Sorted returns: [-0.06, -0.04, -0.03, -0.02, -0.01, 0.01, 0.02, 0.03, 0.04, 0.05]
+  VaR index: 1
+  90% VaR: -4.0%
+  On $50,000: $2,000
+hints:
+  - "Sort returns from worst to best, then pick the return at the (1-confidence) percentile."
+  - "The index calculation: int((1 - 0.90) * 10) = int(1.0) = 1."
+concept_tags:
+  - value-at-risk
+  - volatility

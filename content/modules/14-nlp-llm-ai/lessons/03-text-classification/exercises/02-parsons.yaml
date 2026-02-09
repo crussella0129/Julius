@@ -1,0 +1,21 @@
+type: parsons
+id: "03-text-classification-parsons-01"
+prompt: "Arrange these lines to compute the TF (term frequency) of each word in a document, returning a dictionary mapping words to their frequencies."
+blocks:
+  - "def compute_tf(document):"
+  - "    words = document.lower().split()"
+  - "    total = len(words)"
+  - "    counts = {}"
+  - "    for word in words:"
+  - "        counts[word] = counts.get(word, 0) + 1"
+  - "    return {word: count / total for word, count in counts.items()}"
+distractors:
+  - "    return {word: count for word, count in counts.items()}"
+  - "    total = len(set(words))"
+solution_order: [0, 1, 2, 3, 4, 5, 6]
+hints:
+  - "Term frequency divides each word's count by the total number of words."
+  - "total should be len(words), not len(set(words)) -- we want total words, not unique words."
+concept_tags:
+  - tf-idf
+  - text-classification

@@ -1,0 +1,20 @@
+type: write
+id: "05-forensics-write-01"
+prompt: "Write a program that analyzes a list of log entries. Given the log lines below, count how many entries are 'ERROR' vs 'INFO' vs 'WARNING', and print the counts sorted from most to least frequent. Use collections.Counter.\n\nLog lines:\n  '2024-01-15 10:00:00 ERROR disk full'\n  '2024-01-15 10:01:00 INFO backup started'\n  '2024-01-15 10:02:00 ERROR connection timeout'\n  '2024-01-15 10:03:00 WARNING low memory'\n  '2024-01-15 10:04:00 ERROR disk full'\n  '2024-01-15 10:05:00 INFO backup completed'"
+starter_code: "from collections import Counter\n\n# Write your code here\n"
+tests:
+  - description: "Output contains 'ERROR' with count 3"
+    check: "'error' in output.lower() and '3' in output"
+  - description: "Output contains 'INFO' with count 2"
+    check: "'info' in output.lower() and '2' in output"
+  - description: "Output contains 'WARNING' with count 1"
+    check: "'warning' in output.lower() and '1' in output"
+  - description: "ERROR appears before INFO (most common first)"
+    check: "output.lower().index('error') < output.lower().index('info')"
+hints:
+  - "Split each log entry by spaces and extract the third element (index 2) for the log level."
+  - "Use Counter(levels).most_common() to get counts sorted by frequency."
+  - "Print each level and its count."
+concept_tags:
+  - log-parsing
+  - file-analysis

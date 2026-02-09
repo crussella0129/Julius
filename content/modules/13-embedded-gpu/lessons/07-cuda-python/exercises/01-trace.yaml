@@ -1,0 +1,110 @@
+type: trace
+id: "07-cuda-python-trace-01"
+prompt: "Trace through this code that simulates CUDA thread indexing for a grid of blocks and predict the output."
+code: |
+  n = 6
+  threads_per_block = 4
+  blocks = (n + threads_per_block - 1) // threads_per_block
+
+  print(f"Grid: {blocks} blocks x {threads_per_block} threads")
+
+  for block in range(blocks):
+      for thread in range(threads_per_block):
+          global_id = block * threads_per_block + thread
+          if global_id < n:
+              print(f"  B{block}T{thread} -> index {global_id}")
+          else:
+              print(f"  B{block}T{thread} -> idle")
+steps:
+  - line: 1
+    variables: {"n": 6, "threads_per_block": 4}
+    output: ""
+    explanation: "6 data elements, 4 threads per block."
+  - line: 3
+    variables: {"blocks": 2}
+    output: ""
+    explanation: "(6 + 4 - 1) // 4 = 9 // 4 = 2 blocks needed."
+  - line: 5
+    variables: {}
+    output: "Grid: 2 blocks x 4 threads"
+    explanation: "Print the grid configuration."
+  - line: 7
+    variables: {"block": 0, "thread": 0, "global_id": 0}
+    output: ""
+    explanation: "Block 0, Thread 0: global_id = 0*4+0 = 0. 0 < 6, active."
+  - line: 10
+    variables: {}
+    output: "  B0T0 -> index 0"
+    explanation: "Thread processes data[0]."
+  - line: 7
+    variables: {"block": 0, "thread": 1, "global_id": 1}
+    output: ""
+    explanation: "Block 0, Thread 1: global_id = 1."
+  - line: 10
+    variables: {}
+    output: "  B0T1 -> index 1"
+    explanation: "Thread processes data[1]."
+  - line: 7
+    variables: {"block": 0, "thread": 2, "global_id": 2}
+    output: ""
+    explanation: "Block 0, Thread 2: global_id = 2."
+  - line: 10
+    variables: {}
+    output: "  B0T2 -> index 2"
+    explanation: "Thread processes data[2]."
+  - line: 7
+    variables: {"block": 0, "thread": 3, "global_id": 3}
+    output: ""
+    explanation: "Block 0, Thread 3: global_id = 3."
+  - line: 10
+    variables: {}
+    output: "  B0T3 -> index 3"
+    explanation: "Thread processes data[3]."
+  - line: 7
+    variables: {"block": 1, "thread": 0, "global_id": 4}
+    output: ""
+    explanation: "Block 1, Thread 0: global_id = 1*4+0 = 4."
+  - line: 10
+    variables: {}
+    output: "  B1T0 -> index 4"
+    explanation: "Thread processes data[4]."
+  - line: 7
+    variables: {"block": 1, "thread": 1, "global_id": 5}
+    output: ""
+    explanation: "Block 1, Thread 1: global_id = 5."
+  - line: 10
+    variables: {}
+    output: "  B1T1 -> index 5"
+    explanation: "Thread processes data[5]."
+  - line: 7
+    variables: {"block": 1, "thread": 2, "global_id": 6}
+    output: ""
+    explanation: "Block 1, Thread 2: global_id = 6. 6 >= n=6, idle."
+  - line: 12
+    variables: {}
+    output: "  B1T2 -> idle"
+    explanation: "Thread 6 has no data to process."
+  - line: 7
+    variables: {"block": 1, "thread": 3, "global_id": 7}
+    output: ""
+    explanation: "Block 1, Thread 3: global_id = 7. 7 >= n=6, idle."
+  - line: 12
+    variables: {}
+    output: "  B1T3 -> idle"
+    explanation: "Thread 7 has no data to process."
+expected_output: |
+  Grid: 2 blocks x 4 threads
+    B0T0 -> index 0
+    B0T1 -> index 1
+    B0T2 -> index 2
+    B0T3 -> index 3
+    B1T0 -> index 4
+    B1T1 -> index 5
+    B1T2 -> idle
+    B1T3 -> idle
+hints:
+  - "Global thread ID = block_id * threads_per_block + thread_id."
+  - "With 6 elements and 4 threads per block, we need 2 blocks (8 threads), but 2 threads are idle."
+concept_tags:
+  - thread-blocks
+  - cuda-kernels

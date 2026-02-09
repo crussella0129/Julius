@@ -1,0 +1,86 @@
+type: trace
+id: "06-error-handling-trace-01"
+prompt: "Trace through this code and predict the final output."
+code: |
+  def safe_divide(a, b):
+      try:
+          result = a / b
+      except ZeroDivisionError:
+          print("Cannot divide by zero!")
+          return None
+      else:
+          print(f"{a} / {b} = {result}")
+          return result
+      finally:
+          print("Division attempted.")
+
+  x = safe_divide(10, 2)
+  print(f"Result: {x}")
+  print("---")
+  y = safe_divide(10, 0)
+  print(f"Result: {y}")
+steps:
+  - line: 1
+    variables: {}
+    output: ""
+    explanation: "The function safe_divide is defined."
+  - line: 13
+    variables: {}
+    output: ""
+    explanation: "safe_divide(10, 2) is called. Inside: a=10, b=2."
+  - line: 3
+    variables: { "a": "10", "b": "2", "result": "5.0" }
+    output: ""
+    explanation: "result = 10 / 2 = 5.0. No exception is raised."
+  - line: 8
+    variables: { "result": "5.0" }
+    output: "10 / 2 = 5.0"
+    explanation: "Since no exception occurred, the else block runs, printing the result."
+  - line: 11
+    variables: {}
+    output: "Division attempted."
+    explanation: "The finally block always runs, printing 'Division attempted.'."
+  - line: 14
+    variables: { "x": "5.0" }
+    output: "Result: 5.0"
+    explanation: "x is assigned 5.0 (the return value), then printed."
+  - line: 15
+    variables: {}
+    output: "---"
+    explanation: "Prints the separator."
+  - line: 16
+    variables: {}
+    output: ""
+    explanation: "safe_divide(10, 0) is called. Inside: a=10, b=0."
+  - line: 3
+    variables: { "a": "10", "b": "0" }
+    output: ""
+    explanation: "10 / 0 raises a ZeroDivisionError."
+  - line: 5
+    variables: {}
+    output: "Cannot divide by zero!"
+    explanation: "The except block catches ZeroDivisionError."
+  - line: 11
+    variables: {}
+    output: "Division attempted."
+    explanation: "The finally block runs even after the exception was caught."
+  - line: 17
+    variables: { "y": "None" }
+    output: "Result: None"
+    explanation: "y is None (the except block returned None), then printed."
+expected_output: |
+  10 / 2 = 5.0
+  Division attempted.
+  Result: 5.0
+  ---
+  Cannot divide by zero!
+  Division attempted.
+  Result: None
+hints:
+  - "The else block runs only when NO exception occurs."
+  - "The finally block ALWAYS runs, whether or not an exception was raised."
+  - "When the except block returns None, that's what the caller receives."
+concept_tags:
+  - try-except
+  - finally-else
+  - exception-types

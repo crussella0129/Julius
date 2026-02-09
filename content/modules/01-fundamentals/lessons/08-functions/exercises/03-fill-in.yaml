@@ -1,0 +1,28 @@
+type: fill-in
+id: "08-functions-fill-in-01"
+prompt: "Fill in the blanks to define a function with a default parameter and call it."
+template: |
+  ____ greet(name, greeting____"Hello"):
+      print(f"{greeting}, {name}!")
+
+  greet("Alice")
+  greet("Bob", "Good morning")
+blanks:
+  - position: 0
+    answer: "def"
+    hint: "function keyword"
+  - position: 1
+    answer: "="
+    hint: "default value"
+solution: |
+  def greet(name, greeting="Hello"):
+      print(f"{greeting}, {name}!")
+
+  greet("Alice")
+  greet("Bob", "Good morning")
+hints:
+  - "Functions are defined with the 'def' keyword."
+  - "Default values are assigned with = in the parameter list."
+concept_tags:
+  - function-definition
+  - parameters-arguments

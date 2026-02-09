@@ -1,0 +1,23 @@
+type: parsons
+id: "02-linear-regression-parsons-01"
+prompt: "Arrange these lines to implement Mean Squared Error and use it to evaluate two models."
+blocks:
+  - "def mse(actual, predicted):"
+  - "    errors = [(a - p) ** 2 for a, p in zip(actual, predicted)]"
+  - "    return sum(errors) / len(errors)"
+  - "actual = [3, 5, 7, 9]"
+  - "model_a = [2.8, 5.2, 6.9, 9.1]"
+  - "model_b = [3.5, 4.0, 8.0, 8.5]"
+  - "print(f'Model A MSE: {mse(actual, model_a):.4f}')"
+  - "print(f'Model B MSE: {mse(actual, model_b):.4f}')"
+distractors:
+  - "    errors = [abs(a - p) for a, p in zip(actual, predicted)]"
+  - "    return sum(errors)"
+solution_order: [0, 1, 2, 3, 4, 5, 6, 7]
+hints:
+  - "MSE squares the errors, then takes the mean."
+  - "Define the function first, then the data, then compute MSE for each model."
+  - "Lower MSE means better predictions."
+concept_tags:
+  - cost-function
+  - linear-model

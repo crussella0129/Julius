@@ -1,0 +1,22 @@
+type: write
+id: "03-classification-write-01"
+prompt: "Write a function called `knn_classify` that takes a new point (x, y), a list of training points [(x, y, label), ...], and k. It should compute Euclidean distance to each training point, find the k nearest, and return the majority label. Test with training data [(1,1,'A'), (2,1,'A'), (1,2,'A'), (8,8,'B'), (9,8,'B'), (8,9,'B')] and predict for (2,2) with k=3 and (7,7) with k=3."
+starter_code: |
+  import math
+  from collections import Counter
+
+  # Write your function here
+tests:
+  - description: "Point (2,2) is classified as A"
+    check: "'A' in output"
+  - description: "Point (7,7) is classified as B"
+    check: "'B' in output"
+  - description: "Both predictions are printed"
+    check: "len(output.strip().splitlines()) >= 2"
+hints:
+  - "Euclidean distance: sqrt((x1-x2)^2 + (y1-y2)^2)."
+  - "Sort by distance, take the first k, and use Counter.most_common(1)."
+  - "Remember to print both predictions."
+concept_tags:
+  - knn-classifier
+  - logistic-regression

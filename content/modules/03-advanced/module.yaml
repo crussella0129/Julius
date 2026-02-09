@@ -1,0 +1,12 @@
+id: "03-advanced"
+title: "Advanced Python"
+description: "OOP, decorators, generators, and concurrency patterns"
+order: 3
+lessons:
+  - 01-oop-classes
+  - 02-oop-inheritance
+  - 03-decorators
+  - 04-generators
+  - 05-context-managers
+  - 06-design-patterns
+  - 07-concurrency

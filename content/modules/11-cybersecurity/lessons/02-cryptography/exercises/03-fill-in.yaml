@@ -1,0 +1,37 @@
+type: fill-in
+id: "02-cryptography-fill-in-01"
+prompt: "Fill in the blanks to create and verify an HMAC signature for a message."
+template: |
+  import hmac
+  import hashlib
+
+  key = b"secret"
+  message = b"important data"
+  signature = hmac.____(key, message, hashlib.____).hexdigest()
+  is_valid = hmac.____(signature, hmac.new(key, message, hashlib.sha256).hexdigest())
+  print(is_valid)
+blanks:
+  - position: 0
+    answer: "new"
+    hint: "function to create a new HMAC object"
+  - position: 1
+    answer: "sha256"
+    hint: "hash algorithm to use"
+  - position: 2
+    answer: "compare_digest"
+    hint: "timing-safe comparison function"
+solution: |
+  import hmac
+  import hashlib
+
+  key = b"secret"
+  message = b"important data"
+  signature = hmac.new(key, message, hashlib.sha256).hexdigest()
+  is_valid = hmac.compare_digest(signature, hmac.new(key, message, hashlib.sha256).hexdigest())
+  print(is_valid)
+hints:
+  - "hmac.new() creates a new HMAC object with a key, message, and hash algorithm."
+  - "Always use hmac.compare_digest() instead of == to prevent timing attacks."
+concept_tags:
+  - hmac
+  - hashing

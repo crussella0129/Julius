@@ -1,0 +1,53 @@
+type: fill-in
+id: "02-oop-inheritance-fill-in-01"
+prompt: "Fill in the blanks to create an Employee class that inherits from Person and calls the parent's __init__."
+template: |
+  class Person:
+      def __init__(self, name):
+          self.name = name
+
+  class Employee(____):
+      def __init__(self, name, company):
+          ____.__init__(name)
+          self.company = company
+
+      def describe(self):
+          return f"{self.name} works at {self.company}"
+
+  e = Employee("Alice", "Acme")
+  print(e.describe())
+  print(____(e, Person))
+blanks:
+  - position: 0
+    answer: "Person"
+    hint: "the parent class name"
+  - position: 1
+    answer: "super()"
+    hint: "call the parent class"
+  - position: 2
+    answer: "isinstance"
+    hint: "built-in function to check type"
+solution: |
+  class Person:
+      def __init__(self, name):
+          self.name = name
+
+  class Employee(Person):
+      def __init__(self, name, company):
+          super().__init__(name)
+          self.company = company
+
+      def describe(self):
+          return f"{self.name} works at {self.company}"
+
+  e = Employee("Alice", "Acme")
+  print(e.describe())
+  print(isinstance(e, Person))
+hints:
+  - "Put the parent class name in parentheses after the child class name."
+  - "super() gives you access to the parent class's methods."
+  - "isinstance() checks if an object is an instance of a given class."
+concept_tags:
+  - inheritance
+  - super-function
+  - isinstance-check

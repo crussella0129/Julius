@@ -1,0 +1,43 @@
+type: fill-in
+id: "10-dynamic-programming-fill-in-01"
+prompt: "Fill in the blanks to complete the climbing stairs DP solution. You can take 1 or 2 stairs at a time."
+template: |
+  def climb_stairs(n):
+      if n <= 2:
+          return n
+      dp = [0] * (n + 1)
+      dp[1] = ____
+      dp[2] = ____
+      for i in range(3, n + 1):
+          dp[i] = dp[i - 1] + dp[____]
+      return dp[n]
+
+  print(climb_stairs(5))
+blanks:
+  - position: 0
+    answer: "1"
+    hint: "there is 1 way to climb 1 stair"
+  - position: 1
+    answer: "2"
+    hint: "there are 2 ways to climb 2 stairs (1+1 or 2)"
+  - position: 2
+    answer: "i - 2"
+    hint: "you can reach step i from two steps back"
+solution: |
+  def climb_stairs(n):
+      if n <= 2:
+          return n
+      dp = [0] * (n + 1)
+      dp[1] = 1
+      dp[2] = 2
+      for i in range(3, n + 1):
+          dp[i] = dp[i - 1] + dp[i - 2]
+      return dp[n]
+
+  print(climb_stairs(5))
+hints:
+  - "To reach step i, you either came from step i-1 (one step) or step i-2 (two steps)."
+  - "dp[i] = dp[i-1] + dp[i-2] is the same recurrence as Fibonacci."
+concept_tags:
+  - tabulation
+  - optimal-substructure

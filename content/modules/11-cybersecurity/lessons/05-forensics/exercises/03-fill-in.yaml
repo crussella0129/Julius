@@ -1,0 +1,37 @@
+type: fill-in
+id: "05-forensics-fill-in-01"
+prompt: "Fill in the blanks to create a hex dump function that displays each byte as a two-digit hex value and shows printable ASCII characters."
+template: |
+  def hex_dump(data, width=16):
+      for offset in range(0, len(data), width):
+          chunk = data[offset:offset + width]
+          hex_part = " ".join(f"{b:____}" for b in chunk)
+          ascii_part = "".join(
+              ____(b) if 32 <= b < 127 else "." for b in chunk
+          )
+          print(f"{offset:08x}  {hex_part}  {____}")
+blanks:
+  - position: 0
+    answer: "02x"
+    hint: "format specifier for 2-digit hexadecimal"
+  - position: 1
+    answer: "chr"
+    hint: "function converting integer to character"
+  - position: 2
+    answer: "ascii_part"
+    hint: "variable holding the ASCII representation"
+solution: |
+  def hex_dump(data, width=16):
+      for offset in range(0, len(data), width):
+          chunk = data[offset:offset + width]
+          hex_part = " ".join(f"{b:02x}" for b in chunk)
+          ascii_part = "".join(
+              chr(b) if 32 <= b < 127 else "." for b in chunk
+          )
+          print(f"{offset:08x}  {hex_part}  {ascii_part}")
+hints:
+  - "The format specifier 02x means: 2 digits, zero-padded, hexadecimal."
+  - "chr() converts an integer to its corresponding ASCII character."
+concept_tags:
+  - file-analysis
+  - metadata-extraction

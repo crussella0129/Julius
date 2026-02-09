@@ -1,0 +1,43 @@
+type: trace
+id: "04-operators-trace-01"
+prompt: "Trace through this code and predict the final output."
+code: |
+  x = 10
+  y = 3
+  a = x // y
+  b = x % y
+  c = a + b
+  print(c)
+steps:
+  - line: 1
+    variables: { "x": "10" }
+    output: ""
+    explanation: "x is assigned the value 10."
+  - line: 2
+    variables: { "x": "10", "y": "3" }
+    output: ""
+    explanation: "y is assigned the value 3."
+  - line: 3
+    variables: { "x": "10", "y": "3", "a": "3" }
+    output: ""
+    explanation: "10 // 3 is floor division, which gives 3 (rounds down)."
+  - line: 4
+    variables: { "x": "10", "y": "3", "a": "3", "b": "1" }
+    output: ""
+    explanation: "10 % 3 is the remainder of 10 divided by 3, which is 1."
+  - line: 5
+    variables: { "x": "10", "y": "3", "a": "3", "b": "1", "c": "4" }
+    output: ""
+    explanation: "a + b = 3 + 1 = 4."
+  - line: 6
+    variables: { "x": "10", "y": "3", "a": "3", "b": "1", "c": "4" }
+    output: "4"
+    explanation: "Prints the value of c, which is 4."
+expected_output: |
+  4
+hints:
+  - "// is floor division (rounds down to nearest integer)."
+  - "% gives the remainder after division."
+concept_tags:
+  - arithmetic-operators
+  - operator-precedence

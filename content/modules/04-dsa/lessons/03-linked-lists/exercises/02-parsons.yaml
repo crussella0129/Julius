@@ -1,0 +1,19 @@
+type: parsons
+id: "03-linked-lists-parsons-01"
+prompt: "Arrange these lines to implement a prepend method that inserts a new node at the beginning of a linked list."
+blocks:
+  - "def prepend(self, val):"
+  - "    new_node = Node(val)"
+  - "    new_node.next = self.head"
+  - "    self.head = new_node"
+solution_order: [0, 1, 2, 3]
+distractors:
+  - "    self.head = new_node"
+  - "    new_node.next = self.head"
+  - "    self.head.next = new_node"
+hints:
+  - "First create the new node, then point it to the current head, then update head."
+  - "Order matters: if you update self.head first, you lose the reference to the old head."
+concept_tags:
+  - singly-linked-list
+  - insertion-deletion

@@ -1,0 +1,52 @@
+type: trace
+id: "02-spacy-trace-01"
+prompt: "Trace through this code that simulates spaCy-style token processing and predict the output."
+code: |
+  class Token:
+      def __init__(self, text, pos, lemma):
+          self.text = text
+          self.pos_ = pos
+          self.lemma_ = lemma
+          self.is_stop = text.lower() in {"the", "is", "a"}
+
+  tokens = [
+      Token("The", "DET", "the"),
+      Token("dog", "NOUN", "dog"),
+      Token("is", "AUX", "be"),
+      Token("running", "VERB", "run"),
+  ]
+
+  nouns = [t.lemma_ for t in tokens if t.pos_ == "NOUN"]
+  non_stop = [t.text for t in tokens if not t.is_stop]
+  print(nouns)
+  print(non_stop)
+steps:
+  - line: 9
+    variables: {"tokens": "list of 4 Token objects"}
+    output: ""
+    explanation: "Four Token objects are created with text, POS, and lemma attributes."
+  - line: 16
+    variables: {"nouns": ["dog"]}
+    output: ""
+    explanation: "List comprehension filters tokens where pos_ is 'NOUN', then extracts lemma_. Only 'dog' matches."
+  - line: 17
+    variables: {"non_stop": ["dog", "running"]}
+    output: ""
+    explanation: "'The' (is_stop=True) and 'is' (is_stop=True) are filtered out. 'dog' and 'running' remain."
+  - line: 18
+    variables: {}
+    output: "['dog']"
+    explanation: "The nouns list is printed."
+  - line: 19
+    variables: {}
+    output: "['dog', 'running']"
+    explanation: "The non-stop-word tokens are printed."
+expected_output: |
+  ['dog']
+  ['dog', 'running']
+hints:
+  - "is_stop checks if the lowercase text is in the set {'the', 'is', 'a'}."
+  - "Only tokens with pos_ == 'NOUN' are included in the nouns list."
+concept_tags:
+  - spacy
+  - pos-tagging

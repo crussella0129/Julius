@@ -1,0 +1,32 @@
+type: fill-in
+id: "04-scheduling-fill-in-01"
+prompt: "Fill in the blanks to format the current date and time as 'YYYY-MM-DD HH:MM:SS' and print it."
+template: |
+  from datetime import ____
+
+  now = datetime.____()
+  formatted = now.____("%Y-%m-%d %H:%M:%S")
+  print(formatted)
+blanks:
+  - position: 0
+    answer: "datetime"
+    hint: "the class to import"
+  - position: 1
+    answer: "now"
+    hint: "class method that returns current date and time"
+  - position: 2
+    answer: "strftime"
+    hint: "method that formats datetime as a string"
+solution: |
+  from datetime import datetime
+
+  now = datetime.now()
+  formatted = now.strftime("%Y-%m-%d %H:%M:%S")
+  print(formatted)
+hints:
+  - "Import datetime from the datetime module."
+  - "datetime.now() returns the current date and time."
+  - "strftime() converts a datetime to a formatted string."
+concept_tags:
+  - time-module
+  - periodic-tasks

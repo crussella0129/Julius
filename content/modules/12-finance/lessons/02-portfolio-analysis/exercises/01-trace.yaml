@@ -1,0 +1,97 @@
+type: trace
+id: "02-portfolio-analysis-trace-01"
+prompt: "Trace through this code that calculates portfolio growth and maximum drawdown, then predict the output."
+code: |
+  values = [10000]
+  returns = [0.05, -0.03, 0.02, -0.08, 0.04]
+
+  for r in returns:
+      values.append(values[-1] * (1 + r))
+
+  peak = values[0]
+  max_dd = 0
+  for v in values:
+      if v > peak:
+          peak = v
+      dd = (peak - v) / peak
+      if dd > max_dd:
+          max_dd = dd
+
+  print(f"Start: ${values[0]:,.0f}")
+  print(f"End:   ${values[-1]:,.0f}")
+  print(f"Max DD: {max_dd*100:.1f}%")
+steps:
+  - line: 1
+    variables: {"values": "[10000]"}
+    output: ""
+    explanation: "Start with $10,000."
+  - line: 2
+    variables: {"returns": "[0.05, -0.03, 0.02, -0.08, 0.04]"}
+    output: ""
+    explanation: "Five daily returns: +5%, -3%, +2%, -8%, +4%."
+  - line: 4
+    variables: {"r": 0.05}
+    output: ""
+    explanation: "First return: +5%. 10000 * 1.05 = 10500."
+  - line: 5
+    variables: {"values": "[10000, 10500.0]"}
+    output: ""
+    explanation: "Append 10500."
+  - line: 4
+    variables: {"r": -0.03}
+    output: ""
+    explanation: "Second return: -3%. 10500 * 0.97 = 10185."
+  - line: 5
+    variables: {"values": "[10000, 10500.0, 10185.0]"}
+    output: ""
+    explanation: "Append 10185."
+  - line: 4
+    variables: {"r": 0.02}
+    output: ""
+    explanation: "Third return: +2%. 10185 * 1.02 = 10388.7."
+  - line: 5
+    variables: {"values": "[10000, 10500.0, 10185.0, 10388.7]"}
+    output: ""
+    explanation: "Append 10388.7."
+  - line: 4
+    variables: {"r": -0.08}
+    output: ""
+    explanation: "Fourth return: -8%. 10388.7 * 0.92 = 9557.604."
+  - line: 5
+    variables: {"values": "[10000, 10500.0, 10185.0, 10388.7, 9557.604]"}
+    output: ""
+    explanation: "Append 9557.604."
+  - line: 4
+    variables: {"r": 0.04}
+    output: ""
+    explanation: "Fifth return: +4%. 9557.604 * 1.04 = 9939.908."
+  - line: 5
+    variables: {"values": "[10000, 10500.0, 10185.0, 10388.7, 9557.604, 9939.908...]"}
+    output: ""
+    explanation: "Append 9939.908."
+  - line: 7
+    variables: {"peak": 10000}
+    output: ""
+    explanation: "Initialize peak to the starting value."
+  - line: 17
+    variables: {}
+    output: "Start: $10,000"
+    explanation: "Print starting portfolio value."
+  - line: 18
+    variables: {}
+    output: "End:   $9,940"
+    explanation: "Print ending value (rounded)."
+  - line: 19
+    variables: {"max_dd": 0.0897}
+    output: "Max DD: 9.0%"
+    explanation: "Maximum drawdown: peak was 10500, trough was 9557.6. (10500-9557.6)/10500 = 9.0%."
+expected_output: |
+  Start: $10,000
+  End:   $9,940
+  Max DD: 9.0%
+hints:
+  - "Each new value = previous value * (1 + return)."
+  - "Maximum drawdown is the largest percentage drop from any peak."
+concept_tags:
+  - portfolio-returns
+  - sharpe-ratio

@@ -1,0 +1,66 @@
+type: trace
+id: "10-practical-ml-trace-01"
+prompt: "Trace through this feature engineering pipeline and predict the output."
+code: |
+  records = [
+      {"name": "Alice", "age": 28, "income": 55000, "city": "NYC"},
+      {"name": "Bob", "age": 45, "income": 82000, "city": "LA"},
+      {"name": "Charlie", "age": 35, "income": 67000, "city": "NYC"},
+  ]
+
+  # Feature engineering
+  city_map = {}
+  city_counter = 0
+  for r in records:
+      if r["city"] not in city_map:
+          city_map[r["city"]] = city_counter
+          city_counter += 1
+      r["city_code"] = city_map[r["city"]]
+      r["age_group"] = "young" if r["age"] < 30 else "mid" if r["age"] < 50 else "senior"
+      r["income_k"] = r["income"] / 1000
+
+  for r in records:
+      print(f"{r['name']}: city_code={r['city_code']}, age_group={r['age_group']}, income_k={r['income_k']}")
+steps:
+  - line: 1
+    variables: {}
+    output: ""
+    explanation: "Define 3 records."
+  - line: 8
+    variables: {"city_map": "{}", "city_counter": 0}
+    output: ""
+    explanation: "Initialize city encoding."
+  - line: 10
+    variables: {"r": "Alice's record"}
+    output: ""
+    explanation: "Alice: NYC not in map, assign 0. age 28 < 30 -> young. income_k = 55."
+  - line: 10
+    variables: {"r": "Bob's record"}
+    output: ""
+    explanation: "Bob: LA not in map, assign 1. age 45 >= 30 and < 50 -> mid. income_k = 82."
+  - line: 10
+    variables: {"r": "Charlie's record"}
+    output: ""
+    explanation: "Charlie: NYC already in map -> 0. age 35 >= 30 and < 50 -> mid. income_k = 67."
+  - line: 18
+    variables: {}
+    output: "Alice: city_code=0, age_group=young, income_k=55.0"
+    explanation: "Print Alice's engineered features."
+  - line: 18
+    variables: {}
+    output: "Bob: city_code=1, age_group=mid, income_k=82.0"
+    explanation: "Print Bob's engineered features."
+  - line: 18
+    variables: {}
+    output: "Charlie: city_code=0, age_group=mid, income_k=67.0"
+    explanation: "Print Charlie's engineered features."
+expected_output: |
+  Alice: city_code=0, age_group=young, income_k=55.0
+  Bob: city_code=1, age_group=mid, income_k=82.0
+  Charlie: city_code=0, age_group=mid, income_k=67.0
+hints:
+  - "Cities are encoded in order of first appearance."
+  - "Age groups: young (<30), mid (30-49), senior (50+)."
+concept_tags:
+  - feature-engineering
+  - ml-pipeline

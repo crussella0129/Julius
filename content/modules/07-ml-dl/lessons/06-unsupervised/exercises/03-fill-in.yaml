@@ -1,0 +1,51 @@
+type: fill-in
+id: "06-unsupervised-fill-in-01"
+prompt: "Fill in the blanks to assign points to the nearest of two centroids."
+template: |
+  import math
+
+  points = [(1, 2), (3, 4), (7, 8), (9, 10)]
+  centroids = [(2, 2), (8, 8)]
+
+  def distance(a, b):
+      return math.____((a[0]-b[0])**2 + (a[1]-b[1])**2)
+
+  labels = []
+  for p in points:
+      d0 = distance(p, centroids[____])
+      d1 = distance(p, centroids[1])
+      labels.append(0 if d0 ____ d1 else 1)
+
+  print(labels)
+blanks:
+  - position: 0
+    answer: "sqrt"
+    hint: "square root function"
+  - position: 1
+    answer: "0"
+    hint: "index of the first centroid"
+  - position: 2
+    answer: "<="
+    hint: "assign to cluster 0 if it is closer or equidistant"
+solution: |
+  import math
+
+  points = [(1, 2), (3, 4), (7, 8), (9, 10)]
+  centroids = [(2, 2), (8, 8)]
+
+  def distance(a, b):
+      return math.sqrt((a[0]-b[0])**2 + (a[1]-b[1])**2)
+
+  labels = []
+  for p in points:
+      d0 = distance(p, centroids[0])
+      d1 = distance(p, centroids[1])
+      labels.append(0 if d0 <= d1 else 1)
+
+  print(labels)
+hints:
+  - "Euclidean distance uses sqrt of sum of squared differences."
+  - "Assign to whichever centroid is closer."
+concept_tags:
+  - k-means
+  - clustering

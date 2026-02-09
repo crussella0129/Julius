@@ -1,0 +1,67 @@
+type: fill-in
+id: "05-segmentation-fill-in-01"
+prompt: "Fill in the blanks to complete this region growing segmentation function."
+template: |
+  import numpy as np
+
+  def region_grow(image, seed_row, seed_col, threshold):
+      h, w = image.shape
+      visited = np.zeros((h, w), dtype=____)
+      region = np.zeros((h, w), dtype=np.uint8)
+      seed_val = float(image[seed_row, seed_col])
+      queue = [(seed_row, seed_col)]
+      visited[seed_row, seed_col] = True
+
+      while ____:
+          r, c = queue.pop(0)
+          if abs(float(image[r, c]) - seed_val) <= threshold:
+              region[r, c] = 1
+              for dr, dc in [(-1,0),(1,0),(0,-1),(0,1)]:
+                  nr, nc = r+dr, c+dc
+                  if 0<=nr<h and 0<=nc<w and not visited[nr, ____]:
+                      visited[nr, nc] = True
+                      queue.append((nr, nc))
+      return region
+
+  img = np.array([[100,105,200],[102,103,210],[104,101,205]], dtype=np.uint8)
+  print(region_grow(img, 0, 0, 10).tolist())
+blanks:
+  - position: 0
+    answer: "bool"
+    hint: "data type for True/False visited tracking"
+  - position: 1
+    answer: "queue"
+    hint: "loop while there are pixels to process"
+  - position: 2
+    answer: "nc"
+    hint: "column index of the neighbor"
+solution: |
+  import numpy as np
+
+  def region_grow(image, seed_row, seed_col, threshold):
+      h, w = image.shape
+      visited = np.zeros((h, w), dtype=bool)
+      region = np.zeros((h, w), dtype=np.uint8)
+      seed_val = float(image[seed_row, seed_col])
+      queue = [(seed_row, seed_col)]
+      visited[seed_row, seed_col] = True
+
+      while queue:
+          r, c = queue.pop(0)
+          if abs(float(image[r, c]) - seed_val) <= threshold:
+              region[r, c] = 1
+              for dr, dc in [(-1,0),(1,0),(0,-1),(0,1)]:
+                  nr, nc = r+dr, c+dc
+                  if 0<=nr<h and 0<=nc<w and not visited[nr, nc]:
+                      visited[nr, nc] = True
+                      queue.append((nr, nc))
+      return region
+
+  img = np.array([[100,105,200],[102,103,210],[104,101,205]], dtype=np.uint8)
+  print(region_grow(img, 0, 0, 10).tolist())
+hints:
+  - "visited tracks which pixels have been checked, using boolean values."
+  - "The BFS loop runs while the queue is non-empty."
+concept_tags:
+  - watershed
+  - semantic-segmentation

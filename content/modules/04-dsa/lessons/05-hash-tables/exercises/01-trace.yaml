@@ -1,0 +1,91 @@
+type: trace
+id: "05-hash-tables-trace-01"
+prompt: "Trace through this two-sum solution using a hash table and predict the output."
+code: |
+  def two_sum(nums, target):
+      seen = {}
+      for i, num in enumerate(nums):
+          complement = target - num
+          if complement in seen:
+              return [seen[complement], i]
+          seen[num] = i
+      return []
+
+  print(two_sum([3, 5, 2, 7], 9))
+steps:
+  - line: 2
+    variables: { "seen": "{}" }
+    output: ""
+    explanation: "Initialize empty hash table."
+  - line: 3
+    variables: { "i": "0", "num": "3", "seen": "{}" }
+    output: ""
+    explanation: "First element: index 0, value 3."
+  - line: 4
+    variables: { "complement": "6" }
+    output: ""
+    explanation: "complement = 9 - 3 = 6."
+  - line: 5
+    variables: { "complement": "6", "seen": "{}" }
+    output: ""
+    explanation: "6 is not in seen (empty), skip."
+  - line: 7
+    variables: { "seen": "{3: 0}" }
+    output: ""
+    explanation: "Store 3 -> index 0 in seen."
+  - line: 3
+    variables: { "i": "1", "num": "5", "seen": "{3: 0}" }
+    output: ""
+    explanation: "Second element: index 1, value 5."
+  - line: 4
+    variables: { "complement": "4" }
+    output: ""
+    explanation: "complement = 9 - 5 = 4."
+  - line: 5
+    variables: { "complement": "4", "seen": "{3: 0}" }
+    output: ""
+    explanation: "4 is not in seen, skip."
+  - line: 7
+    variables: { "seen": "{3: 0, 5: 1}" }
+    output: ""
+    explanation: "Store 5 -> index 1."
+  - line: 3
+    variables: { "i": "2", "num": "2", "seen": "{3: 0, 5: 1}" }
+    output: ""
+    explanation: "Third element: index 2, value 2."
+  - line: 4
+    variables: { "complement": "7" }
+    output: ""
+    explanation: "complement = 9 - 2 = 7."
+  - line: 5
+    variables: { "complement": "7", "seen": "{3: 0, 5: 1}" }
+    output: ""
+    explanation: "7 is not in seen, skip."
+  - line: 7
+    variables: { "seen": "{3: 0, 5: 1, 2: 2}" }
+    output: ""
+    explanation: "Store 2 -> index 2."
+  - line: 3
+    variables: { "i": "3", "num": "7", "seen": "{3: 0, 5: 1, 2: 2}" }
+    output: ""
+    explanation: "Fourth element: index 3, value 7."
+  - line: 4
+    variables: { "complement": "2" }
+    output: ""
+    explanation: "complement = 9 - 7 = 2."
+  - line: 5
+    variables: { "complement": "2", "seen": "{3: 0, 5: 1, 2: 2}" }
+    output: ""
+    explanation: "2 IS in seen (at index 2). Found a pair!"
+  - line: 6
+    variables: {}
+    output: "[2, 3]"
+    explanation: "Return [seen[2], 3] = [2, 3]. nums[2]+nums[3] = 2+7 = 9."
+expected_output: |
+  [2, 3]
+hints:
+  - "For each number, check if target - num has been seen before."
+  - "The hash table maps values to their indices for O(1) lookups."
+concept_tags:
+  - hash-function
+  - frequency-counting

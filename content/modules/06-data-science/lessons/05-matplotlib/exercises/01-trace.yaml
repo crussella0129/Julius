@@ -1,0 +1,62 @@
+type: trace
+id: "05-matplotlib-trace-01"
+prompt: "Trace through this code that builds plot data and predict the output."
+code: |
+  months = ["Jan", "Feb", "Mar", "Apr"]
+  sales = [100, 150, 130, 180]
+  costs = [80, 90, 85, 100]
+
+  profits = []
+  for s, c in zip(sales, costs):
+      profits.append(s - c)
+
+  print(f"Profits: {profits}")
+  print(f"Best month: {months[profits.index(max(profits))]}")
+  print(f"Total profit: {sum(profits)}")
+steps:
+  - line: 1
+    variables: {"months": "['Jan', 'Feb', 'Mar', 'Apr']"}
+    output: ""
+    explanation: "Define month labels."
+  - line: 2
+    variables: {"sales": "[100, 150, 130, 180]"}
+    output: ""
+    explanation: "Define sales data."
+  - line: 3
+    variables: {"costs": "[80, 90, 85, 100]"}
+    output: ""
+    explanation: "Define costs data."
+  - line: 5
+    variables: {"profits": "[]"}
+    output: ""
+    explanation: "Initialize empty profits list."
+  - line: 6
+    variables: {}
+    output: ""
+    explanation: "Loop through sales and costs together: (100,80), (150,90), (130,85), (180,100)."
+  - line: 7
+    variables: {"profits": "[20, 60, 45, 80]"}
+    output: ""
+    explanation: "Compute: 100-80=20, 150-90=60, 130-85=45, 180-100=80."
+  - line: 9
+    variables: {}
+    output: "Profits: [20, 60, 45, 80]"
+    explanation: "Print the profits list."
+  - line: 10
+    variables: {}
+    output: "Best month: Apr"
+    explanation: "max(profits)=80, index of 80 is 3, months[3]='Apr'."
+  - line: 11
+    variables: {}
+    output: "Total profit: 205"
+    explanation: "20+60+45+80 = 205."
+expected_output: |
+  Profits: [20, 60, 45, 80]
+  Best month: Apr
+  Total profit: 205
+hints:
+  - "zip() pairs corresponding elements from sales and costs."
+  - "profits.index(max(profits)) finds the position of the highest profit."
+concept_tags:
+  - line-plots
+  - plot-customization

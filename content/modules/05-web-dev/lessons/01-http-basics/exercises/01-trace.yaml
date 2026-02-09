@@ -1,0 +1,81 @@
+type: trace
+id: "01-http-basics-trace-01"
+prompt: "Trace through this code that simulates HTTP status code checking and predict the output."
+code: |
+  status_codes = {200: "OK", 404: "Not Found", 500: "Server Error"}
+  responses = [200, 404, 200, 500]
+
+  for code in responses:
+      message = status_codes.get(code, "Unknown")
+      if code >= 400:
+          print(f"Error {code}: {message}")
+      else:
+          print(f"Success: {message}")
+steps:
+  - line: 1
+    variables: {"status_codes": "{200: 'OK', 404: 'Not Found', 500: 'Server Error'}"}
+    output: ""
+    explanation: "Create a dictionary mapping status codes to their descriptions."
+  - line: 2
+    variables: {"responses": "[200, 404, 200, 500]"}
+    output: ""
+    explanation: "Create a list of status codes to process."
+  - line: 4
+    variables: {"code": 200}
+    output: ""
+    explanation: "First iteration: code is 200."
+  - line: 5
+    variables: {"code": 200, "message": "OK"}
+    output: ""
+    explanation: "Look up 200 in the dictionary, get 'OK'."
+  - line: 8
+    variables: {"code": 200, "message": "OK"}
+    output: "Success: OK"
+    explanation: "200 < 400, so print the success message."
+  - line: 4
+    variables: {"code": 404}
+    output: ""
+    explanation: "Second iteration: code is 404."
+  - line: 5
+    variables: {"code": 404, "message": "Not Found"}
+    output: ""
+    explanation: "Look up 404 in the dictionary, get 'Not Found'."
+  - line: 7
+    variables: {"code": 404, "message": "Not Found"}
+    output: "Error 404: Not Found"
+    explanation: "404 >= 400, so print the error message."
+  - line: 4
+    variables: {"code": 200}
+    output: ""
+    explanation: "Third iteration: code is 200 again."
+  - line: 5
+    variables: {"code": 200, "message": "OK"}
+    output: ""
+    explanation: "Look up 200 again."
+  - line: 8
+    variables: {"code": 200, "message": "OK"}
+    output: "Success: OK"
+    explanation: "200 < 400, success message again."
+  - line: 4
+    variables: {"code": 500}
+    output: ""
+    explanation: "Fourth iteration: code is 500."
+  - line: 5
+    variables: {"code": 500, "message": "Server Error"}
+    output: ""
+    explanation: "Look up 500, get 'Server Error'."
+  - line: 7
+    variables: {"code": 500, "message": "Server Error"}
+    output: "Error 500: Server Error"
+    explanation: "500 >= 400, so print the error message."
+expected_output: |
+  Success: OK
+  Error 404: Not Found
+  Success: OK
+  Error 500: Server Error
+hints:
+  - "Status codes >= 400 are errors."
+  - "dict.get() looks up a key and returns a default if not found."
+concept_tags:
+  - http-methods
+  - status-codes

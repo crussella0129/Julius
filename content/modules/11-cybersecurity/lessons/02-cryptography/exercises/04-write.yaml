@@ -1,0 +1,17 @@
+type: write
+id: "02-cryptography-write-01"
+prompt: "Write a program that takes three strings ('apple', 'banana', 'apple'), computes the SHA-256 hash of each (full hex digest), and prints each string with its hash. Then print whether the first and third hashes match."
+starter_code: "import hashlib\n\n# Write your code here\n"
+tests:
+  - description: "Output contains the hash of 'apple'"
+    check: "'3a7bd3e2360a3d29eea436fcfb7e44c735d117c42d1c1835420b6b9942dd4f1b' in output or 'apple' in output.lower()"
+  - description: "Output has at least 4 lines"
+    check: "len(output.strip().splitlines()) >= 4"
+  - description: "Output indicates a match"
+    check: "'match' in output.lower() or 'same' in output.lower() or 'true' in output.lower() or 'equal' in output.lower()"
+hints:
+  - "Use hashlib.sha256(s.encode()).hexdigest() to get the hex digest."
+  - "Hash functions are deterministic: 'apple' will always produce the same hash."
+  - "Compare the first and third hash strings with ==."
+concept_tags:
+  - hashing

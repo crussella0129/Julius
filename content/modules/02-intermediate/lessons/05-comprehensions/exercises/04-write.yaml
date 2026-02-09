@@ -1,0 +1,26 @@
+type: write
+id: "05-comprehensions-write-01"
+prompt: "Using comprehensions (not regular for loops), write a program that: (1) Creates a list of squares of even numbers from 1 to 20 and prints it. (2) Creates a dictionary mapping each number 1-5 to its factorial (1:1, 2:2, 3:6, 4:24, 5:120) and prints it. (3) Given the sentence 'the quick brown fox jumps over the lazy dog', creates a set of word lengths and prints it sorted."
+starter_code: |
+  # List of squares of even numbers from 1 to 20
+
+  # Dictionary of factorials for 1 through 5
+
+  # Set of unique word lengths from the sentence
+  sentence = "the quick brown fox jumps over the lazy dog"
+tests:
+  - description: "First line shows squares of evens"
+    check: "output.strip().splitlines()[0] == '[4, 16, 36, 64, 100, 144, 196, 256, 324, 400]'"
+  - description: "Second line shows factorials dict"
+    check: "output.strip().splitlines()[1] == '{1: 1, 2: 2, 3: 6, 4: 24, 5: 120}'"
+  - description: "Third line shows sorted unique lengths"
+    check: "output.strip().splitlines()[2] == '[3, 4, 5]'"
+hints:
+  - "For squares of evens: [x**2 for x in range(1, 21) if x % 2 == 0]"
+  - "For factorials, you can import math and use math.factorial, or compute it with a helper."
+  - "For word lengths: {len(w) for w in sentence.split()}, then sorted()."
+  - "import math\nprint([x**2 for x in range(1, 21) if x % 2 == 0])\nprint({x: math.factorial(x) for x in range(1, 6)})\nsentence = 'the quick brown fox jumps over the lazy dog'\nprint(sorted({len(w) for w in sentence.split()}))"
+concept_tags:
+  - list-comprehensions
+  - dict-comprehensions
+  - conditional-comprehensions

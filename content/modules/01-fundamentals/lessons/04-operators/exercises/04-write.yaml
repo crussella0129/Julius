@@ -1,0 +1,23 @@
+type: write
+id: "04-operators-write-01"
+prompt: "Write a program that takes a number of minutes (use the variable `minutes = 145`) and converts it to hours and remaining minutes. Print the result in the format: '145 minutes is 2 hours and 25 minutes'."
+starter_code: |
+  minutes = 145
+
+  # Calculate hours and remaining minutes
+
+  # Print the result
+tests:
+  - description: "Output contains '2 hours'"
+    check: "'2 hours' in output"
+  - description: "Output contains '25 minutes'"
+    check: "'25 minutes' in output"
+  - description: "Output is exactly 1 line"
+    check: "len(output.strip().splitlines()) == 1"
+hints:
+  - "Use // to get the number of whole hours."
+  - "Use % to get the remaining minutes after dividing by 60."
+  - "hours = minutes // 60"
+concept_tags:
+  - arithmetic-operators
+  - operator-precedence

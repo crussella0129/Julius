@@ -1,0 +1,18 @@
+type: parsons
+id: "04-operators-parsons-01"
+prompt: "Arrange these lines to check if a number is even and print the appropriate message."
+blocks:
+  - "number = 42"
+  - "is_even = number % 2 == 0"
+  - "if is_even:"
+  - '    print("Even")'
+solution_order: [0, 1, 2, 3]
+distractors:
+  - "is_even = number / 2 == 0"
+  - "is_even = number // 2"
+hints:
+  - "The modulo operator (%) gives the remainder — if it's 0, the number is even."
+  - "== checks equality, while = assigns a value."
+concept_tags:
+  - arithmetic-operators
+  - comparison-operators

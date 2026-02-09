@@ -1,0 +1,61 @@
+type: trace
+id: "04-scheduling-trace-01"
+prompt: "Trace through this code and predict what will be printed."
+code: |
+  import sched
+  import time
+
+  scheduler = sched.scheduler(time.time, time.sleep)
+  results = []
+
+  def task(label):
+      results.append(label)
+
+  scheduler.enter(0, 2, task, ("low",))
+  scheduler.enter(0, 1, task, ("high",))
+  scheduler.run()
+
+  for r in results:
+      print(r)
+steps:
+  - line: 1
+    variables: {}
+    output: ""
+    explanation: "Import sched and time modules."
+  - line: 4
+    variables: { "scheduler": "sched.scheduler object" }
+    output: ""
+    explanation: "Create a scheduler using time.time for timing and time.sleep for delays."
+  - line: 5
+    variables: { "results": "[]" }
+    output: ""
+    explanation: "Initialize an empty list to collect results."
+  - line: 10
+    variables: {}
+    output: ""
+    explanation: "Schedule task('low') with delay 0 and priority 2 (lower priority)."
+  - line: 11
+    variables: {}
+    output: ""
+    explanation: "Schedule task('high') with delay 0 and priority 1 (higher priority)."
+  - line: 12
+    variables: { "results": "['high', 'low']" }
+    output: ""
+    explanation: "Both events fire at delay 0. Priority 1 runs before priority 2, so 'high' is appended first."
+  - line: 14
+    variables: {}
+    output: "high"
+    explanation: "Print first element: 'high'."
+  - line: 15
+    variables: {}
+    output: "low"
+    explanation: "Print second element: 'low'."
+expected_output: |
+  high
+  low
+hints:
+  - "In sched, lower priority numbers run first."
+  - "Both events have delay 0, so priority determines the order."
+concept_tags:
+  - schedule-module
+  - periodic-tasks

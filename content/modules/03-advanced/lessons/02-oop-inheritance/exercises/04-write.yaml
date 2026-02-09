@@ -1,0 +1,27 @@
+type: write
+id: "02-oop-inheritance-write-01"
+prompt: "Create a base class `Shape` with a method `area()` that returns 0. Then create two child classes: `Square` (takes side) and `Triangle` (takes base and height). Override area() in each: square area is side*side, triangle area is 0.5*base*height. Print the area of a Square(4) and a Triangle(6, 3)."
+starter_code: |
+  # Define Shape, Square, and Triangle classes
+
+
+  # Test them
+  s = Square(4)
+  t = Triangle(6, 3)
+  print(s.area())
+  print(t.area())
+tests:
+  - description: "Output has exactly 2 lines"
+    check: "len(output.strip().splitlines()) == 2"
+  - description: "Square(4) area is 16"
+    check: "output.strip().splitlines()[0].strip() == '16'"
+  - description: "Triangle(6, 3) area is 9.0"
+    check: "output.strip().splitlines()[1].strip() == '9.0'"
+hints:
+  - "Each child class should inherit from Shape."
+  - "Use super().__init__() if the parent has an __init__, or just define your own."
+  - "class Shape:\n    def area(self):\n        return 0\n\nclass Square(Shape):\n    def __init__(self, side):\n        self.side = side\n    def area(self):\n        return self.side * self.side\n\nclass Triangle(Shape):\n    def __init__(self, base, height):\n        self.base = base\n        self.height = height\n    def area(self):\n        return 0.5 * self.base * self.height"
+concept_tags:
+  - inheritance
+  - method-overriding
+  - polymorphism

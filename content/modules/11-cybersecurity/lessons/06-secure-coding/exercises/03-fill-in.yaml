@@ -1,0 +1,39 @@
+type: fill-in
+id: "06-secure-coding-fill-in-01"
+prompt: "Fill in the blanks to generate a secure random token and a secure random password using the secrets module."
+template: |
+  import secrets
+  import string
+
+  token = secrets.____(____)
+  print(f"Token: {token[:16]}...")
+
+  alphabet = string.ascii_letters + string.digits
+  password = ''.join(secrets.____(alphabet) for _ in range(12))
+  print(f"Password length: {len(password)}")
+blanks:
+  - position: 0
+    answer: "token_hex"
+    hint: "method for generating hex tokens"
+  - position: 1
+    answer: "32"
+    hint: "number of random bytes"
+  - position: 2
+    answer: "choice"
+    hint: "method to pick one random character"
+solution: |
+  import secrets
+  import string
+
+  token = secrets.token_hex(32)
+  print(f"Token: {token[:16]}...")
+
+  alphabet = string.ascii_letters + string.digits
+  password = ''.join(secrets.choice(alphabet) for _ in range(12))
+  print(f"Password length: {len(password)}")
+hints:
+  - "secrets.token_hex(n) generates n random bytes as a hex string."
+  - "secrets.choice() picks a random element from a sequence, cryptographically secure."
+concept_tags:
+  - secrets-management
+  - input-sanitization

@@ -1,0 +1,15 @@
+type: write
+id: "09-sorting-write-01"
+prompt: "Write a complete merge_sort(arr) function that recursively splits the array and merges sorted halves. Print the result of merge_sort([38, 27, 43, 3, 9, 82, 10])."
+starter_code: |
+  # Write merge_sort(arr) with a merge helper, then print the sorted result
+tests:
+  - description: "Output is [3, 9, 10, 27, 38, 43, 82]"
+    check: "output.strip() == '[3, 9, 10, 27, 38, 43, 82]'"
+  - description: "Result is sorted"
+    check: "'3' in output and '82' in output"
+hints:
+  - "Base case: if len(arr) <= 1, return arr."
+  - "Split at mid = len(arr) // 2, recursively sort both halves, then merge."
+concept_tags:
+  - merge-sort

@@ -1,0 +1,19 @@
+type: write
+id: "01-pygame-setup-write-01"
+prompt: "Write a program that simulates a simple game loop counter. Create a variable `frame` starting at 0, and loop 60 times (simulating 1 second at 60 FPS). Each iteration, increment frame by 1. After the loop, print the total frames, the simulated FPS (60), and the simulated time elapsed ('1.0 seconds')."
+starter_code: |
+  # Simulate a game loop
+tests:
+  - description: "Output shows 60 frames"
+    check: "'60' in output"
+  - description: "Output mentions FPS"
+    check: "'60' in output"
+  - description: "Output shows time elapsed"
+    check: "'1.0' in output or '1 second' in output.lower()"
+hints:
+  - "Use a for loop: for _ in range(60): frame += 1"
+  - "FPS is 60, time = frames / FPS = 60 / 60 = 1.0"
+  - "print(f'Frames: {frame}'); print(f'FPS: 60'); print(f'Time: {frame / 60} seconds')"
+concept_tags:
+  - game-loop
+  - pygame-init

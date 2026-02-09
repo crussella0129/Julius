@@ -1,0 +1,62 @@
+type: fill-in
+id: "05-sound-graphics-fill-in-01"
+prompt: "Fill in the blanks to create a simple animation controller that cycles through frames."
+template: |
+  class Animator:
+      def __init__(self, frame_names, speed):
+          self.frames = frame_names
+          self.speed = speed
+          self.timer = 0.0
+          self.current = 0
+
+      def update(self, dt):
+          self.____ += dt
+          if self.timer >= self.____:
+              self.timer = 0.0
+              self.current = (self.current + 1) % ____(self.frames)
+
+      def get_frame(self):
+          return self.frames[self.current]
+
+  anim = Animator(["walk_0", "walk_1", "walk_2"], 0.3)
+  for _ in range(3):
+      anim.update(0.3)
+      print(anim.get_frame())
+blanks:
+  - position: 0
+    answer: "timer"
+    hint: "accumulates delta time"
+  - position: 1
+    answer: "speed"
+    hint: "threshold to advance frame"
+  - position: 2
+    answer: "len"
+    hint: "built-in function for list length"
+solution: |
+  class Animator:
+      def __init__(self, frame_names, speed):
+          self.frames = frame_names
+          self.speed = speed
+          self.timer = 0.0
+          self.current = 0
+
+      def update(self, dt):
+          self.timer += dt
+          if self.timer >= self.speed:
+              self.timer = 0.0
+              self.current = (self.current + 1) % len(self.frames)
+
+      def get_frame(self):
+          return self.frames[self.current]
+
+  anim = Animator(["walk_0", "walk_1", "walk_2"], 0.3)
+  for _ in range(3):
+      anim.update(0.3)
+      print(anim.get_frame())
+hints:
+  - "timer accumulates dt each update call."
+  - "When timer reaches speed, reset it and advance the frame."
+  - "len(self.frames) gives the total number of frames for modulo wrapping."
+concept_tags:
+  - sprite-animation
+  - particle-effects

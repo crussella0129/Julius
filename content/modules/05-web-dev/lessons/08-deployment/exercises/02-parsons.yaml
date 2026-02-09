@@ -1,0 +1,23 @@
+type: parsons
+id: "08-deployment-parsons-01"
+prompt: "Arrange these lines to create a configuration system that reads from environment variables with sensible defaults."
+blocks:
+  - "import os"
+  - "class AppConfig:"
+  - "    def __init__(self):"
+  - "        self.debug = os.environ.get('DEBUG', 'false') == 'true'"
+  - "        self.secret_key = os.environ.get('SECRET_KEY', 'dev-secret')"
+  - "        self.db_url = os.environ.get('DATABASE_URL', 'sqlite:///app.db')"
+  - "config = AppConfig()"
+  - "print(f'Debug: {config.debug}, DB: {config.db_url}')"
+distractors:
+  - "        self.debug = os.environ['DEBUG']"
+  - "    def __init__(self, debug, secret):"
+solution_order: [0, 1, 2, 3, 4, 5, 6, 7]
+hints:
+  - "Use os.environ.get() with defaults so the app works without env vars set."
+  - "Compare the DEBUG string to 'true' to get a boolean."
+  - "Create the config instance after defining the class."
+concept_tags:
+  - environment-variables
+  - production-config

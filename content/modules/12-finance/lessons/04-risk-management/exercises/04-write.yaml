@@ -1,0 +1,20 @@
+type: write
+id: "04-risk-management-write-01"
+prompt: "Write a function called risk_report that takes a list of daily returns and a portfolio value, then prints: (1) the daily volatility as a percentage, (2) the annualized volatility, (3) the 95% historical VaR as a dollar amount, and (4) the worst single-day return. Test it with returns [0.02, -0.03, 0.01, -0.015, 0.025, -0.04, 0.015, -0.01, 0.03, -0.02] and portfolio value $100,000."
+starter_code: "import math\n\n# Write your code here\n"
+tests:
+  - description: "Output mentions volatility"
+    check: "'volatil' in output.lower() or 'vol' in output.lower()"
+  - description: "Output mentions VaR"
+    check: "'var' in output.lower() or 'value at risk' in output.lower() or '$' in output"
+  - description: "Output mentions worst day return"
+    check: "'-4' in output or '-0.04' in output or 'worst' in output.lower()"
+  - description: "Output has at least 4 lines"
+    check: "len(output.strip().splitlines()) >= 4"
+hints:
+  - "Daily volatility = sqrt(variance), where variance uses N-1 denominator."
+  - "Annualized volatility = daily_vol * sqrt(252)."
+  - "For historical VaR, sort returns and pick the 5th percentile."
+concept_tags:
+  - value-at-risk
+  - volatility

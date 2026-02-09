@@ -1,0 +1,24 @@
+type: write
+id: "06-conditionals-write-01"
+prompt: "Write a program that assigns a variable `number = 17` and prints whether it is 'Positive', 'Negative', or 'Zero'. Then print whether it is 'Even' or 'Odd'. Output should be exactly 2 lines."
+starter_code: |
+  number = 17
+
+  # Print "Positive", "Negative", or "Zero"
+
+  # Print "Even" or "Odd"
+tests:
+  - description: "Output has exactly 2 lines"
+    check: "len(output.strip().splitlines()) == 2"
+  - description: "First line is 'Positive'"
+    check: "output.strip().splitlines()[0] == 'Positive'"
+  - description: "Second line is 'Odd'"
+    check: "output.strip().splitlines()[1] == 'Odd'"
+hints:
+  - "Use if/elif/else to check if number > 0, < 0, or == 0."
+  - "Use number % 2 == 0 to check if a number is even."
+concept_tags:
+  - if-statement
+  - elif-statement
+  - else-statement
+  - boolean-expressions

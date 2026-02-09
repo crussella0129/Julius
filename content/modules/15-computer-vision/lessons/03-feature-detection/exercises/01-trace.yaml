@@ -1,0 +1,60 @@
+type: trace
+id: "03-feature-detection-trace-01"
+prompt: "Trace through this template matching code and predict where the best match is found."
+code: |
+  import numpy as np
+
+  image = np.array([
+      [0, 0, 0, 0, 0],
+      [0, 255, 255, 0, 0],
+      [0, 255, 255, 0, 0],
+      [0, 0, 0, 0, 0],
+  ], dtype=float)
+
+  template = np.array([[255, 255], [255, 255]], dtype=float)
+
+  h, w = image.shape
+  th, tw = template.shape
+  best_pos = (0, 0)
+  best_ssd = float('inf')
+
+  for i in range(h - th + 1):
+      for j in range(w - tw + 1):
+          region = image[i:i+th, j:j+tw]
+          ssd = np.sum((region - template) ** 2)
+          if ssd < best_ssd:
+              best_ssd = ssd
+              best_pos = (i, j)
+
+  print(f"Best match: {best_pos}")
+  print(f"SSD: {best_ssd:.0f}")
+steps:
+  - line: 3
+    variables: {"image": "4x5 array with a 2x2 white block at rows 1-2, cols 1-2"}
+    output: ""
+    explanation: "The image has a 2x2 block of 255s starting at position (1,1)."
+  - line: 10
+    variables: {"template": "2x2 array of 255s"}
+    output: ""
+    explanation: "The template is a 2x2 block of all white pixels."
+  - line: 17
+    variables: {}
+    output: ""
+    explanation: "The loop tries all positions. At (1,1), the region is [[255,255],[255,255]] which exactly matches the template."
+  - line: 25
+    variables: {"best_pos": [1, 1], "best_ssd": 0.0}
+    output: "Best match: (1, 1)"
+    explanation: "Position (1,1) gives SSD=0 (perfect match). No other position can beat 0."
+  - line: 26
+    variables: {}
+    output: "SSD: 0"
+    explanation: "Zero SSD means a perfect match was found."
+expected_output: |
+  Best match: (1, 1)
+  SSD: 0
+hints:
+  - "SSD = 0 means the region perfectly matches the template."
+  - "The 2x2 white block in the image starts at row 1, column 1."
+concept_tags:
+  - template-matching
+  - feature-descriptors

@@ -1,0 +1,63 @@
+type: trace
+id: "07-file-io-trace-01"
+prompt: "Trace through this code and predict the final output. Assume the file operations succeed."
+code: |
+  lines = ["apple\n", "banana\n", "cherry\n"]
+  cleaned = []
+  for line in lines:
+      cleaned.append(line.strip())
+  print(cleaned)
+  print(len(cleaned))
+
+  result = "\n".join(cleaned)
+  print(result)
+steps:
+  - line: 1
+    variables: { "lines": "['apple\\n', 'banana\\n', 'cherry\\n']" }
+    output: ""
+    explanation: "lines simulates what readlines() would return — each line has a trailing newline."
+  - line: 2
+    variables: { "lines": "['apple\\n', 'banana\\n', 'cherry\\n']", "cleaned": "[]" }
+    output: ""
+    explanation: "cleaned is initialized as an empty list."
+  - line: 3
+    variables: { "cleaned": "['apple']" }
+    output: ""
+    explanation: "First iteration: 'apple\\n'.strip() gives 'apple', which is appended."
+  - line: 3
+    variables: { "cleaned": "['apple', 'banana']" }
+    output: ""
+    explanation: "Second iteration: 'banana\\n'.strip() gives 'banana'."
+  - line: 3
+    variables: { "cleaned": "['apple', 'banana', 'cherry']" }
+    output: ""
+    explanation: "Third iteration: 'cherry\\n'.strip() gives 'cherry'."
+  - line: 5
+    variables: { "cleaned": "['apple', 'banana', 'cherry']" }
+    output: "['apple', 'banana', 'cherry']"
+    explanation: "Prints the cleaned list without newline characters."
+  - line: 6
+    variables: {}
+    output: "3"
+    explanation: "len(cleaned) is 3."
+  - line: 8
+    variables: { "result": "apple\\nbanana\\ncherry" }
+    output: ""
+    explanation: "join() combines the list with newline separators."
+  - line: 9
+    variables: {}
+    output: "apple\nbanana\ncherry"
+    explanation: "Prints the joined string, which displays on three lines."
+expected_output: |
+  ['apple', 'banana', 'cherry']
+  3
+  apple
+  banana
+  cherry
+hints:
+  - "strip() removes leading and trailing whitespace, including newline characters."
+  - "readlines() returns lines with '\\n' at the end — you almost always want to strip them."
+  - "'\\n'.join(list) puts a newline between each element when printed."
+concept_tags:
+  - file-reading
+  - with-statement

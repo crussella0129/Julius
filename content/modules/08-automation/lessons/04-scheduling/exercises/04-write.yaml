@@ -1,0 +1,25 @@
+type: write
+id: "04-scheduling-write-01"
+prompt: "Write a program that uses the sched module to schedule 3 events: print 'first' at delay 0, 'second' at delay 0 with lower priority, and 'third' at delay 0 with the lowest priority. Run the scheduler so all three print in order."
+starter_code: |
+  import sched
+  import time
+
+  s = sched.scheduler(time.time, time.sleep)
+  # Your code here
+tests:
+  - description: "Output has exactly 3 lines"
+    check: "len(output.strip().splitlines()) == 3"
+  - description: "First line is 'first'"
+    check: "output.strip().splitlines()[0] == 'first'"
+  - description: "Second line is 'second'"
+    check: "output.strip().splitlines()[1] == 'second'"
+  - description: "Third line is 'third'"
+    check: "output.strip().splitlines()[2] == 'third'"
+hints:
+  - "Use s.enter(delay, priority, function, args)."
+  - "Lower priority numbers run first. Use priorities 1, 2, 3."
+  - "s.enter(0, 1, print, ('first',)); s.enter(0, 2, print, ('second',)); s.enter(0, 3, print, ('third',)); s.run()"
+concept_tags:
+  - schedule-module
+  - periodic-tasks

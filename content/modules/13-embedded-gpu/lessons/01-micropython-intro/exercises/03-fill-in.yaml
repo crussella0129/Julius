@@ -1,0 +1,65 @@
+type: fill-in
+id: "01-micropython-intro-fill-in-01"
+prompt: "Fill in the blanks to create a GPIO Pin class with on(), off(), and value() methods."
+template: |
+  class Pin:
+      OUT = "output"
+      IN = "input"
+
+      def __init__(self, number, mode=None):
+          self.number = number
+          self._value = 0
+
+      def on(self):
+          self.____ = 1
+
+      def off(self):
+          self._value = ____
+
+      def value(self):
+          return self.____
+
+  led = Pin(25, Pin.OUT)
+  led.on()
+  print(led.value())
+  led.off()
+  print(led.value())
+blanks:
+  - position: 0
+    answer: "_value"
+    hint: "the private attribute storing pin state"
+  - position: 1
+    answer: "0"
+    hint: "value for LOW/off state"
+  - position: 2
+    answer: "_value"
+    hint: "return the current pin state"
+solution: |
+  class Pin:
+      OUT = "output"
+      IN = "input"
+
+      def __init__(self, number, mode=None):
+          self.number = number
+          self._value = 0
+
+      def on(self):
+          self._value = 1
+
+      def off(self):
+          self._value = 0
+
+      def value(self):
+          return self._value
+
+  led = Pin(25, Pin.OUT)
+  led.on()
+  print(led.value())
+  led.off()
+  print(led.value())
+hints:
+  - "on() sets _value to 1 (HIGH), off() sets it to 0 (LOW)."
+  - "value() returns the current state stored in _value."
+concept_tags:
+  - gpio-control
+  - micropython-basics

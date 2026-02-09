@@ -1,0 +1,70 @@
+type: fill-in
+id: "06-complete-game-fill-in-01"
+prompt: "Fill in the blanks to create a Game class with state management, reset, and difficulty scaling."
+template: |
+  class Game:
+      def __init__(self):
+          self.state = "____"
+          self.score = 0
+          self.difficulty = 1.0
+
+      def reset(self):
+          self.score = ____
+          self.difficulty = 1.0
+          self.state = "playing"
+
+      def update(self):
+          if self.state != "playing":
+              return
+          self.score += 1
+          self.difficulty = 1.0 + self.score / ____
+
+  g = Game()
+  print(f"Initial state: {g.state}")
+  g.reset()
+  for _ in range(100):
+      g.update()
+  print(f"Score: {g.score}")
+  print(f"Difficulty: {g.difficulty}")
+blanks:
+  - position: 0
+    answer: "menu"
+    hint: "the initial game state"
+  - position: 1
+    answer: "0"
+    hint: "reset score to zero"
+  - position: 2
+    answer: "500"
+    hint: "divisor for difficulty scaling"
+solution: |
+  class Game:
+      def __init__(self):
+          self.state = "menu"
+          self.score = 0
+          self.difficulty = 1.0
+
+      def reset(self):
+          self.score = 0
+          self.difficulty = 1.0
+          self.state = "playing"
+
+      def update(self):
+          if self.state != "playing":
+              return
+          self.score += 1
+          self.difficulty = 1.0 + self.score / 500
+
+  g = Game()
+  print(f"Initial state: {g.state}")
+  g.reset()
+  for _ in range(100):
+      g.update()
+  print(f"Score: {g.score}")
+  print(f"Difficulty: {g.difficulty}")
+hints:
+  - "Games typically start in a 'menu' state."
+  - "Resetting sets score back to 0."
+  - "Difficulty increases gradually: score/500 means +0.2 at score 100."
+concept_tags:
+  - game-architecture
+  - gameplay-loop

@@ -1,0 +1,40 @@
+type: fill-in
+id: "05-backtesting-fill-in-01"
+prompt: "Fill in the blanks to calculate the win rate and total return of a strategy from a list of trade results."
+template: |
+  trades = [50, -20, 30, -10, 40, -15, 25]
+
+  wins = sum(1 for t in trades if t ____ 0)
+  total_trades = ____(trades)
+  win_rate = wins / total_trades * 100
+  total_pnl = ____(trades)
+
+  print(f"Win rate: {win_rate:.1f}%")
+  print(f"Total P&L: ${total_pnl}")
+blanks:
+  - position: 0
+    answer: ">"
+    hint: "comparison operator for profitable trades"
+  - position: 1
+    answer: "len"
+    hint: "function to count total trades"
+  - position: 2
+    answer: "sum"
+    hint: "function to add up all trade results"
+solution: |
+  trades = [50, -20, 30, -10, 40, -15, 25]
+
+  wins = sum(1 for t in trades if t > 0)
+  total_trades = len(trades)
+  win_rate = wins / total_trades * 100
+  total_pnl = sum(trades)
+
+  print(f"Win rate: {win_rate:.1f}%")
+  print(f"Total P&L: ${total_pnl}")
+hints:
+  - "A winning trade has a positive P&L (> 0)."
+  - "len() counts the total number of trades."
+  - "sum() adds up all trade results for total profit/loss."
+concept_tags:
+  - performance-metrics
+  - trading-strategy

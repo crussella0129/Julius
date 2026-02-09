@@ -1,0 +1,44 @@
+type: fill-in
+id: "07-web-scraping-fill-in-01"
+prompt: "Fill in the blanks to extract all links from an HTML string using Beautiful Soup."
+template: |
+  from bs4 import ____
+
+  html = \"<a href='https://a.com'>A</a><a href='https://b.com'>B</a>\"
+  soup = BeautifulSoup(html, \"html.parser\")
+
+  links = soup.____("a")
+  for link in links:
+      url = link[\"____\"]
+      text = link.____
+      print(f\"{text}: {url}\")
+blanks:
+  - position: 0
+    answer: "BeautifulSoup"
+    hint: "the main class to import"
+  - position: 1
+    answer: "find_all"
+    hint: "method that returns all matching elements"
+  - position: 2
+    answer: "href"
+    hint: "HTML attribute that holds the URL"
+  - position: 3
+    answer: "text"
+    hint: "property that returns the element's text content"
+solution: |
+  from bs4 import BeautifulSoup
+
+  html = "<a href='https://a.com'>A</a><a href='https://b.com'>B</a>"
+  soup = BeautifulSoup(html, "html.parser")
+
+  links = soup.find_all("a")
+  for link in links:
+      url = link["href"]
+      text = link.text
+      print(f"{text}: {url}")
+hints:
+  - "find_all() returns a list of all elements matching the tag."
+  - "Access attributes like dictionary keys: element['href']."
+concept_tags:
+  - beautifulsoup
+  - html-parsing

@@ -1,0 +1,45 @@
+type: fill-in
+id: "06-openbb-fill-in-01"
+prompt: "Fill in the blanks to create a data pipeline that fetches prices, computes returns, and calculates the average return."
+template: |
+  def pipeline(prices):
+      returns = []
+      for i in range(1, ____(prices)):
+          ret = (prices[i] - prices[____]) / prices[i-1]
+          returns.append(ret)
+
+      avg = sum(returns) / ____(returns)
+      return avg
+
+  prices = [100, 105, 103, 108, 110]
+  result = pipeline(prices)
+  print(f"Average daily return: {result*100:.2f}%")
+blanks:
+  - position: 0
+    answer: "len"
+    hint: "function to get the length of the list"
+  - position: 1
+    answer: "i-1"
+    hint: "index of the previous price"
+  - position: 2
+    answer: "len"
+    hint: "function to count the returns"
+solution: |
+  def pipeline(prices):
+      returns = []
+      for i in range(1, len(prices)):
+          ret = (prices[i] - prices[i-1]) / prices[i-1]
+          returns.append(ret)
+
+      avg = sum(returns) / len(returns)
+      return avg
+
+  prices = [100, 105, 103, 108, 110]
+  result = pipeline(prices)
+  print(f"Average daily return: {result*100:.2f}%")
+hints:
+  - "len(prices) gives the number of prices to iterate over."
+  - "Each return compares the current price to the previous price at index i-1."
+concept_tags:
+  - data-pipeline
+  - financial-apis

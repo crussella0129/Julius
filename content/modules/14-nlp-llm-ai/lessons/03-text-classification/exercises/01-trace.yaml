@@ -1,0 +1,46 @@
+type: trace
+id: "03-text-classification-trace-01"
+prompt: "Trace through this bag-of-words vectorization and predict the output."
+code: |
+  from collections import Counter
+
+  docs = ["the cat sat", "a dog ran"]
+  vocab = sorted(set(word for doc in docs for word in doc.split()))
+  print(vocab)
+
+  def to_vector(doc, vocab):
+      counts = Counter(doc.split())
+      return [counts.get(w, 0) for w in vocab]
+
+  vec = to_vector("the cat sat", vocab)
+  print(vec)
+steps:
+  - line: 4
+    variables: {"vocab": ["a", "cat", "dog", "ran", "sat", "the"]}
+    output: ""
+    explanation: "All unique words from both docs are collected into a set and sorted alphabetically."
+  - line: 5
+    variables: {}
+    output: "['a', 'cat', 'dog', 'ran', 'sat', 'the']"
+    explanation: "The sorted vocabulary list is printed."
+  - line: 7
+    variables: {}
+    output: ""
+    explanation: "The to_vector function is defined but not yet called."
+  - line: 11
+    variables: {"vec": [0, 1, 0, 0, 1, 1]}
+    output: ""
+    explanation: "'the cat sat' has counts: a=0, cat=1, dog=0, ran=0, sat=1, the=1."
+  - line: 12
+    variables: {}
+    output: "[0, 1, 0, 0, 1, 1]"
+    explanation: "The document vector is printed."
+expected_output: |
+  ['a', 'cat', 'dog', 'ran', 'sat', 'the']
+  [0, 1, 0, 0, 1, 1]
+hints:
+  - "The vocabulary is all unique words sorted alphabetically across all documents."
+  - "Each position in the vector corresponds to the count of that vocab word in the document."
+concept_tags:
+  - bag-of-words
+  - text-classification

@@ -1,0 +1,59 @@
+type: trace
+id: "05-email-api-trace-01"
+prompt: "Trace through this code and predict what will be printed."
+code: |
+  import json
+
+  data = {"name": "Alice", "age": 30, "hobbies": ["reading", "coding"]}
+
+  json_str = json.dumps(data, indent=2)
+  print(type(json_str).__name__)
+
+  parsed = json.loads(json_str)
+  print(type(parsed).__name__)
+  print(parsed["name"])
+  print(len(parsed["hobbies"]))
+steps:
+  - line: 1
+    variables: {}
+    output: ""
+    explanation: "Import the json module."
+  - line: 3
+    variables: { "data": "{'name': 'Alice', 'age': 30, 'hobbies': ['reading', 'coding']}" }
+    output: ""
+    explanation: "Create a Python dictionary with mixed types."
+  - line: 5
+    variables: { "json_str": "'{\\n  \"name\": \"Alice\"...}'" }
+    output: ""
+    explanation: "json.dumps converts the dict to a formatted JSON string."
+  - line: 6
+    variables: {}
+    output: "str"
+    explanation: "json.dumps always returns a string."
+  - line: 8
+    variables: { "parsed": "{'name': 'Alice', 'age': 30, 'hobbies': ['reading', 'coding']}" }
+    output: ""
+    explanation: "json.loads parses the JSON string back into a Python dict."
+  - line: 9
+    variables: {}
+    output: "dict"
+    explanation: "json.loads returns a dictionary from a JSON object string."
+  - line: 10
+    variables: {}
+    output: "Alice"
+    explanation: "Access the 'name' key from the parsed dictionary."
+  - line: 11
+    variables: {}
+    output: "2"
+    explanation: "The 'hobbies' list has 2 elements: 'reading' and 'coding'."
+expected_output: |
+  str
+  dict
+  Alice
+  2
+hints:
+  - "json.dumps() converts Python objects to JSON strings."
+  - "json.loads() parses JSON strings back to Python objects."
+concept_tags:
+  - json-handling
+  - rest-api

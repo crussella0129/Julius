@@ -1,0 +1,24 @@
+type: write
+id: "03-feature-detection-write-01"
+prompt: "Write a function called find_template that takes a 2D NumPy image array and a 2D NumPy template array, and returns a tuple (row, col) of the top-left position where the template best matches (lowest sum of squared differences). Test it: create a 6x6 zeros image, set a 2x2 block at rows 2-3, cols 3-4 to 255, then search for a 2x2 template of all 255s. Print the result."
+starter_code: |
+  import numpy as np
+
+  # Write your find_template function here
+
+  image = np.zeros((6, 6), dtype=float)
+  image[2:4, 3:5] = 255
+  template = np.ones((2, 2), dtype=float) * 255
+  print(find_template(image, template))
+tests:
+  - description: "Best match is at (2, 3)"
+    check: "'2' in output and '3' in output"
+  - description: "Output is a tuple"
+    check: "'(' in output and ')' in output"
+hints:
+  - "Slide the template across all valid positions and compute SSD at each."
+  - "Valid row range: 0 to h - th; valid col range: 0 to w - tw."
+  - "The position with SSD = 0 is the perfect match."
+concept_tags:
+  - template-matching
+  - feature-detection

@@ -1,0 +1,49 @@
+type: fill-in
+id: "05-comprehensions-fill-in-01"
+prompt: "Fill in the blanks to create a list comprehension, a filtered comprehension, and a dictionary comprehension."
+template: |
+  # Double each number
+  numbers = [1, 2, 3, 4, 5]
+  doubled = [x ____ 2 for x in numbers]
+  print(doubled)
+
+  # Keep only strings that start with 'a'
+  words = ["apple", "banana", "avocado", "cherry"]
+  a_words = [w for w in words ____ w.startswith("a")]
+  print(a_words)
+
+  # Map numbers to their cubes
+  cubes = {x: x ** 3 ____ x in range(4)}
+  print(cubes)
+blanks:
+  - position: 0
+    answer: "*"
+    hint: "multiplication operator"
+  - position: 1
+    answer: "if"
+    hint: "keyword for filtering in comprehensions"
+  - position: 2
+    answer: "for"
+    hint: "keyword that iterates over items"
+solution: |
+  # Double each number
+  numbers = [1, 2, 3, 4, 5]
+  doubled = [x * 2 for x in numbers]
+  print(doubled)
+
+  # Keep only strings that start with 'a'
+  words = ["apple", "banana", "avocado", "cherry"]
+  a_words = [w for w in words if w.startswith("a")]
+  print(a_words)
+
+  # Map numbers to their cubes
+  cubes = {x: x ** 3 for x in range(4)}
+  print(cubes)
+hints:
+  - "x * 2 doubles each number in the comprehension."
+  - "'if' after 'for' filters elements based on a condition."
+  - "Dict comprehensions use {key: value for item in iterable}."
+concept_tags:
+  - list-comprehensions
+  - dict-comprehensions
+  - conditional-comprehensions

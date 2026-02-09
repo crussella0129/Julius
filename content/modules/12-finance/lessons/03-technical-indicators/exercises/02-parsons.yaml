@@ -1,0 +1,22 @@
+type: parsons
+id: "03-technical-indicators-parsons-01"
+prompt: "Arrange these lines to calculate the Exponential Moving Average (EMA) from a list of prices."
+blocks:
+  - "def ema(prices, period):"
+  - "    multiplier = 2 / (period + 1)"
+  - "    result = [sum(prices[:period]) / period]"
+  - "    for price in prices[period:]:"
+  - "        new_ema = (price - result[-1]) * multiplier + result[-1]"
+  - "        result.append(round(new_ema, 2))"
+  - "    return result"
+distractors:
+  - "    multiplier = 1 / period"
+  - "    result = [prices[0]]"
+solution_order: [0, 1, 2, 3, 4, 5, 6]
+hints:
+  - "The multiplier for EMA is 2 / (period + 1)."
+  - "The first EMA value is the SMA of the first 'period' prices."
+  - "Each subsequent EMA = (price - prev_EMA) * multiplier + prev_EMA."
+concept_tags:
+  - moving-averages
+  - signals

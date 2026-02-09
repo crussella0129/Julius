@@ -1,0 +1,24 @@
+type: fill-in
+id: "05-input-output-fill-in-01"
+prompt: "Fill in the blanks to format and print a name and score."
+template: |
+  name = "Alice"
+  score = 0.9345
+  print(____"{name} scored {score____}")
+blanks:
+  - position: 0
+    answer: "f"
+    hint: "f-string prefix"
+  - position: 1
+    answer: ":.1%"
+    hint: "percentage format"
+solution: |
+  name = "Alice"
+  score = 0.9345
+  print(f"{name} scored {score:.1%}")
+hints:
+  - "F-strings start with the letter f before the quote."
+  - ":.1% formats a decimal as a percentage with one decimal place (e.g., 0.9345 → 93.5%)."
+concept_tags:
+  - f-strings
+  - string-formatting

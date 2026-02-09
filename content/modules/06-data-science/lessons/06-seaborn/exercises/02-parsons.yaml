@@ -1,0 +1,24 @@
+type: parsons
+id: "06-seaborn-parsons-01"
+prompt: "Arrange these lines to compute a correlation matrix from two lists and display it as a formatted table."
+blocks:
+  - "import numpy as np"
+  - "x = [1, 2, 3, 4, 5]"
+  - "y = [2, 4, 5, 4, 5]"
+  - "data = np.array([x, y])"
+  - "corr = np.corrcoef(data)"
+  - "labels = ['x', 'y']"
+  - "for i, row_label in enumerate(labels):"
+  - "    row = [f'{corr[i][j]:.2f}' for j in range(len(labels))]"
+  - "    print(f'{row_label}: {row}')"
+distractors:
+  - "corr = np.correlation(x, y)"
+  - "data = [x, y]"
+solution_order: [0, 1, 2, 3, 4, 5, 6, 7, 8]
+hints:
+  - "np.corrcoef() computes the correlation matrix from a 2D array."
+  - "Each row of the output matrix shows correlations with all variables."
+  - "Format with :.2f for two decimal places."
+concept_tags:
+  - heatmaps
+  - statistical-plots

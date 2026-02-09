@@ -1,0 +1,77 @@
+type: trace
+id: "04-stacks-queues-trace-01"
+prompt: "Trace through this balanced parentheses checker and predict the output."
+code: |
+  def is_balanced(s):
+      stack = []
+      pairs = {')': '(', ']': '['}
+      for char in s:
+          if char in '([':
+              stack.append(char)
+          elif char in ')]':
+              if not stack or stack[-1] != pairs[char]:
+                  return False
+              stack.pop()
+      return len(stack) == 0
+
+  print(is_balanced("([])"))
+steps:
+  - line: 2
+    variables: { "stack": "[]" }
+    output: ""
+    explanation: "Initialize empty stack."
+  - line: 4
+    variables: { "char": "\"(\"", "stack": "[]" }
+    output: ""
+    explanation: "First char is '(', an opening bracket."
+  - line: 5
+    variables: { "stack": "[\"(\"]" }
+    output: ""
+    explanation: "Push '(' onto stack."
+  - line: 4
+    variables: { "char": "\"[\"", "stack": "[\"(\"]" }
+    output: ""
+    explanation: "Second char is '[', an opening bracket."
+  - line: 5
+    variables: { "stack": "[\"(\", \"[\"]" }
+    output: ""
+    explanation: "Push '[' onto stack."
+  - line: 4
+    variables: { "char": "\"]\"", "stack": "[\"(\", \"[\"]" }
+    output: ""
+    explanation: "Third char is ']', a closing bracket."
+  - line: 7
+    variables: { "stack": "[\"(\", \"[\"]" }
+    output: ""
+    explanation: "stack is not empty and stack[-1]='[' matches pairs[']']='['. Match!"
+  - line: 8
+    variables: { "stack": "[\"(\"]" }
+    output: ""
+    explanation: "Pop '[' from stack."
+  - line: 4
+    variables: { "char": "\")\"", "stack": "[\"(\"]" }
+    output: ""
+    explanation: "Fourth char is ')', a closing bracket."
+  - line: 7
+    variables: { "stack": "[\"(\"]" }
+    output: ""
+    explanation: "stack[-1]='(' matches pairs[')']='('. Match!"
+  - line: 8
+    variables: { "stack": "[]" }
+    output: ""
+    explanation: "Pop '(' from stack. Stack is now empty."
+  - line: 9
+    variables: { "stack": "[]" }
+    output: ""
+    explanation: "Loop is done. len(stack) == 0 is True."
+  - line: 11
+    variables: {}
+    output: "True"
+    explanation: "Print True -- the string is balanced."
+expected_output: |
+  True
+hints:
+  - "Opening brackets get pushed, closing brackets pop and check for a match."
+  - "The string is balanced only if the stack is empty at the end."
+concept_tags:
+  - stack-lifo

@@ -1,0 +1,20 @@
+type: parsons
+id: "04-pandas-aggregation-parsons-01"
+prompt: "Arrange these lines to group sales data by product, calculate total and average sales, then sort by total sales descending."
+blocks:
+  - "import pandas as pd"
+  - "df = pd.DataFrame({'product': ['A','A','B','B','B'], 'sales': [100,150,200,180,220]})"
+  - "summary = df.groupby('product')['sales'].agg(['sum', 'mean'])"
+  - "summary = summary.sort_values('sum', ascending=False)"
+  - "print(summary)"
+distractors:
+  - "summary = df.group('product').sum()"
+  - "summary = summary.order_by('sum')"
+solution_order: [0, 1, 2, 3, 4]
+hints:
+  - "Use groupby() then agg() with a list of function names."
+  - "sort_values() sorts a DataFrame by the specified column."
+  - "ascending=False gives largest values first."
+concept_tags:
+  - groupby
+  - aggregation-functions

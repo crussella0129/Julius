@@ -1,0 +1,19 @@
+type: write
+id: "04-flask-database-write-01"
+prompt: "Write a class called `SimpleDB` that simulates a database. It should have: an `__init__` that creates an empty list `self.records`, a `create(name, email)` method that adds a dict with auto-incrementing 'id', 'name', and 'email' and returns the id, a `find(record_id)` method that returns the record dict or None, and a `all()` method that returns all records. Demo it by creating two users, finding one by id, and printing all records."
+starter_code: |
+  # Write your class here
+tests:
+  - description: "Creates records with incrementing IDs"
+    check: "'1' in output and '2' in output"
+  - description: "Find returns a record with a name"
+    check: "'name' in output.lower() or 'Alice' in output or 'Bob' in output"
+  - description: "All records are listed"
+    check: "output.count('id') >= 2 or (output.count('Alice') >= 1 and output.count('Bob') >= 1)"
+hints:
+  - "Use len(self.records) + 1 for auto-incrementing IDs."
+  - "In find(), loop through records and check if r['id'] matches."
+  - "The all() method simply returns self.records."
+concept_tags:
+  - sqlite
+  - orm

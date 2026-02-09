@@ -1,0 +1,18 @@
+type: write
+id: "03-technical-indicators-write-01"
+prompt: "Write a function called simple_moving_average that takes a list of prices and a period, and returns a list of SMA values. Test it with prices [20, 22, 24, 23, 25, 27, 26] and period 3. Print each SMA value with its corresponding date index."
+starter_code: "# Write your code here\n"
+tests:
+  - description: "Output contains the correct first SMA value (22.0)"
+    check: "'22.0' in output or '22.00' in output"
+  - description: "Output contains at least 5 SMA values"
+    check: "len(output.strip().splitlines()) >= 5"
+  - description: "Output contains the last SMA value (26.0)"
+    check: "'26.0' in output or '26.00' in output"
+hints:
+  - "The SMA for period 3 starts at index 2 (need at least 3 values)."
+  - "For each position, average the current value and the previous (period-1) values."
+  - "The function should return a list of floats."
+concept_tags:
+  - moving-averages
+  - signals

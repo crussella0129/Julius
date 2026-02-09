@@ -1,0 +1,29 @@
+type: write
+id: "02-lists-write-01"
+prompt: "Write a program that starts with the list [10, 20, 30, 40, 50]. Remove the element at index 1, add 60 to the end, insert 15 at index 1, then print the final list, its length, and the sum of all elements (each on a separate line)."
+starter_code: |
+  numbers = [10, 20, 30, 40, 50]
+
+  # Remove element at index 1
+
+  # Add 60 to the end
+
+  # Insert 15 at index 1
+
+  # Print the list, its length, and the sum
+tests:
+  - description: "First line shows the modified list"
+    check: "output.strip().splitlines()[0] == '[10, 15, 30, 40, 50, 60]'"
+  - description: "Second line shows the length: 6"
+    check: "output.strip().splitlines()[1] == '6'"
+  - description: "Third line shows the sum: 205"
+    check: "output.strip().splitlines()[2] == '205'"
+hints:
+  - "Use pop(1) to remove the element at index 1."
+  - "Use append(60) to add 60 to the end."
+  - "Use insert(1, 15) to insert 15 at index 1."
+  - "numbers = [10, 20, 30, 40, 50]\nnumbers.pop(1)\nnumbers.append(60)\nnumbers.insert(1, 15)\nprint(numbers)\nprint(len(numbers))\nprint(sum(numbers))"
+concept_tags:
+  - list-methods
+  - list-indexing
+  - list-mutability

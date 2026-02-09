@@ -1,0 +1,67 @@
+type: fill-in
+id: "06-cupy-gpu-fill-in-01"
+prompt: "Fill in the blanks to create a GPU memory manager that tracks allocations and can free named blocks."
+template: |
+  class GPUMemory:
+      def __init__(self, total_mb):
+          self.total = total_mb
+          self.allocs = ____
+
+      def allocate(self, name, size_mb):
+          self.allocs[name] = size_mb
+          print(f"Allocated {name}: {size_mb}MB")
+
+      def free(self, name):
+          if name in self.____:
+              del self.allocs[____]
+              print(f"Freed {name}")
+
+      def used(self):
+          return sum(self.allocs.values())
+
+  gpu = GPUMemory(8)
+  gpu.allocate("model", 3)
+  gpu.allocate("data", 2)
+  print(f"Used: {gpu.used()}MB")
+  gpu.free("data")
+  print(f"Used: {gpu.used()}MB")
+blanks:
+  - position: 0
+    answer: "{}"
+    hint: "empty dictionary"
+  - position: 1
+    answer: "allocs"
+    hint: "dictionary holding allocations"
+  - position: 2
+    answer: "name"
+    hint: "key to delete from dictionary"
+solution: |
+  class GPUMemory:
+      def __init__(self, total_mb):
+          self.total = total_mb
+          self.allocs = {}
+
+      def allocate(self, name, size_mb):
+          self.allocs[name] = size_mb
+          print(f"Allocated {name}: {size_mb}MB")
+
+      def free(self, name):
+          if name in self.allocs:
+              del self.allocs[name]
+              print(f"Freed {name}")
+
+      def used(self):
+          return sum(self.allocs.values())
+
+  gpu = GPUMemory(8)
+  gpu.allocate("model", 3)
+  gpu.allocate("data", 2)
+  print(f"Used: {gpu.used()}MB")
+  gpu.free("data")
+  print(f"Used: {gpu.used()}MB")
+hints:
+  - "Use a dictionary to map allocation names to their sizes."
+  - "del self.allocs[name] removes the named allocation."
+concept_tags:
+  - gpu-arrays
+  - host-device-transfer

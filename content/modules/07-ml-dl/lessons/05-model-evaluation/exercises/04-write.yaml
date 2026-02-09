@@ -1,0 +1,19 @@
+type: write
+id: "05-model-evaluation-write-01"
+prompt: "Write a function called `grid_search` that takes a list of parameter dicts (each with 'name' and 'value'), a scoring function that takes a dict of params and returns a score, and returns the best parameter combination. Test with params [{'name': 'k', 'values': [1,3,5,7]}, {'name': 'weight', 'values': ['uniform','distance']}] and a scoring function that returns higher scores for k=5 and weight='distance'. Print the best params and score."
+starter_code: |
+  from itertools import product
+
+  # Write your function here
+tests:
+  - description: "Output shows the best parameters"
+    check: "'5' in output and 'distance' in output"
+  - description: "Output includes a score"
+    check: "any(c.isdigit() for c in output)"
+hints:
+  - "Use itertools.product to generate all combinations."
+  - "Track the best score and corresponding parameters."
+  - "The scoring function simulates model evaluation."
+concept_tags:
+  - hyperparameter-tuning
+  - cross-validation

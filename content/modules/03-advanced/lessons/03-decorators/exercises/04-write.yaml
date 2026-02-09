@@ -1,0 +1,32 @@
+type: write
+id: "03-decorators-write-01"
+prompt: "Write a decorator called `add_greeting` that modifies a function's return value by prepending 'Hello! ' to it. Apply it to a function called `get_name` that returns a name. Print the result of calling get_name('Alice') -- it should output 'Hello! Alice'."
+starter_code: |
+  from functools import wraps
+
+  # Define the add_greeting decorator
+
+
+  # Apply it to get_name
+  @add_greeting
+  def get_name(name):
+      return name
+
+  # Test it
+  print(get_name("Alice"))
+  print(get_name("Bob"))
+tests:
+  - description: "Output has exactly 2 lines"
+    check: "len(output.strip().splitlines()) == 2"
+  - description: "First line is 'Hello! Alice'"
+    check: "output.strip().splitlines()[0] == 'Hello! Alice'"
+  - description: "Second line is 'Hello! Bob'"
+    check: "output.strip().splitlines()[1] == 'Hello! Bob'"
+hints:
+  - "The decorator should call the original function, then prepend 'Hello! ' to the result."
+  - "Remember to use @wraps(func) and return the wrapper function."
+  - "def add_greeting(func):\n    @wraps(func)\n    def wrapper(*args, **kwargs):\n        return 'Hello! ' + func(*args, **kwargs)\n    return wrapper"
+concept_tags:
+  - decorator-syntax
+  - closures
+  - functools-wraps

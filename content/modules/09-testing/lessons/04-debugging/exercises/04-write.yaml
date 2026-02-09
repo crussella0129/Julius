@@ -1,0 +1,21 @@
+type: write
+id: "04-debugging-write-01"
+prompt: "Write a function called `find_first_negative` that takes a list of numbers and returns the index of the first negative number, or -1 if there are none. Add debug-style print statements showing each number checked (format: 'Checking index N: VALUE'). Test with [5, 3, -2, 8] (should print index 2) and [1, 2, 3] (should print -1)."
+starter_code: |
+  # Define find_first_negative with debug prints
+
+  # Test cases
+tests:
+  - description: "Output shows checking messages"
+    check: "'Checking index' in output"
+  - description: "First test returns index 2"
+    check: "'2' in output"
+  - description: "Second test returns -1"
+    check: "'-1' in output"
+hints:
+  - "Loop with enumerate to get both index and value."
+  - "Print f'Checking index {i}: {val}' for each element."
+  - "Return i when val < 0, or return -1 after the loop."
+concept_tags:
+  - print-debugging
+  - traceback-reading

@@ -1,0 +1,50 @@
+type: trace
+id: "08-functions-trace-01"
+prompt: "Trace through this code and predict the final output."
+code: |
+  def double(n):
+      return n * 2
+
+  def add_one(n):
+      return n + 1
+
+  result = add_one(double(3))
+  print(result)
+steps:
+  - line: 1
+    variables: {}
+    output: ""
+    explanation: "The function double is defined but not yet called."
+  - line: 4
+    variables: {}
+    output: ""
+    explanation: "The function add_one is defined but not yet called."
+  - line: 7
+    variables: {}
+    output: ""
+    explanation: "Python evaluates double(3) first — the inner call."
+  - line: 2
+    variables: { "n": "3 (in double)" }
+    output: ""
+    explanation: "Inside double: n=3, returns 3 * 2 = 6."
+  - line: 5
+    variables: { "n": "6 (in add_one)" }
+    output: ""
+    explanation: "Inside add_one: n=6 (the result of double(3)), returns 6 + 1 = 7."
+  - line: 7
+    variables: { "result": "7" }
+    output: ""
+    explanation: "result is assigned the return value of add_one(6), which is 7."
+  - line: 8
+    variables: { "result": "7" }
+    output: "7"
+    explanation: "Prints the value of result, which is 7."
+expected_output: |
+  7
+hints:
+  - "Nested function calls are evaluated from the inside out."
+  - "double(3) returns 6, then add_one(6) returns 7."
+concept_tags:
+  - function-definition
+  - return-values
+  - parameters-arguments

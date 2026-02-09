@@ -1,0 +1,25 @@
+type: parsons
+id: "07-eda-project-parsons-01"
+prompt: "Arrange these lines to perform outlier detection using the IQR method on a list of values."
+blocks:
+  - "data = [10, 12, 14, 15, 18, 22, 25, 28, 100]"
+  - "data.sort()"
+  - "n = len(data)"
+  - "q1 = data[n // 4]"
+  - "q3 = data[3 * n // 4]"
+  - "iqr = q3 - q1"
+  - "lower = q1 - 1.5 * iqr"
+  - "upper = q3 + 1.5 * iqr"
+  - "outliers = [x for x in data if x < lower or x > upper]"
+  - "print(f'Outliers: {outliers}')"
+distractors:
+  - "iqr = q3 + q1"
+  - "outliers = [x for x in data if x > upper]"
+solution_order: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+hints:
+  - "Sort the data first, then find Q1 and Q3 by position."
+  - "IQR = Q3 - Q1. Outliers are below Q1-1.5*IQR or above Q3+1.5*IQR."
+  - "Filter the data for values outside the bounds."
+concept_tags:
+  - eda-workflow
+  - insight-extraction

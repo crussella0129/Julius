@@ -1,0 +1,44 @@
+type: fill-in
+id: "03-flask-forms-fill-in-01"
+prompt: "Fill in the blanks to validate a registration form and collect any errors."
+template: |
+  def validate_registration(data):
+      errors = []
+      if ____(data.get(\"name\", \"\")) < 2:
+          errors.____("Name must be at least 2 characters")
+      if \"@\" not ____ data.get(\"email\", \"\"):
+          errors.append(\"Invalid email\")
+      return ____
+
+  result = validate_registration({\"name\": \"Jo\", \"email\": \"jo@mail.com\"})
+  print(len(result), \"errors\")
+blanks:
+  - position: 0
+    answer: "len"
+    hint: "function that returns the length of a string"
+  - position: 1
+    answer: "append"
+    hint: "list method to add an item to the end"
+  - position: 2
+    answer: "in"
+    hint: "operator to check membership"
+  - position: 3
+    answer: "errors"
+    hint: "what the function should return"
+solution: |
+  def validate_registration(data):
+      errors = []
+      if len(data.get("name", "")) < 2:
+          errors.append("Name must be at least 2 characters")
+      if "@" not in data.get("email", ""):
+          errors.append("Invalid email")
+      return errors
+
+  result = validate_registration({"name": "Jo", "email": "jo@mail.com"})
+  print(len(result), "errors")
+hints:
+  - "len() gets the length of the name string."
+  - "The 'in' operator checks if '@' is inside the email string."
+concept_tags:
+  - form-validation
+  - html-forms

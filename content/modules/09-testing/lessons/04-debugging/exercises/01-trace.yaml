@@ -1,0 +1,52 @@
+type: trace
+id: "04-debugging-trace-01"
+prompt: "Trace through this code and predict what will be printed."
+code: |
+  import logging
+
+  logging.basicConfig(level=logging.WARNING)
+
+  logging.debug("Starting up")
+  logging.info("Loading data")
+  logging.warning("Disk space low")
+  logging.error("File not found")
+  logging.critical("System crash")
+steps:
+  - line: 1
+    variables: {}
+    output: ""
+    explanation: "Import the logging module."
+  - line: 3
+    variables: {}
+    output: ""
+    explanation: "Set logging level to WARNING. Only WARNING (30), ERROR (40), and CRITICAL (50) will show."
+  - line: 5
+    variables: {}
+    output: ""
+    explanation: "DEBUG level (10) is below WARNING (30), so this is suppressed."
+  - line: 6
+    variables: {}
+    output: ""
+    explanation: "INFO level (20) is below WARNING (30), so this is suppressed."
+  - line: 7
+    variables: {}
+    output: "WARNING:root:Disk space low"
+    explanation: "WARNING level (30) meets the threshold. Message is displayed."
+  - line: 8
+    variables: {}
+    output: "ERROR:root:File not found"
+    explanation: "ERROR level (40) is above WARNING. Message is displayed."
+  - line: 9
+    variables: {}
+    output: "CRITICAL:root:System crash"
+    explanation: "CRITICAL level (50) is above WARNING. Message is displayed."
+expected_output: |
+  WARNING:root:Disk space low
+  ERROR:root:File not found
+  CRITICAL:root:System crash
+hints:
+  - "Logging levels: DEBUG(10) < INFO(20) < WARNING(30) < ERROR(40) < CRITICAL(50)."
+  - "Only messages at the configured level or above are shown."
+concept_tags:
+  - logging-module
+  - print-debugging

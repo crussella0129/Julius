@@ -1,0 +1,23 @@
+type: parsons
+id: "08-langchain-parsons-01"
+prompt: "Arrange these lines to create a PromptTemplate class with a format method that replaces {variable} placeholders with provided values."
+blocks:
+  - "class PromptTemplate:"
+  - "    def __init__(self, template, variables):"
+  - "        self.template = template"
+  - "        self.variables = variables"
+  - "    def format(self, **kwargs):"
+  - "        result = self.template"
+  - "        for key, value in kwargs.items():"
+  - "            result = result.replace('{' + key + '}', str(value))"
+  - "        return result"
+distractors:
+  - "            result = result.replace(key, str(value))"
+  - "        result = kwargs"
+solution_order: [0, 1, 2, 3, 4, 5, 6, 7, 8]
+hints:
+  - "The replace method needs to match the full placeholder including braces."
+  - "Use string concatenation to build the placeholder pattern: '{' + key + '}'."
+concept_tags:
+  - prompt-templates
+  - langchain

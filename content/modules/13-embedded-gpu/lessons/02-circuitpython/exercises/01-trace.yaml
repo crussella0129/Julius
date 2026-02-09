@@ -1,0 +1,100 @@
+type: trace
+id: "02-circuitpython-trace-01"
+prompt: "Trace through this code that simulates PWM LED brightness control and predict the output."
+code: |
+  class PWM:
+      def __init__(self, pin):
+          self.pin = pin
+          self.duty = 0
+
+      def set_percent(self, pct):
+          self.duty = int(pct / 100 * 65535)
+          return self.duty
+
+  led = PWM(13)
+  levels = [0, 25, 50, 75, 100]
+
+  for level in levels:
+      raw = led.set_percent(level)
+      print(f"{level}% -> {raw}")
+steps:
+  - line: 10
+    variables: {"led": "PWM(pin=13, duty=0)"}
+    output: ""
+    explanation: "Create a PWM object for pin 13 with duty cycle 0."
+  - line: 11
+    variables: {"levels": "[0, 25, 50, 75, 100]"}
+    output: ""
+    explanation: "Five brightness levels from off to full."
+  - line: 13
+    variables: {"level": 0}
+    output: ""
+    explanation: "First level: 0% brightness."
+  - line: 14
+    variables: {"raw": 0}
+    output: ""
+    explanation: "0/100 * 65535 = 0."
+  - line: 15
+    variables: {}
+    output: "0% -> 0"
+    explanation: "LED is off."
+  - line: 13
+    variables: {"level": 25}
+    output: ""
+    explanation: "Second level: 25%."
+  - line: 14
+    variables: {"raw": 16383}
+    output: ""
+    explanation: "25/100 * 65535 = 16383.75, int() = 16383."
+  - line: 15
+    variables: {}
+    output: "25% -> 16383"
+    explanation: "LED at quarter brightness."
+  - line: 13
+    variables: {"level": 50}
+    output: ""
+    explanation: "Third level: 50%."
+  - line: 14
+    variables: {"raw": 32767}
+    output: ""
+    explanation: "50/100 * 65535 = 32767.5, int() = 32767."
+  - line: 15
+    variables: {}
+    output: "50% -> 32767"
+    explanation: "LED at half brightness."
+  - line: 13
+    variables: {"level": 75}
+    output: ""
+    explanation: "Fourth level: 75%."
+  - line: 14
+    variables: {"raw": 49151}
+    output: ""
+    explanation: "75/100 * 65535 = 49151.25, int() = 49151."
+  - line: 15
+    variables: {}
+    output: "75% -> 49151"
+    explanation: "LED at three-quarter brightness."
+  - line: 13
+    variables: {"level": 100}
+    output: ""
+    explanation: "Fifth level: 100%."
+  - line: 14
+    variables: {"raw": 65535}
+    output: ""
+    explanation: "100/100 * 65535 = 65535."
+  - line: 15
+    variables: {}
+    output: "100% -> 65535"
+    explanation: "LED at full brightness."
+expected_output: |
+  0% -> 0
+  25% -> 16383
+  50% -> 32767
+  75% -> 49151
+  100% -> 65535
+hints:
+  - "PWM duty cycle is a 16-bit value (0-65535). Percentage maps to this range."
+  - "int() truncates toward zero, so 16383.75 becomes 16383."
+concept_tags:
+  - pwm
+  - circuitpython

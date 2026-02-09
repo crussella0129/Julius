@@ -1,0 +1,23 @@
+type: parsons
+id: "01-why-testing-parsons-01"
+prompt: "Arrange these lines to write a simple test that checks a function and prints whether the test passed or failed."
+blocks:
+  - "def square(n):"
+  - "    return n * n"
+  - "result = square(5)"
+  - "expected = 25"
+  - "if result == expected:"
+  - "    print('PASS')"
+  - "else:"
+  - "    print(f'FAIL: got {result}, expected {expected}')"
+distractors:
+  - "assert square(5)"
+  - "    return n + n"
+solution_order: [0, 1, 2, 3, 4, 5, 6, 7]
+hints:
+  - "Define the function first, then call it."
+  - "Compare the actual result with the expected value."
+  - "Print PASS or FAIL with details."
+concept_tags:
+  - testing-motivation
+  - manual-vs-automated

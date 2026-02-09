@@ -1,0 +1,44 @@
+type: trace
+id: "06-conditionals-trace-01"
+prompt: "Trace through this code and predict the final output."
+code: |
+  score = 75
+  if score >= 90:
+      grade = "A"
+  elif score >= 80:
+      grade = "B"
+  elif score >= 70:
+      grade = "C"
+  else:
+      grade = "F"
+  print(grade)
+steps:
+  - line: 1
+    variables: { "score": "75" }
+    output: ""
+    explanation: "score is assigned the value 75."
+  - line: 2
+    variables: { "score": "75" }
+    output: ""
+    explanation: "75 >= 90 is False, so we skip to the next elif."
+  - line: 4
+    variables: { "score": "75" }
+    output: ""
+    explanation: "75 >= 80 is False, so we skip to the next elif."
+  - line: 6
+    variables: { "score": "75", "grade": "'C'" }
+    output: ""
+    explanation: "75 >= 70 is True, so grade is assigned 'C'. Remaining branches are skipped."
+  - line: 10
+    variables: { "score": "75", "grade": "'C'" }
+    output: "C"
+    explanation: "Prints the value of grade, which is 'C'."
+expected_output: |
+  C
+hints:
+  - "Python checks elif conditions from top to bottom and runs only the first match."
+  - "Once a branch matches, all remaining elif/else branches are skipped."
+concept_tags:
+  - if-statement
+  - elif-statement
+  - boolean-expressions

@@ -49,6 +49,17 @@ export default function Dashboard(): JSX.Element {
         </div>
       </div>
 
+      <div
+        className="card"
+        style={{ marginBottom: '1.5rem', cursor: 'pointer', borderColor: 'var(--accent-primary)' }}
+        onClick={() => navigate('/placement')}
+      >
+        <strong>Not sure where to start?</strong>
+        <p style={{ color: 'var(--text-secondary)', marginTop: '0.25rem' }}>
+          Take a quick 15-question assessment to find the module that matches your experience level.
+        </p>
+      </div>
+
       {reviewDueCount > 0 && (
         <div
           className="card"

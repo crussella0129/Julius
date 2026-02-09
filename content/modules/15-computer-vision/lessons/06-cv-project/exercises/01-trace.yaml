@@ -1,0 +1,59 @@
+type: trace
+id: "06-cv-project-trace-01"
+prompt: "Trace through this feature extraction and prediction code and predict the output."
+code: |
+  import numpy as np
+
+  def extract_features(image):
+      return [image.mean(), image.std()]
+
+  img_bright = np.array([[200, 210], [190, 205]], dtype=np.uint8)
+  img_dark = np.array([[30, 40], [35, 25]], dtype=np.uint8)
+
+  f_bright = extract_features(img_bright)
+  f_dark = extract_features(img_dark)
+
+  print(f"Bright: mean={f_bright[0]:.1f}, std={f_bright[1]:.1f}")
+  print(f"Dark: mean={f_dark[0]:.1f}, std={f_dark[1]:.1f}")
+
+  # Simple classifier: bright if mean > 128
+  for label, features in [("bright", f_bright), ("dark", f_dark)]:
+      pred = "bright" if features[0] > 128 else "dark"
+      correct = "yes" if pred == label else "no"
+      print(f"  {label} -> predicted {pred}, correct: {correct}")
+steps:
+  - line: 6
+    variables: {"img_bright": "2x2 array with values 190-210", "img_dark": "2x2 array with values 25-40"}
+    output: ""
+    explanation: "Two small images are created: one bright (high values) and one dark (low values)."
+  - line: 9
+    variables: {"f_bright": [201.25, 7.4], "f_dark": [32.5, 5.59]}
+    output: ""
+    explanation: "Features are [mean, std] for each image."
+  - line: 12
+    variables: {}
+    output: "Bright: mean=201.2, std=7.4"
+    explanation: "Mean of [200,210,190,205] = 201.25, rounded to 201.2 at 1 decimal."
+  - line: 13
+    variables: {}
+    output: "Dark: mean=32.5, std=5.6"
+    explanation: "Mean of [30,40,35,25] = 32.5, std approximately 5.6."
+  - line: 17
+    variables: {}
+    output: "  bright -> predicted bright, correct: yes"
+    explanation: "201.2 > 128, so predicted bright. Matches label."
+  - line: 17
+    variables: {}
+    output: "  dark -> predicted dark, correct: yes"
+    explanation: "32.5 < 128, so predicted dark. Matches label."
+expected_output: |
+  Bright: mean=201.2, std=7.4
+  Dark: mean=32.5, std=5.6
+  bright -> predicted bright, correct: yes
+  dark -> predicted dark, correct: yes
+hints:
+  - "np.mean() of [200, 210, 190, 205] = 805/4 = 201.25."
+  - "The classifier compares the mean feature against 128."
+concept_tags:
+  - cv-pipeline
+  - image-classification

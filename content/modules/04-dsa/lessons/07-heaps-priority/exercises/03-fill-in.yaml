@@ -1,0 +1,34 @@
+type: fill-in
+id: "07-heaps-priority-fill-in-01"
+prompt: "Fill in the blanks to implement a max-heap using Python's heapq (which only supports min-heap). Push the values 3, 1, 4, then pop and print the largest."
+template: |
+  import heapq
+
+  max_heap = []
+  for val in [3, 1, 4]:
+      heapq.heappush(max_heap, ____val)
+
+  largest = ____heapq.heappop(max_heap)
+  print(largest)
+blanks:
+  - position: 0
+    answer: "-"
+    hint: "negate to turn min-heap into max-heap"
+  - position: 1
+    answer: "-"
+    hint: "negate again to get the original value back"
+solution: |
+  import heapq
+
+  max_heap = []
+  for val in [3, 1, 4]:
+      heapq.heappush(max_heap, -val)
+
+  largest = -heapq.heappop(max_heap)
+  print(largest)
+hints:
+  - "Push -val so the largest original value becomes the smallest negative value."
+  - "After popping, negate again to restore the original positive value."
+concept_tags:
+  - max-heap
+  - heapq-module

@@ -1,0 +1,29 @@
+type: parsons
+id: "03-game-physics-parsons-01"
+prompt: "Arrange these lines to create a Ball class that bounces off the walls of an 800x600 screen."
+blocks:
+  - "class Ball:"
+  - "    def __init__(self, x, y, vel_x, vel_y, radius):"
+  - "        self.x = x"
+  - "        self.y = y"
+  - "        self.vel_x = vel_x"
+  - "        self.vel_y = vel_y"
+  - "        self.radius = radius"
+  - "    def update(self):"
+  - "        self.x += self.vel_x"
+  - "        self.y += self.vel_y"
+  - "        if self.x - self.radius <= 0 or self.x + self.radius >= 800:"
+  - "            self.vel_x = -self.vel_x"
+  - "        if self.y - self.radius <= 0 or self.y + self.radius >= 600:"
+  - "            self.vel_y = -self.vel_y"
+distractors:
+  - "        if self.x <= 0 or self.x >= 800:"
+  - "            self.vel_x = 0"
+solution_order: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
+hints:
+  - "Initialize position, velocity, and radius in __init__."
+  - "In update, move first, then check walls and reverse velocity."
+  - "Account for radius: the edge of the ball, not its center, hits the wall."
+concept_tags:
+  - bouncing
+  - collision-detection

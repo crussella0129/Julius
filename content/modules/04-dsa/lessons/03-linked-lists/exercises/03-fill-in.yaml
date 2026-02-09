@@ -1,0 +1,44 @@
+type: fill-in
+id: "03-linked-lists-fill-in-01"
+prompt: "Fill in the blanks to complete the delete method that removes the first node with the given value from a singly linked list."
+template: |
+  def delete(self, val):
+      if self.head and self.head.val == val:
+          self.____ = self.head.____
+          return
+      current = self.head
+      while current and current.____:
+          if current.next.val == val:
+              current.next = current.next.____
+              return
+          current = current.next
+blanks:
+  - position: 0
+    answer: "head"
+    hint: "the reference to the first node"
+  - position: 1
+    answer: "next"
+    hint: "the node after head becomes the new head"
+  - position: 2
+    answer: "next"
+    hint: "check if there is a next node to examine"
+  - position: 3
+    answer: "next"
+    hint: "skip over the deleted node by linking to the one after it"
+solution: |
+  def delete(self, val):
+      if self.head and self.head.val == val:
+          self.head = self.head.next
+          return
+      current = self.head
+      while current and current.next:
+          if current.next.val == val:
+              current.next = current.next.next
+              return
+          current = current.next
+hints:
+  - "To delete head: make self.head point to self.head.next."
+  - "To delete a middle node: make the previous node skip over it by setting current.next = current.next.next."
+concept_tags:
+  - singly-linked-list
+  - insertion-deletion

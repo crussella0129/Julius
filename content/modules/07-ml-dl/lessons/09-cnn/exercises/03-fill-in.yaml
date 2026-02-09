@@ -1,0 +1,43 @@
+type: fill-in
+id: "09-cnn-fill-in-01"
+prompt: "Fill in the blanks to perform a 1D convolution on a signal."
+template: |
+  def convolve(signal, kernel):
+      output = []
+      for i in range(len(signal) - len(____) + 1):
+          value = 0
+          for j in range(len(kernel)):
+              value += signal[i + ____] * kernel[j]
+          output.____(value)
+      return output
+
+  result = convolve([2, 1, 0, 3, 1], [1, 0, -1])
+  print(result)
+blanks:
+  - position: 0
+    answer: "kernel"
+    hint: "what determines the output length"
+  - position: 1
+    answer: "j"
+    hint: "offset within the kernel window"
+  - position: 2
+    answer: "append"
+    hint: "add the computed value to the output list"
+solution: |
+  def convolve(signal, kernel):
+      output = []
+      for i in range(len(signal) - len(kernel) + 1):
+          value = 0
+          for j in range(len(kernel)):
+              value += signal[i + j] * kernel[j]
+          output.append(value)
+      return output
+
+  result = convolve([2, 1, 0, 3, 1], [1, 0, -1])
+  print(result)
+hints:
+  - "Output length = len(signal) - len(kernel) + 1."
+  - "At position i, multiply signal[i+j] by kernel[j] for each j."
+concept_tags:
+  - convolution
+  - cnn-architecture

@@ -1,0 +1,19 @@
+type: write
+id: "02-flask-intro-write-01"
+prompt: "Write a function called `match_route` that takes a path string and a dictionary of routes (path -> handler_name). If the path matches a route, return a tuple (200, handler_name). If not, return (404, 'Not Found'). Print the results of calling it with '/home', '/about', and '/missing' using the routes {'/home': 'index', '/about': 'about_page'}."
+starter_code: |
+  # Write your function here
+tests:
+  - description: "Output contains (200, 'index') for /home"
+    check: "'200' in output and 'index' in output"
+  - description: "Output contains (404, 'Not Found') for /missing"
+    check: "'404' in output and 'Not Found' in output"
+  - description: "Output has 3 lines of results"
+    check: "len(output.strip().splitlines()) == 3"
+hints:
+  - "Use the 'in' operator to check if the path exists in the routes dictionary."
+  - "Return a tuple with the status code and handler name or 'Not Found'."
+  - "Call the function three times and print each result."
+concept_tags:
+  - routes
+  - flask-app

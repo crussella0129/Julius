@@ -1,0 +1,22 @@
+type: write
+id: "05-sound-graphics-write-01"
+prompt: "Write a ParticleSystem class. It should have: an `emit(x, y, count)` method that creates `count` particles at position (x, y), each with random vel_x between -2 and 2 and vel_y between -3 and 0, a lifetime of 5, and age 0. An `update()` method that moves each particle by its velocity, increments age, and removes dead particles. A `count_alive()` method. Test: emit 10 particles at (0,0), print alive count, update 6 times, print alive count again."
+starter_code: |
+  import random
+  random.seed(42)
+
+  # Define ParticleSystem class
+
+  # Test
+tests:
+  - description: "First count is 10"
+    check: "'10' in output.strip().splitlines()[0]"
+  - description: "Second count is 0 (all particles expired after 6 updates)"
+    check: "'0' in output.strip().splitlines()[1]"
+hints:
+  - "Store particles as a list of dicts with keys: x, y, vel_x, vel_y, lifetime, age."
+  - "In update: increment age, move by velocity, filter out particles where age >= lifetime."
+  - "count_alive returns len(self.particles)."
+concept_tags:
+  - particle-effects
+  - sprite-animation

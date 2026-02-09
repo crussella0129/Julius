@@ -1,0 +1,37 @@
+type: fill-in
+id: "04-debugging-fill-in-01"
+prompt: "Fill in the blanks to read a traceback and identify the error type and location."
+template: |
+  # Given this traceback:
+  # Traceback (most recent call last):
+  #   File "app.py", line 10, in main
+  #     result = calculate(x, y)
+  #   File "app.py", line 5, in calculate
+  #     return x / y
+  # ZeroDivisionError: division by zero
+
+  error_type = "____"
+  error_line = ____
+  error_function = "____"
+  print(f"Error: {error_type} at line {error_line} in {error_function}")
+blanks:
+  - position: 0
+    answer: "ZeroDivisionError"
+    hint: "the error name at the bottom of the traceback"
+  - position: 1
+    answer: "5"
+    hint: "the line number where the error actually occurred"
+  - position: 2
+    answer: "calculate"
+    hint: "the function where the error happened"
+solution: |
+  error_type = "ZeroDivisionError"
+  error_line = 5
+  error_function = "calculate"
+  print(f"Error: {error_type} at line {error_line} in {error_function}")
+hints:
+  - "Read the traceback from bottom to top."
+  - "The last file/line before the error message is where it occurred."
+concept_tags:
+  - traceback-reading
+  - print-debugging

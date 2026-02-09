@@ -1,0 +1,31 @@
+type: fill-in
+id: "02-regex-fill-in-01"
+prompt: "Fill in the blanks to replace all phone numbers in the format XXX-XXXX with '[REDACTED]'."
+template: |
+  import re
+
+  text = "Call 555-1234 or 555-5678"
+  result = re.____(r"\d{____}-\d{____}", "[REDACTED]", text)
+  print(result)
+blanks:
+  - position: 0
+    answer: "sub"
+    hint: "substitution function"
+  - position: 1
+    answer: "3"
+    hint: "number of digits before the dash"
+  - position: 2
+    answer: "4"
+    hint: "number of digits after the dash"
+solution: |
+  import re
+
+  text = "Call 555-1234 or 555-5678"
+  result = re.sub(r"\d{3}-\d{4}", "[REDACTED]", text)
+  print(result)
+hints:
+  - "re.sub(pattern, replacement, string) replaces all matches."
+  - "\\d{3} matches exactly 3 digits, \\d{4} matches exactly 4 digits."
+concept_tags:
+  - re-module
+  - substitution

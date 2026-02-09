@@ -1,0 +1,49 @@
+type: fill-in
+id: "05-matplotlib-fill-in-01"
+prompt: "Fill in the blanks to compute data for a scatter plot showing height vs weight correlation."
+template: |
+  heights = [160, 170, 175, 180, 165, 172]
+  weights = [55, 70, 75, 85, 60, 68]
+
+  n = ____(heights)
+  avg_h = ____(heights) / n
+  avg_w = sum(weights) / n
+
+  correlation_data = []
+  for h, w in ____(heights, weights):
+      correlation_data.append((h - avg_h) * (w - avg_w))
+
+  print(f\"Points: {n}\")
+  print(f\"Avg height: {avg_h:.1f}\")
+  print(f\"Avg weight: {avg_w:.1f}\")
+blanks:
+  - position: 0
+    answer: "len"
+    hint: "function to count items"
+  - position: 1
+    answer: "sum"
+    hint: "function to add all values"
+  - position: 2
+    answer: "zip"
+    hint: "function to iterate over two lists in parallel"
+solution: |
+  heights = [160, 170, 175, 180, 165, 172]
+  weights = [55, 70, 75, 85, 60, 68]
+
+  n = len(heights)
+  avg_h = sum(heights) / n
+  avg_w = sum(weights) / n
+
+  correlation_data = []
+  for h, w in zip(heights, weights):
+      correlation_data.append((h - avg_h) * (w - avg_w))
+
+  print(f"Points: {n}")
+  print(f"Avg height: {avg_h:.1f}")
+  print(f"Avg weight: {avg_w:.1f}")
+hints:
+  - "len() counts items, sum() totals them."
+  - "zip() pairs each height with its corresponding weight."
+concept_tags:
+  - scatter-plots
+  - plot-customization

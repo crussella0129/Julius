@@ -1,0 +1,20 @@
+type: write
+id: "07-quant-project-write-01"
+prompt: "Build a mini quant project: (1) Create a list of 10 prices starting at 100, changing by a fixed pattern [+5, -3, +8, -2, +6, -4, +7, -1, +3]. (2) Compute a 3-period SMA. (3) Generate buy/sell signals: buy (print 'BUY') when price crosses above SMA, sell (print 'SELL') when price crosses below SMA. (4) Print a summary with the starting price, ending price, and total number of signals generated."
+starter_code: "# Write your code here\n"
+tests:
+  - description: "Output contains BUY"
+    check: "'buy' in output.lower()"
+  - description: "Output contains SELL"
+    check: "'sell' in output.lower()"
+  - description: "Output shows starting price 100"
+    check: "'100' in output"
+  - description: "Output has at least 4 lines"
+    check: "len(output.strip().splitlines()) >= 4"
+hints:
+  - "Build prices by applying each change: prices[i] = prices[i-1] + changes[i-1]."
+  - "SMA(3) starts at index 2. Compare price vs SMA for crossover signals."
+  - "A crossover occurs when the relationship between price and SMA changes from one day to the next."
+concept_tags:
+  - project-design
+  - strategy-implementation

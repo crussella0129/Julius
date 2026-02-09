@@ -1,0 +1,30 @@
+type: fill-in
+id: "01-os-filesystem-fill-in-01"
+prompt: "Fill in the blanks to find all .txt files in the 'data' directory recursively and print each filename."
+template: |
+  from pathlib import Path
+
+  for f in Path("data").____("____.txt"):
+      print(f.____)
+blanks:
+  - position: 0
+    answer: "rglob"
+    hint: "recursive glob method"
+  - position: 1
+    answer: "*"
+    hint: "wildcard matching any name"
+  - position: 2
+    answer: "name"
+    hint: "property that returns the filename"
+solution: |
+  from pathlib import Path
+
+  for f in Path("data").rglob("*.txt"):
+      print(f.name)
+hints:
+  - "rglob searches recursively through all subdirectories."
+  - "The * wildcard matches any filename before .txt."
+  - "The .name property gives just the filename, not the full path."
+concept_tags:
+  - pathlib
+  - file-operations

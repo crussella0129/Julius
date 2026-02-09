@@ -1,0 +1,54 @@
+type: trace
+id: "03-decorators-trace-01"
+prompt: "Trace through this code and predict the final output."
+code: |
+  def shout(func):
+      def wrapper(*args, **kwargs):
+          result = func(*args, **kwargs)
+          return result.upper()
+      return wrapper
+
+  @shout
+  def greet(name):
+      return f"hello, {name}"
+
+  print(greet("alice"))
+  print(greet("bob"))
+steps:
+  - line: 1
+    variables: {}
+    output: ""
+    explanation: "The shout decorator function is defined."
+  - line: 7
+    variables: {}
+    output: ""
+    explanation: "@shout applies the decorator: greet = shout(greet). Now greet points to wrapper."
+  - line: 11
+    variables: {}
+    output: ""
+    explanation: "greet('alice') calls wrapper('alice')."
+  - line: 3
+    variables: { "args": "('alice',)" }
+    output: ""
+    explanation: "Inside wrapper: func('alice') calls the original greet, which returns 'hello, alice'."
+  - line: 4
+    variables: { "result": "hello, alice" }
+    output: ""
+    explanation: "result.upper() converts to 'HELLO, ALICE' and returns it."
+  - line: 11
+    variables: {}
+    output: "HELLO, ALICE"
+    explanation: "print() outputs the uppercased string."
+  - line: 12
+    variables: {}
+    output: "HELLO, BOB"
+    explanation: "Same process: greet('bob') -> wrapper('bob') -> 'hello, bob'.upper() -> 'HELLO, BOB'."
+expected_output: |
+  HELLO, ALICE
+  HELLO, BOB
+hints:
+  - "@shout makes greet point to the wrapper function."
+  - "The wrapper calls the original greet, then uppercases the result."
+concept_tags:
+  - decorator-syntax
+  - closures

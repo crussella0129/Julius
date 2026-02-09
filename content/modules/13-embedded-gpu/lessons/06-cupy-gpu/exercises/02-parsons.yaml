@@ -1,0 +1,25 @@
+type: parsons
+id: "06-cupy-gpu-parsons-01"
+prompt: "Arrange these lines to write an array-library-agnostic function (the xp pattern) that works with both NumPy and CuPy."
+blocks:
+  - "import numpy as np"
+  - "def compute_stats(xp, data):"
+  - "    mean = xp.mean(data)"
+  - "    std = xp.std(data)"
+  - "    normalized = (data - mean) / std"
+  - "    return normalized, mean, std"
+  - ""
+  - "data = np.array([2.0, 4.0, 6.0, 8.0, 10.0])"
+  - "result, m, s = compute_stats(np, data)"
+  - "print(f'Mean: {m}, Std: {s:.2f}')"
+distractors:
+  - "    normalized = data / mean"
+  - "    return data, mean, std"
+solution_order: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+hints:
+  - "The xp parameter can be numpy or cupy -- both have the same API."
+  - "Normalize data by subtracting mean and dividing by std deviation."
+  - "Call the function with np as the array library."
+concept_tags:
+  - cupy-api
+  - gpu-arrays

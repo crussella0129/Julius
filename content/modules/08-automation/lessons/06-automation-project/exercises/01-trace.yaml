@@ -1,0 +1,65 @@
+type: trace
+id: "06-automation-project-trace-01"
+prompt: "Trace through this code and predict what will be printed."
+code: |
+  from pathlib import Path
+
+  CATEGORIES = {
+      "Images": [".jpg", ".png"],
+      "Docs": [".pdf", ".txt"],
+  }
+
+  def get_category(filename):
+      ext = Path(filename).suffix.lower()
+      for cat, exts in CATEGORIES.items():
+          if ext in exts:
+              return cat
+      return "Other"
+
+  files = ["photo.JPG", "report.pdf", "data.csv", "logo.png"]
+  for f in files:
+      print(f"{f} -> {get_category(f)}")
+steps:
+  - line: 1
+    variables: {}
+    output: ""
+    explanation: "Import Path from pathlib."
+  - line: 3
+    variables: { "CATEGORIES": "{'Images': ['.jpg', '.png'], 'Docs': ['.pdf', '.txt']}" }
+    output: ""
+    explanation: "Define the category mapping dictionary."
+  - line: 8
+    variables: {}
+    output: ""
+    explanation: "Define the get_category function."
+  - line: 15
+    variables: { "files": "['photo.JPG', 'report.pdf', 'data.csv', 'logo.png']" }
+    output: ""
+    explanation: "Create a list of test filenames."
+  - line: 17
+    variables: { "f": "'photo.JPG'" }
+    output: "photo.JPG -> Images"
+    explanation: "suffix is '.JPG', .lower() makes it '.jpg', which is in Images."
+  - line: 17
+    variables: { "f": "'report.pdf'" }
+    output: "report.pdf -> Docs"
+    explanation: "suffix is '.pdf', which is in Docs."
+  - line: 17
+    variables: { "f": "'data.csv'" }
+    output: "data.csv -> Other"
+    explanation: "suffix is '.csv', which is not in any category. Returns 'Other'."
+  - line: 17
+    variables: { "f": "'logo.png'" }
+    output: "logo.png -> Images"
+    explanation: "suffix is '.png', which is in Images."
+expected_output: |
+  photo.JPG -> Images
+  report.pdf -> Docs
+  data.csv -> Other
+  logo.png -> Images
+hints:
+  - ".lower() converts '.JPG' to '.jpg' so it matches the category."
+  - "'.csv' is not in any category, so it returns 'Other'."
+concept_tags:
+  - file-organization
+  - combining-modules

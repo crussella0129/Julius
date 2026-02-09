@@ -1,0 +1,25 @@
+type: parsons
+id: "08-graphs-parsons-01"
+prompt: "Arrange these lines to implement an iterative DFS that prints all nodes reachable from a starting node."
+blocks:
+  - "def dfs(graph, start):"
+  - "    visited = set()"
+  - "    stack = [start]"
+  - "    while stack:"
+  - "        node = stack.pop()"
+  - "        if node not in visited:"
+  - "            visited.add(node)"
+  - "            print(node)"
+  - "            for neighbor in graph[node]:"
+  - "                if neighbor not in visited:"
+  - "                    stack.append(neighbor)"
+solution_order: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+distractors:
+  - "        node = stack.popleft()"
+  - "    queue = [start]"
+hints:
+  - "DFS uses a stack (LIFO), not a queue. Use pop(), not popleft()."
+  - "Check if a node is visited after popping, since it might have been added multiple times."
+concept_tags:
+  - dfs
+  - adjacency-list

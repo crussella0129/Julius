@@ -1,0 +1,44 @@
+type: trace
+id: "05-transformers-trace-01"
+prompt: "Trace through this softmax computation and predict the final output."
+code: |
+  import math
+
+  def softmax(scores):
+      max_s = max(scores)
+      exps = [math.exp(s - max_s) for s in scores]
+      total = sum(exps)
+      return [e / total for e in exps]
+
+  scores = [2.0, 1.0, 0.0]
+  weights = softmax(scores)
+  print([f"{w:.3f}" for w in weights])
+
+  # Which token gets most attention?
+  print(f"Max attention: index {weights.index(max(weights))}")
+steps:
+  - line: 9
+    variables: {"scores": [2.0, 1.0, 0.0]}
+    output: ""
+    explanation: "Three raw attention scores are defined."
+  - line: 10
+    variables: {"max_s": 2.0, "exps": [1.0, 0.368, 0.135], "total": 1.503}
+    output: ""
+    explanation: "Subtract max (2.0) for numerical stability: exp(0)=1.0, exp(-1)=0.368, exp(-2)=0.135. Total=1.503."
+  - line: 11
+    variables: {"weights": [0.665, 0.245, 0.090]}
+    output: "['0.665', '0.245', '0.090']"
+    explanation: "Each exp is divided by total. Highest score (2.0) gets highest weight (0.665)."
+  - line: 14
+    variables: {}
+    output: "Max attention: index 0"
+    explanation: "Index 0 has the highest weight, confirming the token with score 2.0 gets most attention."
+expected_output: |
+  ['0.665', '0.245', '0.090']
+  Max attention: index 0
+hints:
+  - "Softmax converts scores to probabilities that sum to 1."
+  - "The highest input score always gets the highest probability."
+concept_tags:
+  - self-attention
+  - transformer-architecture

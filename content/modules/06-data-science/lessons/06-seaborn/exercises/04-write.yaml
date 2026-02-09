@@ -1,0 +1,19 @@
+type: write
+id: "06-seaborn-write-01"
+prompt: "Write a function called `compute_correlation` that takes two lists of equal length and returns the Pearson correlation coefficient. Use the formula: r = sum((xi - x_mean)(yi - y_mean)) / sqrt(sum((xi - x_mean)^2) * sum((yi - y_mean)^2)). Test with x = [1, 2, 3, 4, 5] and y = [2, 4, 5, 4, 5]. Print the result rounded to 4 decimal places."
+starter_code: |
+  import math
+
+  # Write your function here
+tests:
+  - description: "Output contains a correlation value between -1 and 1"
+    check: "any(c.isdigit() for c in output)"
+  - description: "Correlation is approximately 0.8"
+    check: "'0.8' in output"
+hints:
+  - "Compute means first: x_mean = sum(x) / len(x)."
+  - "Use zip(x, y) to iterate over pairs."
+  - "The numerator is sum of (xi-xmean)*(yi-ymean), denominator is sqrt of products of sum of squares."
+concept_tags:
+  - heatmaps
+  - statistical-plots

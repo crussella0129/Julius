@@ -1,0 +1,67 @@
+type: trace
+id: "01-why-testing-trace-01"
+prompt: "Trace through this code and predict what will be printed."
+code: |
+  def is_even(n):
+      return n % 2 == 0
+
+  tests_passed = 0
+  tests_failed = 0
+
+  test_cases = [(4, True), (7, False), (0, True), (-3, False)]
+
+  for value, expected in test_cases:
+      result = is_even(value)
+      if result == expected:
+          tests_passed += 1
+      else:
+          tests_failed += 1
+
+  print(f"Passed: {tests_passed}")
+  print(f"Failed: {tests_failed}")
+steps:
+  - line: 1
+    variables: {}
+    output: ""
+    explanation: "Define is_even function that returns True if n is divisible by 2."
+  - line: 4
+    variables: { "tests_passed": "0", "tests_failed": "0" }
+    output: ""
+    explanation: "Initialize counters for passed and failed tests."
+  - line: 7
+    variables: { "test_cases": "[(4, True), (7, False), (0, True), (-3, False)]" }
+    output: ""
+    explanation: "Define test cases as (input, expected_output) pairs."
+  - line: 9
+    variables: { "value": "4", "expected": "True", "result": "True" }
+    output: ""
+    explanation: "is_even(4) returns True, matches expected True. tests_passed = 1."
+  - line: 9
+    variables: { "value": "7", "expected": "False", "result": "False" }
+    output: ""
+    explanation: "is_even(7) returns False, matches expected False. tests_passed = 2."
+  - line: 9
+    variables: { "value": "0", "expected": "True", "result": "True" }
+    output: ""
+    explanation: "is_even(0) returns True, matches expected True. tests_passed = 3."
+  - line: 9
+    variables: { "value": "-3", "expected": "False", "result": "False" }
+    output: ""
+    explanation: "is_even(-3) returns False, matches expected False. tests_passed = 4."
+  - line: 16
+    variables: { "tests_passed": "4", "tests_failed": "0" }
+    output: "Passed: 4"
+    explanation: "All 4 tests passed."
+  - line: 17
+    variables: {}
+    output: "Failed: 0"
+    explanation: "No tests failed."
+expected_output: |
+  Passed: 4
+  Failed: 0
+hints:
+  - "is_even checks if n % 2 == 0. Even numbers (including 0) return True."
+  - "Negative odd numbers like -3 have -3 % 2 == 1 in Python (not 0), so is_even returns False."
+concept_tags:
+  - testing-motivation
+  - manual-vs-automated

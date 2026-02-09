@@ -1,0 +1,59 @@
+type: trace
+id: "04-generators-trace-01"
+prompt: "Trace through this code and predict the final output."
+code: |
+  def evens_up_to(n):
+      i = 0
+      while i <= n:
+          yield i
+          i += 2
+
+  gen = evens_up_to(7)
+  print(next(gen))
+  print(next(gen))
+  print(next(gen))
+
+  for x in gen:
+      print(x, end=" ")
+steps:
+  - line: 1
+    variables: {}
+    output: ""
+    explanation: "The generator function evens_up_to is defined."
+  - line: 7
+    variables: {}
+    output: ""
+    explanation: "evens_up_to(7) creates a generator object. The function body does NOT run yet."
+  - line: 8
+    variables: { "i": "0" }
+    output: "0"
+    explanation: "next(gen) starts the function. i=0, yields 0, pauses."
+  - line: 9
+    variables: { "i": "2" }
+    output: "2"
+    explanation: "next(gen) resumes. i becomes 2, yields 2, pauses."
+  - line: 10
+    variables: { "i": "4" }
+    output: "4"
+    explanation: "next(gen) resumes. i becomes 4, yields 4, pauses."
+  - line: 12
+    variables: { "i": "6" }
+    output: "6 "
+    explanation: "The for loop calls next(gen). i becomes 6, yields 6."
+  - line: 12
+    variables: { "i": "8" }
+    output: ""
+    explanation: "i becomes 8, which is > 7, so the while loop ends. StopIteration is raised, ending the for loop."
+expected_output: |
+  0
+  2
+  4
+  6
+hints:
+  - "The generator remembers where it left off between next() calls."
+  - "The for loop picks up where the manual next() calls stopped."
+  - "When i=8 > 7, the function returns and StopIteration ends the loop."
+concept_tags:
+  - yield-keyword
+  - next-function
+  - lazy-evaluation

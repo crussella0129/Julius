@@ -1,0 +1,98 @@
+type: trace
+id: "05-forensics-trace-01"
+prompt: "Trace through this code that parses log entries and counts failed login attempts by IP address."
+code: |
+  from collections import Counter
+
+  logs = [
+      "Failed login from 10.0.0.1 user admin",
+      "Success login from 10.0.0.2 user alice",
+      "Failed login from 10.0.0.1 user root",
+      "Failed login from 10.0.0.3 user admin",
+      "Failed login from 10.0.0.1 user guest",
+  ]
+
+  failed_ips = []
+  for entry in logs:
+      if entry.startswith("Failed"):
+          parts = entry.split()
+          ip = parts[3]
+          failed_ips.append(ip)
+
+  counts = Counter(failed_ips)
+  for ip, n in counts.most_common():
+      print(f"{ip}: {n}")
+steps:
+  - line: 3
+    variables: {"logs": "[5 log entries]"}
+    output: ""
+    explanation: "Create a list of 5 log entries, mixing failed and successful logins."
+  - line: 11
+    variables: {"failed_ips": "[]"}
+    output: ""
+    explanation: "Initialize empty list to collect IPs from failed attempts."
+  - line: 12
+    variables: {"entry": "Failed login from 10.0.0.1 user admin"}
+    output: ""
+    explanation: "First entry starts with 'Failed'."
+  - line: 14
+    variables: {"parts": "['Failed', 'login', 'from', '10.0.0.1', 'user', 'admin']"}
+    output: ""
+    explanation: "Split the entry into words."
+  - line: 15
+    variables: {"ip": "10.0.0.1"}
+    output: ""
+    explanation: "The IP address is at index 3."
+  - line: 16
+    variables: {"failed_ips": "['10.0.0.1']"}
+    output: ""
+    explanation: "Append the IP to our list."
+  - line: 12
+    variables: {"entry": "Success login from 10.0.0.2 user alice"}
+    output: ""
+    explanation: "Second entry starts with 'Success', not 'Failed' -- skip it."
+  - line: 12
+    variables: {"entry": "Failed login from 10.0.0.1 user root"}
+    output: ""
+    explanation: "Third entry is a failed login from 10.0.0.1 again."
+  - line: 16
+    variables: {"failed_ips": "['10.0.0.1', '10.0.0.1']"}
+    output: ""
+    explanation: "Append 10.0.0.1 a second time."
+  - line: 12
+    variables: {"entry": "Failed login from 10.0.0.3 user admin"}
+    output: ""
+    explanation: "Fourth entry is a failed login from a different IP."
+  - line: 16
+    variables: {"failed_ips": "['10.0.0.1', '10.0.0.1', '10.0.0.3']"}
+    output: ""
+    explanation: "Append 10.0.0.3."
+  - line: 12
+    variables: {"entry": "Failed login from 10.0.0.1 user guest"}
+    output: ""
+    explanation: "Fifth entry is another failed login from 10.0.0.1."
+  - line: 16
+    variables: {"failed_ips": "['10.0.0.1', '10.0.0.1', '10.0.0.3', '10.0.0.1']"}
+    output: ""
+    explanation: "Append 10.0.0.1 a third time."
+  - line: 18
+    variables: {"counts": "Counter({'10.0.0.1': 3, '10.0.0.3': 1})"}
+    output: ""
+    explanation: "Counter tallies the occurrences of each IP."
+  - line: 19
+    variables: {"ip": "10.0.0.1", "n": 3}
+    output: "10.0.0.1: 3"
+    explanation: "most_common() returns IPs sorted by count, highest first."
+  - line: 19
+    variables: {"ip": "10.0.0.3", "n": 1}
+    output: "10.0.0.3: 1"
+    explanation: "Second most common IP with 1 failed attempt."
+expected_output: |
+  10.0.0.1: 3
+  10.0.0.3: 1
+hints:
+  - "Only entries starting with 'Failed' are counted."
+  - "Counter.most_common() returns items sorted by count in descending order."
+concept_tags:
+  - log-parsing
+  - evidence-handling

@@ -1,0 +1,73 @@
+type: trace
+id: "03-linked-lists-trace-01"
+prompt: "Trace through this linked list traversal and predict the output."
+code: |
+  class Node:
+      def __init__(self, val, next_node=None):
+          self.val = val
+          self.next = next_node
+
+  head = Node(10, Node(20, Node(30)))
+  current = head
+  total = 0
+  while current:
+      total += current.val
+      current = current.next
+  print(total)
+steps:
+  - line: 6
+    variables: { "head": "Node(10)->Node(20)->Node(30)->None" }
+    output: ""
+    explanation: "Build the chain: 10 -> 20 -> 30 -> None."
+  - line: 7
+    variables: { "current": "Node(10)" }
+    output: ""
+    explanation: "current points to head, which is Node(10)."
+  - line: 8
+    variables: { "total": "0" }
+    output: ""
+    explanation: "Initialize total to 0."
+  - line: 9
+    variables: { "current": "Node(10)", "total": "0" }
+    output: ""
+    explanation: "current is not None, enter loop."
+  - line: 10
+    variables: { "total": "10", "current": "Node(10)" }
+    output: ""
+    explanation: "total += 10, total is now 10."
+  - line: 11
+    variables: { "current": "Node(20)" }
+    output: ""
+    explanation: "current moves to Node(20)."
+  - line: 9
+    variables: { "current": "Node(20)", "total": "10" }
+    output: ""
+    explanation: "current is not None, continue loop."
+  - line: 10
+    variables: { "total": "30", "current": "Node(20)" }
+    output: ""
+    explanation: "total += 20, total is now 30."
+  - line: 11
+    variables: { "current": "Node(30)" }
+    output: ""
+    explanation: "current moves to Node(30)."
+  - line: 10
+    variables: { "total": "60", "current": "Node(30)" }
+    output: ""
+    explanation: "total += 30, total is now 60."
+  - line: 11
+    variables: { "current": "None" }
+    output: ""
+    explanation: "current moves to None (end of list)."
+  - line: 12
+    variables: { "total": "60" }
+    output: "60"
+    explanation: "Loop exits. Print total = 60 (10+20+30)."
+expected_output: |
+  60
+hints:
+  - "Follow the .next references: 10 -> 20 -> 30 -> None."
+  - "The while loop stops when current becomes None."
+concept_tags:
+  - singly-linked-list
+  - node-traversal

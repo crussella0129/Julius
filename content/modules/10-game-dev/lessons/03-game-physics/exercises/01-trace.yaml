@@ -1,0 +1,58 @@
+type: trace
+id: "03-game-physics-trace-01"
+prompt: "Trace through this code simulating gravity and predict what will be printed."
+code: |
+  y = 0
+  vel_y = 0
+  gravity = 2
+  ground = 20
+
+  for frame in range(6):
+      vel_y += gravity
+      y += vel_y
+      if y >= ground:
+          y = ground
+          vel_y = 0
+      print(f"Frame {frame}: y={y}, vel_y={vel_y}")
+steps:
+  - line: 1
+    variables: { "y": "0", "vel_y": "0", "gravity": "2", "ground": "20" }
+    output: ""
+    explanation: "Initialize position at 0, no velocity, gravity of 2, ground at 20."
+  - line: 7
+    variables: { "frame": "0", "vel_y": "2", "y": "2" }
+    output: "Frame 0: y=2, vel_y=2"
+    explanation: "vel_y = 0 + 2 = 2. y = 0 + 2 = 2. Below ground, no collision."
+  - line: 7
+    variables: { "frame": "1", "vel_y": "4", "y": "6" }
+    output: "Frame 1: y=6, vel_y=4"
+    explanation: "vel_y = 2 + 2 = 4. y = 2 + 4 = 6. Still below ground level."
+  - line: 7
+    variables: { "frame": "2", "vel_y": "6", "y": "12" }
+    output: "Frame 2: y=12, vel_y=6"
+    explanation: "vel_y = 4 + 2 = 6. y = 6 + 6 = 12. Still falling."
+  - line: 7
+    variables: { "frame": "3", "vel_y": "0", "y": "20" }
+    output: "Frame 3: y=20, vel_y=0"
+    explanation: "vel_y = 6 + 2 = 8. y = 12 + 8 = 20. Hit ground! y clamped to 20, vel_y reset to 0."
+  - line: 7
+    variables: { "frame": "4", "vel_y": "0", "y": "20" }
+    output: "Frame 4: y=20, vel_y=0"
+    explanation: "vel_y = 0 + 2 = 2. y = 20 + 2 = 22 >= 20. Clamped again: y=20, vel_y=0."
+  - line: 7
+    variables: { "frame": "5", "vel_y": "0", "y": "20" }
+    output: "Frame 5: y=20, vel_y=0"
+    explanation: "Same pattern: gravity adds velocity, but immediately hits ground. y=20, vel_y=0."
+expected_output: |
+  Frame 0: y=2, vel_y=2
+  Frame 1: y=6, vel_y=4
+  Frame 2: y=12, vel_y=6
+  Frame 3: y=20, vel_y=0
+  Frame 4: y=20, vel_y=0
+  Frame 5: y=20, vel_y=0
+hints:
+  - "Gravity adds to velocity each frame, and velocity adds to position."
+  - "When y >= ground, position snaps to ground and velocity resets to 0."
+concept_tags:
+  - gravity
+  - collision-detection

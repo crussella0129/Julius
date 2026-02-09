@@ -1,0 +1,23 @@
+type: write
+id: "02-sprites-movement-write-01"
+prompt: "Write a class called `Entity` with x, y, and speed attributes. Add a `move_toward` method that takes a target_x and target_y and moves the entity one step (by `speed` pixels) toward the target. If the entity is within `speed` distance, snap it to the target. Create an entity at (0, 0) with speed 5, move it toward (3, 4) and print its position, then move it toward (100, 0) and print its position."
+starter_code: |
+  import math
+
+  # Define Entity class
+
+  # Test
+tests:
+  - description: "Output has exactly 2 lines"
+    check: "len(output.strip().splitlines()) == 2"
+  - description: "First move snaps to target (3, 4) since distance is 5"
+    check: "'3' in output.strip().splitlines()[0] and '4' in output.strip().splitlines()[0]"
+  - description: "Second position shows movement toward (100, 0)"
+    check: "output.strip().splitlines()[1] != output.strip().splitlines()[0]"
+hints:
+  - "Calculate distance: math.sqrt((tx-x)**2 + (ty-y)**2). If distance <= speed, snap."
+  - "Otherwise, move by speed in the direction of the target using dx/dist and dy/dist."
+  - "After first move: distance to (3,4) is 5.0, equals speed, so snap to (3, 4)."
+concept_tags:
+  - sprite-class
+  - velocity

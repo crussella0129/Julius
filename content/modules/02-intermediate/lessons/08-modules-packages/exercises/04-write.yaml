@@ -1,0 +1,34 @@
+type: write
+id: "08-modules-packages-write-01"
+prompt: "Write a program that uses the math and os modules to: (1) Print the value of pi rounded to 4 decimal places. (2) Print the ceiling of 7.2. (3) Print the floor of 7.8. (4) Print the factorial of 6. (5) Print the current working directory using os.getcwd()."
+starter_code: |
+  # Import the modules you need
+
+  # Print pi rounded to 4 decimal places
+
+  # Print ceiling of 7.2
+
+  # Print floor of 7.8
+
+  # Print factorial of 6
+
+  # Print current working directory
+tests:
+  - description: "First line is pi rounded: 3.1416"
+    check: "output.strip().splitlines()[0] == '3.1416'"
+  - description: "Second line is ceil(7.2): 8"
+    check: "output.strip().splitlines()[1] == '8'"
+  - description: "Third line is floor(7.8): 7"
+    check: "output.strip().splitlines()[2] == '7'"
+  - description: "Fourth line is factorial(6): 720"
+    check: "output.strip().splitlines()[3] == '720'"
+  - description: "Fifth line is a directory path (starts with /)"
+    check: "output.strip().splitlines()[4].startswith('/')"
+hints:
+  - "Import math and os at the top."
+  - "Use round(math.pi, 4) for pi, math.ceil() for ceiling, math.floor() for floor."
+  - "math.factorial(6) computes 6! = 720."
+  - "import math\nimport os\nprint(round(math.pi, 4))\nprint(math.ceil(7.2))\nprint(math.floor(7.8))\nprint(math.factorial(6))\nprint(os.getcwd())"
+concept_tags:
+  - import-statement
+  - standard-library

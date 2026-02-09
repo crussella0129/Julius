@@ -1,0 +1,22 @@
+type: parsons
+id: "05-transformers-parsons-01"
+prompt: "Arrange these lines to implement a simplified self-attention function that computes attention weights and returns weighted value vectors for a single query token."
+blocks:
+  - "def single_query_attention(query, keys, values):"
+  - "    d_k = len(query)"
+  - "    scores = [sum(query[d] * k[d] for d in range(d_k)) for k in keys]"
+  - "    scores = [s / math.sqrt(d_k) for s in scores]"
+  - "    weights = softmax(scores)"
+  - "    d_v = len(values[0])"
+  - "    output = [sum(weights[j] * values[j][d] for j in range(len(values))) for d in range(d_v)]"
+  - "    return output"
+distractors:
+  - "    scores = [sum(query[d] * k[d] for d in range(d_k)) for k in values]"
+  - "    scores = [s * math.sqrt(d_k) for s in scores]"
+solution_order: [0, 1, 2, 3, 4, 5, 6, 7]
+hints:
+  - "Scores are dot products of the query with each key, not each value."
+  - "We divide by sqrt(d_k), not multiply -- this is the scaling step."
+concept_tags:
+  - self-attention
+  - transformer-architecture

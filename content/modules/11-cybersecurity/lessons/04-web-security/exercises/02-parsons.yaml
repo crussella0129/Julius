@@ -1,0 +1,20 @@
+type: parsons
+id: "04-web-security-parsons-01"
+prompt: "Arrange these lines to create a function that safely renders user comments by escaping HTML, preventing XSS attacks."
+blocks:
+  - "import html"
+  - "def render_comment(username, comment):"
+  - "    safe_user = html.escape(username)"
+  - "    safe_comment = html.escape(comment)"
+  - "    return f\"<div class='comment'><b>{safe_user}</b>: {safe_comment}</div>\""
+distractors:
+  - "    return f\"<div class='comment'><b>{username}</b>: {comment}</div>\""
+  - "    safe_comment = comment.replace('<', '')"
+solution_order: [0, 1, 2, 3, 4]
+hints:
+  - "Import html first, then define the function."
+  - "Both username and comment must be escaped before being inserted into HTML."
+  - "html.escape() converts characters like < > & to safe HTML entities."
+concept_tags:
+  - xss
+  - input-validation

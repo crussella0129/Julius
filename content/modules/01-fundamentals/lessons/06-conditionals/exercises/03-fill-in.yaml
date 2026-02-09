@@ -1,0 +1,34 @@
+type: fill-in
+id: "06-conditionals-fill-in-01"
+prompt: "Fill in the blanks to check if a person can ride a roller coaster (must be at least 120cm tall AND at least 8 years old)."
+template: |
+  height = 130
+  age = 10
+  ____ height >= 120 ____ age >= 8:
+      print("You can ride!")
+  ____:
+      print("Sorry, not yet.")
+blanks:
+  - position: 0
+    answer: "if"
+    hint: "conditional keyword"
+  - position: 1
+    answer: "and"
+    hint: "both conditions must be true"
+  - position: 2
+    answer: "else"
+    hint: "otherwise"
+solution: |
+  height = 130
+  age = 10
+  if height >= 120 and age >= 8:
+      print("You can ride!")
+  else:
+      print("Sorry, not yet.")
+hints:
+  - "'and' requires both conditions to be True."
+  - "if starts the conditional; else handles the alternative."
+concept_tags:
+  - if-statement
+  - else-statement
+  - boolean-expressions

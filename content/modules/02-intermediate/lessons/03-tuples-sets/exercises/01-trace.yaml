@@ -1,0 +1,56 @@
+type: trace
+id: "03-tuples-sets-trace-01"
+prompt: "Trace through this code and predict the final output."
+code: |
+  a = {1, 2, 3, 4, 5}
+  b = {4, 5, 6, 7, 8}
+  both = a & b
+  only_a = a - b
+  combined = a | b
+  print(sorted(both))
+  print(sorted(only_a))
+  print(len(combined))
+steps:
+  - line: 1
+    variables: { "a": "{1, 2, 3, 4, 5}" }
+    output: ""
+    explanation: "Set a is created with elements 1 through 5."
+  - line: 2
+    variables: { "a": "{1, 2, 3, 4, 5}", "b": "{4, 5, 6, 7, 8}" }
+    output: ""
+    explanation: "Set b is created with elements 4 through 8."
+  - line: 3
+    variables: { "a": "{1, 2, 3, 4, 5}", "b": "{4, 5, 6, 7, 8}", "both": "{4, 5}" }
+    output: ""
+    explanation: "a & b is the intersection — elements in both sets: {4, 5}."
+  - line: 4
+    variables: { "a": "{1, 2, 3, 4, 5}", "b": "{4, 5, 6, 7, 8}", "both": "{4, 5}", "only_a": "{1, 2, 3}" }
+    output: ""
+    explanation: "a - b is the difference — elements in a but not in b: {1, 2, 3}."
+  - line: 5
+    variables: { "a": "{1, 2, 3, 4, 5}", "b": "{4, 5, 6, 7, 8}", "both": "{4, 5}", "only_a": "{1, 2, 3}", "combined": "{1, 2, 3, 4, 5, 6, 7, 8}" }
+    output: ""
+    explanation: "a | b is the union — all elements from both sets: {1, 2, 3, 4, 5, 6, 7, 8}."
+  - line: 6
+    variables: {}
+    output: "[4, 5]"
+    explanation: "sorted(both) returns a sorted list of the intersection: [4, 5]."
+  - line: 7
+    variables: {}
+    output: "[1, 2, 3]"
+    explanation: "sorted(only_a) returns a sorted list of the difference: [1, 2, 3]."
+  - line: 8
+    variables: {}
+    output: "8"
+    explanation: "len(combined) is 8 — the union has 8 unique elements."
+expected_output: |
+  [4, 5]
+  [1, 2, 3]
+  8
+hints:
+  - "& is intersection (elements in both), - is difference (elements in first but not second), | is union (all elements)."
+  - "sorted() converts a set to a sorted list."
+  - "The union of {1,2,3,4,5} and {4,5,6,7,8} has 8 unique elements (duplicates are removed)."
+concept_tags:
+  - sets
+  - set-operations

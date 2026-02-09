@@ -1,0 +1,12 @@
+id: "13-embedded-gpu"
+title: "Embedded, IoT & GPU Python"
+description: "MicroPython, IoT networking, and GPU-accelerated computing"
+order: 13
+lessons:
+  - 01-micropython-intro
+  - 02-circuitpython
+  - 03-iot-networking
+  - 04-numpy-performance
+  - 05-numba-jit
+  - 06-cupy-gpu
+  - 07-cuda-python

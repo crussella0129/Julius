@@ -1,0 +1,19 @@
+type: write
+id: "06-rest-api-write-01"
+prompt: "Write a class called `TodoAPI` that simulates a REST API. It should have: `create(title)` that adds a todo with auto-incrementing id and done=False, returns the todo dict; `get(todo_id)` that returns the todo or None; `update(todo_id, done)` that sets the done status and returns the updated todo or None; `delete(todo_id)` that removes and returns True, or returns False. Demo by creating 2 todos, updating one to done, deleting the other, and printing the remaining todos."
+starter_code: |
+  # Write your class here
+tests:
+  - description: "Creates todos with IDs"
+    check: "'id' in output.lower() or '1' in output"
+  - description: "Shows a todo marked as done"
+    check: "'True' in output or 'done' in output.lower()"
+  - description: "Shows deletion result"
+    check: "output.count('True') >= 1 or 'delete' in output.lower()"
+hints:
+  - "Use a dictionary to store todos by ID."
+  - "Auto-increment IDs with a counter attribute."
+  - "Return None from get/update if the ID is not found."
+concept_tags:
+  - crud-endpoints
+  - rest-principles

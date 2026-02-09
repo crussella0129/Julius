@@ -1,0 +1,17 @@
+type: write
+id: "08-graphs-write-01"
+prompt: "Write a function called count_components(graph) that counts the number of connected components in an undirected graph represented as an adjacency list (dict). Test it with: {1: [2], 2: [1], 3: [4], 4: [3], 5: []}. Print the count."
+starter_code: |
+  from collections import deque
+  # Write count_components(graph) and test it
+tests:
+  - description: "Output is 3 (three components: {1,2}, {3,4}, {5})"
+    check: "'3' in output.strip()"
+  - description: "Output is a single number"
+    check: "output.strip().isdigit()"
+hints:
+  - "Loop over all nodes. For each unvisited node, start a BFS/DFS to mark the entire component."
+  - "Increment the component count each time you start a new BFS/DFS."
+concept_tags:
+  - connected-components
+  - bfs

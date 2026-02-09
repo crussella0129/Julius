@@ -1,0 +1,84 @@
+type: trace
+id: "05-numba-jit-trace-01"
+prompt: "Trace through this code that computes Mandelbrot set iterations for several complex points and predict the output."
+code: |
+  def mandelbrot(c, max_iter):
+      z = 0j
+      for i in range(max_iter):
+          z = z * z + c
+          if abs(z) > 2:
+              return i
+      return max_iter
+
+  points = [complex(0, 0), complex(1, 0), complex(-2, 0), complex(0.5, 0.5)]
+  max_iter = 10
+
+  for c in points:
+      iters = mandelbrot(c, max_iter)
+      label = "inside" if iters == max_iter else f"escaped at {iters}"
+      print(f"c={c}: {label}")
+steps:
+  - line: 9
+    variables: {"points": "[(0+0j), (1+0j), (-2+0j), (0.5+0.5j)]"}
+    output: ""
+    explanation: "Four complex points to test."
+  - line: 12
+    variables: {"c": "(0+0j)"}
+    output: ""
+    explanation: "First point: 0+0j. z starts at 0, z*z+c = 0 always. abs(z) never exceeds 2."
+  - line: 13
+    variables: {"iters": 10}
+    output: ""
+    explanation: "Loop completes all 10 iterations without escaping. Returns max_iter."
+  - line: 15
+    variables: {}
+    output: "c=0j: inside"
+    explanation: "0+0j is inside the Mandelbrot set."
+  - line: 12
+    variables: {"c": "(1+0j)"}
+    output: ""
+    explanation: "Second point: 1+0j. z=0 -> 1 -> 2 -> 5. abs(5) > 2 at i=2."
+  - line: 13
+    variables: {"iters": 2}
+    output: ""
+    explanation: "Escaped at iteration 2 (z=5, abs=5 > 2)."
+  - line: 15
+    variables: {}
+    output: "c=(1+0j): escaped at 2"
+    explanation: "1+0j escapes quickly."
+  - line: 12
+    variables: {"c": "(-2+0j)"}
+    output: ""
+    explanation: "Third point: -2+0j. z=0 -> -2 -> 2 -> 2 -> 2... abs(z)=2, not > 2."
+  - line: 13
+    variables: {"iters": 10}
+    output: ""
+    explanation: "z oscillates at abs(z)=2 but never exceeds it. Returns max_iter."
+  - line: 15
+    variables: {}
+    output: "c=(-2+0j): inside"
+    explanation: "-2+0j is on the boundary of the Mandelbrot set."
+  - line: 12
+    variables: {"c": "(0.5+0.5j)"}
+    output: ""
+    explanation: "Fourth point: 0.5+0.5j. z grows but stays bounded for 10 iterations."
+  - line: 13
+    variables: {"iters": 10}
+    output: ""
+    explanation: "Does not escape in 10 iterations."
+  - line: 15
+    variables: {}
+    output: "c=(0.5+0.5j): inside"
+    explanation: "0.5+0.5j is inside the set for this max_iter."
+expected_output: |
+  c=0j: inside
+  c=(1+0j): escaped at 2
+  c=(-2+0j): inside
+  c=(0.5+0.5j): inside
+hints:
+  - "z starts at 0j. Each iteration: z = z*z + c."
+  - "If abs(z) > 2 at any point, the point escapes (outside the set)."
+  - "For c=0, z is always 0. For c=1, z quickly grows past 2."
+concept_tags:
+  - jit-compilation
+  - nopython-mode

@@ -1,0 +1,22 @@
+type: write
+id: "08-langchain-write-01"
+prompt: "Write a Chain class whose __init__ takes a list of functions, and whose run(data) method passes data through each function sequentially, returning the final result. Then create three functions: (1) strip_text that strips whitespace, (2) to_upper that uppercases, (3) add_exclaim that appends '!!!'. Create a chain with all three and print the result of running it with '  hello world  '."
+starter_code: |
+  # Write Chain class and three functions here
+
+  chain = Chain([strip_text, to_upper, add_exclaim])
+  print(chain.run("  hello world  "))
+tests:
+  - description: "Output is 'HELLO WORLD!!!'"
+    check: "output.strip() == 'HELLO WORLD!!!'"
+  - description: "Output has no leading/trailing spaces (strip was applied)"
+    check: "output.strip() == output.strip()"
+  - description: "Output ends with !!!"
+    check: "output.strip().endswith('!!!')"
+hints:
+  - "The Chain.run method loops through self.steps, updating data each time."
+  - "strip_text returns text.strip(), to_upper returns text.upper()."
+  - "add_exclaim returns text + '!!!'."
+concept_tags:
+  - chains
+  - langchain

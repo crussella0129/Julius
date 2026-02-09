@@ -1,0 +1,63 @@
+type: fill-in
+id: "06-error-handling-fill-in-01"
+prompt: "Fill in the blanks to handle a ValueError, raise a custom exception, and use a finally block."
+template: |
+  # Handle ValueError when converting to int
+  try:
+      number = int("hello")
+  ____ ValueError as e:
+      print(f"Error: {e}")
+
+  # Raise an exception for invalid input
+  def set_age(age):
+      if age < 0:
+          ____ ValueError("Age cannot be negative")
+      return age
+
+  # Finally block
+  print("Starting...")
+  try:
+      result = 10 / 2
+  except ZeroDivisionError:
+      print("Zero division!")
+  ____:
+      print("Done.")
+blanks:
+  - position: 0
+    answer: "except"
+    hint: "keyword that catches exceptions"
+  - position: 1
+    answer: "raise"
+    hint: "keyword that triggers an exception"
+  - position: 2
+    answer: "finally"
+    hint: "block that always executes"
+solution: |
+  # Handle ValueError when converting to int
+  try:
+      number = int("hello")
+  except ValueError as e:
+      print(f"Error: {e}")
+
+  # Raise an exception for invalid input
+  def set_age(age):
+      if age < 0:
+          raise ValueError("Age cannot be negative")
+      return age
+
+  # Finally block
+  print("Starting...")
+  try:
+      result = 10 / 2
+  except ZeroDivisionError:
+      print("Zero division!")
+  finally:
+      print("Done.")
+hints:
+  - "'except' catches exceptions raised in the try block."
+  - "'raise' deliberately triggers an exception."
+  - "'finally' defines a block that runs whether or not an exception occurred."
+concept_tags:
+  - try-except
+  - raising-exceptions
+  - finally-else

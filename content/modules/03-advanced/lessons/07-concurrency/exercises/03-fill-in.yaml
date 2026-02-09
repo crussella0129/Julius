@@ -1,0 +1,47 @@
+type: fill-in
+id: "07-concurrency-fill-in-01"
+prompt: "Fill in the blanks to complete this asyncio program that runs two coroutines concurrently."
+template: |
+  import asyncio
+
+  ____ def task(name, delay):
+      print(f"{name} starting")
+      ____ asyncio.sleep(delay)
+      print(f"{name} done")
+      return name
+
+  async def main():
+      results = await asyncio.____( task("A", 1), task("B", 2) )
+      print(results)
+
+  asyncio.run(main())
+blanks:
+  - position: 0
+    answer: "async"
+    hint: "keyword for defining a coroutine"
+  - position: 1
+    answer: "await"
+    hint: "keyword to pause and wait"
+  - position: 2
+    answer: "gather"
+    hint: "run multiple coroutines concurrently"
+solution: |
+  import asyncio
+
+  async def task(name, delay):
+      print(f"{name} starting")
+      await asyncio.sleep(delay)
+      print(f"{name} done")
+      return name
+
+  async def main():
+      results = await asyncio.gather(task("A", 1), task("B", 2))
+      print(results)
+
+  asyncio.run(main())
+hints:
+  - "Coroutines are defined with 'async def'."
+  - "Use 'await' to pause a coroutine while waiting for an async operation."
+  - "asyncio.gather() runs multiple coroutines concurrently and collects their results."
+concept_tags:
+  - asyncio-basics

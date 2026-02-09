@@ -1,0 +1,45 @@
+type: fill-in
+id: "06-seaborn-fill-in-01"
+prompt: "Fill in the blanks to compute statistics for a box plot (min, Q1, median, Q3, max)."
+template: |
+  data = [2, 7, 15, 22, 28, 33, 41, 48, 55, 60]
+  data.sort()
+
+  n = len(data)
+  minimum = ____[0]
+  maximum = data[____ - 1]
+  median = (data[n // 2 - 1] + data[n // 2]) / 2
+
+  q1_data = data[:n // 2]
+  q1 = (q1_data[len(q1_data) // 2 - 1] + q1_data[len(q1_data) // 2]) / 2
+
+  print(f\"Min: {minimum}, Median: {____}, Max: {maximum}\")
+blanks:
+  - position: 0
+    answer: "data"
+    hint: "the sorted list"
+  - position: 1
+    answer: "n"
+    hint: "variable holding the length of data"
+  - position: 2
+    answer: "median"
+    hint: "the middle value computed above"
+solution: |
+  data = [2, 7, 15, 22, 28, 33, 41, 48, 55, 60]
+  data.sort()
+
+  n = len(data)
+  minimum = data[0]
+  maximum = data[n - 1]
+  median = (data[n // 2 - 1] + data[n // 2]) / 2
+
+  q1_data = data[:n // 2]
+  q1 = (q1_data[len(q1_data) // 2 - 1] + q1_data[len(q1_data) // 2]) / 2
+
+  print(f"Min: {minimum}, Median: {median}, Max: {maximum}")
+hints:
+  - "The minimum is the first element of the sorted data."
+  - "For even-length data, the median is the average of the two middle values."
+concept_tags:
+  - distribution-plots
+  - statistical-plots

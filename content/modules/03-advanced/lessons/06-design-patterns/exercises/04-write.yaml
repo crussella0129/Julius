@@ -1,0 +1,29 @@
+type: write
+id: "06-design-patterns-write-01"
+prompt: "Implement the Strategy pattern: write three functions `add(a, b)`, `subtract(a, b)`, and `multiply(a, b)`. Then write a function `calculate(a, b, strategy)` that takes two numbers and a strategy function, calls the strategy, and returns the result. Print the results of calculate(10, 3, add), calculate(10, 3, subtract), and calculate(10, 3, multiply)."
+starter_code: |
+  # Define strategy functions
+
+
+  # Define the calculate function
+
+
+  # Test them
+  print(calculate(10, 3, add))
+  print(calculate(10, 3, subtract))
+  print(calculate(10, 3, multiply))
+tests:
+  - description: "Output has exactly 3 lines"
+    check: "len(output.strip().splitlines()) == 3"
+  - description: "add(10, 3) = 13"
+    check: "output.strip().splitlines()[0].strip() == '13'"
+  - description: "subtract(10, 3) = 7"
+    check: "output.strip().splitlines()[1].strip() == '7'"
+  - description: "multiply(10, 3) = 30"
+    check: "output.strip().splitlines()[2].strip() == '30'"
+hints:
+  - "Each strategy is a simple function that takes two arguments and returns a result."
+  - "calculate() just calls the strategy function with the two numbers."
+  - "def add(a, b): return a + b\ndef subtract(a, b): return a - b\ndef multiply(a, b): return a * b\ndef calculate(a, b, strategy): return strategy(a, b)"
+concept_tags:
+  - strategy-pattern

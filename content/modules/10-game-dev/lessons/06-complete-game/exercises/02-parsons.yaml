@@ -1,0 +1,27 @@
+type: parsons
+id: "06-complete-game-parsons-01"
+prompt: "Arrange these lines to create a simple game loop that spawns falling objects, checks collisions with a player, tracks score, and ends when lives reach zero."
+blocks:
+  - "player_x = 50"
+  - "lives = 3"
+  - "score = 0"
+  - "obstacles = []"
+  - "while lives > 0:"
+  - "    obstacles.append(100)"
+  - "    obstacles = [y + 10 for y in obstacles]"
+  - "    obstacles = [y for y in obstacles if y < 200]"
+  - "    score += 1"
+  - "    if any(y > 150 for y in obstacles):"
+  - "        lives -= 1"
+  - "print(f'Final score: {score}')"
+distractors:
+  - "while score > 0:"
+  - "    if obstacles > 150:"
+solution_order: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+hints:
+  - "Initialize player, lives, score, and obstacle list first."
+  - "The game loop runs while lives > 0."
+  - "Each iteration: spawn, move, remove off-screen, score, check collisions."
+concept_tags:
+  - gameplay-loop
+  - game-architecture

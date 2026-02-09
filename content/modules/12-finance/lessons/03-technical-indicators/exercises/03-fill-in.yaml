@@ -1,0 +1,35 @@
+type: fill-in
+id: "03-technical-indicators-fill-in-01"
+prompt: "Fill in the blanks to compute the RSI's relative strength (RS) and convert it to the 0-100 RSI scale."
+template: |
+  avg_gain = 2.5
+  avg_loss = 1.0
+
+  rs = avg_gain / ____
+  rsi_value = 100 - ____ / (1 + ____)
+  print(f"RS: {rs:.2f}")
+  print(f"RSI: {rsi_value:.2f}")
+blanks:
+  - position: 0
+    answer: "avg_loss"
+    hint: "denominator of the RS formula"
+  - position: 1
+    answer: "100"
+    hint: "the constant in the RSI formula"
+  - position: 2
+    answer: "rs"
+    hint: "relative strength value"
+solution: |
+  avg_gain = 2.5
+  avg_loss = 1.0
+
+  rs = avg_gain / avg_loss
+  rsi_value = 100 - 100 / (1 + rs)
+  print(f"RS: {rs:.2f}")
+  print(f"RSI: {rsi_value:.2f}")
+hints:
+  - "RS (Relative Strength) = average gain / average loss."
+  - "RSI = 100 - 100 / (1 + RS). When RS is high, RSI approaches 100."
+concept_tags:
+  - rsi
+  - signals

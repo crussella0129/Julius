@@ -1,0 +1,47 @@
+type: fill-in
+id: "03-classification-fill-in-01"
+prompt: "Fill in the blanks to compute a confusion matrix from predictions and actual labels."
+template: |
+  actual =      [1, 0, 1, 1, 0, 1, 0, 0, 1, 0]
+  predictions = [1, 0, 0, 1, 0, 1, 1, 0, 1, 0]
+
+  tp = sum(1 for a, p in zip(actual, predictions) if a == 1 and p == ____)
+  tn = sum(1 for a, p in zip(actual, predictions) if a == ____ and p == 0)
+  fp = sum(1 for a, p in zip(actual, predictions) if a == 0 and p == 1)
+  fn = sum(1 for a, p in zip(actual, predictions) if a == 1 and ____ == 0)
+
+  accuracy = (tp + ____) / len(actual)
+  print(f\"TP={tp}, TN={tn}, FP={fp}, FN={fn}\")
+  print(f\"Accuracy: {accuracy:.1%}\")
+blanks:
+  - position: 0
+    answer: "1"
+    hint: "true positive: actual=1 AND predicted=?"
+  - position: 1
+    answer: "0"
+    hint: "true negative: actual=? AND predicted=0"
+  - position: 2
+    answer: "p"
+    hint: "false negative: actual=1 AND which variable == 0?"
+  - position: 3
+    answer: "tn"
+    hint: "accuracy uses true positives and true ?"
+solution: |
+  actual =      [1, 0, 1, 1, 0, 1, 0, 0, 1, 0]
+  predictions = [1, 0, 0, 1, 0, 1, 1, 0, 1, 0]
+
+  tp = sum(1 for a, p in zip(actual, predictions) if a == 1 and p == 1)
+  tn = sum(1 for a, p in zip(actual, predictions) if a == 0 and p == 0)
+  fp = sum(1 for a, p in zip(actual, predictions) if a == 0 and p == 1)
+  fn = sum(1 for a, p in zip(actual, predictions) if a == 1 and p == 0)
+
+  accuracy = (tp + tn) / len(actual)
+  print(f"TP={tp}, TN={tn}, FP={fp}, FN={fn}")
+  print(f"Accuracy: {accuracy:.1%}")
+hints:
+  - "TP: both actual and predicted are 1 (positive)."
+  - "TN: both actual and predicted are 0 (negative)."
+  - "Accuracy = (TP + TN) / total."
+concept_tags:
+  - confusion-matrix
+  - classification-metrics

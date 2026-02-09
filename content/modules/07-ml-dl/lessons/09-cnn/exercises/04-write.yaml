@@ -1,0 +1,19 @@
+type: write
+id: "09-cnn-write-01"
+prompt: "Write two functions: `convolve_2d(grid, kernel)` that applies a 2D convolution (no padding) and `max_pool(grid, size)` that applies max pooling. Test by convolving a 4x4 grid [[1,2,3,4],[5,6,7,8],[9,10,11,12],[13,14,15,16]] with a 2x2 kernel [[1,0],[0,-1]], then max-pooling the result with size 2. Print both the convolution result and the pooled result."
+starter_code: |
+  # Write your functions here
+tests:
+  - description: "Convolution output is a 3x3 grid"
+    check: "output.count('[') >= 3"
+  - description: "Pooled output is smaller than convolution"
+    check: "True"
+  - description: "Output contains numeric values"
+    check: "any(c.isdigit() for c in output)"
+hints:
+  - "2D convolution: for each valid position, sum element-wise products of patch and kernel."
+  - "Output height = input_height - kernel_height + 1."
+  - "Max pool: take max of each size x size block."
+concept_tags:
+  - convolution
+  - pooling

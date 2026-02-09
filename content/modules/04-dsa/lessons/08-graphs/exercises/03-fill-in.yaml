@@ -1,0 +1,56 @@
+type: fill-in
+id: "08-graphs-fill-in-01"
+prompt: "Fill in the blanks to complete a BFS shortest-path function that returns the path from start to end."
+template: |
+  from collections import deque
+
+  def shortest_path(graph, start, end):
+      queue = deque([(start, [start])])
+      visited = {____}
+
+      while queue:
+          node, path = queue.____()
+          if node == end:
+              return path
+          for neighbor in graph[node]:
+              if neighbor not in ____:
+                  visited.add(neighbor)
+                  queue.append((neighbor, path + [____]))
+
+      return None
+blanks:
+  - position: 0
+    answer: "start"
+    hint: "the starting node should be marked as visited immediately"
+  - position: 1
+    answer: "popleft"
+    hint: "BFS removes from the front of the queue"
+  - position: 2
+    answer: "visited"
+    hint: "check the set of already-explored nodes"
+  - position: 3
+    answer: "neighbor"
+    hint: "extend the path with the new node being explored"
+solution: |
+  from collections import deque
+
+  def shortest_path(graph, start, end):
+      queue = deque([(start, [start])])
+      visited = {start}
+
+      while queue:
+          node, path = queue.popleft()
+          if node == end:
+              return path
+          for neighbor in graph[node]:
+              if neighbor not in visited:
+                  visited.add(neighbor)
+                  queue.append((neighbor, path + [neighbor]))
+
+      return None
+hints:
+  - "BFS guarantees the shortest path in unweighted graphs because it explores level by level."
+  - "Each queue entry is a tuple of (node, path_so_far) to track the route."
+concept_tags:
+  - bfs
+  - connected-components

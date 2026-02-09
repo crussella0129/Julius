@@ -1,0 +1,206 @@
+id: "placement"
+title: "Find Your Starting Point"
+description: "Answer these questions to discover where to begin. This isn't a test — it's a shortcut to find content that matches your experience level."
+questions:
+  - id: "q01"
+    module_target: "01-fundamentals"
+    prompt: "What does this code print?"
+    code: |
+      x = 5
+      y = x + 3
+      x = 10
+      print(y)
+    choices:
+      - { label: "A", text: "13" }
+      - { label: "B", text: "8" }
+      - { label: "C", text: "10" }
+      - { label: "D", text: "Error" }
+    correct: "B"
+    explanation: "y was assigned x + 3 when x was 5, so y = 8. Changing x later doesn't affect y."
+
+  - id: "q02"
+    module_target: "02-intermediate"
+    prompt: "What does this code print?"
+    code: |
+      data = [1, 2, 3, 4, 5]
+      result = data[1:4]
+      print(result)
+    choices:
+      - { label: "A", text: "[1, 2, 3, 4]" }
+      - { label: "B", text: "[2, 3, 4]" }
+      - { label: "C", text: "[1, 2, 3]" }
+      - { label: "D", text: "[2, 3, 4, 5]" }
+    correct: "B"
+    explanation: "Slicing [1:4] extracts elements at indices 1, 2, 3 — which are 2, 3, 4."
+
+  - id: "q03"
+    module_target: "03-advanced"
+    prompt: "What does this code print?"
+    code: |
+      class Dog:
+          def __init__(self, name):
+              self.name = name
+          def speak(self):
+              return f"{self.name} says Woof!"
+
+      d = Dog("Rex")
+      print(d.speak())
+    choices:
+      - { label: "A", text: "Rex says Woof!" }
+      - { label: "B", text: "Dog says Woof!" }
+      - { label: "C", text: "Error" }
+      - { label: "D", text: "None" }
+    correct: "A"
+    explanation: "Dog('Rex') creates an instance with name='Rex'. d.speak() returns 'Rex says Woof!'."
+
+  - id: "q04"
+    module_target: "04-dsa"
+    prompt: "What is the time complexity of searching for an element in a sorted array using binary search?"
+    code: ""
+    choices:
+      - { label: "A", text: "O(n)" }
+      - { label: "B", text: "O(n log n)" }
+      - { label: "C", text: "O(log n)" }
+      - { label: "D", text: "O(1)" }
+    correct: "C"
+    explanation: "Binary search halves the search space each step, giving O(log n) time complexity."
+
+  - id: "q05"
+    module_target: "05-web-dev"
+    prompt: "In a REST API, which HTTP method is typically used to create a new resource?"
+    code: ""
+    choices:
+      - { label: "A", text: "GET" }
+      - { label: "B", text: "POST" }
+      - { label: "C", text: "PUT" }
+      - { label: "D", text: "DELETE" }
+    correct: "B"
+    explanation: "POST is the standard HTTP method for creating new resources. GET reads, PUT updates, DELETE removes."
+
+  - id: "q06"
+    module_target: "06-data-science"
+    prompt: "What does this pandas code return?"
+    code: |
+      import pandas as pd
+      df = pd.DataFrame({'a': [1, 2, 3], 'b': [4, 5, 6]})
+      print(df['a'].mean())
+    choices:
+      - { label: "A", text: "2.0" }
+      - { label: "B", text: "6" }
+      - { label: "C", text: "3.0" }
+      - { label: "D", text: "[1, 2, 3]" }
+    correct: "A"
+    explanation: "The mean of [1, 2, 3] is (1+2+3)/3 = 2.0."
+
+  - id: "q07"
+    module_target: "07-ml-dl"
+    prompt: "In supervised machine learning, what is the purpose of a test set?"
+    code: ""
+    choices:
+      - { label: "A", text: "To train the model" }
+      - { label: "B", text: "To tune hyperparameters" }
+      - { label: "C", text: "To evaluate model performance on unseen data" }
+      - { label: "D", text: "To clean the data" }
+    correct: "C"
+    explanation: "The test set is held out to evaluate how well the model generalizes to data it hasn't seen during training."
+
+  - id: "q08"
+    module_target: "08-automation"
+    prompt: "Which Python module is used to interact with the operating system's file paths?"
+    code: ""
+    choices:
+      - { label: "A", text: "sys" }
+      - { label: "B", text: "os.path or pathlib" }
+      - { label: "C", text: "file" }
+      - { label: "D", text: "shutil" }
+    correct: "B"
+    explanation: "os.path and pathlib are Python's standard modules for file path manipulation."
+
+  - id: "q09"
+    module_target: "09-testing"
+    prompt: "What does this pytest code test?"
+    code: |
+      def add(a, b):
+          return a + b
+
+      def test_add():
+          assert add(2, 3) == 5
+    choices:
+      - { label: "A", text: "That add() prints 5" }
+      - { label: "B", text: "That add(2, 3) returns 5" }
+      - { label: "C", text: "That 2 + 3 is defined" }
+      - { label: "D", text: "That add() takes two arguments" }
+    correct: "B"
+    explanation: "assert checks that add(2, 3) returns exactly 5. If not, the test fails."
+
+  - id: "q10"
+    module_target: "10-game-dev"
+    prompt: "In game development, what is a 'game loop'?"
+    code: ""
+    choices:
+      - { label: "A", text: "A loop that plays background music" }
+      - { label: "B", text: "A continuous cycle of input, update, and render" }
+      - { label: "C", text: "A loop that loads game assets" }
+      - { label: "D", text: "A for loop that creates game objects" }
+    correct: "B"
+    explanation: "The game loop continuously processes input, updates game state, and renders the display — typically 30-60 times per second."
+
+  - id: "q11"
+    module_target: "11-cybersecurity"
+    prompt: "What is a hash function primarily used for in security?"
+    code: ""
+    choices:
+      - { label: "A", text: "Encrypting data that can be decrypted later" }
+      - { label: "B", text: "Generating a fixed-size fingerprint of data" }
+      - { label: "C", text: "Compressing files" }
+      - { label: "D", text: "Generating random numbers" }
+    correct: "B"
+    explanation: "A hash function produces a fixed-size digest (fingerprint) of input data. It's one-way — you can't reverse it to get the original data."
+
+  - id: "q12"
+    module_target: "12-finance"
+    prompt: "What does a moving average indicator do?"
+    code: ""
+    choices:
+      - { label: "A", text: "Predicts exact future prices" }
+      - { label: "B", text: "Smooths price data over a window of time" }
+      - { label: "C", text: "Calculates the total return of a stock" }
+      - { label: "D", text: "Determines the volume of trades" }
+    correct: "B"
+    explanation: "A moving average smooths out price fluctuations by averaging values over a rolling window, revealing trends."
+
+  - id: "q13"
+    module_target: "13-embedded-gpu"
+    prompt: "What is MicroPython?"
+    code: ""
+    choices:
+      - { label: "A", text: "A faster version of Python" }
+      - { label: "B", text: "A Python implementation for microcontrollers" }
+      - { label: "C", text: "A Python linter" }
+      - { label: "D", text: "A Python package manager" }
+    correct: "B"
+    explanation: "MicroPython is a lean implementation of Python 3 designed to run on microcontrollers and embedded systems."
+
+  - id: "q14"
+    module_target: "14-nlp-llm-ai"
+    prompt: "In NLP, what is tokenization?"
+    code: ""
+    choices:
+      - { label: "A", text: "Converting text to images" }
+      - { label: "B", text: "Splitting text into smaller units (words, subwords, or characters)" }
+      - { label: "C", text: "Translating text to another language" }
+      - { label: "D", text: "Removing punctuation from text" }
+    correct: "B"
+    explanation: "Tokenization breaks text into tokens (words, subwords, or characters) that can be processed by NLP models."
+
+  - id: "q15"
+    module_target: "15-computer-vision"
+    prompt: "In computer vision, what does a convolutional layer do?"
+    code: ""
+    choices:
+      - { label: "A", text: "Stores image pixels" }
+      - { label: "B", text: "Applies learned filters to detect features like edges and textures" }
+      - { label: "C", text: "Resizes images" }
+      - { label: "D", text: "Converts images to grayscale" }
+    correct: "B"
+    explanation: "Convolutional layers slide learned filters across an image to detect local features like edges, corners, and textures."

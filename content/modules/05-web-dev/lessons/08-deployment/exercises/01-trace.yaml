@@ -1,0 +1,71 @@
+type: trace
+id: "08-deployment-trace-01"
+prompt: "Trace through this configuration loading simulation and predict the output."
+code: |
+  import os
+
+  os.environ["APP_ENV"] = "production"
+  os.environ["SECRET_KEY"] = "abc123"
+
+  class Config:
+      DEBUG = False
+      SECRET = "default"
+
+  class DevConfig(Config):
+      DEBUG = True
+
+  class ProdConfig(Config):
+      SECRET = os.environ.get("SECRET_KEY", "fallback")
+
+  env = os.environ.get("APP_ENV", "development")
+  if env == "production":
+      config = ProdConfig()
+  else:
+      config = DevConfig()
+
+  print(f"ENV: {env}")
+  print(f"DEBUG: {config.DEBUG}")
+  print(f"SECRET: {config.SECRET}")
+steps:
+  - line: 3
+    variables: {}
+    output: ""
+    explanation: "Set APP_ENV to 'production' in environment."
+  - line: 4
+    variables: {}
+    output: ""
+    explanation: "Set SECRET_KEY to 'abc123' in environment."
+  - line: 16
+    variables: {"env": "production"}
+    output: ""
+    explanation: "Read APP_ENV from environment, get 'production'."
+  - line: 17
+    variables: {"env": "production"}
+    output: ""
+    explanation: "env equals 'production', so enter the if branch."
+  - line: 18
+    variables: {"config": "ProdConfig instance"}
+    output: ""
+    explanation: "Create ProdConfig. It inherits DEBUG=False from Config, and sets SECRET from env."
+  - line: 21
+    variables: {}
+    output: "ENV: production"
+    explanation: "Print the environment name."
+  - line: 22
+    variables: {}
+    output: "DEBUG: False"
+    explanation: "ProdConfig inherits DEBUG=False from Config (does not override it)."
+  - line: 23
+    variables: {}
+    output: "SECRET: abc123"
+    explanation: "ProdConfig sets SECRET from os.environ.get('SECRET_KEY'), which is 'abc123'."
+expected_output: |
+  ENV: production
+  DEBUG: False
+  SECRET: abc123
+hints:
+  - "ProdConfig inherits from Config but only overrides SECRET."
+  - "os.environ.get() reads from environment variables set earlier."
+concept_tags:
+  - environment-variables
+  - production-config

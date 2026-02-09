@@ -1,0 +1,23 @@
+type: write
+id: "04-game-state-write-01"
+prompt: "Write a ScoreBoard class that tracks the top 3 high scores. It should have an `add_score(name, score)` method that adds a score and keeps only the top 3 (sorted highest first), and a `display()` method that prints each entry as 'N. name: score'. Test by adding: ('Alice', 50), ('Bob', 80), ('Charlie', 30), ('Diana', 90). Then call display() to show the top 3."
+starter_code: |
+  # Define ScoreBoard class
+
+  # Test
+tests:
+  - description: "Output has exactly 3 lines"
+    check: "len(output.strip().splitlines()) == 3"
+  - description: "Diana is first with 90"
+    check: "'Diana' in output.strip().splitlines()[0] and '90' in output.strip().splitlines()[0]"
+  - description: "Bob is second with 80"
+    check: "'Bob' in output.strip().splitlines()[1] and '80' in output.strip().splitlines()[1]"
+  - description: "Alice is third with 50"
+    check: "'Alice' in output.strip().splitlines()[2] and '50' in output.strip().splitlines()[2]"
+hints:
+  - "Store scores as a list of (name, score) tuples."
+  - "After adding, sort by score descending and slice to top 3."
+  - "self.scores.sort(key=lambda x: x[1], reverse=True); self.scores = self.scores[:3]"
+concept_tags:
+  - score-tracking
+  - game-states

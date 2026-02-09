@@ -1,0 +1,33 @@
+type: write
+id: "04-dictionaries-write-01"
+prompt: "Write a program that creates a dictionary of student grades: {'Alice': 85, 'Bob': 92, 'Charlie': 78, 'Diana': 95, 'Eve': 88}. Then: (1) Print the grade for 'Charlie'. (2) Add 'Frank' with grade 91. (3) Print all student names who scored 90 or above, sorted alphabetically, one per line. (4) Print the class average (as an integer)."
+starter_code: |
+  grades = {"Alice": 85, "Bob": 92, "Charlie": 78, "Diana": 95, "Eve": 88}
+
+  # Print Charlie's grade
+
+  # Add Frank with grade 91
+
+  # Print names of students scoring 90+ (sorted, one per line)
+
+  # Print the class average as an integer
+tests:
+  - description: "First line is Charlie's grade: 78"
+    check: "output.strip().splitlines()[0] == '78'"
+  - description: "Second line is 'Bob' (first 90+ student alphabetically)"
+    check: "output.strip().splitlines()[1] == 'Bob'"
+  - description: "Third line is 'Diana'"
+    check: "output.strip().splitlines()[2] == 'Diana'"
+  - description: "Fourth line is 'Frank'"
+    check: "output.strip().splitlines()[3] == 'Frank'"
+  - description: "Fifth line is the class average: 88"
+    check: "output.strip().splitlines()[4] == '88'"
+hints:
+  - "Access a value with grades['Charlie']."
+  - "Add a new entry with grades['Frank'] = 91."
+  - "Use a loop or comprehension: [name for name, grade in grades.items() if grade >= 90]"
+  - "grades = {'Alice': 85, 'Bob': 92, 'Charlie': 78, 'Diana': 95, 'Eve': 88}\nprint(grades['Charlie'])\ngrades['Frank'] = 91\nfor name in sorted(name for name, grade in grades.items() if grade >= 90):\n    print(name)\nprint(int(sum(grades.values()) / len(grades)))"
+concept_tags:
+  - dict-creation
+  - dict-methods
+  - dict-iteration

@@ -1,0 +1,43 @@
+type: fill-in
+id: "04-generators-fill-in-01"
+prompt: "Fill in the blanks to create a generator function and use itertools.islice to get the first 5 values."
+template: |
+  import itertools
+
+  def powers_of_two():
+      n = 1
+      while True:
+          ____ n
+          n ____= 2
+
+  first_five = list(itertools.____( powers_of_two(), 5))
+  print(first_five)
+blanks:
+  - position: 0
+    answer: "yield"
+    hint: "produce the next value"
+  - position: 1
+    answer: "*"
+    hint: "multiply n by 2"
+  - position: 2
+    answer: "islice"
+    hint: "take a slice from an iterator"
+solution: |
+  import itertools
+
+  def powers_of_two():
+      n = 1
+      while True:
+          yield n
+          n *= 2
+
+  first_five = list(itertools.islice(powers_of_two(), 5))
+  print(first_five)
+hints:
+  - "Use 'yield' to produce values one at a time from a generator."
+  - "'n *= 2' doubles n each iteration: 1, 2, 4, 8, 16..."
+  - "itertools.islice() takes the first N items from any iterable."
+concept_tags:
+  - yield-keyword
+  - itertools-module
+  - lazy-evaluation

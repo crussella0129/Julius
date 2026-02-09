@@ -1,0 +1,23 @@
+type: write
+id: "02-image-processing-write-01"
+prompt: "Write a function called apply_box_blur that takes a 2D NumPy array (grayscale image) and returns the result of applying a 3x3 box blur (average of 9 neighbors). Use zero-padding so the output has the same shape. Test it on the array [[0,0,0],[0,255,0],[0,0,0]] and print the center pixel value of the result (rounded to 1 decimal)."
+starter_code: |
+  import numpy as np
+
+  # Write your apply_box_blur function here
+
+  image = np.array([[0, 0, 0], [0, 255, 0], [0, 0, 0]], dtype=float)
+  result = apply_box_blur(image)
+  print(f"{result[1, 1]:.1f}")
+tests:
+  - description: "Center pixel is approximately 28.3 (255/9)"
+    check: "'28.3' in output"
+  - description: "Output has 1 line"
+    check: "len(output.strip().splitlines()) == 1"
+hints:
+  - "A box blur kernel is np.ones((3,3)) / 9.0."
+  - "Use np.pad(image, 1, mode='constant') to add zero-padding."
+  - "For each pixel, extract the 3x3 region and compute np.sum(region * kernel)."
+concept_tags:
+  - convolution
+  - filters

@@ -1,0 +1,24 @@
+type: parsons
+id: "01-ml-concepts-parsons-01"
+prompt: "Arrange these lines to split data into train and test sets, train a simple model (nearest neighbor), and evaluate it."
+blocks:
+  - "data = [(1, 'A'), (2, 'A'), (3, 'B'), (4, 'B'), (5, 'B')]"
+  - "train = data[:4]"
+  - "test = data[4:]"
+  - "def predict(value, training_data):"
+  - "    closest = min(training_data, key=lambda t: abs(t[0] - value))"
+  - "    return closest[1]"
+  - "test_value, true_label = test[0]"
+  - "predicted = predict(test_value, train)"
+  - "print(f'Predicted: {predicted}, Actual: {true_label}')"
+distractors:
+  - "train = data[4:]"
+  - "    return training_data[0][1]"
+solution_order: [0, 1, 2, 3, 4, 5, 6, 7, 8]
+hints:
+  - "Split data into train (first 4) and test (last 1)."
+  - "The predict function finds the training point closest to the input."
+  - "Compare the prediction to the true label."
+concept_tags:
+  - supervised-learning
+  - train-test-split

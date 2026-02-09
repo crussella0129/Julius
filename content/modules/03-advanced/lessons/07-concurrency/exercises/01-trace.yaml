@@ -1,0 +1,66 @@
+type: trace
+id: "07-concurrency-trace-01"
+prompt: "Trace through this code and predict the final output. Assume threads run in the order they are started."
+code: |
+  import threading
+
+  results = []
+  lock = threading.Lock()
+
+  def worker(value):
+      with lock:
+          results.append(value * 2)
+
+  threads = []
+  for i in [1, 2, 3]:
+      t = threading.Thread(target=worker, args=(i,))
+      threads.append(t)
+      t.start()
+
+  for t in threads:
+      t.join()
+
+  results.sort()
+  print(results)
+steps:
+  - line: 3
+    variables: { "results": "[]" }
+    output: ""
+    explanation: "An empty list and a lock are created as shared state."
+  - line: 11
+    variables: { "threads": "[]" }
+    output: ""
+    explanation: "Three threads are created, each calling worker with values 1, 2, and 3."
+  - line: 6
+    variables: { "value": "1" }
+    output: ""
+    explanation: "First thread runs worker(1). Acquires lock, appends 2 to results."
+  - line: 6
+    variables: { "value": "2" }
+    output: ""
+    explanation: "Second thread runs worker(2). Acquires lock, appends 4 to results."
+  - line: 6
+    variables: { "value": "3" }
+    output: ""
+    explanation: "Third thread runs worker(3). Acquires lock, appends 6 to results."
+  - line: 16
+    variables: {}
+    output: ""
+    explanation: "All threads are joined (waited on). All have completed."
+  - line: 18
+    variables: { "results": "[2, 4, 6]" }
+    output: ""
+    explanation: "results.sort() sorts the list. It may already be in order, but sort ensures it."
+  - line: 19
+    variables: {}
+    output: "[2, 4, 6]"
+    explanation: "The sorted results are printed."
+expected_output: |
+  [2, 4, 6]
+hints:
+  - "Each thread doubles its input value and appends it to the shared list."
+  - "The lock ensures only one thread modifies the list at a time."
+  - "results.sort() ensures a deterministic output regardless of thread execution order."
+concept_tags:
+  - threading-module
+  - global-interpreter-lock

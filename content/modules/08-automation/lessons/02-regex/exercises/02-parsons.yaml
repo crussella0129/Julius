@@ -1,0 +1,21 @@
+type: parsons
+id: "02-regex-parsons-01"
+prompt: "Arrange these lines to extract all email addresses from a text string and print each one on a separate line."
+blocks:
+  - "import re"
+  - "text = 'Contact alice@example.com or bob@mail.org for info'"
+  - "emails = re.findall(r'[\\w.]+@[\\w.]+', text)"
+  - "for email in emails:"
+  - "    print(email)"
+distractors:
+  - "emails = re.match(r'[\\w.]+@[\\w.]+', text)"
+  - "emails = text.find('@')"
+solution_order: [0, 1, 2, 3, 4]
+hints:
+  - "Import re before using it."
+  - "findall returns a list of all matches, while match only checks the start."
+  - "Loop through the list and print each email."
+concept_tags:
+  - re-module
+  - regex-patterns
+  - search-match

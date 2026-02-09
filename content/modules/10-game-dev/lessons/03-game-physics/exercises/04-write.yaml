@@ -1,0 +1,19 @@
+type: write
+id: "03-game-physics-write-01"
+prompt: "Write a simulation of a bouncing ball. Start at position y=0 with vel_y=0 and gravity=3. The ground is at y=30. When the ball hits the ground, it bounces with 50% energy loss (multiply vel_y by -0.5). Simulate 10 frames and print 'Frame N: y=Y vel_y=V' for each. Use integer or rounded values."
+starter_code: |
+  # Simulate bouncing ball with energy loss
+tests:
+  - description: "Output has 10 lines"
+    check: "len(output.strip().splitlines()) == 10"
+  - description: "First frame shows movement"
+    check: "'Frame 0' in output"
+  - description: "Ball hits ground and bounces (vel_y becomes negative)"
+    check: "any('vel_y=-' in line for line in output.strip().splitlines())"
+hints:
+  - "Each frame: vel_y += gravity, y += vel_y, then check ground."
+  - "On ground hit: y = 30, vel_y = -vel_y * 0.5."
+  - "Use round() for clean output."
+concept_tags:
+  - gravity
+  - bouncing

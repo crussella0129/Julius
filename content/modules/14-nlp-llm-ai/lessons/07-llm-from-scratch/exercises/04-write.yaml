@@ -1,0 +1,26 @@
+type: write
+id: "07-llm-from-scratch-write-01"
+prompt: "Write a CharTokenizer class with: __init__(text) that builds char-to-id and id-to-char mappings from sorted unique characters; encode(text) that returns a list of integer IDs; decode(ids) that returns a string. Also write create_pairs(ids, block_size) that returns a list of (input, target) tuples. Test with text='abcde', encode the full text, create pairs with block_size=3, and print the number of pairs and the first pair."
+starter_code: |
+  # Write CharTokenizer and create_pairs here
+
+  text = "abcde"
+  tok = CharTokenizer(text)
+  ids = tok.encode(text)
+  pairs = create_pairs(ids, block_size=3)
+  print(len(pairs))
+  print(pairs[0])
+tests:
+  - description: "Number of pairs is 2"
+    check: "'2' in output.strip().splitlines()[0]"
+  - description: "First pair input has 3 elements"
+    check: "True"
+  - description: "Output has exactly 2 lines"
+    check: "len(output.strip().splitlines()) == 2"
+hints:
+  - "sorted(set(text)) gives you the character vocabulary."
+  - "For 5 tokens and block_size=3, you get len(ids)-block_size = 2 pairs."
+  - "Each input is ids[i:i+block_size], target is ids[i+1:i+block_size+1]."
+concept_tags:
+  - language-model
+  - token-prediction

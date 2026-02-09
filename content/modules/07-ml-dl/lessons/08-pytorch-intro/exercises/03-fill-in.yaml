@@ -1,0 +1,55 @@
+type: fill-in
+id: "08-pytorch-intro-fill-in-01"
+prompt: "Fill in the blanks to implement a simple gradient descent training step."
+template: |
+  def linear(x, w, b):
+      return sum(xi * wi for xi, wi in ____(x, w)) + b
+
+  def train_step(x, y, w, b, lr):
+      pred = linear(x, w, b)
+      error = pred - ____
+      grad_w = [2 * error * xi for xi in x]
+      grad_b = 2 * ____
+      new_w = [wi - ____ * gw for wi, gw in zip(w, grad_w)]
+      new_b = b - lr * grad_b
+      return new_w, new_b
+
+  w, b = [0.5, 0.5], 0.0
+  w, b = train_step([1, 2], 4, w, b, 0.01)
+  print(f\"w={[round(x,4) for x in w]}, b={round(b,4)}\")
+blanks:
+  - position: 0
+    answer: "zip"
+    hint: "pair x values with w values"
+  - position: 1
+    answer: "y"
+    hint: "the target value"
+  - position: 2
+    answer: "error"
+    hint: "the prediction error"
+  - position: 3
+    answer: "lr"
+    hint: "learning rate for the update"
+solution: |
+  def linear(x, w, b):
+      return sum(xi * wi for xi, wi in zip(x, w)) + b
+
+  def train_step(x, y, w, b, lr):
+      pred = linear(x, w, b)
+      error = pred - y
+      grad_w = [2 * error * xi for xi in x]
+      grad_b = 2 * error
+      new_w = [wi - lr * gw for wi, gw in zip(w, grad_w)]
+      new_b = b - lr * grad_b
+      return new_w, new_b
+
+  w, b = [0.5, 0.5], 0.0
+  w, b = train_step([1, 2], 4, w, b, 0.01)
+  print(f"w={[round(x,4) for x in w]}, b={round(b,4)}")
+hints:
+  - "error = prediction - target."
+  - "Gradients are 2*error*x for weights, 2*error for bias."
+  - "Update: w = w - lr * gradient."
+concept_tags:
+  - autograd
+  - training-loop

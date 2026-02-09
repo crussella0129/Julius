@@ -1,0 +1,57 @@
+type: trace
+id: "08-langchain-trace-01"
+prompt: "Trace through this chain execution and predict the output."
+code: |
+  class Chain:
+      def __init__(self, steps):
+          self.steps = steps
+      def run(self, data):
+          for step in self.steps:
+              data = step(data)
+          return data
+
+  def lower(text):
+      return text.lower()
+
+  def remove_punct(text):
+      return "".join(c for c in text if c.isalnum() or c == " ")
+
+  def word_count(text):
+      return f"{len(text.split())} words"
+
+  chain = Chain([lower, remove_punct, word_count])
+  result = chain.run("Hello, World! How are you?")
+  print(result)
+steps:
+  - line: 17
+    variables: {"chain": "Chain with 3 steps"}
+    output: ""
+    explanation: "A chain is created with three functions: lower, remove_punct, word_count."
+  - line: 18
+    variables: {"data": "Hello, World! How are you?"}
+    output: ""
+    explanation: "The run method starts with the input string."
+  - line: 18
+    variables: {"data": "hello, world! how are you?"}
+    output: ""
+    explanation: "Step 1 (lower): converts all characters to lowercase."
+  - line: 18
+    variables: {"data": "hello world how are you"}
+    output: ""
+    explanation: "Step 2 (remove_punct): removes commas, exclamation, and question mark."
+  - line: 18
+    variables: {"data": "5 words"}
+    output: ""
+    explanation: "Step 3 (word_count): 'hello world how are you' splits into 5 words."
+  - line: 19
+    variables: {}
+    output: "5 words"
+    explanation: "The final result of the chain is printed."
+expected_output: |
+  5 words
+hints:
+  - "Each step receives the output of the previous step as its input."
+  - "After removing punctuation, the text has 5 space-separated words."
+concept_tags:
+  - chains
+  - langchain

@@ -1,0 +1,26 @@
+type: parsons
+id: "05-model-evaluation-parsons-01"
+prompt: "Arrange these lines to implement a simple grid search over two hyperparameters, tracking the best combination."
+blocks:
+  - "param_a_values = [1, 5, 10]"
+  - "param_b_values = [0.01, 0.1, 1.0]"
+  - "best_score = 0"
+  - "best_params = None"
+  - "for a in param_a_values:"
+  - "    for b in param_b_values:"
+  - "        score = 1.0 / (1 + abs(a - 5) + abs(b - 0.1))"
+  - "        if score > best_score:"
+  - "            best_score = score"
+  - "            best_params = (a, b)"
+  - "print(f'Best: {best_params} with score {best_score:.3f}')"
+distractors:
+  - "        if score < best_score:"
+  - "best_score = float('inf')"
+solution_order: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+hints:
+  - "Initialize best_score to 0 and update when a higher score is found."
+  - "Nested loops try every combination of parameters."
+  - "Track both the best score and the parameters that produced it."
+concept_tags:
+  - hyperparameter-tuning
+  - model-selection

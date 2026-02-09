@@ -1,0 +1,23 @@
+type: parsons
+id: "06-rest-api-parsons-01"
+prompt: "Arrange these lines to create a FastAPI endpoint that gets a todo by ID, raising a 404 error if not found."
+blocks:
+  - "from fastapi import FastAPI, HTTPException"
+  - "app = FastAPI()"
+  - "todos = {1: {'id': 1, 'title': 'Buy milk', 'done': False}}"
+  - "@app.get('/todos/{todo_id}')"
+  - "def read_todo(todo_id: int):"
+  - "    if todo_id not in todos:"
+  - "        raise HTTPException(status_code=404, detail='Not found')"
+  - "    return todos[todo_id]"
+distractors:
+  - "        return 404"
+  - "    if todo_id in todos:"
+solution_order: [0, 1, 2, 3, 4, 5, 6, 7]
+hints:
+  - "Import HTTPException alongside FastAPI."
+  - "Check if the ID is NOT in the dictionary, and raise an exception if so."
+  - "If the ID exists, return the todo directly."
+concept_tags:
+  - crud-endpoints
+  - http-status-codes

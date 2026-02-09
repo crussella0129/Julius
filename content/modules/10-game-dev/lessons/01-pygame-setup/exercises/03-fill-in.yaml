@@ -1,0 +1,49 @@
+type: fill-in
+id: "01-pygame-setup-fill-in-01"
+prompt: "Fill in the blanks to define RGB color constants and calculate a window's center point."
+template: |
+  RED = (255, ____, ____)
+  GREEN = (0, ____, 0)
+  BLUE = (0, 0, 255)
+
+  WIDTH, HEIGHT = 640, 480
+  center_x = WIDTH ____ 2
+  center_y = HEIGHT ____ 2
+
+  print(f"RED = {RED}")
+  print(f"GREEN = {GREEN}")
+  print(f"Center: ({center_x}, {center_y})")
+blanks:
+  - position: 0
+    answer: "0"
+    hint: "red has no green component"
+  - position: 1
+    answer: "0"
+    hint: "red has no blue component"
+  - position: 2
+    answer: "255"
+    hint: "green has full green component"
+  - position: 3
+    answer: "//"
+    hint: "integer division operator"
+  - position: 4
+    answer: "//"
+    hint: "same division operator for height"
+solution: |
+  RED = (255, 0, 0)
+  GREEN = (0, 255, 0)
+  BLUE = (0, 0, 255)
+
+  WIDTH, HEIGHT = 640, 480
+  center_x = WIDTH // 2
+  center_y = HEIGHT // 2
+
+  print(f"RED = {RED}")
+  print(f"GREEN = {GREEN}")
+  print(f"Center: ({center_x}, {center_y})")
+hints:
+  - "RGB means (Red, Green, Blue). Pure red is (255, 0, 0)."
+  - "Use // for integer division to get whole-number pixel coordinates."
+concept_tags:
+  - display-surface
+  - pygame-init

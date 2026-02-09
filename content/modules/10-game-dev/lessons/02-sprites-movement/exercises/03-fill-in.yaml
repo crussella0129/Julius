@@ -1,0 +1,54 @@
+type: fill-in
+id: "02-sprites-movement-fill-in-01"
+prompt: "Fill in the blanks to create a sprite that moves and wraps around the screen (reappears on the other side)."
+template: |
+  class WrapSprite:
+      def __init__(self, x, y, width=800, height=600):
+          self.x = x
+          self.y = y
+          self.width = width
+          self.height = height
+
+      def move(self, dx, dy):
+          self.x = (self.x + dx) ____ self.width
+          self.y = (self.y + dy) ____ self.____
+
+  s = WrapSprite(790, 10)
+  s.move(20, 0)
+  print(f"Wrapped x: {s.x}")
+  s.move(0, -20)
+  print(f"Wrapped y: {s.y}")
+blanks:
+  - position: 0
+    answer: "%"
+    hint: "modulo operator for wrapping"
+  - position: 1
+    answer: "%"
+    hint: "same operator for vertical wrap"
+  - position: 2
+    answer: "height"
+    hint: "wrap around the screen height"
+solution: |
+  class WrapSprite:
+      def __init__(self, x, y, width=800, height=600):
+          self.x = x
+          self.y = y
+          self.width = width
+          self.height = height
+
+      def move(self, dx, dy):
+          self.x = (self.x + dx) % self.width
+          self.y = (self.y + dy) % self.height
+
+  s = WrapSprite(790, 10)
+  s.move(20, 0)
+  print(f"Wrapped x: {s.x}")
+  s.move(0, -20)
+  print(f"Wrapped y: {s.y}")
+hints:
+  - "The modulo operator % wraps values around a range."
+  - "(790 + 20) % 800 = 810 % 800 = 10."
+  - "(10 + -20) % 600 = -10 % 600 = 590 in Python."
+concept_tags:
+  - sprite-class
+  - screen-bounds

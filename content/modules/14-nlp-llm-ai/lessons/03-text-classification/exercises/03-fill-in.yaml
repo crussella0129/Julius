@@ -1,0 +1,35 @@
+type: fill-in
+id: "03-text-classification-fill-in-01"
+prompt: "Fill in the blanks to complete this accuracy function that compares predictions against actual labels."
+template: |
+  def accuracy(predictions, actual):
+      correct = ____(p == a for p, a in ____(predictions, actual))
+      return correct / ____(actual)
+
+  preds = ["pos", "neg", "pos", "pos"]
+  actual = ["pos", "neg", "neg", "pos"]
+  print(f"{accuracy(preds, actual):.0%}")
+blanks:
+  - position: 0
+    answer: "sum"
+    hint: "built-in that adds up True (1) and False (0) values"
+  - position: 1
+    answer: "zip"
+    hint: "pairs up elements from two lists"
+  - position: 2
+    answer: "len"
+    hint: "total number of items to divide by"
+solution: |
+  def accuracy(predictions, actual):
+      correct = sum(p == a for p, a in zip(predictions, actual))
+      return correct / len(actual)
+
+  preds = ["pos", "neg", "pos", "pos"]
+  actual = ["pos", "neg", "neg", "pos"]
+  print(f"{accuracy(preds, actual):.0%}")
+hints:
+  - "sum() counts True values (True == 1, False == 0)."
+  - "zip() pairs corresponding elements from two sequences."
+concept_tags:
+  - text-classification
+  - naive-bayes

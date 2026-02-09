@@ -1,0 +1,22 @@
+type: parsons
+id: "04-flask-database-parsons-01"
+prompt: "Arrange these lines to define a SQLAlchemy model for a 'Book' table with id, title, and author columns, then create a new book and save it to the database."
+blocks:
+  - "class Book(db.Model):"
+  - "    id = db.Column(db.Integer, primary_key=True)"
+  - "    title = db.Column(db.String(200), nullable=False)"
+  - "    author = db.Column(db.String(100), nullable=False)"
+  - "book = Book(title='Dune', author='Frank Herbert')"
+  - "db.session.add(book)"
+  - "db.session.commit()"
+distractors:
+  - "db.session.save(book)"
+  - "    title = db.String(200)"
+solution_order: [0, 1, 2, 3, 4, 5, 6]
+hints:
+  - "The class definition and column declarations come first."
+  - "After creating an instance, add it to the session then commit."
+  - "Use db.session.add(), not db.session.save()."
+concept_tags:
+  - flask-sqlalchemy
+  - orm

@@ -1,0 +1,67 @@
+type: trace
+id: "02-linear-regression-trace-01"
+prompt: "Trace through this simple linear regression calculation and predict the output."
+code: |
+  x = [1, 2, 3, 4, 5]
+  y = [3, 5, 7, 9, 11]
+
+  n = len(x)
+  x_mean = sum(x) / n
+  y_mean = sum(y) / n
+
+  numerator = sum((xi - x_mean) * (yi - y_mean) for xi, yi in zip(x, y))
+  denominator = sum((xi - x_mean) ** 2 for xi in x)
+
+  slope = numerator / denominator
+  intercept = y_mean - slope * x_mean
+
+  print(f"slope: {slope}")
+  print(f"intercept: {intercept}")
+  print(f"predict(6): {slope * 6 + intercept}")
+steps:
+  - line: 1
+    variables: {"x": "[1, 2, 3, 4, 5]", "y": "[3, 5, 7, 9, 11]"}
+    output: ""
+    explanation: "Define x and y data. Note y = 2x + 1."
+  - line: 4
+    variables: {"n": 5, "x_mean": 3.0, "y_mean": 7.0}
+    output: ""
+    explanation: "Compute means: x_mean=15/5=3, y_mean=35/5=7."
+  - line: 8
+    variables: {"numerator": 20.0}
+    output: ""
+    explanation: "Sum of (xi-3)(yi-7): (-2)(-4)+(-1)(-2)+(0)(0)+(1)(2)+(2)(4) = 8+2+0+2+8=20."
+  - line: 9
+    variables: {"denominator": 10.0}
+    output: ""
+    explanation: "Sum of (xi-3)^2: 4+1+0+1+4=10."
+  - line: 11
+    variables: {"slope": 2.0}
+    output: ""
+    explanation: "slope = 20/10 = 2.0."
+  - line: 12
+    variables: {"intercept": 1.0}
+    output: ""
+    explanation: "intercept = 7 - 2*3 = 1.0."
+  - line: 14
+    variables: {}
+    output: "slope: 2.0"
+    explanation: "Print slope."
+  - line: 15
+    variables: {}
+    output: "intercept: 1.0"
+    explanation: "Print intercept."
+  - line: 16
+    variables: {}
+    output: "predict(6): 13.0"
+    explanation: "2*6 + 1 = 13.0."
+expected_output: |
+  slope: 2.0
+  intercept: 1.0
+  predict(6): 13.0
+hints:
+  - "The data follows y = 2x + 1 perfectly."
+  - "The slope formula uses deviations from the means of x and y."
+concept_tags:
+  - linear-model
+  - cost-function

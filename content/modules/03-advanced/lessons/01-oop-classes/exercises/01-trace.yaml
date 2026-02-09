@@ -1,0 +1,65 @@
+type: trace
+id: "01-oop-classes-trace-01"
+prompt: "Trace through this code and predict the final output."
+code: |
+  class Counter:
+      def __init__(self, start=0):
+          self.count = start
+
+      def increment(self):
+          self.count += 1
+          return self.count
+
+  c1 = Counter()
+  c2 = Counter(10)
+  c1.increment()
+  c1.increment()
+  c2.increment()
+  print(c1.count, c2.count)
+steps:
+  - line: 1
+    variables: {}
+    output: ""
+    explanation: "The Counter class is defined with __init__ and increment methods."
+  - line: 9
+    variables: {}
+    output: ""
+    explanation: "Counter() is called with no argument, so start defaults to 0."
+  - line: 3
+    variables: { "self": "c1", "start": "0" }
+    output: ""
+    explanation: "Inside __init__: self.count is set to 0 for c1."
+  - line: 10
+    variables: { "c1.count": "0" }
+    output: ""
+    explanation: "Counter(10) is called with start=10."
+  - line: 3
+    variables: { "self": "c2", "start": "10" }
+    output: ""
+    explanation: "Inside __init__: self.count is set to 10 for c2."
+  - line: 11
+    variables: { "c1.count": "0", "c2.count": "10" }
+    output: ""
+    explanation: "c1.increment() is called. self.count goes from 0 to 1."
+  - line: 12
+    variables: { "c1.count": "1", "c2.count": "10" }
+    output: ""
+    explanation: "c1.increment() again. self.count goes from 1 to 2."
+  - line: 13
+    variables: { "c1.count": "2", "c2.count": "10" }
+    output: ""
+    explanation: "c2.increment() is called. c2.count goes from 10 to 11."
+  - line: 14
+    variables: { "c1.count": "2", "c2.count": "11" }
+    output: "2 11"
+    explanation: "Prints c1.count (2) and c2.count (11). Each object tracks its own count."
+expected_output: |
+  2 11
+hints:
+  - "Each object has its own separate copy of self.count."
+  - "c1 starts at 0 and is incremented twice. c2 starts at 10 and is incremented once."
+concept_tags:
+  - class-definition
+  - init-method
+  - instance-attributes
+  - instance-methods

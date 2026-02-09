@@ -1,0 +1,24 @@
+type: parsons
+id: "03-test-patterns-parsons-01"
+prompt: "Arrange these lines to write a test using the Arrange-Act-Assert pattern that tests a function removing duplicates from a list."
+blocks:
+  - "def remove_duplicates(items):"
+  - "    return list(set(items))"
+  - "def test_remove_duplicates():"
+  - "    # Arrange"
+  - "    data = [1, 2, 2, 3, 3, 3]"
+  - "    # Act"
+  - "    result = remove_duplicates(data)"
+  - "    # Assert"
+  - "    assert sorted(result) == [1, 2, 3]"
+distractors:
+  - "    assert result == [1, 2, 3]"
+  - "    result = data.remove_duplicates()"
+solution_order: [0, 1, 2, 3, 4, 5, 6, 7, 8]
+hints:
+  - "Define the function first, then the test."
+  - "Use sorted() in the assert because set() doesn't guarantee order."
+  - "The AAA comments clarify the structure."
+concept_tags:
+  - arrange-act-assert
+  - edge-cases

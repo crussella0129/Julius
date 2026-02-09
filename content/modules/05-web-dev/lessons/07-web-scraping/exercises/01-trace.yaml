@@ -1,0 +1,62 @@
+type: trace
+id: "07-web-scraping-trace-01"
+prompt: "Trace through this HTML parsing simulation and predict the output."
+code: |
+  html_elements = [
+      {"tag": "h1", "class": None, "text": "Welcome"},
+      {"tag": "p", "class": "intro", "text": "Hello there"},
+      {"tag": "p", "class": "body", "text": "Main content"},
+      {"tag": "p", "class": "intro", "text": "Second intro"},
+  ]
+
+  def find_all(tag=None, class_name=None):
+      results = []
+      for el in html_elements:
+          if tag and el["tag"] != tag:
+              continue
+          if class_name and el["class"] != class_name:
+              continue
+          results.append(el)
+      return results
+
+  matches = find_all(tag="p", class_name="intro")
+  for m in matches:
+      print(m["text"])
+
+  count = len(find_all(tag="p"))
+  print(f"Total p tags: {count}")
+steps:
+  - line: 1
+    variables: {}
+    output: ""
+    explanation: "Define list of simulated HTML elements."
+  - line: 20
+    variables: {}
+    output: ""
+    explanation: "Call find_all looking for p tags with class 'intro'."
+  - line: 10
+    variables: {"results": "[]"}
+    output: ""
+    explanation: "Check each element. h1 fails tag check. First p/intro matches. p/body fails class check. Second p/intro matches."
+  - line: 21
+    variables: {"m": "{'tag': 'p', 'class': 'intro', 'text': 'Hello there'}"}
+    output: "Hello there"
+    explanation: "Print text of first matching element."
+  - line: 21
+    variables: {"m": "{'tag': 'p', 'class': 'intro', 'text': 'Second intro'}"}
+    output: "Second intro"
+    explanation: "Print text of second matching element."
+  - line: 23
+    variables: {"count": 3}
+    output: "Total p tags: 3"
+    explanation: "find_all(tag='p') with no class filter returns all 3 p elements."
+expected_output: |
+  Hello there
+  Second intro
+  Total p tags: 3
+hints:
+  - "find_all filters by both tag and class when both are specified."
+  - "When class_name is None, the class check is skipped."
+concept_tags:
+  - beautifulsoup
+  - html-parsing

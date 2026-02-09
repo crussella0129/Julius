@@ -1,0 +1,45 @@
+type: fill-in
+id: "03-iot-networking-fill-in-01"
+prompt: "Fill in the blanks to check if an MQTT topic matches a pattern that uses the '+' single-level wildcard."
+template: |
+  def match_topic(pattern, topic):
+      p_parts = pattern.split("/")
+      t_parts = topic.____("/")
+      if len(p_parts) != len(t_parts):
+          return False
+      for p, t in ____(p_parts, t_parts):
+          if p != "+" and p ____ t:
+              return False
+      return True
+
+  print(match_topic("home/+/temp", "home/kitchen/temp"))
+  print(match_topic("home/+/temp", "office/kitchen/temp"))
+blanks:
+  - position: 0
+    answer: "split"
+    hint: "string method to divide by separator"
+  - position: 1
+    answer: "zip"
+    hint: "function to pair up two lists"
+  - position: 2
+    answer: "!="
+    hint: "not-equal comparison operator"
+solution: |
+  def match_topic(pattern, topic):
+      p_parts = pattern.split("/")
+      t_parts = topic.split("/")
+      if len(p_parts) != len(t_parts):
+          return False
+      for p, t in zip(p_parts, t_parts):
+          if p != "+" and p != t:
+              return False
+      return True
+
+  print(match_topic("home/+/temp", "home/kitchen/temp"))
+  print(match_topic("home/+/temp", "office/kitchen/temp"))
+hints:
+  - "split('/') breaks a topic string into its hierarchical parts."
+  - "The '+' wildcard matches any single level, so skip comparison when p == '+'."
+concept_tags:
+  - mqtt
+  - wifi-connection

@@ -1,0 +1,27 @@
+type: parsons
+id: "05-numba-jit-parsons-01"
+prompt: "Arrange these lines to show the Numba JIT compilation workflow: define a function with the decorator, call it once to trigger compilation, then benchmark the compiled version."
+blocks:
+  - "import time"
+  - "# from numba import jit"
+  - "# @jit(nopython=True)"
+  - "def sum_squares(n):"
+  - "    total = 0"
+  - "    for i in range(n):"
+  - "        total += i * i"
+  - "    return total"
+  - "sum_squares(100)  # Warm-up: triggers compilation"
+  - "start = time.time()"
+  - "result = sum_squares(1000000)"
+  - "print(f'Time: {time.time() - start:.4f}s, Result: {result}')"
+distractors:
+  - "sum_squares = jit(sum_squares)"
+  - "    total += i ** 3"
+solution_order: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+hints:
+  - "Import time first, then define the function with the @jit decorator."
+  - "The warm-up call with a small input triggers compilation."
+  - "Benchmark the subsequent call to measure compiled performance."
+concept_tags:
+  - jit-compilation
+  - nopython-mode

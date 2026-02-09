@@ -1,0 +1,23 @@
+type: parsons
+id: "02-flask-intro-parsons-01"
+prompt: "Arrange these lines to create a minimal Flask app with a home route that returns 'Welcome!' and a greet route that takes a name parameter."
+blocks:
+  - "from flask import Flask"
+  - "app = Flask(__name__)"
+  - "@app.route('/')"
+  - "def home():"
+  - "    return 'Welcome!'"
+  - "@app.route('/greet/<name>')"
+  - "def greet(name):"
+  - "    return f'Hello, {name}!'"
+distractors:
+  - "from flask import route"
+  - "    return name"
+solution_order: [0, 1, 2, 3, 4, 5, 6, 7]
+hints:
+  - "Import Flask first, then create the app instance."
+  - "The decorator @app.route() goes directly above the function it decorates."
+  - "Dynamic route parameters like <name> become function arguments."
+concept_tags:
+  - flask-app
+  - routes

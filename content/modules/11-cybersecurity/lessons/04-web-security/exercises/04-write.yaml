@@ -1,0 +1,20 @@
+type: write
+id: "04-web-security-write-01"
+prompt: "Write a function called sanitize_input that takes a string and returns an HTML-escaped version using Python's html module. Test it with three inputs: a normal string, a string with <script> tags, and a string with quote characters. Print each original and sanitized version."
+starter_code: "import html\n\n# Write your code here\n"
+tests:
+  - description: "Output contains '&lt;' (escaped less-than)"
+    check: "'&lt;' in output"
+  - description: "Output contains '&gt;' (escaped greater-than)"
+    check: "'&gt;' in output"
+  - description: "Output does not contain raw '<script>'"
+    check: "'<script>' not in output"
+  - description: "Output has at least 6 lines"
+    check: "len(output.strip().splitlines()) >= 6"
+hints:
+  - "Use html.escape() to convert special characters to HTML entities."
+  - "Characters like < become &lt; and > becomes &gt;."
+  - "Print both the original and sanitized version for each test input."
+concept_tags:
+  - xss
+  - input-validation

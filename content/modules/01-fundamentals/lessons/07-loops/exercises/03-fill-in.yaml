@@ -1,0 +1,22 @@
+type: fill-in
+id: "07-loops-fill-in-01"
+prompt: "Fill in the blanks to print the even numbers from 0 to 8 using a for loop."
+template: |
+  for i in ____(0, ____, 2):
+      print(i)
+blanks:
+  - position: 0
+    answer: "range"
+    hint: "sequence generator"
+  - position: 1
+    answer: "10"
+    hint: "stop value (exclusive)"
+solution: |
+  for i in range(0, 10, 2):
+      print(i)
+hints:
+  - "range(start, stop, step) generates numbers from start up to (but not including) stop."
+  - "To include 8, the stop value must be at least 9 — but since step is 2, use 10."
+concept_tags:
+  - for-loop
+  - range-function

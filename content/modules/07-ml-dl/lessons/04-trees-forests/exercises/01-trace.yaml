@@ -1,0 +1,72 @@
+type: trace
+id: "04-trees-forests-trace-01"
+prompt: "Trace through this Gini impurity calculation and predict the output."
+code: |
+  def gini(labels):
+      total = len(labels)
+      if total == 0:
+          return 0.0
+      counts = {}
+      for label in labels:
+          counts[label] = counts.get(label, 0) + 1
+      return 1 - sum((c / total) ** 2 for c in counts.values())
+
+  groups = [
+      ["A", "A", "A", "A"],
+      ["A", "B", "A", "B"],
+      ["A", "B", "C"],
+  ]
+
+  for g in groups:
+      print(f"{g} -> gini={gini(g):.3f}")
+steps:
+  - line: 10
+    variables: {}
+    output: ""
+    explanation: "Define three test groups."
+  - line: 16
+    variables: {"g": "['A', 'A', 'A', 'A']"}
+    output: ""
+    explanation: "First group: all A."
+  - line: 5
+    variables: {"counts": "{'A': 4}", "total": 4}
+    output: ""
+    explanation: "Gini = 1 - (4/4)^2 = 1 - 1 = 0.0."
+  - line: 17
+    variables: {}
+    output: "['A', 'A', 'A', 'A'] -> gini=0.000"
+    explanation: "Pure node has gini=0."
+  - line: 16
+    variables: {"g": "['A', 'B', 'A', 'B']"}
+    output: ""
+    explanation: "Second group: 2 A's and 2 B's."
+  - line: 5
+    variables: {"counts": "{'A': 2, 'B': 2}", "total": 4}
+    output: ""
+    explanation: "Gini = 1 - (2/4)^2 - (2/4)^2 = 1 - 0.25 - 0.25 = 0.5."
+  - line: 17
+    variables: {}
+    output: "['A', 'B', 'A', 'B'] -> gini=0.500"
+    explanation: "Maximum impurity for 2 classes."
+  - line: 16
+    variables: {"g": "['A', 'B', 'C']"}
+    output: ""
+    explanation: "Third group: 3 different classes."
+  - line: 5
+    variables: {"counts": "{'A': 1, 'B': 1, 'C': 1}", "total": 3}
+    output: ""
+    explanation: "Gini = 1 - (1/3)^2 - (1/3)^2 - (1/3)^2 = 1 - 3*(1/9) = 1 - 1/3 = 0.667."
+  - line: 17
+    variables: {}
+    output: "['A', 'B', 'C'] -> gini=0.667"
+    explanation: "High impurity with 3 equally distributed classes."
+expected_output: |
+  ['A', 'A', 'A', 'A'] -> gini=0.000
+  ['A', 'B', 'A', 'B'] -> gini=0.500
+  ['A', 'B', 'C'] -> gini=0.667
+hints:
+  - "Gini = 1 - sum of (proportion of each class)^2."
+  - "A pure node (all same class) has gini=0."
+concept_tags:
+  - decision-tree
+  - information-gain

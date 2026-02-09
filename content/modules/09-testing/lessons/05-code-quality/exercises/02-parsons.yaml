@@ -1,0 +1,24 @@
+type: parsons
+id: "05-code-quality-parsons-01"
+prompt: "Arrange these lines to write a properly documented function with type hints that calculates the area of a circle."
+blocks:
+  - "import math"
+  - "def circle_area(radius: float) -> float:"
+  - "    \"\"\"Calculate the area of a circle."
+  - "    Args:"
+  - "        radius: The radius of the circle."
+  - "    Returns:"
+  - "        The area as a float."
+  - "    \"\"\""
+  - "    return math.pi * radius ** 2"
+distractors:
+  - "def circle_area(radius) -> None:"
+  - "    return pi * radius * 2"
+solution_order: [0, 1, 2, 3, 4, 5, 6, 7, 8]
+hints:
+  - "Import math first for math.pi."
+  - "Type hints go in the function signature: parameter: type and -> return_type."
+  - "Docstring goes right after the def line, inside triple quotes."
+concept_tags:
+  - type-hints
+  - docstrings

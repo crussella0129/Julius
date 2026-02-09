@@ -1,0 +1,35 @@
+type: fill-in
+id: "04-risk-management-fill-in-01"
+prompt: "Fill in the blanks to calculate the historical VaR at the 95% confidence level from sorted returns."
+template: |
+  returns = [-0.05, -0.03, -0.02, -0.01, 0.0, 0.01, 0.02, 0.03, 0.04, 0.05,
+             -0.04, -0.01, 0.02, 0.03, -0.02, 0.01, 0.0, 0.04, -0.03, 0.02]
+
+  sorted_rets = ____(returns)
+  index = int((1 - ____) * len(sorted_rets))
+  var_95 = sorted_rets[____]
+  print(f"95% VaR: {var_95*100:.1f}%")
+blanks:
+  - position: 0
+    answer: "sorted"
+    hint: "function to sort a list"
+  - position: 1
+    answer: "0.95"
+    hint: "confidence level as a decimal"
+  - position: 2
+    answer: "index"
+    hint: "variable holding the calculated position"
+solution: |
+  returns = [-0.05, -0.03, -0.02, -0.01, 0.0, 0.01, 0.02, 0.03, 0.04, 0.05,
+             -0.04, -0.01, 0.02, 0.03, -0.02, 0.01, 0.0, 0.04, -0.03, 0.02]
+
+  sorted_rets = sorted(returns)
+  index = int((1 - 0.95) * len(sorted_rets))
+  var_95 = sorted_rets[index]
+  print(f"95% VaR: {var_95*100:.1f}%")
+hints:
+  - "sorted() returns a new sorted list from worst to best returns."
+  - "For 95% confidence with 20 data points: int(0.05 * 20) = 1."
+concept_tags:
+  - value-at-risk
+  - volatility

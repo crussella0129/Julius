@@ -1,0 +1,28 @@
+type: write
+id: "05-context-managers-write-01"
+prompt: "Write a context manager function (using @contextmanager from contextlib) called `tag` that takes a tag name and prints '<name>' before the block and '</name>' after. For example, `with tag('div'):` should print '<div>' before and '</div>' after. Test it with the tag 'body' and print 'Hello' inside the block."
+starter_code: |
+  from contextlib import contextmanager
+
+  # Define the tag context manager
+
+
+  # Test it
+  with tag("body"):
+      print("Hello")
+tests:
+  - description: "Output has exactly 3 lines"
+    check: "len(output.strip().splitlines()) == 3"
+  - description: "First line is '<body>'"
+    check: "output.strip().splitlines()[0] == '<body>'"
+  - description: "Second line is 'Hello'"
+    check: "output.strip().splitlines()[1] == 'Hello'"
+  - description: "Third line is '</body>'"
+    check: "output.strip().splitlines()[2] == '</body>'"
+hints:
+  - "Print the opening tag before yield and the closing tag after yield."
+  - "Use f-strings: f'<{name}>' and f'</{name}>'."
+  - "@contextmanager\ndef tag(name):\n    print(f'<{name}>')\n    yield\n    print(f'</{name}>')"
+concept_tags:
+  - contextlib-contextmanager
+  - with-statement

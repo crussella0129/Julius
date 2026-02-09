@@ -1,0 +1,78 @@
+type: trace
+id: "01-financial-data-trace-01"
+prompt: "Trace through this code that calculates daily returns from stock prices and predict the output."
+code: |
+  prices = [100.0, 105.0, 102.0, 108.0]
+  returns = []
+
+  for i in range(1, len(prices)):
+      ret = (prices[i] - prices[i-1]) / prices[i-1]
+      returns.append(ret)
+      print(f"Day {i}: {ret*100:+.1f}%")
+
+  avg = sum(returns) / len(returns)
+  print(f"Average: {avg*100:+.1f}%")
+steps:
+  - line: 1
+    variables: {"prices": "[100.0, 105.0, 102.0, 108.0]"}
+    output: ""
+    explanation: "Four daily closing prices."
+  - line: 2
+    variables: {"returns": "[]"}
+    output: ""
+    explanation: "Empty list to store calculated returns."
+  - line: 4
+    variables: {"i": 1}
+    output: ""
+    explanation: "First iteration: i=1, comparing price[1] to price[0]."
+  - line: 5
+    variables: {"ret": 0.05}
+    output: ""
+    explanation: "(105 - 100) / 100 = 0.05 or 5%."
+  - line: 7
+    variables: {}
+    output: "Day 1: +5.0%"
+    explanation: "Print the return as a percentage with sign."
+  - line: 4
+    variables: {"i": 2}
+    output: ""
+    explanation: "Second iteration: i=2."
+  - line: 5
+    variables: {"ret": -0.02857142857142857}
+    output: ""
+    explanation: "(102 - 105) / 105 = -0.02857... or about -2.9%."
+  - line: 7
+    variables: {}
+    output: "Day 2: -2.9%"
+    explanation: "The price dropped, so the return is negative."
+  - line: 4
+    variables: {"i": 3}
+    output: ""
+    explanation: "Third iteration: i=3."
+  - line: 5
+    variables: {"ret": 0.058823529411764705}
+    output: ""
+    explanation: "(108 - 102) / 102 = 0.05882... or about 5.9%."
+  - line: 7
+    variables: {}
+    output: "Day 3: +5.9%"
+    explanation: "Price increased from 102 to 108."
+  - line: 9
+    variables: {"avg": 0.02675070028011204}
+    output: ""
+    explanation: "Average of the three returns."
+  - line: 10
+    variables: {}
+    output: "Average: +2.7%"
+    explanation: "The average daily return is about 2.7%."
+expected_output: |
+  Day 1: +5.0%
+  Day 2: -2.9%
+  Day 3: +5.9%
+  Average: +2.7%
+hints:
+  - "Each return is (new_price - old_price) / old_price."
+  - "The format specifier +.1f shows the sign and one decimal place."
+concept_tags:
+  - returns
+  - ohlcv

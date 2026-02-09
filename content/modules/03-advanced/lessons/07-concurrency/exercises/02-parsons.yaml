@@ -1,0 +1,26 @@
+type: parsons
+id: "07-concurrency-parsons-01"
+prompt: "Arrange these lines to use ThreadPoolExecutor to square a list of numbers in parallel and print the results."
+blocks:
+  - "from concurrent.futures import ThreadPoolExecutor"
+  - ""
+  - "def square(n):"
+  - "    return n * n"
+  - ""
+  - "numbers = [1, 2, 3, 4, 5]"
+  - ""
+  - "with ThreadPoolExecutor(max_workers=3) as executor:"
+  - "    results = list(executor.map(square, numbers))"
+  - ""
+  - "print(results)"
+solution_order: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+distractors:
+  - "    results = executor.map(square, numbers)"
+  - "with ThreadPoolExecutor() as executor.map:"
+hints:
+  - "Import ThreadPoolExecutor from concurrent.futures."
+  - "Use 'with' to manage the executor as a context manager."
+  - "executor.map() returns an iterator; wrap it in list() to get all results."
+concept_tags:
+  - concurrent-futures
+  - threading-module

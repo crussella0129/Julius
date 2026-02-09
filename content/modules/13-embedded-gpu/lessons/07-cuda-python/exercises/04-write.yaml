@@ -1,0 +1,20 @@
+type: write
+id: "07-cuda-python-write-01"
+prompt: "Write a function called simulate_kernel that takes a list of numbers and a threads_per_block value. It should: (1) calculate the number of blocks needed, (2) simulate each thread computing the square of its data element, (3) print the grid configuration (blocks x threads), (4) print which thread (block, thread_id, global_id) processed which element, and (5) print the final result array. Test with data [3, 1, 4, 1, 5, 9, 2, 6] and threads_per_block=3."
+starter_code: "# Write your code here\n"
+tests:
+  - description: "Output shows grid configuration"
+    check: "'block' in output.lower() and 'thread' in output.lower()"
+  - description: "Output contains squared values (9, 1, 16)"
+    check: "'9' in output and '16' in output"
+  - description: "Output shows idle threads"
+    check: "'idle' in output.lower() or len(output.strip().splitlines()) >= 10"
+  - description: "Output has at least 8 lines"
+    check: "len(output.strip().splitlines()) >= 8"
+hints:
+  - "Number of blocks = (len(data) + threads_per_block - 1) // threads_per_block."
+  - "Global thread ID = block_id * threads_per_block + thread_id."
+  - "Check if global_id < len(data) before processing; otherwise the thread is idle."
+concept_tags:
+  - cuda-kernels
+  - thread-blocks

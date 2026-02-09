@@ -1,0 +1,21 @@
+type: parsons
+id: "06-unsupervised-parsons-01"
+prompt: "Arrange these lines to compute the mean (centroid) of a cluster of 2D points."
+blocks:
+  - "cluster = [(2, 3), (4, 5), (6, 7), (8, 9)]"
+  - "n = len(cluster)"
+  - "mean_x = sum(p[0] for p in cluster) / n"
+  - "mean_y = sum(p[1] for p in cluster) / n"
+  - "centroid = (mean_x, mean_y)"
+  - "print(f'Centroid: {centroid}')"
+distractors:
+  - "centroid = cluster[n // 2]"
+  - "mean_x = max(p[0] for p in cluster)"
+solution_order: [0, 1, 2, 3, 4, 5]
+hints:
+  - "The centroid is the mean of all x-coordinates and the mean of all y-coordinates."
+  - "Use sum with a generator expression for each coordinate."
+  - "Divide by the number of points n."
+concept_tags:
+  - k-means
+  - clustering

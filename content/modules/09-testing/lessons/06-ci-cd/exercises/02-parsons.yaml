@@ -1,0 +1,27 @@
+type: parsons
+id: "06-ci-cd-parsons-01"
+prompt: "Arrange these lines to simulate a CI pipeline that runs lint, test, and deploy steps in order, stopping on failure."
+blocks:
+  - "def lint():"
+  - "    print('Linting... OK')"
+  - "    return True"
+  - "def test():"
+  - "    print('Testing... OK')"
+  - "    return True"
+  - "def deploy():"
+  - "    print('Deploying... OK')"
+  - "    return True"
+  - "for step in [lint, test, deploy]:"
+  - "    if not step():"
+  - "        break"
+distractors:
+  - "for step in [lint(), test(), deploy()]:"
+  - "    step.run()"
+solution_order: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+hints:
+  - "Define each step as a function that returns True on success."
+  - "The list contains function references (no parentheses), not function calls."
+  - "Call each function in the loop with step() and check its return value."
+concept_tags:
+  - continuous-integration
+  - automated-pipeline

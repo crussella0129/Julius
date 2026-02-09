@@ -1,0 +1,20 @@
+type: write
+id: "05-backtesting-write-01"
+prompt: "Write a simple backtest: given prices [100, 102, 98, 103, 107, 105, 110] and an initial capital of $10,000, simulate a buy-and-hold strategy (buy on day 0, sell on the last day). Print the portfolio value for each day, the total return as a percentage, and the maximum drawdown as a percentage."
+starter_code: "# Write your code here\n"
+tests:
+  - description: "Output shows starting value of $10,000"
+    check: "'10000' in output or '10,000' in output"
+  - description: "Output shows total return of 10%"
+    check: "'10.0' in output or '10%' in output or '10.00' in output"
+  - description: "Output mentions drawdown"
+    check: "'drawdown' in output.lower() or 'dd' in output.lower()"
+  - description: "Output has at least 8 lines"
+    check: "len(output.strip().splitlines()) >= 8"
+hints:
+  - "Shares = initial_capital / prices[0]. Each day's value = shares * price."
+  - "Total return = (final_value / initial_value - 1) * 100."
+  - "Track the running peak to calculate drawdown at each point."
+concept_tags:
+  - backtesting-framework
+  - performance-metrics

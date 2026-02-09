@@ -1,0 +1,30 @@
+type: parsons
+id: "05-sound-graphics-parsons-01"
+prompt: "Arrange these lines to create a Particle class with position, velocity, lifetime, and update/alive check methods."
+blocks:
+  - "import random"
+  - "class Particle:"
+  - "    def __init__(self, x, y):"
+  - "        self.x = x"
+  - "        self.y = y"
+  - "        self.vel_x = random.uniform(-2, 2)"
+  - "        self.vel_y = random.uniform(-4, -1)"
+  - "        self.lifetime = 30"
+  - "        self.age = 0"
+  - "    def update(self):"
+  - "        self.x += self.vel_x"
+  - "        self.y += self.vel_y"
+  - "        self.age += 1"
+  - "    def is_alive(self):"
+  - "        return self.age < self.lifetime"
+distractors:
+  - "        self.age = self.lifetime"
+  - "        return self.age > self.lifetime"
+solution_order: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]
+hints:
+  - "Import random for velocity randomization."
+  - "Initialize position, velocity, lifetime, and age in __init__."
+  - "update moves the particle; is_alive checks if age is less than lifetime."
+concept_tags:
+  - particle-effects
+  - sprite-animation

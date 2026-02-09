@@ -1,0 +1,16 @@
+type: write
+id: "02-arrays-strings-write-01"
+prompt: "Write a function called reverse_words(s) that takes a string of words separated by spaces, reverses the order of the words, and prints the result. For example, reverse_words('hello world python') should print 'python world hello'. Call it with 'the quick brown fox'."
+starter_code: |
+  # Write reverse_words(s) and call it with 'the quick brown fox'
+tests:
+  - description: "Output is 'fox brown quick the'"
+    check: "output.strip() == 'fox brown quick the'"
+  - description: "Words are reversed, not characters"
+    check: "'fox' in output and 'the' in output"
+hints:
+  - "Split the string into a list of words with .split()."
+  - "Reverse the list with slicing [::-1] or .reverse(), then join with ' '.join(...)."
+concept_tags:
+  - in-place-manipulation
+  - two-pointer

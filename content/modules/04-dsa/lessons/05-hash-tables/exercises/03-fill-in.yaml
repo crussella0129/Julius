@@ -1,0 +1,38 @@
+type: fill-in
+id: "05-hash-tables-fill-in-01"
+prompt: "Fill in the blanks to find the first non-repeating character in a string using a dictionary."
+template: |
+  def first_unique(s):
+      freq = {}
+      for char in s:
+          freq[char] = freq.____(char, 0) + 1
+      for char in s:
+          if freq[____] == 1:
+              return char
+      return None
+
+  print(first_unique("aabbcdd"))
+blanks:
+  - position: 0
+    answer: "get"
+    hint: "dictionary method that returns a default if the key is missing"
+  - position: 1
+    answer: "char"
+    hint: "look up the current character's count"
+solution: |
+  def first_unique(s):
+      freq = {}
+      for char in s:
+          freq[char] = freq.get(char, 0) + 1
+      for char in s:
+          if freq[char] == 1:
+              return char
+      return None
+
+  print(first_unique("aabbcdd"))
+hints:
+  - "dict.get(key, default) returns default if key is not found, avoiding KeyError."
+  - "The second loop checks characters in original order, returning the first with count 1."
+concept_tags:
+  - frequency-counting
+  - hash-function

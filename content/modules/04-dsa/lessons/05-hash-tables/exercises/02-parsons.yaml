@@ -1,0 +1,20 @@
+type: parsons
+id: "05-hash-tables-parsons-01"
+prompt: "Arrange these lines to count the frequency of each word in a sentence and print the result."
+blocks:
+  - "sentence = 'the cat sat on the mat'"
+  - "words = sentence.split()"
+  - "freq = {}"
+  - "for word in words:"
+  - "    freq[word] = freq.get(word, 0) + 1"
+  - "print(freq)"
+solution_order: [0, 1, 2, 3, 4, 5]
+distractors:
+  - "    freq[word] += 1"
+  - "    freq[word] = freq[word] + 1"
+hints:
+  - "Use .get(word, 0) to safely handle keys not yet in the dictionary."
+  - "The distractors would raise a KeyError for the first occurrence of a word."
+concept_tags:
+  - frequency-counting
+  - dict-internals

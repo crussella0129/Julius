@@ -1,0 +1,21 @@
+type: write
+id: "02-pandas-series-write-01"
+prompt: "Create a pandas DataFrame with columns 'student' (['Alice', 'Bob', 'Charlie', 'Diana', 'Eve']), 'math' ([88, 95, 72, 90, 85]), and 'english' ([92, 78, 88, 95, 80]). Add a column 'average' that is the mean of math and english. Print the DataFrame sorted by average in descending order. Then print the name of the student with the highest average."
+starter_code: |
+  import pandas as pd
+
+  # Write your code here
+tests:
+  - description: "Output contains student names"
+    check: "'Alice' in output and 'Bob' in output"
+  - description: "Output contains average column"
+    check: "'average' in output.lower() or '90.0' in output or '86.5' in output"
+  - description: "Output shows the top student"
+    check: "'Diana' in output"
+hints:
+  - "Compute average as (df['math'] + df['english']) / 2."
+  - "Use sort_values('average', ascending=False) to sort."
+  - "Use df.loc[df['average'].idxmax(), 'student'] to get the top student's name."
+concept_tags:
+  - dataframe
+  - column-operations

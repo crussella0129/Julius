@@ -1,0 +1,19 @@
+type: write
+id: "10-practical-ml-write-01"
+prompt: "Write a class called `MLPipeline` that chains preprocessing and prediction steps. It should have: `add_step(name, func)` that adds a named transformation function; `fit_predict(data)` that runs all steps in order on the data and returns the result. Each step function takes a list of dicts and returns a modified list of dicts. Demo with two steps: 'normalize_age' (divides age by 100) and 'encode_city' (replaces city string with a numeric code). Apply to [{'age': 25, 'city': 'NYC'}, {'age': 50, 'city': 'LA'}, {'age': 30, 'city': 'NYC'}] and print the result."
+starter_code: |
+  # Write your class here
+tests:
+  - description: "Ages are normalized (0.25, 0.5, 0.3)"
+    check: "'0.25' in output or '0.5' in output or '0.3' in output"
+  - description: "Cities are encoded as numbers"
+    check: "'0' in output and '1' in output"
+  - description: "Pipeline processes all records"
+    check: "output.count('{') >= 3 or output.count('age') >= 3"
+hints:
+  - "Store steps as a list of (name, function) tuples."
+  - "In fit_predict, loop through steps and apply each function to the data."
+  - "Each step function should modify the dicts and return the list."
+concept_tags:
+  - ml-pipeline
+  - feature-engineering

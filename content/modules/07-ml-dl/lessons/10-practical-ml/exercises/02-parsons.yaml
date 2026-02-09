@@ -1,0 +1,26 @@
+type: parsons
+id: "10-practical-ml-parsons-01"
+prompt: "Arrange these lines to build a simple ML pipeline: scale features, train a model, save it, then load and predict."
+blocks:
+  - "from sklearn.preprocessing import StandardScaler"
+  - "import pickle"
+  - "scaler = StandardScaler()"
+  - "X_train_scaled = scaler.fit_transform(X_train)"
+  - "X_test_scaled = scaler.transform(X_test)"
+  - "model.fit(X_train_scaled, y_train)"
+  - "with open('model.pkl', 'wb') as f:"
+  - "    pickle.dump((scaler, model), f)"
+  - "with open('model.pkl', 'rb') as f:"
+  - "    loaded_scaler, loaded_model = pickle.load(f)"
+  - "predictions = loaded_model.predict(loaded_scaler.transform(X_test))"
+distractors:
+  - "X_test_scaled = scaler.fit_transform(X_test)"
+  - "    pickle.dump(model, f)"
+solution_order: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+hints:
+  - "Fit the scaler on training data only, then transform both train and test."
+  - "Save both the scaler and model together."
+  - "When loading, transform test data with the loaded scaler before predicting."
+concept_tags:
+  - ml-pipeline
+  - model-persistence

@@ -1,0 +1,60 @@
+type: trace
+id: "01-numpy-fundamentals-trace-01"
+prompt: "Trace through this NumPy array operations code and predict the output."
+code: |
+  import numpy as np
+
+  a = np.array([10, 20, 30, 40, 50])
+  b = a[1:4]
+  print(b)
+
+  mask = a > 25
+  filtered = a[mask]
+  print(filtered)
+
+  print(np.mean(a))
+  print(np.argmax(a))
+steps:
+  - line: 3
+    variables: {"a": "array([10, 20, 30, 40, 50])"}
+    output: ""
+    explanation: "Create a NumPy array with 5 elements."
+  - line: 4
+    variables: {"b": "array([20, 30, 40])"}
+    output: ""
+    explanation: "Slice from index 1 to 3 (exclusive 4)."
+  - line: 5
+    variables: {}
+    output: "[20 30 40]"
+    explanation: "Print the sliced array."
+  - line: 7
+    variables: {"mask": "array([False, False, True, True, True])"}
+    output: ""
+    explanation: "Create boolean mask: which elements are > 25."
+  - line: 8
+    variables: {"filtered": "array([30, 40, 50])"}
+    output: ""
+    explanation: "Apply mask to get elements where condition is True."
+  - line: 9
+    variables: {}
+    output: "[30 40 50]"
+    explanation: "Print the filtered array."
+  - line: 11
+    variables: {}
+    output: "30.0"
+    explanation: "Mean of [10,20,30,40,50] = 150/5 = 30.0."
+  - line: 12
+    variables: {}
+    output: "4"
+    explanation: "Index of maximum value (50) is 4."
+expected_output: |
+  [20 30 40]
+  [30 40 50]
+  30.0
+  4
+hints:
+  - "Array slicing uses [start:stop] where stop is exclusive."
+  - "Boolean indexing returns elements where the mask is True."
+concept_tags:
+  - ndarray
+  - indexing-slicing

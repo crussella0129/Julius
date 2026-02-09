@@ -1,0 +1,21 @@
+type: parsons
+id: "07-llm-from-scratch-parsons-01"
+prompt: "Arrange these lines to create a function that generates training pairs for a language model. Each pair should be (input_sequence, target_sequence) where the target is shifted by one position."
+blocks:
+  - "def create_training_pairs(token_ids, block_size):"
+  - "    pairs = []"
+  - "    for i in range(len(token_ids) - block_size):"
+  - "        x = token_ids[i:i + block_size]"
+  - "        y = token_ids[i + 1:i + block_size + 1]"
+  - "        pairs.append((x, y))"
+  - "    return pairs"
+distractors:
+  - "        y = token_ids[i:i + block_size]"
+  - "    for i in range(len(token_ids)):"
+solution_order: [0, 1, 2, 3, 4, 5, 6]
+hints:
+  - "The target sequence starts one position after the input sequence."
+  - "The loop must stop early enough so both x and y fit within the token list."
+concept_tags:
+  - language-model
+  - training-loop

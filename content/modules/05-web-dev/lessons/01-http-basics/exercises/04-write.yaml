@@ -1,0 +1,21 @@
+type: write
+id: "01-http-basics-write-01"
+prompt: "Write a function called `parse_url` that takes a URL string and returns a dictionary with keys 'scheme', 'host', and 'path'. For example, parse_url('https://example.com/about') should return {'scheme': 'https', 'host': 'example.com', 'path': '/about'}. Use the urllib.parse module. Print the result of calling it with 'https://example.com/about'."
+starter_code: |
+  from urllib.parse import urlparse
+
+  # Write your function here
+tests:
+  - description: "Output contains 'https' as scheme"
+    check: "'https' in output"
+  - description: "Output contains 'example.com' as host"
+    check: "'example.com' in output"
+  - description: "Output contains '/about' as path"
+    check: "'/about' in output"
+hints:
+  - "urlparse() returns an object with attributes like .scheme, .netloc, and .path."
+  - "Build a dictionary from the parsed result's attributes."
+  - "Remember to print the dictionary at the end."
+concept_tags:
+  - urls
+  - request-response

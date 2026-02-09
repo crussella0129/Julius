@@ -1,0 +1,27 @@
+type: fill-in
+id: "04-operators-fill-in-01"
+prompt: "Fill in the blanks with the correct operators."
+template: |
+  x = 15
+  y = 4
+  quotient = x ____ y
+  remainder = x ____ y
+  print(f"15 divided by 4 is {quotient} remainder {remainder}")
+blanks:
+  - position: 0
+    answer: "//"
+    hint: "integer division"
+  - position: 1
+    answer: "%"
+    hint: "remainder"
+solution: |
+  x = 15
+  y = 4
+  quotient = x // y
+  remainder = x % y
+  print(f"15 divided by 4 is {quotient} remainder {remainder}")
+hints:
+  - "Floor division (//) gives the whole number part of division."
+  - "Modulo (%) gives the remainder after division."
+concept_tags:
+  - arithmetic-operators

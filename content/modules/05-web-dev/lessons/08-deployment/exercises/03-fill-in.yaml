@@ -1,0 +1,38 @@
+type: fill-in
+id: "08-deployment-fill-in-01"
+prompt: "Fill in the blanks to read configuration from environment variables with defaults."
+template: |
+  import ____
+
+  debug = os.environ.____(\"DEBUG\", \"false\") == \"____\"
+  port = ____(os.environ.get(\"PORT\", \"8000\"))
+  host = os.environ.get(\"HOST\", \"0.0.0.0\")
+
+  print(f\"Running on {host}:{port}, debug={debug}\")
+blanks:
+  - position: 0
+    answer: "os"
+    hint: "module for operating system interfaces"
+  - position: 1
+    answer: "get"
+    hint: "method that returns a default if key is missing"
+  - position: 2
+    answer: "true"
+    hint: "the string value that means debug is on"
+  - position: 3
+    answer: "int"
+    hint: "convert the port string to a number"
+solution: |
+  import os
+
+  debug = os.environ.get("DEBUG", "false") == "true"
+  port = int(os.environ.get("PORT", "8000"))
+  host = os.environ.get("HOST", "0.0.0.0")
+
+  print(f"Running on {host}:{port}, debug={debug}")
+hints:
+  - "os.environ.get() returns a string, so compare to 'true' for booleans."
+  - "Convert PORT to int since environment variables are always strings."
+concept_tags:
+  - environment-variables
+  - production-config

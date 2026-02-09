@@ -1,0 +1,48 @@
+type: fill-in
+id: "03-subprocess-fill-in-01"
+prompt: "Fill in the blanks to run a command with a 5-second timeout and raise an exception if it fails."
+template: |
+  import subprocess
+
+  try:
+      result = subprocess.____(
+          ["python3", "-c", "print('done')"],
+          capture_output=True,
+          text=True,
+          ____=True,
+          ____=5
+      )
+      print(result.stdout.strip())
+  except subprocess.CalledProcessError as e:
+      print(f"Failed: {e.returncode}")
+blanks:
+  - position: 0
+    answer: "run"
+    hint: "the main subprocess function"
+  - position: 1
+    answer: "check"
+    hint: "parameter that raises exception on failure"
+  - position: 2
+    answer: "timeout"
+    hint: "parameter that limits execution time in seconds"
+solution: |
+  import subprocess
+
+  try:
+      result = subprocess.run(
+          ["python3", "-c", "print('done')"],
+          capture_output=True,
+          text=True,
+          check=True,
+          timeout=5
+      )
+      print(result.stdout.strip())
+  except subprocess.CalledProcessError as e:
+      print(f"Failed: {e.returncode}")
+hints:
+  - "subprocess.run() is the recommended way to run external commands."
+  - "check=True makes it raise CalledProcessError on non-zero exit codes."
+  - "timeout=5 kills the process after 5 seconds."
+concept_tags:
+  - subprocess-run
+  - process-management

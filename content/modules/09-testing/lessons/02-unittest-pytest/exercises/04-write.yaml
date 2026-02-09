@@ -1,0 +1,21 @@
+type: write
+id: "02-unittest-pytest-write-01"
+prompt: "Write a function called `reverse_words` that takes a sentence and returns it with the word order reversed (e.g., 'hello world' becomes 'world hello'). Then write at least 3 assert tests: a normal case, a single word, and an empty string. Print 'All tests passed!' at the end."
+starter_code: |
+  # Define reverse_words function
+
+  # Write assert tests
+
+  print("All tests passed!")
+tests:
+  - description: "Output contains 'All tests passed!'"
+    check: "'All tests passed!' in output"
+  - description: "No errors in output"
+    check: "'Error' not in output"
+hints:
+  - "Split the string into words, reverse the list, join back."
+  - "def reverse_words(s): return ' '.join(s.split()[::-1])"
+  - "assert reverse_words('hello world') == 'world hello'"
+concept_tags:
+  - pytest-basics
+  - assert-introspection

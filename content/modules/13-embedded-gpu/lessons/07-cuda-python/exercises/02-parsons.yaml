@@ -1,0 +1,24 @@
+type: parsons
+id: "07-cuda-python-parsons-01"
+prompt: "Arrange these lines to simulate a grid-stride loop where 3 threads process 9 data elements (each thread handles multiple elements)."
+blocks:
+  - "data = [1, 2, 3, 4, 5, 6, 7, 8, 9]"
+  - "num_threads = 3"
+  - "result = [0] * len(data)"
+  - "for tid in range(num_threads):"
+  - "    idx = tid"
+  - "    while idx < len(data):"
+  - "        result[idx] = data[idx] * 2"
+  - "        idx += num_threads"
+  - "print(result)"
+distractors:
+  - "        idx += 1"
+  - "    idx = 0"
+solution_order: [0, 1, 2, 3, 4, 5, 6, 7, 8]
+hints:
+  - "Each thread starts at its thread ID and steps by the total number of threads."
+  - "Thread 0 processes indices 0, 3, 6. Thread 1 processes 1, 4, 7. Thread 2 processes 2, 5, 8."
+  - "The stride (step) equals num_threads, not 1."
+concept_tags:
+  - grid-stride-loops
+  - cuda-kernels

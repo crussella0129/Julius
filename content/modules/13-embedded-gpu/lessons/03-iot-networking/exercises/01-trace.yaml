@@ -1,0 +1,59 @@
+type: trace
+id: "03-iot-networking-trace-01"
+prompt: "Trace through this MQTT broker simulation and predict the output."
+code: |
+  class Broker:
+      def __init__(self):
+          self.subs = {}
+
+      def subscribe(self, topic, cb):
+          self.subs.setdefault(topic, []).append(cb)
+
+      def publish(self, topic, msg):
+          for cb in self.subs.get(topic, []):
+              cb(topic, msg)
+
+  def handler(topic, msg):
+      print(f"[{topic}] {msg}")
+
+  broker = Broker()
+  broker.subscribe("temp", handler)
+  broker.subscribe("humid", handler)
+
+  broker.publish("temp", "22.5")
+  broker.publish("humid", "45.0")
+  broker.publish("light", "800")
+steps:
+  - line: 14
+    variables: {"broker": "Broker()"}
+    output: ""
+    explanation: "Create a broker with empty subscriptions."
+  - line: 15
+    variables: {}
+    output: ""
+    explanation: "Subscribe handler to 'temp' topic."
+  - line: 16
+    variables: {}
+    output: ""
+    explanation: "Subscribe handler to 'humid' topic."
+  - line: 18
+    variables: {}
+    output: "[temp] 22.5"
+    explanation: "Publish to 'temp': handler is subscribed, so it's called."
+  - line: 19
+    variables: {}
+    output: "[humid] 45.0"
+    explanation: "Publish to 'humid': handler is subscribed, so it's called."
+  - line: 20
+    variables: {}
+    output: ""
+    explanation: "Publish to 'light': no subscribers, so nothing happens."
+expected_output: |
+  [temp] 22.5
+  [humid] 45.0
+hints:
+  - "Messages are only delivered to subscribers of that specific topic."
+  - "Publishing to a topic with no subscribers is silently ignored."
+concept_tags:
+  - mqtt
+  - data-publishing

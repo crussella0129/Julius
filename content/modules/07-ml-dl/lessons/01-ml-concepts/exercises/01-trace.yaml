@@ -1,0 +1,72 @@
+type: trace
+id: "01-ml-concepts-trace-01"
+prompt: "Trace through this train-test split simulation and predict the output."
+code: |
+  data = [("A", 1), ("B", 0), ("C", 1), ("D", 0), ("E", 1),
+          ("F", 0), ("G", 1), ("H", 0), ("I", 1), ("J", 0)]
+
+  split_index = int(len(data) * 0.8)
+  train = data[:split_index]
+  test = data[split_index:]
+
+  print(f"Total: {len(data)}")
+  print(f"Train: {len(train)}")
+  print(f"Test: {len(test)}")
+
+  train_labels = [label for _, label in train]
+  test_labels = [label for _, label in test]
+  print(f"Train labels: {train_labels}")
+  print(f"Test labels: {test_labels}")
+steps:
+  - line: 1
+    variables: {"data": "list of 10 tuples"}
+    output: ""
+    explanation: "Create 10 data points with names and labels."
+  - line: 4
+    variables: {"split_index": 8}
+    output: ""
+    explanation: "int(10 * 0.8) = 8. Split at index 8."
+  - line: 5
+    variables: {"train": "first 8 items"}
+    output: ""
+    explanation: "Training set: items 0 through 7."
+  - line: 6
+    variables: {"test": "last 2 items"}
+    output: ""
+    explanation: "Test set: items 8 and 9."
+  - line: 8
+    variables: {}
+    output: "Total: 10"
+    explanation: "10 total data points."
+  - line: 9
+    variables: {}
+    output: "Train: 8"
+    explanation: "8 training samples (80%)."
+  - line: 10
+    variables: {}
+    output: "Test: 2"
+    explanation: "2 test samples (20%)."
+  - line: 12
+    variables: {"train_labels": "[1, 0, 1, 0, 1, 0, 1, 0]"}
+    output: ""
+    explanation: "Extract labels from training data."
+  - line: 14
+    variables: {}
+    output: "Train labels: [1, 0, 1, 0, 1, 0, 1, 0]"
+    explanation: "Print training labels."
+  - line: 15
+    variables: {}
+    output: "Test labels: [1, 0]"
+    explanation: "Print test labels: I=1, J=0."
+expected_output: |
+  Total: 10
+  Train: 8
+  Test: 2
+  Train labels: [1, 0, 1, 0, 1, 0, 1, 0]
+  Test labels: [1, 0]
+hints:
+  - "int(10 * 0.8) = 8, so the split happens at index 8."
+  - "Slicing [:8] gets the first 8, [8:] gets the remaining 2."
+concept_tags:
+  - train-test-split
+  - supervised-learning

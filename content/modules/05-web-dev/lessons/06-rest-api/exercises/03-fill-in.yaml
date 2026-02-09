@@ -1,0 +1,50 @@
+type: fill-in
+id: "06-rest-api-fill-in-01"
+prompt: "Fill in the blanks to implement pagination for a list endpoint."
+template: |
+  def paginate(items, page=1, per_page=10):
+      start = (page - ____) * per_page
+      end = start + ____
+      return {
+          \"items\": items[start:____],
+          \"total\": ____(items),
+          \"page\": page,
+      }
+
+  data = list(range(1, 26))
+  result = paginate(data, page=2, per_page=5)
+  print(result[\"items\"])
+  print(result[\"total\"])
+blanks:
+  - position: 0
+    answer: "1"
+    hint: "pages are 1-indexed, so subtract this to get 0-indexed"
+  - position: 1
+    answer: "per_page"
+    hint: "how many items after the start"
+  - position: 2
+    answer: "end"
+    hint: "slice up to this index"
+  - position: 3
+    answer: "len"
+    hint: "function to count total items"
+solution: |
+  def paginate(items, page=1, per_page=10):
+      start = (page - 1) * per_page
+      end = start + per_page
+      return {
+          "items": items[start:end],
+          "total": len(items),
+          "page": page,
+      }
+
+  data = list(range(1, 26))
+  result = paginate(data, page=2, per_page=5)
+  print(result["items"])
+  print(result["total"])
+hints:
+  - "Page 1 starts at index 0, page 2 starts at index per_page."
+  - "Use list slicing [start:end] to get the page of items."
+concept_tags:
+  - rest-principles
+  - json-responses

@@ -1,0 +1,23 @@
+type: write
+id: "05-email-api-write-01"
+prompt: "Write a program that creates a dictionary with keys 'name', 'version', and 'features' (a list of at least 2 strings). Convert it to a formatted JSON string with 2-space indentation and print it. Then parse it back and print just the name value."
+starter_code: |
+  import json
+
+  # Your code here
+tests:
+  - description: "Output contains valid JSON with 'name' key"
+    check: "'\"name\"' in output"
+  - description: "Output contains 'version' key"
+    check: "'\"version\"' in output"
+  - description: "Output contains 'features' key"
+    check: "'\"features\"' in output"
+  - description: "Last line is the name value (a non-empty string)"
+    check: "len(output.strip().splitlines()[-1].strip()) > 0 and '\"' not in output.strip().splitlines()[-1]"
+hints:
+  - "Create a dict: data = {'name': 'MyApp', 'version': '1.0', 'features': ['fast', 'secure']}"
+  - "Use json.dumps(data, indent=2) for formatted output."
+  - "Parse back with json.loads() and print the 'name' value."
+concept_tags:
+  - json-handling
+  - rest-api

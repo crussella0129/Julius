@@ -1,0 +1,20 @@
+type: write
+id: "06-openbb-write-01"
+prompt: "Write a stock screener function called screen that takes a list of stock dictionaries (each with 'ticker', 'pe_ratio', 'market_cap', and 'dividend_yield') and two parameters: max_pe and min_yield. Return stocks where pe_ratio < max_pe AND dividend_yield > min_yield. Test with at least 5 stocks and print the passing tickers with their P/E and yield."
+starter_code: "# Write your code here\n"
+tests:
+  - description: "Output contains at least one ticker"
+    check: "len(output.strip()) > 0"
+  - description: "Output shows P/E values"
+    check: "'pe' in output.lower() or 'p/e' in output.lower()"
+  - description: "Output shows yield values"
+    check: "'yield' in output.lower() or '%' in output"
+  - description: "Output has at least 2 lines"
+    check: "len(output.strip().splitlines()) >= 2"
+hints:
+  - "Loop through each stock and check both conditions."
+  - "Use a list to collect passing stocks, then print them."
+  - "Remember to use < for P/E and > for yield."
+concept_tags:
+  - data-pipeline
+  - research-workflow

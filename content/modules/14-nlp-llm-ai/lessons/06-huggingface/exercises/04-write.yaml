@@ -1,0 +1,24 @@
+type: write
+id: "06-huggingface-write-01"
+prompt: "Write a Tokenizer class with: (1) __init__ taking a list of strings as vocabulary (index 0 should be '[UNK]'), building token_to_id and id_to_token dicts; (2) encode(text) that splits on whitespace and returns a list of integer IDs (unknown words map to 0); (3) decode(ids) that returns the joined string. Demonstrate by encoding 'hello world foo' with vocab ['[UNK]', 'hello', 'world'] and printing both the IDs and the decoded text."
+starter_code: |
+  # Write your Tokenizer class here
+
+  tok = Tokenizer(["[UNK]", "hello", "world"])
+  ids = tok.encode("hello world foo")
+  print(ids)
+  print(tok.decode(ids))
+tests:
+  - description: "Encoded IDs are [1, 2, 0]"
+    check: "'[1, 2, 0]' in output"
+  - description: "Decoded text contains [UNK]"
+    check: "'[UNK]' in output"
+  - description: "Output has 2 lines"
+    check: "len(output.strip().splitlines()) == 2"
+hints:
+  - "Use enumerate() to build the mapping from tokens to indices."
+  - "dict.get(key, default) returns default if the key is missing."
+  - "Use ' '.join() to convert a list of strings back to a sentence."
+concept_tags:
+  - tokenizers
+  - huggingface-pipeline

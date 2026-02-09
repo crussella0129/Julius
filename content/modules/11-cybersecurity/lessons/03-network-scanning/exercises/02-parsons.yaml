@@ -1,0 +1,24 @@
+type: parsons
+id: "03-network-scanning-parsons-01"
+prompt: "Arrange these lines to create a function that scans a single port and returns whether it is open, using a timeout to avoid hanging."
+blocks:
+  - "import socket"
+  - "def scan_port(host, port, timeout=1):"
+  - "    sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)"
+  - "    sock.settimeout(timeout)"
+  - "    try:"
+  - "        result = sock.connect_ex((host, port))"
+  - "        return result == 0"
+  - "    finally:"
+  - "        sock.close()"
+distractors:
+  - "        return result == 1"
+  - "    sock.connect((host, port))"
+solution_order: [0, 1, 2, 3, 4, 5, 6, 7, 8]
+hints:
+  - "Start with the import, then define the function."
+  - "connect_ex() returns 0 when the connection succeeds (port is open)."
+  - "The finally block ensures the socket is always closed."
+concept_tags:
+  - sockets
+  - port-scanning

@@ -1,0 +1,18 @@
+type: write
+id: "05-numba-jit-write-01"
+prompt: "Write a function called mandelbrot_grid that takes width, height, and max_iter parameters. It should compute the Mandelbrot set for x in [-2, 1] and y in [-1.5, 1.5]. For each grid point, iterate z = z*z + c until abs(z) > 2 or max_iter is reached. Print a simple ASCII visualization where points inside the set print '*' and escaped points print ' '. Use width=60, height=20, max_iter=50."
+starter_code: "# Write your code here\n"
+tests:
+  - description: "Output contains asterisks (inside the set)"
+    check: "'*' in output"
+  - description: "Output has approximately 20 lines"
+    check: "len(output.strip().splitlines()) >= 15"
+  - description: "Output lines contain spaces (escaped points)"
+    check: "' ' in output"
+hints:
+  - "Map grid coordinates to complex plane: c = complex(x, y)."
+  - "For each point, iterate z = z*z + c. If abs(z) > 2, it escaped."
+  - "Build each row as a string of '*' or ' ', then print it."
+concept_tags:
+  - jit-compilation
+  - parallel-loops

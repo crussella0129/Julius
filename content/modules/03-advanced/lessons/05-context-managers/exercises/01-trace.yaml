@@ -1,0 +1,62 @@
+type: trace
+id: "05-context-managers-trace-01"
+prompt: "Trace through this code and predict the final output."
+code: |
+  class Managed:
+      def __init__(self, name):
+          self.name = name
+          print(f"Created {self.name}")
+
+      def __enter__(self):
+          print(f"Entering {self.name}")
+          return self
+
+      def __exit__(self, exc_type, exc_val, exc_tb):
+          print(f"Exiting {self.name}")
+          return False
+
+  with Managed("A") as a:
+      print(f"Inside with {a.name}")
+  print("After with")
+steps:
+  - line: 1
+    variables: {}
+    output: ""
+    explanation: "The Managed class is defined."
+  - line: 14
+    variables: {}
+    output: ""
+    explanation: "Managed('A') is called, triggering __init__."
+  - line: 4
+    variables: { "self.name": "A" }
+    output: "Created A"
+    explanation: "__init__ sets self.name = 'A' and prints 'Created A'."
+  - line: 6
+    variables: {}
+    output: "Entering A"
+    explanation: "__enter__ is called by the 'with' statement. Prints 'Entering A' and returns self."
+  - line: 15
+    variables: { "a": "Managed object" }
+    output: "Inside with A"
+    explanation: "The body of the with block runs. a is the object returned by __enter__."
+  - line: 10
+    variables: {}
+    output: "Exiting A"
+    explanation: "__exit__ is called as the with block ends normally. exc_type is None."
+  - line: 16
+    variables: {}
+    output: "After with"
+    explanation: "Execution continues after the with block."
+expected_output: |
+  Created A
+  Entering A
+  Inside with A
+  Exiting A
+  After with
+hints:
+  - "__init__ runs when the object is created, before __enter__."
+  - "__enter__ runs when the with block starts."
+  - "__exit__ runs when the with block ends, even if there's an exception."
+concept_tags:
+  - with-statement
+  - enter-exit-methods

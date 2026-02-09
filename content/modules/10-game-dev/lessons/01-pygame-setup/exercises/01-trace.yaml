@@ -1,0 +1,62 @@
+type: trace
+id: "01-pygame-setup-trace-01"
+prompt: "Trace through this code and predict what will be printed."
+code: |
+  # Simulating Pygame concepts without the actual library
+
+  colors = {
+      "black": (0, 0, 0),
+      "white": (255, 255, 255),
+      "red": (255, 0, 0),
+  }
+
+  def rgb_to_hex(rgb):
+      return "#{:02x}{:02x}{:02x}".format(*rgb)
+
+  for name, color in colors.items():
+      print(f"{name}: {rgb_to_hex(color)}")
+
+  width, height = 800, 600
+  print(f"Window: {width}x{height}")
+  print(f"Center: ({width // 2}, {height // 2})")
+steps:
+  - line: 3
+    variables: { "colors": "dict with 3 color entries" }
+    output: ""
+    explanation: "Define a dictionary mapping color names to RGB tuples."
+  - line: 9
+    variables: {}
+    output: ""
+    explanation: "Define a function that converts RGB tuples to hex strings."
+  - line: 12
+    variables: { "name": "'black'", "color": "(0, 0, 0)" }
+    output: "black: #000000"
+    explanation: "Format (0,0,0) as hex: each 0 becomes '00'."
+  - line: 12
+    variables: { "name": "'white'", "color": "(255, 255, 255)" }
+    output: "white: #ffffff"
+    explanation: "Format (255,255,255) as hex: each 255 becomes 'ff'."
+  - line: 12
+    variables: { "name": "'red'", "color": "(255, 0, 0)" }
+    output: "red: #ff0000"
+    explanation: "Format (255,0,0) as hex: 255='ff', 0='00', 0='00'."
+  - line: 15
+    variables: { "width": "800", "height": "600" }
+    output: "Window: 800x600"
+    explanation: "Print the window dimensions."
+  - line: 16
+    variables: {}
+    output: "Center: (400, 300)"
+    explanation: "800 // 2 = 400, 600 // 2 = 300."
+expected_output: |
+  black: #000000
+  white: #ffffff
+  red: #ff0000
+  Window: 800x600
+  Center: (400, 300)
+hints:
+  - "RGB values 0-255 map to hex 00-ff."
+  - "Integer division // gives the center of the window."
+concept_tags:
+  - pygame-init
+  - display-surface

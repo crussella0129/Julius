@@ -1,0 +1,17 @@
+type: write
+id: "04-trees-forests-write-01"
+prompt: "Write a function called `gini_impurity` that takes a list of labels and returns the Gini impurity (1 - sum of squared proportions). Then write a function `best_split` that takes a list of (feature_value, label) tuples and a list of candidate thresholds, and returns the threshold with the lowest weighted Gini impurity. Test with data [(1,'A'),(2,'A'),(3,'A'),(4,'B'),(5,'B'),(6,'B')] and thresholds [2.5, 3.5, 4.5]. Print the best threshold."
+starter_code: |
+  # Write your functions here
+tests:
+  - description: "Best threshold is 3.5 (perfect split)"
+    check: "'3.5' in output"
+  - description: "Output mentions the threshold or split"
+    check: "'3.5' in output or 'threshold' in output.lower() or 'split' in output.lower()"
+hints:
+  - "Gini = 1 - sum((count_i / total)^2 for each class)."
+  - "For each threshold, split data into left (<= threshold) and right (> threshold)."
+  - "Weighted Gini = (n_left/n_total)*gini_left + (n_right/n_total)*gini_right."
+concept_tags:
+  - decision-tree
+  - information-gain

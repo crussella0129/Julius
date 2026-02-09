@@ -1,0 +1,65 @@
+type: trace
+id: "08-modules-packages-trace-01"
+prompt: "Trace through this code and predict the final output."
+code: |
+  import math
+
+  radius = 5
+  area = math.pi * radius ** 2
+  area_rounded = round(area, 2)
+  print(area_rounded)
+
+  root = math.sqrt(144)
+  print(int(root))
+
+  print(math.ceil(4.1))
+  print(math.floor(4.9))
+steps:
+  - line: 1
+    variables: {}
+    output: ""
+    explanation: "The math module is imported, making its functions and constants available."
+  - line: 3
+    variables: { "radius": "5" }
+    output: ""
+    explanation: "radius is assigned 5."
+  - line: 4
+    variables: { "radius": "5", "area": "78.53981633974483" }
+    output: ""
+    explanation: "area = pi * 5^2 = 3.14159... * 25 = 78.5398..."
+  - line: 5
+    variables: { "radius": "5", "area": "78.53981633974483", "area_rounded": "78.54" }
+    output: ""
+    explanation: "round(78.5398..., 2) gives 78.54."
+  - line: 6
+    variables: {}
+    output: "78.54"
+    explanation: "Prints the rounded area."
+  - line: 8
+    variables: { "root": "12.0" }
+    output: ""
+    explanation: "math.sqrt(144) = 12.0 (returns a float)."
+  - line: 9
+    variables: {}
+    output: "12"
+    explanation: "int(12.0) converts to integer 12."
+  - line: 11
+    variables: {}
+    output: "5"
+    explanation: "math.ceil(4.1) rounds UP to the nearest integer: 5."
+  - line: 12
+    variables: {}
+    output: "4"
+    explanation: "math.floor(4.9) rounds DOWN to the nearest integer: 4."
+expected_output: |
+  78.54
+  12
+  5
+  4
+hints:
+  - "math.pi is approximately 3.14159265358979."
+  - "math.sqrt() returns a float. Use int() to convert to an integer."
+  - "ceil() always rounds up, floor() always rounds down."
+concept_tags:
+  - import-statement
+  - standard-library

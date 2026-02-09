@@ -1,0 +1,22 @@
+type: parsons
+id: "03-classification-parsons-01"
+prompt: "Arrange these lines to compute precision, recall, and F1 score from a confusion matrix."
+blocks:
+  - "tp, fp, fn, tn = 40, 10, 5, 45"
+  - "precision = tp / (tp + fp)"
+  - "recall = tp / (tp + fn)"
+  - "f1 = 2 * (precision * recall) / (precision + recall)"
+  - "print(f'Precision: {precision:.2f}')"
+  - "print(f'Recall: {recall:.2f}')"
+  - "print(f'F1 Score: {f1:.2f}')"
+distractors:
+  - "precision = tp / (tp + fn)"
+  - "f1 = (precision + recall) / 2"
+solution_order: [0, 1, 2, 3, 4, 5, 6]
+hints:
+  - "Precision = TP / (TP + FP) -- of predicted positives, how many are correct?"
+  - "Recall = TP / (TP + FN) -- of actual positives, how many were found?"
+  - "F1 is the harmonic mean, not the arithmetic mean."
+concept_tags:
+  - confusion-matrix
+  - classification-metrics

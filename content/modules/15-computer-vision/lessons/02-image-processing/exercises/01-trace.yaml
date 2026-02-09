@@ -1,0 +1,48 @@
+type: trace
+id: "02-image-processing-trace-01"
+prompt: "Trace through this thresholding operation and predict the output."
+code: |
+  import numpy as np
+
+  image = np.array([
+      [50,  150, 200],
+      [100, 128, 250],
+      [25,  175, 80]
+  ], dtype=np.uint8)
+
+  binary = (image > 128).astype(np.uint8) * 255
+  white_count = np.sum(binary == 255)
+  black_count = np.sum(binary == 0)
+
+  print(binary.tolist())
+  print(f"White: {white_count}, Black: {black_count}")
+steps:
+  - line: 3
+    variables: {"image": "3x3 array with values 25-250"}
+    output: ""
+    explanation: "A 3x3 grayscale image is created with pixel values ranging from 25 to 250."
+  - line: 9
+    variables: {"binary": "3x3 array of 0s and 255s"}
+    output: ""
+    explanation: "Pixels > 128 become 255 (white): 150, 200, 250, 175. Pixels <= 128 become 0: 50, 100, 128, 25, 80. Note: 128 is NOT greater than 128."
+  - line: 10
+    variables: {"white_count": 4, "black_count": 5}
+    output: ""
+    explanation: "4 pixels exceeded threshold (150, 200, 250, 175). 5 pixels did not (50, 100, 128, 25, 80)."
+  - line: 13
+    variables: {}
+    output: "[[0, 255, 255], [0, 0, 255], [0, 255, 0]]"
+    explanation: "Each row printed as a list: row 0 has 150>128 and 200>128; row 1 has only 250>128; row 2 has only 175>128."
+  - line: 14
+    variables: {}
+    output: "White: 4, Black: 5"
+    explanation: "The counts of white and black pixels are printed."
+expected_output: |
+  [[0, 255, 255], [0, 0, 255], [0, 255, 0]]
+  White: 4, Black: 5
+hints:
+  - "The threshold is strictly greater than 128, so 128 itself becomes 0 (black)."
+  - "Count carefully: 50, 100, 128, 25, 80 are all <= 128."
+concept_tags:
+  - thresholding
+  - image-representation

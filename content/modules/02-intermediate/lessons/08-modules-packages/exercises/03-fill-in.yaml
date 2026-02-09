@@ -1,0 +1,53 @@
+type: fill-in
+id: "08-modules-packages-fill-in-01"
+prompt: "Fill in the blanks to import modules, use an alias, and write a __name__ guard."
+template: |
+  # Import with alias
+  import math ____ m
+  print(m.sqrt(16))
+
+  # Import specific item
+  ____ random import choice
+  colors = ["red", "green", "blue"]
+  print(choice(colors))
+
+  # Name guard
+  def main():
+      print("Running!")
+
+  if __name__ == "____":
+      main()
+blanks:
+  - position: 0
+    answer: "as"
+    hint: "keyword for aliasing an import"
+  - position: 1
+    answer: "from"
+    hint: "keyword for importing specific items"
+  - position: 2
+    answer: "__main__"
+    hint: "special value when a file is run directly"
+solution: |
+  # Import with alias
+  import math as m
+  print(m.sqrt(16))
+
+  # Import specific item
+  from random import choice
+  colors = ["red", "green", "blue"]
+  print(choice(colors))
+
+  # Name guard
+  def main():
+      print("Running!")
+
+  if __name__ == "__main__":
+      main()
+hints:
+  - "'import math as m' lets you use m.sqrt() instead of math.sqrt()."
+  - "'from random import choice' lets you call choice() directly."
+  - "When a Python file is run directly, __name__ is set to '__main__'."
+concept_tags:
+  - import-statement
+  - from-import
+  - name-main

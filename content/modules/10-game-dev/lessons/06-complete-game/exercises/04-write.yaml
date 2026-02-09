@@ -1,0 +1,23 @@
+type: write
+id: "06-complete-game-write-01"
+prompt: "Write a simplified text-based dodge game simulation. Create a Player class (x position, lives=3) and a game loop that runs for 20 frames. Each frame: move the player to a random x position (0-9), spawn an obstacle at a random x (0-9), and if they match, the player loses a life. Use random.seed(42). Print 'Frame N: player=X obstacle=O HIT!' or 'Frame N: player=X obstacle=O safe' for each frame. At the end print 'Survived! Score: 20' or 'Game Over! Score: N'."
+starter_code: |
+  import random
+  random.seed(42)
+
+  # Your code here
+tests:
+  - description: "Output contains Frame 0"
+    check: "'Frame 0' in output"
+  - description: "Output shows hit or safe for each frame"
+    check: "'HIT' in output or 'safe' in output"
+  - description: "Output ends with Score line"
+    check: "'Score:' in output.strip().splitlines()[-1]"
+hints:
+  - "Use random.randint(0, 9) for both player and obstacle positions."
+  - "If player_x == obstacle_x, it's a HIT and lives -= 1."
+  - "Break the loop if lives reach 0."
+concept_tags:
+  - game-architecture
+  - gameplay-loop
+  - polish

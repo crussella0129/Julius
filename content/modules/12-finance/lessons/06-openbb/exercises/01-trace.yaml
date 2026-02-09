@@ -1,0 +1,93 @@
+type: trace
+id: "06-openbb-trace-01"
+prompt: "Trace through this code that screens stocks based on P/E ratio and dividend yield criteria."
+code: |
+  stocks = [
+      {"ticker": "A", "pe": 12, "yield": 3.0},
+      {"ticker": "B", "pe": 25, "yield": 1.5},
+      {"ticker": "C", "pe": 8, "yield": 5.0},
+      {"ticker": "D", "pe": 18, "yield": 2.5},
+  ]
+
+  results = []
+  for stock in stocks:
+      if stock["pe"] < 20 and stock["yield"] > 2.0:
+          results.append(stock["ticker"])
+          print(f"PASS: {stock['ticker']} (P/E={stock['pe']}, Yield={stock['yield']}%)")
+      else:
+          print(f"FAIL: {stock['ticker']}")
+
+  print(f"Matches: {len(results)}")
+steps:
+  - line: 1
+    variables: {"stocks": "[4 stock dictionaries]"}
+    output: ""
+    explanation: "Four stocks with P/E ratios and dividend yields."
+  - line: 8
+    variables: {"results": "[]"}
+    output: ""
+    explanation: "Empty results list."
+  - line: 9
+    variables: {"stock": "{'ticker': 'A', 'pe': 12, 'yield': 3.0}"}
+    output: ""
+    explanation: "First stock: A with P/E=12, yield=3.0%."
+  - line: 10
+    variables: {}
+    output: ""
+    explanation: "P/E 12 < 20 is True, yield 3.0 > 2.0 is True. Both pass."
+  - line: 12
+    variables: {"results": "['A']"}
+    output: "PASS: A (P/E=12, Yield=3.0%)"
+    explanation: "Stock A passes both criteria."
+  - line: 9
+    variables: {"stock": "{'ticker': 'B', 'pe': 25, 'yield': 1.5}"}
+    output: ""
+    explanation: "Second stock: B with P/E=25, yield=1.5%."
+  - line: 10
+    variables: {}
+    output: ""
+    explanation: "P/E 25 < 20 is False. Fails the first condition."
+  - line: 14
+    variables: {}
+    output: "FAIL: B"
+    explanation: "Stock B fails the P/E criterion."
+  - line: 9
+    variables: {"stock": "{'ticker': 'C', 'pe': 8, 'yield': 5.0}"}
+    output: ""
+    explanation: "Third stock: C with P/E=8, yield=5.0%."
+  - line: 10
+    variables: {}
+    output: ""
+    explanation: "P/E 8 < 20 is True, yield 5.0 > 2.0 is True."
+  - line: 12
+    variables: {"results": "['A', 'C']"}
+    output: "PASS: C (P/E=8, Yield=5.0%)"
+    explanation: "Stock C passes both criteria."
+  - line: 9
+    variables: {"stock": "{'ticker': 'D', 'pe': 18, 'yield': 2.5}"}
+    output: ""
+    explanation: "Fourth stock: D with P/E=18, yield=2.5%."
+  - line: 10
+    variables: {}
+    output: ""
+    explanation: "P/E 18 < 20 is True, yield 2.5 > 2.0 is True."
+  - line: 12
+    variables: {"results": "['A', 'C', 'D']"}
+    output: "PASS: D (P/E=18, Yield=2.5%)"
+    explanation: "Stock D passes both criteria."
+  - line: 16
+    variables: {}
+    output: "Matches: 3"
+    explanation: "Three out of four stocks passed the screen."
+expected_output: |
+  PASS: A (P/E=12, Yield=3.0%)
+  FAIL: B
+  PASS: C (P/E=8, Yield=5.0%)
+  PASS: D (P/E=18, Yield=2.5%)
+  Matches: 3
+hints:
+  - "Both conditions must be True (P/E < 20 AND yield > 2.0)."
+  - "Stock B fails because its P/E of 25 exceeds the 20 threshold."
+concept_tags:
+  - financial-apis
+  - data-pipeline

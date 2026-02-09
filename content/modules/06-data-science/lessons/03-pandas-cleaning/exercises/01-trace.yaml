@@ -1,0 +1,70 @@
+type: trace
+id: "03-pandas-cleaning-trace-01"
+prompt: "Trace through this data cleaning code and predict the output."
+code: |
+  import pandas as pd
+  import numpy as np
+
+  data = {
+      "name": ["  Alice ", "BOB", None, "diana"],
+      "score": [85, np.nan, 90, 85],
+  }
+  df = pd.DataFrame(data)
+
+  print(f"Missing: {df.isnull().sum().sum()}")
+
+  df["name"] = df["name"].str.strip().str.title()
+  df["score"] = df["score"].fillna(0)
+  df = df.dropna(subset=["name"])
+
+  print(f"Rows: {len(df)}")
+  print(df["name"].tolist())
+  print(df["score"].tolist())
+steps:
+  - line: 4
+    variables: {}
+    output: ""
+    explanation: "Create data dict with some messy values."
+  - line: 8
+    variables: {"df": "DataFrame with 4 rows"}
+    output: ""
+    explanation: "Create DataFrame. Row 2 has name=None, row 1 has score=NaN."
+  - line: 10
+    variables: {}
+    output: "Missing: 2"
+    explanation: "Total nulls: 1 (name None) + 1 (score NaN) = 2."
+  - line: 12
+    variables: {}
+    output: ""
+    explanation: "Strip whitespace and title-case names. None stays None (NaN)."
+  - line: 13
+    variables: {}
+    output: ""
+    explanation: "Fill NaN scores with 0. Bob's score becomes 0.0."
+  - line: 14
+    variables: {}
+    output: ""
+    explanation: "Drop rows where name is NaN. Row 2 (None name) is dropped."
+  - line: 16
+    variables: {}
+    output: "Rows: 3"
+    explanation: "3 rows remain after dropping the null-name row."
+  - line: 17
+    variables: {}
+    output: "['Alice', 'Bob', 'Diana']"
+    explanation: "Names are stripped and title-cased."
+  - line: 18
+    variables: {}
+    output: "[85.0, 0.0, 85.0]"
+    explanation: "Scores with Bob's NaN filled as 0.0."
+expected_output: |
+  Missing: 2
+  Rows: 3
+  ['Alice', 'Bob', 'Diana']
+  [85.0, 0.0, 85.0]
+hints:
+  - "isnull().sum().sum() counts total missing values across all columns."
+  - "str methods propagate NaN -- strip/title on None stays None."
+concept_tags:
+  - missing-data
+  - string-methods

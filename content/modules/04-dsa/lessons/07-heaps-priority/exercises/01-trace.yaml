@@ -1,0 +1,57 @@
+type: trace
+id: "07-heaps-priority-trace-01"
+prompt: "Trace through this heap operations code and predict the output."
+code: |
+  import heapq
+
+  heap = []
+  heapq.heappush(heap, 5)
+  heapq.heappush(heap, 2)
+  heapq.heappush(heap, 8)
+  heapq.heappush(heap, 1)
+  print(heapq.heappop(heap))
+  print(heapq.heappop(heap))
+  print(heap[0])
+steps:
+  - line: 3
+    variables: { "heap": "[]" }
+    output: ""
+    explanation: "Start with an empty heap."
+  - line: 4
+    variables: { "heap": "[5]" }
+    output: ""
+    explanation: "Push 5. Heap: [5]."
+  - line: 5
+    variables: { "heap": "[2, 5]" }
+    output: ""
+    explanation: "Push 2. It is smaller than 5, so it bubbles up to the root. Heap: [2, 5]."
+  - line: 6
+    variables: { "heap": "[2, 5, 8]" }
+    output: ""
+    explanation: "Push 8. It is larger than 2, stays as right child. Heap: [2, 5, 8]."
+  - line: 7
+    variables: { "heap": "[1, 2, 8, 5]" }
+    output: ""
+    explanation: "Push 1. It bubbles up past 5 and 2 to become root. Heap: [1, 2, 8, 5]."
+  - line: 8
+    variables: { "heap": "[2, 5, 8]" }
+    output: "1"
+    explanation: "Pop minimum (1). Heap reorganizes: [2, 5, 8]. Print 1."
+  - line: 9
+    variables: { "heap": "[5, 8]" }
+    output: "2"
+    explanation: "Pop minimum (2). Heap reorganizes: [5, 8]. Print 2."
+  - line: 10
+    variables: { "heap": "[5, 8]" }
+    output: "5"
+    explanation: "Peek at heap[0] = 5 (current minimum). Print 5."
+expected_output: |
+  1
+  2
+  5
+hints:
+  - "heapq is a min-heap: heappop always removes the smallest element."
+  - "heap[0] is always the minimum without removing it."
+concept_tags:
+  - min-heap
+  - heapq-module

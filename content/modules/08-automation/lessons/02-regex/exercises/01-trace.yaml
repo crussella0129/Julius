@@ -1,0 +1,59 @@
+type: trace
+id: "02-regex-trace-01"
+prompt: "Trace through this code and predict what will be printed."
+code: |
+  import re
+
+  text = "Error 404: Page not found at 10:30"
+  numbers = re.findall(r"\d+", text)
+  print(numbers)
+  print(len(numbers))
+
+  match = re.search(r"(\d+):(\d+)", text)
+  print(match.group(1))
+  print(match.group(2))
+steps:
+  - line: 1
+    variables: {}
+    output: ""
+    explanation: "Import the re module for regular expressions."
+  - line: 3
+    variables: { "text": "'Error 404: Page not found at 10:30'" }
+    output: ""
+    explanation: "Assign the text string containing numbers."
+  - line: 4
+    variables: { "numbers": "['404', '10', '30']" }
+    output: ""
+    explanation: "findall returns all sequences of one or more digits: '404', '10', '30'."
+  - line: 5
+    variables: { "numbers": "['404', '10', '30']" }
+    output: "['404', '10', '30']"
+    explanation: "Print the list of all digit sequences found."
+  - line: 6
+    variables: { "numbers": "['404', '10', '30']" }
+    output: "3"
+    explanation: "There are 3 matches in the list."
+  - line: 8
+    variables: { "match": "Match object for '10:30'" }
+    output: ""
+    explanation: "search finds the first occurrence of digits:digits pattern, which is '10:30'."
+  - line: 9
+    variables: { "match": "Match object for '10:30'" }
+    output: "10"
+    explanation: "Group 1 captures the digits before the colon: '10'."
+  - line: 10
+    variables: { "match": "Match object for '10:30'" }
+    output: "30"
+    explanation: "Group 2 captures the digits after the colon: '30'."
+expected_output: |
+  ['404', '10', '30']
+  3
+  10
+  30
+hints:
+  - "\\d+ matches one or more digits. findall returns ALL matches."
+  - "search finds the first match of the pattern digits:digits, which is 10:30, not 404:."
+concept_tags:
+  - re-module
+  - regex-patterns
+  - search-match

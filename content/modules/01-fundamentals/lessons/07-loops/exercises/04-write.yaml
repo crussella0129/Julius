@@ -1,0 +1,18 @@
+type: write
+id: "07-loops-write-01"
+prompt: "Write a program that prints the multiplication table for 7 (from 7x1 to 7x5). Each line should be in the format: '7 x 1 = 7', '7 x 2 = 14', etc."
+starter_code: |
+  # Print the 7 times table from 1 to 5
+tests:
+  - description: "Output has exactly 5 lines"
+    check: "len(output.strip().splitlines()) == 5"
+  - description: "First line is '7 x 1 = 7'"
+    check: "output.strip().splitlines()[0] == '7 x 1 = 7'"
+  - description: "Last line is '7 x 5 = 35'"
+    check: "output.strip().splitlines()[4] == '7 x 5 = 35'"
+hints:
+  - "Use a for loop with range(1, 6) to iterate from 1 to 5."
+  - "Use an f-string: print(f'7 x {i} = {7 * i}')"
+concept_tags:
+  - for-loop
+  - range-function

@@ -1,0 +1,22 @@
+type: write
+id: "01-why-testing-write-01"
+prompt: "Write a function called `clamp` that takes three parameters (value, minimum, maximum) and returns the value clamped to the range [minimum, maximum]. Then write at least 4 assert statements testing: a value in range, below minimum, above maximum, and at the boundary. Print 'All tests passed!' at the end."
+starter_code: |
+  # Define clamp function
+
+  # Write assert tests
+
+  print("All tests passed!")
+tests:
+  - description: "Output contains 'All tests passed!'"
+    check: "'All tests passed!' in output"
+  - description: "No assertion errors (program completes)"
+    check: "'Error' not in output"
+hints:
+  - "clamp(5, 0, 10) should return 5 (in range)."
+  - "clamp(-5, 0, 10) should return 0 (below min, clamped to min)."
+  - "clamp(15, 0, 10) should return 10 (above max, clamped to max)."
+  - "def clamp(val, mn, mx): return max(mn, min(val, mx))"
+concept_tags:
+  - testing-motivation
+  - manual-vs-automated

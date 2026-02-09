@@ -1,0 +1,22 @@
+type: parsons
+id: "04-object-detection-parsons-01"
+prompt: "Arrange these lines to implement Non-Maximum Suppression for object detection. Detections are tuples of (x1, y1, x2, y2, confidence)."
+blocks:
+  - "def nms(detections, iou_threshold):"
+  - "    sorted_dets = sorted(detections, key=lambda d: d[4], reverse=True)"
+  - "    keep = []"
+  - "    while sorted_dets:"
+  - "        best = sorted_dets.pop(0)"
+  - "        keep.append(best)"
+  - "        sorted_dets = [d for d in sorted_dets if compute_iou(best[:4], d[:4]) < iou_threshold]"
+  - "    return keep"
+distractors:
+  - "    sorted_dets = sorted(detections, key=lambda d: d[4])"
+  - "        sorted_dets = [d for d in sorted_dets if compute_iou(best[:4], d[:4]) > iou_threshold]"
+solution_order: [0, 1, 2, 3, 4, 5, 6, 7]
+hints:
+  - "Sort by confidence in descending order (highest first) with reverse=True."
+  - "Remove detections with IoU ABOVE the threshold (they overlap too much)."
+concept_tags:
+  - nms-detection
+  - bounding-boxes

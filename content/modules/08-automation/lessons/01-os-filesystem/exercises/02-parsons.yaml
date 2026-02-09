@@ -1,0 +1,20 @@
+type: parsons
+id: "01-os-filesystem-parsons-01"
+prompt: "Arrange these lines to create a script that creates a directory called 'output', writes 'hello' to a file inside it, then reads the file back and prints its content."
+blocks:
+  - "from pathlib import Path"
+  - "Path('output').mkdir(exist_ok=True)"
+  - "Path('output/greeting.txt').write_text('hello')"
+  - "content = Path('output/greeting.txt').read_text()"
+  - "print(content)"
+distractors:
+  - "os.mkdir('output/greeting.txt')"
+  - "content = open('output/greeting.txt')"
+solution_order: [0, 1, 2, 3, 4]
+hints:
+  - "You must import Path before using it."
+  - "Create the directory before writing a file inside it."
+  - "Use write_text() to write and read_text() to read."
+concept_tags:
+  - pathlib
+  - file-operations

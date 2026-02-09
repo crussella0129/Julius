@@ -1,0 +1,75 @@
+type: trace
+id: "04-flask-database-trace-01"
+prompt: "Trace through this code simulating database CRUD operations and predict the output."
+code: |
+  db = []
+
+  def create(name, email):
+      record = {"id": len(db) + 1, "name": name, "email": email}
+      db.append(record)
+      return record["id"]
+
+  def read(record_id):
+      for r in db:
+          if r["id"] == record_id:
+              return r
+      return None
+
+  def delete(record_id):
+      for i, r in enumerate(db):
+          if r["id"] == record_id:
+              db.pop(i)
+              return True
+      return False
+
+  id1 = create("Alice", "alice@mail.com")
+  id2 = create("Bob", "bob@mail.com")
+  print(f"Created: {id1}, {id2}")
+  print(f"Read: {read(1)['name']}")
+  delete(1)
+  print(f"After delete: {read(1)}")
+  print(f"Remaining: {len(db)}")
+steps:
+  - line: 1
+    variables: {"db": "[]"}
+    output: ""
+    explanation: "Initialize empty list as our simulated database."
+  - line: 21
+    variables: {"id1": 1}
+    output: ""
+    explanation: "Create Alice. db has 0 items, so id = 1. Append record."
+  - line: 22
+    variables: {"id1": 1, "id2": 2}
+    output: ""
+    explanation: "Create Bob. db has 1 item, so id = 2. Append record."
+  - line: 23
+    variables: {"id1": 1, "id2": 2}
+    output: "Created: 1, 2"
+    explanation: "Print the two IDs."
+  - line: 24
+    variables: {}
+    output: "Read: Alice"
+    explanation: "read(1) finds record with id=1, return it, access ['name']."
+  - line: 25
+    variables: {}
+    output: ""
+    explanation: "delete(1) removes the record with id=1 from the list."
+  - line: 26
+    variables: {}
+    output: "After delete: None"
+    explanation: "read(1) can no longer find id=1, returns None."
+  - line: 27
+    variables: {}
+    output: "Remaining: 1"
+    explanation: "Only Bob's record remains in the database."
+expected_output: |
+  Created: 1, 2
+  Read: Alice
+  After delete: None
+  Remaining: 1
+hints:
+  - "The create function assigns IDs based on the current length of the db list."
+  - "After deleting Alice, only Bob remains."
+concept_tags:
+  - sqlite
+  - sql-queries

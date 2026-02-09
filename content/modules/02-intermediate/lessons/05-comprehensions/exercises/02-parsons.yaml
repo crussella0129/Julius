@@ -1,0 +1,21 @@
+type: parsons
+id: "05-comprehensions-parsons-01"
+prompt: "Arrange these lines to create a dictionary comprehension that maps each word to its length, then filter it to only include words with more than 3 characters, and print the result."
+blocks:
+  - "words = [\"hi\", \"hello\", \"hey\", \"greetings\", \"yo\"]"
+  - "lengths = {word: len(word) for word in words}"
+  - "print(lengths)"
+  - ""
+  - "long_words = {word: length for word, length in lengths.items() if length > 3}"
+  - "print(long_words)"
+solution_order: [0, 1, 2, 3, 4, 5]
+distractors:
+  - "lengths = [len(word) for word in words]"
+  - "long_words = {word: length for word in lengths if length > 3}"
+hints:
+  - "A dict comprehension uses {key: value for item in iterable}."
+  - "To filter a dictionary, iterate over .items() and add an if condition."
+  - "The distractor uses a list comprehension instead of a dict comprehension."
+concept_tags:
+  - dict-comprehensions
+  - conditional-comprehensions

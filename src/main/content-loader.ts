@@ -157,6 +157,20 @@ export function buildExerciseIndex(): Record<string, { moduleId: string; lessonI
   return index
 }
 
+export function loadPlacement(): unknown | null {
+  const root = getContentRoot()
+  const yamlPath = join(root, 'placement', 'questionnaire.yaml')
+  if (!existsSync(yamlPath)) return null
+
+  try {
+    const raw = readFileSync(yamlPath, 'utf-8')
+    return parseYaml(raw)
+  } catch (err) {
+    console.error(`Failed to parse placement YAML: ${yamlPath}`, err)
+    return null
+  }
+}
+
 export function listExercises(moduleId: string, lessonId: string): string[] {
   const root = getContentRoot()
   const exDir = join(root, 'modules', moduleId, 'lessons', lessonId, 'exercises')

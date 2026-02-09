@@ -1,0 +1,15 @@
+type: write
+id: "04-stacks-queues-write-01"
+prompt: "Write a function called is_balanced(s) that uses a stack to check if a string of parentheses '(', ')', '[', ']', '{', '}' is balanced. Print the result for '({[]})' and '([)]'."
+starter_code: |
+  # Write is_balanced(s) and test with '({[]})' and '([)]'
+tests:
+  - description: "First test prints True"
+    check: "'True' in output.strip().splitlines()[0]"
+  - description: "Second test prints False"
+    check: "'False' in output.strip().splitlines()[1]"
+hints:
+  - "Use a dictionary to map closing brackets to their opening counterparts."
+  - "Push opening brackets. For closing brackets, check if the stack top matches."
+concept_tags:
+  - stack-lifo

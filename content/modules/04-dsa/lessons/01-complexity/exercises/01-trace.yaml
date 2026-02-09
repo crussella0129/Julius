@@ -1,0 +1,91 @@
+type: trace
+id: "01-complexity-trace-01"
+prompt: "Trace through this code and determine how many times 'compare' is printed."
+code: |
+  count = 0
+  data = [5, 3, 8, 1]
+  n = len(data)
+  for i in range(n):
+      for j in range(i + 1, n):
+          print("compare")
+          count += 1
+  print(count)
+steps:
+  - line: 1
+    variables: { "count": "0" }
+    output: ""
+    explanation: "Initialize comparison counter to 0."
+  - line: 2
+    variables: { "count": "0", "data": "[5, 3, 8, 1]" }
+    output: ""
+    explanation: "Define the list with 4 elements."
+  - line: 3
+    variables: { "count": "0", "n": "4" }
+    output: ""
+    explanation: "n = len(data) = 4."
+  - line: 4
+    variables: { "count": "0", "i": "0", "n": "4" }
+    output: ""
+    explanation: "Outer loop: i = 0."
+  - line: 5
+    variables: { "count": "0", "i": "0", "j": "1" }
+    output: ""
+    explanation: "Inner loop: j goes from 1 to 3. j = 1."
+  - line: 6
+    variables: { "count": "0", "i": "0", "j": "1" }
+    output: "compare"
+    explanation: "Print compare (pair 0,1)."
+  - line: 7
+    variables: { "count": "1", "i": "0", "j": "1" }
+    output: ""
+    explanation: "count becomes 1."
+  - line: 5
+    variables: { "count": "1", "i": "0", "j": "2" }
+    output: "compare"
+    explanation: "j = 2, print compare (pair 0,2). count becomes 2."
+  - line: 5
+    variables: { "count": "2", "i": "0", "j": "3" }
+    output: "compare"
+    explanation: "j = 3, print compare (pair 0,3). count becomes 3."
+  - line: 4
+    variables: { "count": "3", "i": "1" }
+    output: ""
+    explanation: "Outer loop: i = 1. Inner j goes from 2 to 3."
+  - line: 5
+    variables: { "count": "3", "i": "1", "j": "2" }
+    output: "compare"
+    explanation: "j = 2, print compare. count becomes 4."
+  - line: 5
+    variables: { "count": "4", "i": "1", "j": "3" }
+    output: "compare"
+    explanation: "j = 3, print compare. count becomes 5."
+  - line: 4
+    variables: { "count": "5", "i": "2" }
+    output: ""
+    explanation: "Outer loop: i = 2. Inner j goes from 3 to 3."
+  - line: 5
+    variables: { "count": "5", "i": "2", "j": "3" }
+    output: "compare"
+    explanation: "j = 3, print compare. count becomes 6."
+  - line: 4
+    variables: { "count": "6", "i": "3" }
+    output: ""
+    explanation: "Outer loop: i = 3. Inner range(4, 4) is empty, no iterations."
+  - line: 8
+    variables: { "count": "6" }
+    output: "6"
+    explanation: "Print total comparisons: 6. This is n*(n-1)/2 = 4*3/2 = 6, which is O(n^2)."
+expected_output: |
+  compare
+  compare
+  compare
+  compare
+  compare
+  compare
+  6
+hints:
+  - "The inner loop starts at i+1, so it does fewer iterations each time i increases."
+  - "For n=4, the total comparisons are 3 + 2 + 1 + 0 = 6, which is n*(n-1)/2."
+concept_tags:
+  - big-o-notation
+  - time-complexity

@@ -1,0 +1,24 @@
+type: parsons
+id: "02-circuitpython-parsons-01"
+prompt: "Arrange these lines to create a TemperatureSensor class that stores readings and reports the average."
+blocks:
+  - "class TemperatureSensor:"
+  - "    def __init__(self):"
+  - "        self.readings = []"
+  - "    def read(self, value):"
+  - "        self.readings.append(value)"
+  - "    def average(self):"
+  - "        if not self.readings:"
+  - "            return 0"
+  - "        return sum(self.readings) / len(self.readings)"
+distractors:
+  - "        return sum(self.readings)"
+  - "        self.readings = value"
+solution_order: [0, 1, 2, 3, 4, 5, 6, 7, 8]
+hints:
+  - "The __init__ method initializes an empty readings list."
+  - "read() appends a value; average() computes the mean."
+  - "Check for empty list before dividing to avoid ZeroDivisionError."
+concept_tags:
+  - sensors
+  - circuitpython

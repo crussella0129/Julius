@@ -1,0 +1,20 @@
+type: parsons
+id: "06-trees-parsons-01"
+prompt: "Arrange these lines to implement a recursive function that calculates the height of a binary tree."
+blocks:
+  - "def height(node):"
+  - "    if node is None:"
+  - "        return -1"
+  - "    left_h = height(node.left)"
+  - "    right_h = height(node.right)"
+  - "    return 1 + max(left_h, right_h)"
+solution_order: [0, 1, 2, 3, 4, 5]
+distractors:
+  - "        return 0"
+  - "    return left_h + right_h"
+hints:
+  - "Base case: an empty tree (None) has height -1 so a single node has height 0."
+  - "Height is 1 plus the maximum of the left and right subtree heights."
+concept_tags:
+  - binary-tree
+  - recursion-on-trees

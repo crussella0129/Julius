@@ -1,0 +1,23 @@
+type: parsons
+id: "01-http-basics-parsons-01"
+prompt: "Arrange these lines to build a function that classifies an HTTP status code into 'success', 'redirect', 'client_error', or 'server_error'."
+blocks:
+  - "def classify_status(code):"
+  - "    if code >= 500:"
+  - "        return 'server_error'"
+  - "    elif code >= 400:"
+  - "        return 'client_error'"
+  - "    elif code >= 300:"
+  - "        return 'redirect'"
+  - "    else:"
+  - "        return 'success'"
+distractors:
+  - "    elif code >= 200:"
+  - "        return 'informational'"
+solution_order: [0, 1, 2, 3, 4, 5, 6, 7, 8]
+hints:
+  - "Check the highest status codes first (500+) and work downward."
+  - "Each range (5xx, 4xx, 3xx) needs its own elif branch."
+concept_tags:
+  - status-codes
+  - http-methods

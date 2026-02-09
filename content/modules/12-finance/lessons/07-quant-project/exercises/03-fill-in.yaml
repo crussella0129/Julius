@@ -1,0 +1,49 @@
+type: fill-in
+id: "07-quant-project-fill-in-01"
+prompt: "Fill in the blanks to generate simulated stock prices using a random walk with drift."
+template: |
+  import random
+
+  random.seed(42)
+  prices = [100.0]
+  drift = 0.001
+  volatility = 0.02
+
+  for _ in range(9):
+      change = random.____(drift, volatility)
+      new_price = prices[____] * (1 + change)
+      prices.append(round(new_price, 2))
+
+  print(f"Start: ${prices[____]}")
+  print(f"End:   ${prices[-1]}")
+blanks:
+  - position: 0
+    answer: "gauss"
+    hint: "function for normally distributed random numbers"
+  - position: 1
+    answer: "-1"
+    hint: "index of the last element in the list"
+  - position: 2
+    answer: "0"
+    hint: "index of the first element"
+solution: |
+  import random
+
+  random.seed(42)
+  prices = [100.0]
+  drift = 0.001
+  volatility = 0.02
+
+  for _ in range(9):
+      change = random.gauss(drift, volatility)
+      new_price = prices[-1] * (1 + change)
+      prices.append(round(new_price, 2))
+
+  print(f"Start: ${prices[0]}")
+  print(f"End:   ${prices[-1]}")
+hints:
+  - "random.gauss(mu, sigma) generates a normally distributed random number."
+  - "prices[-1] accesses the last element (most recent price)."
+concept_tags:
+  - project-design
+  - strategy-implementation

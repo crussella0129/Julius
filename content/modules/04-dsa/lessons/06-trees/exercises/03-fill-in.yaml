@@ -1,0 +1,42 @@
+type: fill-in
+id: "06-trees-fill-in-01"
+prompt: "Fill in the blanks to complete a BST search function that returns True if the target value exists in the tree."
+template: |
+  def bst_search(node, target):
+      if node is ____:
+          return False
+      if target == node.____:
+          return True
+      elif target < node.val:
+          return bst_search(node.____, target)
+      else:
+          return bst_search(node.____, target)
+blanks:
+  - position: 0
+    answer: "None"
+    hint: "base case: we've gone past a leaf"
+  - position: 1
+    answer: "val"
+    hint: "the attribute holding the node's value"
+  - position: 2
+    answer: "left"
+    hint: "smaller values are in this subtree"
+  - position: 3
+    answer: "right"
+    hint: "larger values are in this subtree"
+solution: |
+  def bst_search(node, target):
+      if node is None:
+          return False
+      if target == node.val:
+          return True
+      elif target < node.val:
+          return bst_search(node.left, target)
+      else:
+          return bst_search(node.right, target)
+hints:
+  - "A BST stores smaller values to the left and larger values to the right."
+  - "When node is None, the target is not in the tree."
+concept_tags:
+  - bst
+  - recursion-on-trees

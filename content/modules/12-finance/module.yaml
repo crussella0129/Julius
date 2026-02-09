@@ -1,0 +1,12 @@
+id: "12-finance"
+title: "Finance & Quantitative Python"
+description: "Financial data analysis, portfolio theory, and backtesting"
+order: 12
+lessons:
+  - 01-financial-data
+  - 02-portfolio-analysis
+  - 03-technical-indicators
+  - 04-risk-management
+  - 05-backtesting
+  - 06-openbb
+  - 07-quant-project

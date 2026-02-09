@@ -1,0 +1,21 @@
+type: parsons
+id: "01-strings-deep-parsons-01"
+prompt: "Arrange these lines to take a full name string, split it into first and last names, capitalize each properly, and print the result as 'Last, First'."
+blocks:
+  - "full_name = \"  john   doe  \""
+  - "cleaned = full_name.strip()"
+  - "parts = cleaned.split()"
+  - "first = parts[0].title()"
+  - "last = parts[1].title()"
+  - "print(f\"{last}, {first}\")"
+solution_order: [0, 1, 2, 3, 4, 5]
+distractors:
+  - "parts = cleaned.split(\",\")"
+  - "first = parts[0].upper()"
+hints:
+  - "First strip the whitespace, then split on spaces."
+  - ".title() capitalizes the first letter of each word, which is what we want for names."
+  - "split() with no arguments splits on any whitespace and ignores extra spaces."
+concept_tags:
+  - string-methods
+  - string-slicing

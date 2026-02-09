@@ -1,0 +1,28 @@
+type: write
+id: "03-text-classification-write-01"
+prompt: "Write a function called build_vocab that takes a list of document strings and returns a sorted list of unique words (lowercased). Then write a function doc_to_vector that takes a document string and the vocabulary list, and returns a list of word counts. Print the vocabulary and the vector for 'the cat sat on the mat' given the corpus ['the cat sat', 'the dog ran', 'a cat and a dog']."
+starter_code: |
+  from collections import Counter
+
+  # Write build_vocab and doc_to_vector here
+
+  corpus = ["the cat sat", "the dog ran", "a cat and a dog"]
+  vocab = build_vocab(corpus)
+  print(vocab)
+  print(doc_to_vector("the cat sat on the mat", vocab))
+tests:
+  - description: "Vocabulary is a sorted list"
+    check: "output.strip().splitlines()[0].startswith('[')"
+  - description: "Vocabulary contains 'cat'"
+    check: "'cat' in output.strip().splitlines()[0]"
+  - description: "Vector is a list of integers"
+    check: "output.strip().splitlines()[1].startswith('[')"
+  - description: "Vector has same length as vocabulary"
+    check: "len(eval(output.strip().splitlines()[0])) == len(eval(output.strip().splitlines()[1]))"
+hints:
+  - "Use set() to collect unique words, then sorted() to order them."
+  - "Use Counter on the split words, then look up each vocab word."
+  - "Words not in the document should have a count of 0."
+concept_tags:
+  - bag-of-words
+  - text-classification

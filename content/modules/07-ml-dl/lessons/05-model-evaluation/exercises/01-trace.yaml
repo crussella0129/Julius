@@ -1,0 +1,62 @@
+type: trace
+id: "05-model-evaluation-trace-01"
+prompt: "Trace through this cross-validation simulation and predict the output."
+code: |
+  data = list(range(10))  # [0,1,2,...,9]
+  k = 5
+  fold_size = len(data) // k
+  scores = []
+
+  for i in range(k):
+      start = i * fold_size
+      end = start + fold_size
+      test_fold = data[start:end]
+      train_folds = data[:start] + data[end:]
+      score = len(train_folds) / len(data)
+      scores.append(score)
+      print(f"Fold {i+1}: test={test_fold}, train_size={len(train_folds)}")
+
+  avg = sum(scores) / len(scores)
+  print(f"Average score: {avg}")
+steps:
+  - line: 1
+    variables: {"data": "[0,1,2,3,4,5,6,7,8,9]", "k": 5, "fold_size": 2}
+    output: ""
+    explanation: "10 items, 5 folds, each fold has 2 items."
+  - line: 6
+    variables: {"i": 0, "test_fold": "[0, 1]", "train_folds": "[2,3,4,5,6,7,8,9]"}
+    output: "Fold 1: test=[0, 1], train_size=8"
+    explanation: "First fold: test is [0,1], train is the remaining 8."
+  - line: 6
+    variables: {"i": 1, "test_fold": "[2, 3]", "train_folds": "[0,1,4,5,6,7,8,9]"}
+    output: "Fold 2: test=[2, 3], train_size=8"
+    explanation: "Second fold: test is [2,3], train is 8 items."
+  - line: 6
+    variables: {"i": 2, "test_fold": "[4, 5]"}
+    output: "Fold 3: test=[4, 5], train_size=8"
+    explanation: "Third fold."
+  - line: 6
+    variables: {"i": 3, "test_fold": "[6, 7]"}
+    output: "Fold 4: test=[6, 7], train_size=8"
+    explanation: "Fourth fold."
+  - line: 6
+    variables: {"i": 4, "test_fold": "[8, 9]"}
+    output: "Fold 5: test=[8, 9], train_size=8"
+    explanation: "Fifth fold."
+  - line: 15
+    variables: {"avg": 0.8}
+    output: "Average score: 0.8"
+    explanation: "Each fold has score 8/10=0.8. Average is 0.8."
+expected_output: |
+  Fold 1: test=[0, 1], train_size=8
+  Fold 2: test=[2, 3], train_size=8
+  Fold 3: test=[4, 5], train_size=8
+  Fold 4: test=[6, 7], train_size=8
+  Fold 5: test=[8, 9], train_size=8
+  Average score: 0.8
+hints:
+  - "Each fold uses 2 items for testing and 8 for training."
+  - "The folds don't overlap -- each item is tested exactly once."
+concept_tags:
+  - cross-validation
+  - model-selection

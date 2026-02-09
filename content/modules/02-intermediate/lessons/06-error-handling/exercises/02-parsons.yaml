@@ -1,0 +1,29 @@
+type: parsons
+id: "06-error-handling-parsons-01"
+prompt: "Arrange these lines to create a function that safely converts a string to an integer, handling both ValueError and TypeError, and always printing a status message."
+blocks:
+  - "def safe_int(value):"
+  - "    try:"
+  - "        result = int(value)"
+  - "    except ValueError:"
+  - "        print(f\"Cannot convert '{value}' to int\")"
+  - "        return None"
+  - "    except TypeError:"
+  - "        print(f\"Wrong type: {type(value)}\")"
+  - "        return None"
+  - "    else:"
+  - "        return result"
+  - "    finally:"
+  - "        print(\"Conversion attempted.\")"
+solution_order: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+distractors:
+  - "    except:"
+  - "        print(\"Error\")"
+hints:
+  - "try comes first, followed by except clauses, then else, then finally."
+  - "Each except block handles a specific exception type."
+  - "The else block runs only if no exception was raised. finally always runs."
+concept_tags:
+  - try-except
+  - exception-types
+  - finally-else

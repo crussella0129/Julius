@@ -1,0 +1,25 @@
+type: write
+id: "04-object-detection-write-01"
+prompt: "Write a function called compute_iou that takes two bounding boxes in corner format (x1, y1, x2, y2) as tuples and returns their Intersection over Union as a float. Test it with box_a=(0, 0, 100, 100) and box_b=(0, 0, 100, 100) (should be 1.0), and box_a=(0, 0, 100, 100) and box_c=(100, 100, 200, 200) (should be 0.0). Print both results formatted to 2 decimal places."
+starter_code: |
+  # Write your compute_iou function here
+
+  a = (0, 0, 100, 100)
+  b = (0, 0, 100, 100)
+  c = (100, 100, 200, 200)
+  print(f"{compute_iou(a, b):.2f}")
+  print(f"{compute_iou(a, c):.2f}")
+tests:
+  - description: "Perfect overlap gives IoU of 1.00"
+    check: "'1.00' in output"
+  - description: "No overlap gives IoU of 0.00"
+    check: "'0.00' in output"
+  - description: "Output has 2 lines"
+    check: "len(output.strip().splitlines()) == 2"
+hints:
+  - "Intersection: max of left edges, max of top edges, min of right edges, min of bottom edges."
+  - "Use max(0, ...) for width and height to handle non-overlapping cases."
+  - "Union = area1 + area2 - intersection."
+concept_tags:
+  - iou
+  - bounding-boxes

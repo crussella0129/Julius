@@ -1,0 +1,21 @@
+type: parsons
+id: "07-heaps-priority-parsons-01"
+prompt: "Arrange these lines to find the 3 smallest numbers in a list using a heap."
+blocks:
+  - "import heapq"
+  - "data = [10, 4, 3, 8, 2, 6, 1, 7]"
+  - "heapq.heapify(data)"
+  - "result = []"
+  - "for _ in range(3):"
+  - "    result.append(heapq.heappop(data))"
+  - "print(result)"
+solution_order: [0, 1, 2, 3, 4, 5, 6]
+distractors:
+  - "data.sort()"
+  - "    result.append(data.pop())"
+hints:
+  - "heapify converts the list into a min-heap in O(n)."
+  - "Each heappop removes the smallest remaining element in O(log n)."
+concept_tags:
+  - min-heap
+  - heapq-module

@@ -1,0 +1,81 @@
+type: trace
+id: "07-eda-project-trace-01"
+prompt: "Trace through this EDA summary function and predict the output."
+code: |
+  dataset = [
+      {"name": "Alice", "dept": "Sales", "salary": 50000},
+      {"name": "Bob", "dept": "Sales", "salary": 60000},
+      {"name": "Charlie", "dept": "Eng", "salary": 90000},
+      {"name": "Diana", "dept": "Eng", "salary": None},
+      {"name": "Alice", "dept": "Sales", "salary": 50000},
+  ]
+
+  n_rows = len(dataset)
+  n_missing = sum(1 for r in dataset if None in r.values())
+  n_dupes = n_rows - len(set(tuple(r.items()) for r in dataset))
+
+  depts = set(r["dept"] for r in dataset)
+  salaries = [r["salary"] for r in dataset if r["salary"] is not None]
+
+  print(f"Rows: {n_rows}")
+  print(f"Missing: {n_missing}")
+  print(f"Duplicates: {n_dupes}")
+  print(f"Departments: {sorted(depts)}")
+  print(f"Avg salary: {sum(salaries)/len(salaries):.0f}")
+steps:
+  - line: 1
+    variables: {}
+    output: ""
+    explanation: "Define dataset with 5 records."
+  - line: 9
+    variables: {"n_rows": 5}
+    output: ""
+    explanation: "5 rows in the dataset."
+  - line: 10
+    variables: {"n_missing": 1}
+    output: ""
+    explanation: "One row has None in values (Diana's salary)."
+  - line: 11
+    variables: {"n_dupes": 1}
+    output: ""
+    explanation: "Alice/Sales/50000 appears twice. Set removes 1 dupe: 5-4=1."
+  - line: 13
+    variables: {"depts": "{'Sales', 'Eng'}"}
+    output: ""
+    explanation: "Two unique departments."
+  - line: 14
+    variables: {"salaries": "[50000, 60000, 90000, 50000]"}
+    output: ""
+    explanation: "Filter out None salary, keep 4 values."
+  - line: 16
+    variables: {}
+    output: "Rows: 5"
+    explanation: "Print row count."
+  - line: 17
+    variables: {}
+    output: "Missing: 1"
+    explanation: "Print missing value count."
+  - line: 18
+    variables: {}
+    output: "Duplicates: 1"
+    explanation: "Print duplicate count."
+  - line: 19
+    variables: {}
+    output: "Departments: ['Eng', 'Sales']"
+    explanation: "Sorted unique departments."
+  - line: 20
+    variables: {}
+    output: "Avg salary: 62500"
+    explanation: "(50000+60000+90000+50000)/4 = 250000/4 = 62500."
+expected_output: |
+  Rows: 5
+  Missing: 1
+  Duplicates: 1
+  Departments: ['Eng', 'Sales']
+  Avg salary: 62500
+hints:
+  - "None in r.values() checks if any value in the dict is None."
+  - "Converting dicts to tuples of items lets you use set() for deduplication."
+concept_tags:
+  - eda-workflow
+  - data-questions

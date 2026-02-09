@@ -1,0 +1,51 @@
+type: fill-in
+id: "02-circuitpython-fill-in-01"
+prompt: "Fill in the blanks to create an I2C bus simulator that scans for connected devices."
+template: |
+  class I2CBus:
+      def __init__(self):
+          self.devices = ____
+
+      def attach(self, address, name):
+          self.____[address] = name
+
+      def scan(self):
+          return ____(self.devices.keys())
+
+  bus = I2CBus()
+  bus.attach(0x76, "BME280")
+  bus.attach(0x3C, "OLED")
+  found = bus.scan()
+  print(f"Devices: {[hex(a) for a in found]}")
+blanks:
+  - position: 0
+    answer: "{}"
+    hint: "empty dictionary literal"
+  - position: 1
+    answer: "devices"
+    hint: "the dictionary storing attached devices"
+  - position: 2
+    answer: "sorted"
+    hint: "function to return keys in order"
+solution: |
+  class I2CBus:
+      def __init__(self):
+          self.devices = {}
+
+      def attach(self, address, name):
+          self.devices[address] = name
+
+      def scan(self):
+          return sorted(self.devices.keys())
+
+  bus = I2CBus()
+  bus.attach(0x76, "BME280")
+  bus.attach(0x3C, "OLED")
+  found = bus.scan()
+  print(f"Devices: {[hex(a) for a in found]}")
+hints:
+  - "Devices are stored in a dictionary mapping address to name."
+  - "sorted() returns the keys in ascending order."
+concept_tags:
+  - i2c-spi
+  - sensors

@@ -1,0 +1,21 @@
+type: parsons
+id: "09-sorting-parsons-01"
+prompt: "Arrange these lines to implement a simple quick sort that picks the middle element as pivot."
+blocks:
+  - "def quick_sort(arr):"
+  - "    if len(arr) <= 1:"
+  - "        return arr"
+  - "    pivot = arr[len(arr) // 2]"
+  - "    left = [x for x in arr if x < pivot]"
+  - "    middle = [x for x in arr if x == pivot]"
+  - "    right = [x for x in arr if x > pivot]"
+  - "    return quick_sort(left) + middle + quick_sort(right)"
+solution_order: [0, 1, 2, 3, 4, 5, 6, 7]
+distractors:
+  - "    pivot = arr[0]"
+  - "    return quick_sort(left) + quick_sort(middle) + quick_sort(right)"
+hints:
+  - "The base case returns the array when it has 0 or 1 elements."
+  - "Elements equal to the pivot go in middle and are NOT recursively sorted."
+concept_tags:
+  - quick-sort

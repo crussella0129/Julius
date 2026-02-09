@@ -1,0 +1,20 @@
+type: parsons
+id: "08-functions-parsons-01"
+prompt: "Arrange these lines to define a function that calculates the area of a rectangle, then call it and print the result."
+blocks:
+  - "def area(width, height):"
+  - "    return width * height"
+  - ""
+  - "result = area(5, 3)"
+  - "print(result)"
+solution_order: [0, 1, 2, 3, 4]
+distractors:
+  - "    print(width * height)"
+  - "def area(width, height)"
+hints:
+  - "A function definition starts with 'def' and ends with a colon."
+  - "Use 'return' to send a value back from the function, not 'print'."
+concept_tags:
+  - function-definition
+  - return-values
+  - parameters-arguments

@@ -1,0 +1,25 @@
+type: parsons
+id: "05-forensics-parsons-01"
+prompt: "Arrange these lines to create a function that reads a file in binary chunks and computes its SHA-256 hash for evidence integrity verification."
+blocks:
+  - "import hashlib"
+  - "def hash_file(filepath):"
+  - "    h = hashlib.sha256()"
+  - "    with open(filepath, 'rb') as f:"
+  - "        while True:"
+  - "            chunk = f.read(8192)"
+  - "            if not chunk:"
+  - "                break"
+  - "            h.update(chunk)"
+  - "    return h.hexdigest()"
+distractors:
+  - "    with open(filepath, 'r') as f:"
+  - "    return h.digest()"
+solution_order: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+hints:
+  - "Import hashlib first, then define the function."
+  - "Open the file in binary mode ('rb'), not text mode."
+  - "Read in chunks with a while loop; break when chunk is empty."
+concept_tags:
+  - file-analysis
+  - evidence-handling

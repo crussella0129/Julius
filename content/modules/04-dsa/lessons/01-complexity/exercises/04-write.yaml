@@ -1,0 +1,21 @@
+type: write
+id: "01-complexity-write-01"
+prompt: "Write a function called count_ops(n) that simulates an O(n^2) algorithm: use two nested loops from 0 to n-1 and count the total number of operations. Print the count at the end. For example, count_ops(3) should print 9."
+starter_code: |
+  # Write count_ops(n) that counts operations in nested loops
+tests:
+  - description: "count_ops(3) prints 9"
+    check: "'9' in output.strip().splitlines()[-1]"
+  - description: "count_ops(4) prints 16"
+    check: |
+      # Re-run with n=4
+      lines = output.strip().splitlines()
+      '16' in lines[-1] if len(lines) > 1 else False
+  - description: "count_ops(1) prints 1"
+    check: "'1' in output.strip().split('\\n')[0]"
+hints:
+  - "Use two nested for loops: for i in range(n) and for j in range(n)."
+  - "Increment a counter inside the inner loop, then print it after both loops finish."
+concept_tags:
+  - big-o-notation
+  - time-complexity

@@ -1,0 +1,21 @@
+type: parsons
+id: "01-numpy-fundamentals-parsons-01"
+prompt: "Arrange these lines to create a NumPy array, compute its statistics, and filter values above the mean."
+blocks:
+  - "import numpy as np"
+  - "data = np.array([12, 45, 7, 23, 56, 34, 8, 67])"
+  - "mean_val = np.mean(data)"
+  - "above_mean = data[data > mean_val]"
+  - "print(f'Mean: {mean_val}')"
+  - "print(f'Above mean: {above_mean}')"
+distractors:
+  - "above_mean = data.filter(mean_val)"
+  - "mean_val = data.average()"
+solution_order: [0, 1, 2, 3, 4, 5]
+hints:
+  - "Import numpy first, then create the array."
+  - "Compute the mean before using it as a filter threshold."
+  - "Boolean indexing: data[data > mean_val] selects elements above the mean."
+concept_tags:
+  - ndarray
+  - array-operations

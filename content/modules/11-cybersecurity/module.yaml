@@ -1,0 +1,11 @@
+id: "11-cybersecurity"
+title: "Cybersecurity"
+description: "Security fundamentals, cryptography, and secure coding"
+order: 11
+lessons:
+  - 01-security-fundamentals
+  - 02-cryptography
+  - 03-network-scanning
+  - 04-web-security
+  - 05-forensics
+  - 06-secure-coding

@@ -1,0 +1,21 @@
+type: write
+id: "01-opencv-basics-write-01"
+prompt: "Using NumPy (import numpy as np), create a 200x200 BGR image (3 channels, uint8, all zeros). Set the top-left quadrant (rows 0-99, cols 0-99) to red [0,0,255] and the bottom-right quadrant (rows 100-199, cols 100-199) to green [0,255,0]. Print the image shape, the pixel value at (50, 50), and the pixel value at (150, 150)."
+starter_code: |
+  import numpy as np
+
+  # Create and manipulate the image here
+tests:
+  - description: "Image shape is (200, 200, 3)"
+    check: "'(200, 200, 3)' in output"
+  - description: "Top-left pixel is red [0, 0, 255]"
+    check: "'[0, 0, 255]' in output or '[  0,   0, 255]' in output or '[0, 0, 255]' in output.replace('  ', ' ')"
+  - description: "Bottom-right pixel is green [0, 255, 0]"
+    check: "'[0, 255, 0]' in output or '[  0, 255,   0]' in output or '[0, 255, 0]' in output.replace('  ', ' ')"
+hints:
+  - "np.zeros((200, 200, 3), dtype=np.uint8) creates a black image."
+  - "Use slicing: img[0:100, 0:100] = [0, 0, 255] for the top-left quadrant."
+  - "Print with img[50, 50].tolist() for clean formatting."
+concept_tags:
+  - image-representation
+  - pixel-manipulation

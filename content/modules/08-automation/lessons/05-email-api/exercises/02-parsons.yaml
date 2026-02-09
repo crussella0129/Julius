@@ -1,0 +1,23 @@
+type: parsons
+id: "05-email-api-parsons-01"
+prompt: "Arrange these lines to make a GET request to an API, check the status, parse the JSON, and print a value."
+blocks:
+  - "import requests"
+  - "response = requests.get('https://api.github.com/users/python')"
+  - "if response.status_code == 200:"
+  - "    data = response.json()"
+  - "    print(data['login'])"
+  - "else:"
+  - "    print('Request failed')"
+distractors:
+  - "data = response.text()"
+  - "response = requests.fetch('https://api.github.com')"
+solution_order: [0, 1, 2, 3, 4, 5, 6]
+hints:
+  - "Import requests first."
+  - "Use requests.get() not requests.fetch()."
+  - "response.json() parses JSON; response.text is a property, not a method call."
+concept_tags:
+  - requests-library
+  - rest-api
+  - json-handling

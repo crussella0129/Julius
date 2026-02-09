@@ -1,0 +1,36 @@
+type: write
+id: "06-error-handling-write-01"
+prompt: "Write a function called `safe_average` that takes a list of values and returns their average. It should: (1) Handle the case where the list is empty by printing 'Error: empty list' and returning None. (2) Handle the case where non-numeric values are in the list by printing 'Error: non-numeric value found' and returning None. (3) On success, return the average as a float. Test it with [10, 20, 30], with [], and with [1, 'two', 3]."
+starter_code: |
+  # Define safe_average function
+
+
+  # Test cases
+  result1 = safe_average([10, 20, 30])
+  print(result1)
+
+  result2 = safe_average([])
+  print(result2)
+
+  result3 = safe_average([1, "two", 3])
+  print(result3)
+tests:
+  - description: "First line is the average: 20.0"
+    check: "output.strip().splitlines()[0] == '20.0'"
+  - description: "Second line is the empty list error"
+    check: "output.strip().splitlines()[1] == 'Error: empty list'"
+  - description: "Third line is None for empty list"
+    check: "output.strip().splitlines()[2] == 'None'"
+  - description: "Fourth line is the non-numeric error"
+    check: "output.strip().splitlines()[3] == 'Error: non-numeric value found'"
+  - description: "Fifth line is None for non-numeric"
+    check: "output.strip().splitlines()[4] == 'None'"
+hints:
+  - "Check if the list is empty with 'if not values' or 'if len(values) == 0'."
+  - "Use try/except TypeError around the sum() call, or check types in a loop."
+  - "The average is sum(values) / len(values)."
+  - "def safe_average(values):\n    if not values:\n        print('Error: empty list')\n        return None\n    try:\n        return sum(values) / len(values)\n    except TypeError:\n        print('Error: non-numeric value found')\n        return None"
+concept_tags:
+  - try-except
+  - exception-types
+  - raising-exceptions

@@ -1,0 +1,30 @@
+type: write
+id: "07-concurrency-write-01"
+prompt: "Write a program that uses `threading.Thread` to run two functions concurrently. Function `count_up` should print numbers 1 through 3 (each on its own line). Function `count_down` should print numbers 3 through 1 (each on its own line). Start both threads, join them, then print 'Done'. Note: to ensure deterministic output for testing, have count_up finish completely before count_down starts by adding a small sleep(0.01) in count_down before its loop."
+starter_code: |
+  import threading
+  import time
+
+  # Define count_up and count_down functions
+
+
+  # Create and start threads, then join them
+
+  print("Done")
+tests:
+  - description: "Output contains 'Done' as the last line"
+    check: "output.strip().splitlines()[-1].strip() == 'Done'"
+  - description: "Output contains the number 1"
+    check: "'1' in output"
+  - description: "Output contains the number 2"
+    check: "'2' in output"
+  - description: "Output contains the number 3"
+    check: "'3' in output"
+  - description: "Output has exactly 7 lines"
+    check: "len(output.strip().splitlines()) == 7"
+hints:
+  - "Define two regular functions, then pass each as target to threading.Thread()."
+  - "Call .start() on both threads, then .join() on both to wait for completion."
+  - "def count_up():\n    for i in range(1, 4):\n        print(i)\n\ndef count_down():\n    time.sleep(0.01)\n    for i in range(3, 0, -1):\n        print(i)\n\nt1 = threading.Thread(target=count_up)\nt2 = threading.Thread(target=count_down)\nt1.start()\nt2.start()\nt1.join()\nt2.join()"
+concept_tags:
+  - threading-module

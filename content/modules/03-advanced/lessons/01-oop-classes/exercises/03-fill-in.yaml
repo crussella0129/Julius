@@ -1,0 +1,45 @@
+type: fill-in
+id: "01-oop-classes-fill-in-01"
+prompt: "Fill in the blanks to complete this class definition with an __init__ method and a greet method."
+template: |
+  ____ Person:
+      def __init__(____,  name, age):
+          ____.name = name
+          self.age = age
+
+      def greet(self):
+          return f"Hi, I'm {____.name} and I'm {self.age}"
+
+  p = Person("Alice", 30)
+  print(p.greet())
+blanks:
+  - position: 0
+    answer: "class"
+    hint: "keyword to define a class"
+  - position: 1
+    answer: "self"
+    hint: "first parameter of every method"
+  - position: 2
+    answer: "self"
+    hint: "refers to the current instance"
+  - position: 3
+    answer: "self"
+    hint: "access instance attributes through this"
+solution: |
+  class Person:
+      def __init__(self, name, age):
+          self.name = name
+          self.age = age
+
+      def greet(self):
+          return f"Hi, I'm {self.name} and I'm {self.age}"
+
+  p = Person("Alice", 30)
+  print(p.greet())
+hints:
+  - "Classes are defined with the 'class' keyword."
+  - "'self' is always the first parameter and refers to the instance."
+concept_tags:
+  - class-definition
+  - init-method
+  - self-parameter

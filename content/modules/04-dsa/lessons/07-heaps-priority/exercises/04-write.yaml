@@ -1,0 +1,17 @@
+type: write
+id: "07-heaps-priority-write-01"
+prompt: "Write a function called heap_sort(nums) that takes a list of numbers, uses heapq to sort them, and returns the sorted list. Print the result of calling heap_sort([5, 3, 8, 1, 2, 7, 4, 6])."
+starter_code: |
+  import heapq
+  # Write heap_sort(nums) and print the sorted result
+tests:
+  - description: "Output is [1, 2, 3, 4, 5, 6, 7, 8]"
+    check: "output.strip() == '[1, 2, 3, 4, 5, 6, 7, 8]'"
+  - description: "Result is sorted"
+    check: "'1' in output and '8' in output"
+hints:
+  - "Use heapq.heapify(copy) to convert to a heap, then heappop in a loop."
+  - "Remember to work on a copy of the input list to avoid modifying the original."
+concept_tags:
+  - heap-sort
+  - heapq-module

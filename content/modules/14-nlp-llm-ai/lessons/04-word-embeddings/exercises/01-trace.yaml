@@ -1,0 +1,40 @@
+type: trace
+id: "04-word-embeddings-trace-01"
+prompt: "Trace through this cosine similarity computation and predict the output."
+code: |
+  import math
+
+  def cosine_similarity(a, b):
+      dot = sum(x * y for x, y in zip(a, b))
+      mag_a = math.sqrt(sum(x * x for x in a))
+      mag_b = math.sqrt(sum(x * x for x in b))
+      return dot / (mag_a * mag_b)
+
+  v1 = [1.0, 0.0, 0.0]
+  v2 = [0.0, 1.0, 0.0]
+  v3 = [1.0, 0.0, 0.0]
+
+  print(f"{cosine_similarity(v1, v2):.1f}")
+  print(f"{cosine_similarity(v1, v3):.1f}")
+steps:
+  - line: 9
+    variables: {"v1": [1.0, 0.0, 0.0], "v2": [0.0, 1.0, 0.0], "v3": [1.0, 0.0, 0.0]}
+    output: ""
+    explanation: "Three vectors are defined. v1 and v3 are identical, v2 is perpendicular to v1."
+  - line: 13
+    variables: {"dot": 0.0, "mag_a": 1.0, "mag_b": 1.0}
+    output: "0.0"
+    explanation: "v1 and v2 are orthogonal: dot product is 0. 0/(1*1) = 0.0."
+  - line: 14
+    variables: {"dot": 1.0, "mag_a": 1.0, "mag_b": 1.0}
+    output: "1.0"
+    explanation: "v1 and v3 are identical: dot product is 1. 1/(1*1) = 1.0."
+expected_output: |
+  0.0
+  1.0
+hints:
+  - "Orthogonal vectors have a dot product of 0, so cosine similarity is 0."
+  - "Identical vectors have a cosine similarity of 1.0."
+concept_tags:
+  - cosine-similarity
+  - word-embeddings

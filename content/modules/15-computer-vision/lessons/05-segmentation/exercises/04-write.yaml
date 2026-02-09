@@ -1,0 +1,27 @@
+type: write
+id: "05-segmentation-write-01"
+prompt: "Write a function called count_objects that takes a 2D NumPy binary array (0s and 1s) and returns the number of connected components (4-connected: up/down/left/right only). Use BFS flood fill to label each component. Test it with the array [[1,1,0,0],[1,0,0,0],[0,0,1,1],[0,0,1,1]] and print the count."
+starter_code: |
+  import numpy as np
+
+  # Write your count_objects function here
+
+  binary = np.array([
+      [1, 1, 0, 0],
+      [1, 0, 0, 0],
+      [0, 0, 1, 1],
+      [0, 0, 1, 1],
+  ])
+  print(count_objects(binary))
+tests:
+  - description: "Two objects found"
+    check: "output.strip() == '2'"
+  - description: "Output is a single number"
+    check: "len(output.strip().splitlines()) == 1"
+hints:
+  - "Scan every pixel. When you find an unlabeled 1, increment count and BFS fill it."
+  - "BFS uses a queue: pop from front, add neighbors that are 1 and unvisited."
+  - "4-connected means only check up, down, left, right (not diagonals)."
+concept_tags:
+  - connected-components
+  - contour-detection

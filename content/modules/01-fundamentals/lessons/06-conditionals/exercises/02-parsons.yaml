@@ -1,0 +1,23 @@
+type: parsons
+id: "06-conditionals-parsons-01"
+prompt: "Arrange these lines to classify a temperature as 'Cold' (below 10), 'Warm' (10-25), or 'Hot' (above 25), then print the result."
+blocks:
+  - "temp = 18"
+  - "if temp < 10:"
+  - '    label = "Cold"'
+  - "elif temp <= 25:"
+  - '    label = "Warm"'
+  - "else:"
+  - '    label = "Hot"'
+  - "print(label)"
+solution_order: [0, 1, 2, 3, 4, 5, 6, 7]
+distractors:
+  - "elif temp < 25:"
+  - "if temp <= 10:"
+hints:
+  - "Check the smallest range first (< 10), then up to 25, then everything else."
+  - "elif and else must come after if, in order."
+concept_tags:
+  - if-statement
+  - elif-statement
+  - else-statement

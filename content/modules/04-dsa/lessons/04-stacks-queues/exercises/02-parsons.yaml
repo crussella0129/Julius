@@ -1,0 +1,21 @@
+type: parsons
+id: "04-stacks-queues-parsons-01"
+prompt: "Arrange these lines to implement a queue using collections.deque that enqueues 'a', 'b', 'c', then dequeues and prints each item in FIFO order."
+blocks:
+  - "from collections import deque"
+  - "queue = deque()"
+  - "queue.append('a')"
+  - "queue.append('b')"
+  - "queue.append('c')"
+  - "while queue:"
+  - "    print(queue.popleft())"
+solution_order: [0, 1, 2, 3, 4, 5, 6]
+distractors:
+  - "    print(queue.pop())"
+  - "queue = []"
+hints:
+  - "Use deque, not a regular list, for O(1) FIFO operations."
+  - "popleft() removes from the front (FIFO), pop() removes from the back (LIFO)."
+concept_tags:
+  - queue-fifo
+  - deque

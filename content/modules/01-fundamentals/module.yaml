@@ -6,3 +6,8 @@ lessons:
   - 01-hello-world
   - 02-variables
   - 03-data-types
+  - 04-operators
+  - 05-input-output
+  - 06-conditionals
+  - 07-loops
+  - 08-functions

@@ -1,0 +1,21 @@
+type: write
+id: "03-subprocess-write-01"
+prompt: "Write a program that uses subprocess to run 'python3 -c \"print(10 * 5)\"', captures the output, and prints two lines: the output value and whether the command succeeded ('success' or 'failure')."
+starter_code: |
+  import subprocess
+
+  # Your code here
+tests:
+  - description: "Output has exactly 2 lines"
+    check: "len(output.strip().splitlines()) == 2"
+  - description: "First line is '50'"
+    check: "output.strip().splitlines()[0] == '50'"
+  - description: "Second line is 'success'"
+    check: "output.strip().splitlines()[1] == 'success'"
+hints:
+  - "Use subprocess.run() with capture_output=True and text=True."
+  - "Print result.stdout.strip() for the output value."
+  - "Check result.returncode == 0 to determine success."
+concept_tags:
+  - subprocess-run
+  - capturing-output

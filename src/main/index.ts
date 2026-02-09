@@ -3,7 +3,7 @@ import { join } from 'path'
 import { electronApp, optimizer, is } from '@electron-toolkit/utils'
 import { initDatabase, getDb } from './db'
 import { runPython } from './python-runner'
-import { loadModule, loadLesson, loadExercise, listModules, listExercises, getLessonTitles, buildExerciseIndex } from './content-loader'
+import { loadModule, loadLesson, loadExercise, listModules, listExercises, getLessonTitles, buildExerciseIndex, loadPlacement } from './content-loader'
 
 function createWindow(): void {
   const mainWindow = new BrowserWindow({
@@ -62,6 +62,7 @@ function setupIPC(): void {
     getLessonTitles(moduleId)
   )
   ipcMain.handle('build-exercise-index', () => buildExerciseIndex())
+  ipcMain.handle('load-placement', () => loadPlacement())
 
   // Python execution
   ipcMain.handle('run-python', (_event, code: string, timeout?: number) =>

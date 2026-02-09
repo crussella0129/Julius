@@ -1,0 +1,19 @@
+type: parsons
+id: "02-lists-parsons-01"
+prompt: "Arrange these lines to create a list of numbers, remove all even numbers using a list comprehension, sort the result in descending order, and print it."
+blocks:
+  - "numbers = [5, 2, 8, 1, 9, 4, 7, 3, 6]"
+  - "odds = [n for n in numbers if n % 2 != 0]"
+  - "odds.sort(reverse=True)"
+  - "print(odds)"
+solution_order: [0, 1, 2, 3]
+distractors:
+  - "odds = numbers.remove(2, 4, 6, 8)"
+  - "odds.sort(reverse=False)"
+hints:
+  - "Start by creating the original list of numbers."
+  - "A list comprehension with an if condition filters elements."
+  - "sort(reverse=True) sorts in descending order (largest first)."
+concept_tags:
+  - list-creation
+  - list-methods

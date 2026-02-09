@@ -1,0 +1,42 @@
+type: fill-in
+id: "02-lists-fill-in-01"
+prompt: "Fill in the blanks to create a list, add an element, make an independent copy, and modify the copy without affecting the original."
+template: |
+  original = [1, 2, 3]
+  original.____(4)
+  print(original)
+
+  copy = original.____()
+  copy.append(5)
+  print(original)
+  print(copy)
+
+  print(____(original))
+blanks:
+  - position: 0
+    answer: "append"
+    hint: "method to add one element to the end"
+  - position: 1
+    answer: "copy"
+    hint: "method to create an independent shallow copy"
+  - position: 2
+    answer: "len"
+    hint: "built-in function that returns the number of elements"
+solution: |
+  original = [1, 2, 3]
+  original.append(4)
+  print(original)
+
+  copy = original.copy()
+  copy.append(5)
+  print(original)
+  print(copy)
+
+  print(len(original))
+hints:
+  - "append() adds a single element to the end of a list."
+  - "copy() creates a new list with the same elements — changes to the copy won't affect the original."
+  - "len() returns the number of items in a list."
+concept_tags:
+  - list-methods
+  - list-mutability

@@ -1,0 +1,23 @@
+type: parsons
+id: "04-risk-management-parsons-01"
+prompt: "Arrange these lines to create a function that calculates the Kelly Criterion for optimal position sizing."
+blocks:
+  - "def kelly_criterion(win_rate, avg_win, avg_loss):"
+  - "    win_loss_ratio = avg_win / avg_loss"
+  - "    kelly = win_rate - (1 - win_rate) / win_loss_ratio"
+  - "    return max(0, kelly)"
+  - ""
+  - "fraction = kelly_criterion(0.60, 200, 100)"
+  - "print(f'Full Kelly: {fraction*100:.1f}%')"
+  - "print(f'Half Kelly: {fraction*50:.1f}%')"
+distractors:
+  - "    kelly = win_rate * win_loss_ratio"
+  - "    return min(1, kelly)"
+solution_order: [0, 1, 2, 3, 4, 5, 6, 7]
+hints:
+  - "Kelly = win_rate - (1 - win_rate) / win_loss_ratio."
+  - "Use max(0, kelly) to ensure we never recommend a negative position."
+  - "Half Kelly is a safer, more practical position size."
+concept_tags:
+  - position-sizing
+  - value-at-risk

@@ -1,0 +1,24 @@
+type: parsons
+id: "02-cryptography-parsons-01"
+prompt: "Arrange these lines to create a function that hashes a password with a salt using PBKDF2, then verifies a password against the stored hash."
+blocks:
+  - "import hashlib, os"
+  - "def hash_password(password):"
+  - "    salt = os.urandom(16)"
+  - "    key = hashlib.pbkdf2_hmac('sha256', password.encode(), salt, 100000)"
+  - "    return salt + key"
+  - "def verify_password(password, stored):"
+  - "    salt = stored[:16]"
+  - "    key = hashlib.pbkdf2_hmac('sha256', password.encode(), salt, 100000)"
+  - "    return key == stored[16:]"
+distractors:
+  - "    key = hashlib.sha256(password.encode()).hexdigest()"
+  - "    return password == stored"
+solution_order: [0, 1, 2, 3, 4, 5, 6, 7, 8]
+hints:
+  - "Start with the import, then define hash_password."
+  - "The salt is random bytes stored alongside the hash."
+  - "To verify, extract the salt from the stored value and re-derive the key."
+concept_tags:
+  - hashing
+  - symmetric-encryption

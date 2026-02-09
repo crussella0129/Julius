@@ -1,0 +1,41 @@
+type: fill-in
+id: "04-numpy-performance-fill-in-01"
+prompt: "Fill in the blanks to perform in-place NumPy operations that avoid creating temporary arrays."
+template: |
+  import numpy as np
+
+  a = np.ones(5)
+
+  a ____ 3
+  a ____ 10
+
+  result = np.empty_like(a)
+  np.multiply(a, 2, ____=result)
+  print(result)
+blanks:
+  - position: 0
+    answer: "*="
+    hint: "in-place multiplication operator"
+  - position: 1
+    answer: "+="
+    hint: "in-place addition operator"
+  - position: 2
+    answer: "out"
+    hint: "parameter to write output directly to existing array"
+solution: |
+  import numpy as np
+
+  a = np.ones(5)
+
+  a *= 3
+  a += 10
+
+  result = np.empty_like(a)
+  np.multiply(a, 2, out=result)
+  print(result)
+hints:
+  - "*= and += modify the array in place without creating temporaries."
+  - "The out= parameter tells NumPy to write the result into an existing array."
+concept_tags:
+  - numpy-optimization
+  - memory-layout

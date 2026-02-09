@@ -1,0 +1,40 @@
+type: fill-in
+id: "04-dictionaries-fill-in-01"
+prompt: "Fill in the blanks to create a dictionary, safely access a missing key, and iterate over key-value pairs."
+template: |
+  person = {"name": "Alice", "age": 30, "city": "Portland"}
+
+  email = person.____("email", "not set")
+  print(email)
+
+  person["email"] = "alice@example.com"
+
+  for key, value ____ person.____():
+      print(f"{key} = {value}")
+blanks:
+  - position: 0
+    answer: "get"
+    hint: "safe access method with a default value"
+  - position: 1
+    answer: "in"
+    hint: "keyword used in for loops"
+  - position: 2
+    answer: "items"
+    hint: "method that returns key-value pairs"
+solution: |
+  person = {"name": "Alice", "age": 30, "city": "Portland"}
+
+  email = person.get("email", "not set")
+  print(email)
+
+  person["email"] = "alice@example.com"
+
+  for key, value in person.items():
+      print(f"{key} = {value}")
+hints:
+  - ".get(key, default) returns the default if the key doesn't exist, avoiding KeyError."
+  - "for key, value in dict.items() unpacks each key-value pair."
+  - ".items() returns view objects of (key, value) tuples."
+concept_tags:
+  - dict-methods
+  - dict-iteration

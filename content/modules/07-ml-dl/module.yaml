@@ -1,0 +1,15 @@
+id: "07-ml-dl"
+title: "Machine Learning & Deep Learning"
+description: "From linear regression to neural networks with scikit-learn and PyTorch"
+order: 7
+lessons:
+  - 01-ml-concepts
+  - 02-linear-regression
+  - 03-classification
+  - 04-trees-forests
+  - 05-model-evaluation
+  - 06-unsupervised
+  - 07-neural-networks
+  - 08-pytorch-intro
+  - 09-cnn
+  - 10-practical-ml

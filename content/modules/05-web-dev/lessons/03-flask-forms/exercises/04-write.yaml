@@ -1,0 +1,19 @@
+type: write
+id: "03-flask-forms-write-01"
+prompt: "Write a function called `validate_form` that takes a dictionary with keys 'username', 'email', and 'password'. Return a list of error strings. Rules: username must be at least 3 characters, email must contain '@', password must be at least 8 characters. Print the result for {'username': 'ab', 'email': 'test', 'password': '12345678'}."
+starter_code: |
+  # Write your function here
+tests:
+  - description: "Output shows username error (too short)"
+    check: "'username' in output.lower() or 'at least 3' in output"
+  - description: "Output shows email error (no @)"
+    check: "'email' in output.lower() or '@' in output"
+  - description: "No password error (8 chars is valid)"
+    check: "'password' not in output.lower().split('email')[0] if 'email' in output.lower() else True"
+hints:
+  - "Create an empty list and append errors as you find them."
+  - "Use len() to check string lengths."
+  - "Use 'in' to check if '@' is in the email."
+concept_tags:
+  - form-validation
+  - post-requests

@@ -1,0 +1,51 @@
+type: trace
+id: "04-dictionaries-trace-01"
+prompt: "Trace through this code and predict the final output."
+code: |
+  inventory = {"apples": 5, "bananas": 3}
+  inventory["cherries"] = 10
+  inventory["apples"] += 2
+  removed = inventory.pop("bananas")
+  print(inventory)
+  print(removed)
+  print(inventory.get("bananas", 0))
+steps:
+  - line: 1
+    variables: { "inventory": "{'apples': 5, 'bananas': 3}" }
+    output: ""
+    explanation: "inventory is created with two key-value pairs."
+  - line: 2
+    variables: { "inventory": "{'apples': 5, 'bananas': 3, 'cherries': 10}" }
+    output: ""
+    explanation: "A new key 'cherries' is added with value 10."
+  - line: 3
+    variables: { "inventory": "{'apples': 7, 'bananas': 3, 'cherries': 10}" }
+    output: ""
+    explanation: "inventory['apples'] is incremented from 5 to 7."
+  - line: 4
+    variables: { "inventory": "{'apples': 7, 'cherries': 10}", "removed": "3" }
+    output: ""
+    explanation: "pop('bananas') removes the key 'bananas' and returns its value, 3."
+  - line: 5
+    variables: { "inventory": "{'apples': 7, 'cherries': 10}", "removed": "3" }
+    output: "{'apples': 7, 'cherries': 10}"
+    explanation: "Prints the dictionary without 'bananas'."
+  - line: 6
+    variables: { "inventory": "{'apples': 7, 'cherries': 10}", "removed": "3" }
+    output: "3"
+    explanation: "Prints the value returned by pop(), which was 3."
+  - line: 7
+    variables: { "inventory": "{'apples': 7, 'cherries': 10}", "removed": "3" }
+    output: "0"
+    explanation: "'bananas' no longer exists, so .get('bananas', 0) returns the default value 0."
+expected_output: |
+  {'apples': 7, 'cherries': 10}
+  3
+  0
+hints:
+  - "Assigning to a new key adds it to the dictionary."
+  - "+= on an existing key modifies its value in place."
+  - ".pop(key) removes the key and returns its value. .get(key, default) returns default if the key is missing."
+concept_tags:
+  - dict-creation
+  - dict-methods

@@ -1,0 +1,14 @@
+type: write
+id: "05-hash-tables-write-01"
+prompt: "Write a function called group_anagrams(words) that takes a list of words and groups anagrams together. Return a list of groups (each group is a list of words that are anagrams of each other). Print the number of groups for the input ['eat', 'tea', 'tan', 'ate', 'nat', 'bat']."
+starter_code: |
+  # Write group_anagrams(words) and print the number of groups
+tests:
+  - description: "There are 3 groups"
+    check: "'3' in output.strip()"
+hints:
+  - "Two words are anagrams if they have the same sorted characters: sorted('eat') == sorted('tea')."
+  - "Use a dict mapping tuple(sorted(word)) to a list of words. Use ''.join(sorted(word)) or tuple(sorted(word)) as the key."
+concept_tags:
+  - hash-function
+  - dict-internals

@@ -1,0 +1,77 @@
+type: trace
+id: "01-security-fundamentals-trace-01"
+prompt: "Trace through this code that checks user permissions using the principle of least privilege and predict the output."
+code: |
+  permissions = {
+      "admin": {"read", "write", "delete"},
+      "editor": {"read", "write"},
+      "viewer": {"read"},
+  }
+  users = [("Alice", "admin"), ("Bob", "viewer"), ("Carol", "editor")]
+  action = "write"
+
+  for name, role in users:
+      allowed = permissions.get(role, set())
+      if action in allowed:
+          print(f"{name}: GRANTED")
+      else:
+          print(f"{name}: DENIED")
+steps:
+  - line: 1
+    variables: {"permissions": "{'admin': {'read','write','delete'}, 'editor': {'read','write'}, 'viewer': {'read'}}"}
+    output: ""
+    explanation: "Create a dictionary mapping roles to their allowed actions as sets."
+  - line: 6
+    variables: {"users": "[('Alice','admin'), ('Bob','viewer'), ('Carol','editor')]"}
+    output: ""
+    explanation: "Create a list of (name, role) tuples."
+  - line: 7
+    variables: {"action": "write"}
+    output: ""
+    explanation: "The action we want to check is 'write'."
+  - line: 9
+    variables: {"name": "Alice", "role": "admin"}
+    output: ""
+    explanation: "First iteration: unpack Alice and admin."
+  - line: 10
+    variables: {"name": "Alice", "role": "admin", "allowed": "{'read','write','delete'}"}
+    output: ""
+    explanation: "Look up admin permissions -- includes read, write, delete."
+  - line: 12
+    variables: {"name": "Alice", "role": "admin"}
+    output: "Alice: GRANTED"
+    explanation: "'write' is in admin's permissions, so access is granted."
+  - line: 9
+    variables: {"name": "Bob", "role": "viewer"}
+    output: ""
+    explanation: "Second iteration: unpack Bob and viewer."
+  - line: 10
+    variables: {"name": "Bob", "role": "viewer", "allowed": "{'read'}"}
+    output: ""
+    explanation: "Look up viewer permissions -- only read."
+  - line: 14
+    variables: {"name": "Bob", "role": "viewer"}
+    output: "Bob: DENIED"
+    explanation: "'write' is not in viewer's permissions, so access is denied."
+  - line: 9
+    variables: {"name": "Carol", "role": "editor"}
+    output: ""
+    explanation: "Third iteration: unpack Carol and editor."
+  - line: 10
+    variables: {"name": "Carol", "role": "editor", "allowed": "{'read','write'}"}
+    output: ""
+    explanation: "Look up editor permissions -- read and write."
+  - line: 12
+    variables: {"name": "Carol", "role": "editor"}
+    output: "Carol: GRANTED"
+    explanation: "'write' is in editor's permissions, so access is granted."
+expected_output: |
+  Alice: GRANTED
+  Bob: DENIED
+  Carol: GRANTED
+hints:
+  - "Sets support the 'in' operator to check membership."
+  - "Only the viewer role lacks 'write' permission."
+concept_tags:
+  - cia-triad
+  - defense-in-depth

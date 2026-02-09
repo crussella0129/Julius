@@ -1,0 +1,24 @@
+type: write
+id: "05-code-quality-write-01"
+prompt: "Write a function called `word_lengths` with full type hints and a docstring. It should take a sentence (str) and return a dictionary mapping each word (str) to its length (int). Test it with 'hello world python' and print each word and its length, sorted alphabetically."
+starter_code: |
+  # Define word_lengths with type hints and docstring
+
+  # Test and print results
+tests:
+  - description: "Output has exactly 3 lines"
+    check: "len(output.strip().splitlines()) == 3"
+  - description: "Contains 'hello' with length 5"
+    check: "'hello' in output and '5' in output"
+  - description: "Contains 'python' with length 6"
+    check: "'python' in output and '6' in output"
+  - description: "Contains 'world' with length 5"
+    check: "'world' in output and '5' in output"
+hints:
+  - "def word_lengths(sentence: str) -> dict[str, int]:"
+  - "Split the sentence, then build a dict with {word: len(word)}."
+  - "Sort the dict items with sorted() before printing."
+concept_tags:
+  - type-hints
+  - docstrings
+  - code-formatting

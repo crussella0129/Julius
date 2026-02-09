@@ -1,0 +1,24 @@
+type: parsons
+id: "01-micropython-intro-parsons-01"
+prompt: "Arrange these lines to create an EmbeddedSystem class that tracks RAM allocation and raises MemoryError when full."
+blocks:
+  - "class EmbeddedSystem:"
+  - "    def __init__(self, ram_kb):"
+  - "        self.total_ram = ram_kb * 1024"
+  - "        self.used = 0"
+  - "    def allocate(self, size):"
+  - "        if self.used + size > self.total_ram:"
+  - "            raise MemoryError('Out of memory')"
+  - "        self.used += size"
+  - "        return True"
+distractors:
+  - "        self.total_ram = ram_kb"
+  - "        self.used = self.total_ram"
+solution_order: [0, 1, 2, 3, 4, 5, 6, 7, 8]
+hints:
+  - "Convert KB to bytes by multiplying by 1024 in __init__."
+  - "Check if allocation would exceed total RAM before adding to used."
+  - "Raise MemoryError if there's not enough space."
+concept_tags:
+  - embedded-constraints
+  - micropython-basics

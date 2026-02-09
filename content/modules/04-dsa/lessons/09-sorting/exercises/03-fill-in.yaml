@@ -1,0 +1,50 @@
+type: fill-in
+id: "09-sorting-fill-in-01"
+prompt: "Fill in the blanks to complete the merge function that combines two sorted lists into one sorted list."
+template: |
+  def merge(left, right):
+      result = []
+      i = j = 0
+      while i < len(left) and j < len(right):
+          if left[i] <= right[____]:
+              result.append(left[i])
+              i += 1
+          else:
+              result.append(right[j])
+              ____ += 1
+      result.extend(left[____:])
+      result.extend(right[j:])
+      return result
+
+  print(merge([1, 3, 5], [2, 4, 6]))
+blanks:
+  - position: 0
+    answer: "j"
+    hint: "index into the right list"
+  - position: 1
+    answer: "j"
+    hint: "advance the right list pointer"
+  - position: 2
+    answer: "i"
+    hint: "remaining elements from the left list"
+solution: |
+  def merge(left, right):
+      result = []
+      i = j = 0
+      while i < len(left) and j < len(right):
+          if left[i] <= right[j]:
+              result.append(left[i])
+              i += 1
+          else:
+              result.append(right[j])
+              j += 1
+      result.extend(left[i:])
+      result.extend(right[j:])
+      return result
+
+  print(merge([1, 3, 5], [2, 4, 6]))
+hints:
+  - "Two pointers i and j track positions in the left and right lists."
+  - "After the loop, one list may have remaining elements -- extend result with them."
+concept_tags:
+  - merge-sort

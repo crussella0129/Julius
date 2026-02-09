@@ -1,0 +1,25 @@
+type: write
+id: "02-regex-write-01"
+prompt: "Write a program that extracts all words that start with a capital letter from the string 'The Quick Brown Fox Jumps Over The Lazy Dog' and prints them one per line."
+starter_code: |
+  import re
+
+  text = "The Quick Brown Fox Jumps Over The Lazy Dog"
+  # Your code here
+tests:
+  - description: "Output has exactly 8 lines"
+    check: "len(output.strip().splitlines()) == 8"
+  - description: "First word is 'The'"
+    check: "output.strip().splitlines()[0] == 'The'"
+  - description: "Contains 'Quick'"
+    check: "'Quick' in output.strip().splitlines()"
+  - description: "Contains 'Fox'"
+    check: "'Fox' in output.strip().splitlines()"
+hints:
+  - "A capital letter is [A-Z], followed by word characters \\w*."
+  - "Use re.findall() to get all matches as a list."
+  - "words = re.findall(r'[A-Z]\\w*', text); then loop and print each."
+concept_tags:
+  - re-module
+  - regex-patterns
+  - search-match

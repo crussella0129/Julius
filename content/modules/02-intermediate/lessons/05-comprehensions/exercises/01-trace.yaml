@@ -1,0 +1,51 @@
+type: trace
+id: "05-comprehensions-trace-01"
+prompt: "Trace through this code and predict the final output."
+code: |
+  numbers = [1, 2, 3, 4, 5, 6]
+  evens = [x for x in numbers if x % 2 == 0]
+  squared = [x ** 2 for x in evens]
+  labels = ["even" if x % 2 == 0 else "odd" for x in range(4)]
+  print(evens)
+  print(squared)
+  print(labels)
+steps:
+  - line: 1
+    variables: { "numbers": "[1, 2, 3, 4, 5, 6]" }
+    output: ""
+    explanation: "numbers is assigned a list of integers 1 through 6."
+  - line: 2
+    variables: { "numbers": "[1, 2, 3, 4, 5, 6]", "evens": "[2, 4, 6]" }
+    output: ""
+    explanation: "The list comprehension filters numbers, keeping only those where x % 2 == 0: [2, 4, 6]."
+  - line: 3
+    variables: { "numbers": "[1, 2, 3, 4, 5, 6]", "evens": "[2, 4, 6]", "squared": "[4, 16, 36]" }
+    output: ""
+    explanation: "Each element of evens is squared: 2**2=4, 4**2=16, 6**2=36."
+  - line: 4
+    variables: { "numbers": "[1, 2, 3, 4, 5, 6]", "evens": "[2, 4, 6]", "squared": "[4, 16, 36]", "labels": "['even', 'odd', 'even', 'odd']" }
+    output: ""
+    explanation: "For range(4): 0 is even, 1 is odd, 2 is even, 3 is odd. The if/else before for transforms each value."
+  - line: 5
+    variables: {}
+    output: "[2, 4, 6]"
+    explanation: "Prints the filtered even numbers."
+  - line: 6
+    variables: {}
+    output: "[4, 16, 36]"
+    explanation: "Prints the squared even numbers."
+  - line: 7
+    variables: {}
+    output: "['even', 'odd', 'even', 'odd']"
+    explanation: "Prints the labels list created with conditional comprehension."
+expected_output: |
+  [2, 4, 6]
+  [4, 16, 36]
+  ['even', 'odd', 'even', 'odd']
+hints:
+  - "'if' after 'for' filters items out. 'if/else' before 'for' transforms every item."
+  - "x ** 2 squares x: 2**2=4, 4**2=16, 6**2=36."
+  - "range(4) produces 0, 1, 2, 3. Even numbers are 0 and 2."
+concept_tags:
+  - list-comprehensions
+  - conditional-comprehensions

@@ -1,0 +1,22 @@
+type: parsons
+id: "04-debugging-parsons-01"
+prompt: "Arrange these lines to set up file-based logging that records messages with timestamps, then log an info and error message."
+blocks:
+  - "import logging"
+  - "logging.basicConfig("
+  - "    filename='app.log',"
+  - "    level=logging.DEBUG,"
+  - "    format='%(asctime)s - %(levelname)s - %(message)s'"
+  - ")"
+  - "logging.info('Application started')"
+  - "logging.error('Something went wrong')"
+distractors:
+  - "logging.setLevel('DEBUG')"
+  - "logging.write('Application started')"
+solution_order: [0, 1, 2, 3, 4, 5, 6, 7]
+hints:
+  - "Import logging, then call basicConfig with filename, level, and format."
+  - "Use logging.info() and logging.error() to log messages."
+concept_tags:
+  - logging-module
+  - print-debugging

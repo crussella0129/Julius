@@ -1,0 +1,13 @@
+id: "02-intermediate"
+title: "Intermediate Python"
+description: "Collections, comprehensions, error handling, and file I/O"
+order: 2
+lessons:
+  - 01-strings-deep
+  - 02-lists
+  - 03-tuples-sets
+  - 04-dictionaries
+  - 05-comprehensions
+  - 06-error-handling
+  - 07-file-io
+  - 08-modules-packages

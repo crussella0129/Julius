@@ -1,0 +1,22 @@
+type: parsons
+id: "03-tuples-sets-parsons-01"
+prompt: "Arrange these lines to create a tuple of coordinates, unpack it into x and y variables, create a set from a list with duplicates, and print the number of unique elements."
+blocks:
+  - "point = (3, 7)"
+  - "x, y = point"
+  - "print(f\"x={x}, y={y}\")"
+  - ""
+  - "numbers = [1, 2, 2, 3, 3, 3, 4]"
+  - "unique = set(numbers)"
+  - "print(len(unique))"
+solution_order: [0, 1, 2, 3, 4, 5, 6]
+distractors:
+  - "x, y = (point)"
+  - "unique = {numbers}"
+hints:
+  - "Tuple unpacking assigns each element to a variable: x, y = (3, 7)."
+  - "set() converts a list to a set, removing duplicates."
+  - "len() on a set gives the count of unique elements."
+concept_tags:
+  - tuples
+  - sets

@@ -1,0 +1,19 @@
+type: write
+id: "05-fastapi-intro-write-01"
+prompt: "Write a function called `validate_item` that takes a dictionary and checks that it has a 'name' key (string) and a 'price' key (int or float, must be positive). Return a tuple of (is_valid: bool, errors: list). Print results for three test cases: {'name': 'Widget', 'price': 9.99}, {'name': '', 'price': -5}, and {'price': 10}."
+starter_code: |
+  # Write your function here
+tests:
+  - description: "First item is valid"
+    check: "'True' in output.splitlines()[0]"
+  - description: "Second item has errors"
+    check: "'False' in output.splitlines()[1]"
+  - description: "Third item has errors (missing name)"
+    check: "'False' in output.splitlines()[2]"
+hints:
+  - "Check isinstance(data.get('name'), str) and that it is non-empty."
+  - "Check that price is a number and positive using isinstance and > 0."
+  - "Collect errors in a list and return (len(errors) == 0, errors)."
+concept_tags:
+  - pydantic-models
+  - type-hints

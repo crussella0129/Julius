@@ -1,0 +1,51 @@
+type: trace
+id: "05-code-quality-trace-01"
+prompt: "Trace through this code and predict what will be printed."
+code: |
+  def process_items(items: list[str]) -> dict[str, int]:
+      result: dict[str, int] = {}
+      for item in items:
+          key: str = item.lower().strip()
+          if key:
+              result[key] = result.get(key, 0) + 1
+      return result
+
+  data = ["Apple", " banana", "apple", "  ", "BANANA", "cherry"]
+  counts = process_items(data)
+  for fruit, count in sorted(counts.items()):
+      print(f"{fruit}: {count}")
+steps:
+  - line: 1
+    variables: {}
+    output: ""
+    explanation: "Define process_items with type hints: takes list of strings, returns dict of str to int."
+  - line: 9
+    variables: { "data": "['Apple', ' banana', 'apple', '  ', 'BANANA', 'cherry']" }
+    output: ""
+    explanation: "Create input list with mixed case, extra spaces, and a whitespace-only string."
+  - line: 10
+    variables: {}
+    output: ""
+    explanation: "Process: 'Apple' -> 'apple'(1), ' banana' -> 'banana'(1), 'apple' -> 'apple'(2), '  ' -> '' (skipped), 'BANANA' -> 'banana'(2), 'cherry' -> 'cherry'(1)."
+  - line: 11
+    variables: { "counts": "{'apple': 2, 'banana': 2, 'cherry': 1}" }
+    output: "apple: 2"
+    explanation: "sorted() iterates keys alphabetically. First: apple with count 2."
+  - line: 12
+    variables: {}
+    output: "banana: 2"
+    explanation: "Next alphabetically: banana with count 2."
+  - line: 12
+    variables: {}
+    output: "cherry: 1"
+    explanation: "Last: cherry with count 1."
+expected_output: |
+  apple: 2
+  banana: 2
+  cherry: 1
+hints:
+  - ".lower().strip() normalizes case and whitespace."
+  - "The empty string from '  '.strip() is falsy, so it's skipped by the if check."
+concept_tags:
+  - type-hints
+  - code-formatting

@@ -1,0 +1,83 @@
+type: trace
+id: "03-technical-indicators-trace-01"
+prompt: "Trace through this code that calculates a 3-period Simple Moving Average and predict the output."
+code: |
+  prices = [10, 12, 14, 13, 15]
+  period = 3
+  sma_values = []
+
+  for i in range(period - 1, len(prices)):
+      window = prices[i - period + 1:i + 1]
+      avg = sum(window) / period
+      sma_values.append(round(avg, 1))
+      print(f"Window {window} -> SMA = {round(avg, 1)}")
+
+  print(f"SMA({period}): {sma_values}")
+steps:
+  - line: 1
+    variables: {"prices": "[10, 12, 14, 13, 15]", "period": 3}
+    output: ""
+    explanation: "Five prices and a 3-period window."
+  - line: 5
+    variables: {"i": 2}
+    output: ""
+    explanation: "First valid index: i=2 (need 3 values: indices 0,1,2)."
+  - line: 6
+    variables: {"window": "[10, 12, 14]"}
+    output: ""
+    explanation: "prices[0:3] = [10, 12, 14]."
+  - line: 7
+    variables: {"avg": 12.0}
+    output: ""
+    explanation: "(10 + 12 + 14) / 3 = 12.0."
+  - line: 9
+    variables: {}
+    output: "Window [10, 12, 14] -> SMA = 12.0"
+    explanation: "Print the first window and its average."
+  - line: 5
+    variables: {"i": 3}
+    output: ""
+    explanation: "Second iteration: i=3."
+  - line: 6
+    variables: {"window": "[12, 14, 13]"}
+    output: ""
+    explanation: "prices[1:4] = [12, 14, 13]."
+  - line: 7
+    variables: {"avg": 13.0}
+    output: ""
+    explanation: "(12 + 14 + 13) / 3 = 13.0."
+  - line: 9
+    variables: {}
+    output: "Window [12, 14, 13] -> SMA = 13.0"
+    explanation: "Print the second window and its average."
+  - line: 5
+    variables: {"i": 4}
+    output: ""
+    explanation: "Third iteration: i=4."
+  - line: 6
+    variables: {"window": "[14, 13, 15]"}
+    output: ""
+    explanation: "prices[2:5] = [14, 13, 15]."
+  - line: 7
+    variables: {"avg": 14.0}
+    output: ""
+    explanation: "(14 + 13 + 15) / 3 = 14.0."
+  - line: 9
+    variables: {}
+    output: "Window [14, 13, 15] -> SMA = 14.0"
+    explanation: "Print the third window and its average."
+  - line: 11
+    variables: {"sma_values": "[12.0, 13.0, 14.0]"}
+    output: "SMA(3): [12.0, 13.0, 14.0]"
+    explanation: "Print all SMA values."
+expected_output: |
+  Window [10, 12, 14] -> SMA = 12.0
+  Window [12, 14, 13] -> SMA = 13.0
+  Window [14, 13, 15] -> SMA = 14.0
+  SMA(3): [12.0, 13.0, 14.0]
+hints:
+  - "The window slides forward by one position each iteration."
+  - "For a period of 3, the first SMA value appears at index 2."
+concept_tags:
+  - moving-averages
+  - signals

@@ -1,0 +1,89 @@
+type: trace
+id: "06-seaborn-trace-01"
+prompt: "Trace through this code that computes statistics for visualization and predict the output."
+code: |
+  data = {
+      "category": ["A", "A", "B", "B", "B", "C"],
+      "value": [10, 20, 30, 40, 50, 15],
+  }
+
+  categories = sorted(set(data["category"]))
+  stats = {}
+
+  for cat in categories:
+      values = [v for c, v in zip(data["category"], data["value"]) if c == cat]
+      stats[cat] = {
+          "mean": sum(values) / len(values),
+          "count": len(values),
+      }
+
+  for cat in categories:
+      s = stats[cat]
+      print(f"{cat}: mean={s['mean']:.1f}, n={s['count']}")
+steps:
+  - line: 1
+    variables: {}
+    output: ""
+    explanation: "Define data with categories and values."
+  - line: 6
+    variables: {"categories": "['A', 'B', 'C']"}
+    output: ""
+    explanation: "Get sorted unique categories."
+  - line: 9
+    variables: {"cat": "A"}
+    output: ""
+    explanation: "First iteration: category A."
+  - line: 10
+    variables: {"values": "[10, 20]"}
+    output: ""
+    explanation: "Filter values where category is A: 10, 20."
+  - line: 11
+    variables: {"stats": "{'A': {'mean': 15.0, 'count': 2}}"}
+    output: ""
+    explanation: "Mean of [10,20] = 15.0, count = 2."
+  - line: 9
+    variables: {"cat": "B"}
+    output: ""
+    explanation: "Second iteration: category B."
+  - line: 10
+    variables: {"values": "[30, 40, 50]"}
+    output: ""
+    explanation: "Filter values where category is B: 30, 40, 50."
+  - line: 11
+    variables: {}
+    output: ""
+    explanation: "Mean of [30,40,50] = 40.0, count = 3."
+  - line: 9
+    variables: {"cat": "C"}
+    output: ""
+    explanation: "Third iteration: category C."
+  - line: 10
+    variables: {"values": "[15]"}
+    output: ""
+    explanation: "Filter values where category is C: 15."
+  - line: 11
+    variables: {}
+    output: ""
+    explanation: "Mean of [15] = 15.0, count = 1."
+  - line: 16
+    variables: {}
+    output: "A: mean=15.0, n=2"
+    explanation: "Print stats for A."
+  - line: 16
+    variables: {}
+    output: "B: mean=40.0, n=3"
+    explanation: "Print stats for B."
+  - line: 16
+    variables: {}
+    output: "C: mean=15.0, n=1"
+    explanation: "Print stats for C."
+expected_output: |
+  A: mean=15.0, n=2
+  B: mean=40.0, n=3
+  C: mean=15.0, n=1
+hints:
+  - "The list comprehension filters values matching each category."
+  - "Categories are processed in sorted order: A, B, C."
+concept_tags:
+  - statistical-plots
+  - categorical-plots

@@ -1,0 +1,48 @@
+type: fill-in
+id: "10-practical-ml-fill-in-01"
+prompt: "Fill in the blanks to normalize features by subtracting mean and dividing by standard deviation."
+template: |
+  def normalize(data):
+      n = len(data)
+      mean = ____(data) / n
+      variance = sum((x - mean) ** 2 for x in data) / n
+      std = variance ** ____
+      if std == 0:
+          return [0.0] * n
+      return [(x - ____) / std for x in data]
+
+  raw = [10, 20, 30, 40, 50]
+  normed = ____(raw)
+  print([round(x, 2) for x in normed])
+blanks:
+  - position: 0
+    answer: "sum"
+    hint: "function to add all values"
+  - position: 1
+    answer: "0.5"
+    hint: "exponent for square root"
+  - position: 2
+    answer: "mean"
+    hint: "subtract this to center the data"
+  - position: 3
+    answer: "normalize"
+    hint: "call the function defined above"
+solution: |
+  def normalize(data):
+      n = len(data)
+      mean = sum(data) / n
+      variance = sum((x - mean) ** 2 for x in data) / n
+      std = variance ** 0.5
+      if std == 0:
+          return [0.0] * n
+      return [(x - mean) / std for x in data]
+
+  raw = [10, 20, 30, 40, 50]
+  normed = normalize(raw)
+  print([round(x, 2) for x in normed])
+hints:
+  - "Standard deviation is the square root of variance."
+  - "Normalization: (x - mean) / std for each value."
+concept_tags:
+  - feature-engineering
+  - ml-pipeline

@@ -10,6 +10,7 @@ interface JuliusAPI {
   listExercises: (moduleId: string, lessonId: string) => Promise<string[]>
   getLessonTitles: (moduleId: string) => Promise<Record<string, string>>
   buildExerciseIndex: () => Promise<Record<string, { moduleId: string; lessonId: string; exerciseFile: string; prompt: string }>>
+  loadPlacement: () => Promise<unknown>
   runPython: (code: string, timeout?: number) => Promise<PythonResult>
   getProgress: () => Promise<unknown[]>
   getConceptMastery: () => Promise<ConceptMasteryRow[]>

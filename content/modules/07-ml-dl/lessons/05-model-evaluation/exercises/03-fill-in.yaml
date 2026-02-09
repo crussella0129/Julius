@@ -1,0 +1,52 @@
+type: fill-in
+id: "05-model-evaluation-fill-in-01"
+prompt: "Fill in the blanks to implement K-fold cross-validation."
+template: |
+  def k_fold_split(data, k):
+      fold_size = len(data) // ____
+      folds = []
+      for i in ____(k):
+          start = i * fold_size
+          end = start + fold_size
+          test = data[start:end]
+          train = data[:____] + data[end:]
+          folds.append((train, test))
+      return ____
+
+  result = k_fold_split(list(range(10)), 5)
+  for i, (train, test) in enumerate(result):
+      print(f\"Fold {i+1}: test_size={len(test)}, train_size={len(train)}\")
+blanks:
+  - position: 0
+    answer: "k"
+    hint: "number of folds"
+  - position: 1
+    answer: "range"
+    hint: "function to iterate from 0 to k-1"
+  - position: 2
+    answer: "start"
+    hint: "slice up to the beginning of the test fold"
+  - position: 3
+    answer: "folds"
+    hint: "the list of (train, test) tuples to return"
+solution: |
+  def k_fold_split(data, k):
+      fold_size = len(data) // k
+      folds = []
+      for i in range(k):
+          start = i * fold_size
+          end = start + fold_size
+          test = data[start:end]
+          train = data[:start] + data[end:]
+          folds.append((train, test))
+      return folds
+
+  result = k_fold_split(list(range(10)), 5)
+  for i, (train, test) in enumerate(result):
+      print(f"Fold {i+1}: test_size={len(test)}, train_size={len(train)}")
+hints:
+  - "fold_size = total / k gives the size of each test fold."
+  - "train = everything before start + everything after end."
+concept_tags:
+  - cross-validation
+  - model-selection

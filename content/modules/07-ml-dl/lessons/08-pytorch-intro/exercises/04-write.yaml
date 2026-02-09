@@ -1,0 +1,17 @@
+type: write
+id: "08-pytorch-intro-write-01"
+prompt: "Write a class called `LinearModel` that simulates a single linear layer: __init__(n_features) sets weights to zeros and bias to 0; forward(x) returns dot product + bias; train(data, epochs, lr) trains on a list of (inputs, target) pairs using MSE gradient descent. After training on [([1], 2), ([2], 4), ([3], 6), ([4], 8)] for 100 epochs with lr=0.01, print the weight and bias, and predict for x=[5]."
+starter_code: |
+  # Write your class here
+tests:
+  - description: "Weight is approximately 2.0"
+    check: "'1.9' in output or '2.0' in output or '2.' in output"
+  - description: "Prediction for 5 is approximately 10"
+    check: "'9.' in output or '10' in output"
+hints:
+  - "MSE gradient for weight: 2 * error * x, for bias: 2 * error."
+  - "Update: w -= lr * gradient, b -= lr * gradient."
+  - "The data follows y = 2x, so the model should learn weight~2, bias~0."
+concept_tags:
+  - tensors
+  - training-loop

@@ -1,0 +1,11 @@
+id: "10-game-dev"
+title: "Game Development"
+description: "Build games with Pygame: sprites, physics, and game loops"
+order: 10
+lessons:
+  - 01-pygame-setup
+  - 02-sprites-movement
+  - 03-game-physics
+  - 04-game-state
+  - 05-sound-graphics
+  - 06-complete-game

@@ -1,0 +1,19 @@
+type: write
+id: "01-ml-concepts-write-01"
+prompt: "Write a function called `train_test_split` that takes a list of data items and a float `test_ratio` (e.g., 0.2). It should return two lists: (train, test). The split index is int(len(data) * (1 - test_ratio)). Also write a function `accuracy` that takes two lists (predictions, actual) and returns the fraction correct. Demo: split the list [1,2,3,4,5,6,7,8,9,10] with test_ratio=0.3, then compute accuracy of [1,0,1] vs [1,1,1]. Print both results."
+starter_code: |
+  # Write your functions here
+tests:
+  - description: "Train set has 7 items"
+    check: "'7' in output"
+  - description: "Test set has 3 items"
+    check: "'3' in output or '[8, 9, 10]' in output"
+  - description: "Accuracy is approximately 0.67"
+    check: "'0.67' in output or '0.6' in output or '2' in output"
+hints:
+  - "Use int(len(data) * (1 - test_ratio)) for the split index."
+  - "Slice data[:split] for train, data[split:] for test."
+  - "Accuracy: sum(p == a for p, a in zip(pred, actual)) / len(pred)."
+concept_tags:
+  - train-test-split
+  - supervised-learning

@@ -1,0 +1,23 @@
+type: parsons
+id: "07-web-scraping-parsons-01"
+prompt: "Arrange these lines to scrape all article titles and authors from an HTML page using Beautiful Soup."
+blocks:
+  - "from bs4 import BeautifulSoup"
+  - "html = '<div class=\"article\"><h2>Title</h2><span class=\"author\">Alice</span></div>'"
+  - "soup = BeautifulSoup(html, 'html.parser')"
+  - "articles = soup.find_all('div', class_='article')"
+  - "for article in articles:"
+  - "    title = article.find('h2').text"
+  - "    author = article.find('span', class_='author').text"
+  - "    print(f'{title} by {author}')"
+distractors:
+  - "soup = BeautifulSoup(html)"
+  - "    title = article.select('h2')"
+solution_order: [0, 1, 2, 3, 4, 5, 6, 7]
+hints:
+  - "Create the soup object with the HTML string and parser name."
+  - "Use find_all() to get all article containers, then find() inside each one."
+  - ".text extracts the text content from an element."
+concept_tags:
+  - beautifulsoup
+  - css-selectors

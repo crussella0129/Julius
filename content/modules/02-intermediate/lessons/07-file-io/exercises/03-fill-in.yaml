@@ -1,0 +1,42 @@
+type: fill-in
+id: "07-file-io-fill-in-01"
+prompt: "Fill in the blanks to write to a file using a with statement, then read it back."
+template: |
+  # Write to a file
+  ____ open("greeting.txt", "w") as f:
+      f.____("Hello, World!\n")
+      f.write("Goodbye, World!\n")
+
+  # Read the file
+  with open("greeting.txt", "____") as f:
+      content = f.read()
+      print(content.strip())
+blanks:
+  - position: 0
+    answer: "with"
+    hint: "context manager keyword"
+  - position: 1
+    answer: "write"
+    hint: "method to write a string to a file"
+  - position: 2
+    answer: "r"
+    hint: "file mode for reading"
+solution: |
+  # Write to a file
+  with open("greeting.txt", "w") as f:
+      f.write("Hello, World!\n")
+      f.write("Goodbye, World!\n")
+
+  # Read the file
+  with open("greeting.txt", "r") as f:
+      content = f.read()
+      print(content.strip())
+hints:
+  - "'with' automatically closes the file when the block ends."
+  - "write() writes a string to the file."
+  - "'r' is the file mode for reading (it's also the default)."
+concept_tags:
+  - with-statement
+  - file-writing
+  - file-reading
+  - file-modes

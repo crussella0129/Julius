@@ -1,0 +1,61 @@
+type: fill-in
+id: "06-huggingface-fill-in-01"
+prompt: "Fill in the blanks to complete this subword tokenizer that finds the longest matching prefix from a vocabulary set."
+template: |
+  def subword_tokenize(word, vocab):
+      tokens = []
+      i = 0
+      while i < ____(word):
+          match = None
+          for end in range(len(word), i, ____):
+              piece = word[i:end]
+              if piece in vocab:
+                  match = piece
+                  ____
+          if match:
+              tokens.append(match)
+              i += len(match)
+          else:
+              tokens.append("[UNK]")
+              i += 1
+      return tokens
+
+  vocab = {"un", "believe", "able"}
+  print(subword_tokenize("unbelievable", vocab))
+blanks:
+  - position: 0
+    answer: "len"
+    hint: "length of the word string"
+  - position: 1
+    answer: "-1"
+    hint: "iterate backwards to find longest match first"
+  - position: 2
+    answer: "break"
+    hint: "stop searching once we find a match"
+solution: |
+  def subword_tokenize(word, vocab):
+      tokens = []
+      i = 0
+      while i < len(word):
+          match = None
+          for end in range(len(word), i, -1):
+              piece = word[i:end]
+              if piece in vocab:
+                  match = piece
+                  break
+          if match:
+              tokens.append(match)
+              i += len(match)
+          else:
+              tokens.append("[UNK]")
+              i += 1
+      return tokens
+
+  vocab = {"un", "believe", "able"}
+  print(subword_tokenize("unbelievable", vocab))
+hints:
+  - "We iterate from the longest possible substring to the shortest."
+  - "Once a match is found, we break out of the inner loop."
+concept_tags:
+  - tokenizers
+  - pretrained-models

@@ -1,0 +1,38 @@
+type: fill-in
+id: "02-flask-intro-fill-in-01"
+prompt: "Fill in the blanks to create a Flask app that renders a template with a variable."
+template: |
+  from flask import Flask, ____
+
+  app = Flask(__name__)
+
+  @app.____(\"/hello/<name>\")
+  def hello(name):
+      return ____(\"hello.html\", ____=name)
+blanks:
+  - position: 0
+    answer: "render_template"
+    hint: "function to render HTML templates"
+  - position: 1
+    answer: "route"
+    hint: "decorator method to register a URL pattern"
+  - position: 2
+    answer: "render_template"
+    hint: "call this function to render the template file"
+  - position: 3
+    answer: "name"
+    hint: "template variable name matching the parameter"
+solution: |
+  from flask import Flask, render_template
+
+  app = Flask(__name__)
+
+  @app.route("/hello/<name>")
+  def hello(name):
+      return render_template("hello.html", name=name)
+hints:
+  - "render_template() is imported from flask and takes the template filename."
+  - "Keyword arguments to render_template become variables in the template."
+concept_tags:
+  - templates
+  - jinja2

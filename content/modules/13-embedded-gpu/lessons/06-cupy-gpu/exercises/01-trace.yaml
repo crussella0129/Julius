@@ -1,0 +1,60 @@
+type: trace
+id: "06-cupy-gpu-trace-01"
+prompt: "Trace through this code that simulates GPU memory allocation and predict the output."
+code: |
+  class GPUMem:
+      def __init__(self, total_mb):
+          self.total = total_mb
+          self.used = 0
+
+      def alloc(self, name, mb):
+          if self.used + mb > self.total:
+              print(f"OOM: {name} needs {mb}MB, only {self.total - self.used}MB free")
+              return False
+          self.used += mb
+          print(f"Alloc {name}: {mb}MB (used: {self.used}/{self.total}MB)")
+          return True
+
+  gpu = GPUMem(8)
+  gpu.alloc("model", 3)
+  gpu.alloc("data", 4)
+  gpu.alloc("grad", 3)
+steps:
+  - line: 14
+    variables: {"gpu": "GPUMem(total=8, used=0)"}
+    output: ""
+    explanation: "Create GPU memory simulator with 8MB total."
+  - line: 15
+    variables: {"name": "model", "mb": 3}
+    output: ""
+    explanation: "Allocate 3MB for model. 0 + 3 = 3 <= 8, fits."
+  - line: 11
+    variables: {"used": 3}
+    output: "Alloc model: 3MB (used: 3/8MB)"
+    explanation: "Allocation succeeds, 3MB used out of 8MB."
+  - line: 16
+    variables: {"name": "data", "mb": 4}
+    output: ""
+    explanation: "Allocate 4MB for data. 3 + 4 = 7 <= 8, fits."
+  - line: 11
+    variables: {"used": 7}
+    output: "Alloc data: 4MB (used: 7/8MB)"
+    explanation: "Allocation succeeds, 7MB used out of 8MB."
+  - line: 17
+    variables: {"name": "grad", "mb": 3}
+    output: ""
+    explanation: "Allocate 3MB for gradients. 7 + 3 = 10 > 8, doesn't fit."
+  - line: 8
+    variables: {}
+    output: "OOM: grad needs 3MB, only 1MB free"
+    explanation: "Out of memory: only 1MB free but need 3MB."
+expected_output: |
+  Alloc model: 3MB (used: 3/8MB)
+  Alloc data: 4MB (used: 7/8MB)
+  OOM: grad needs 3MB, only 1MB free
+hints:
+  - "Track cumulative memory usage: model(3) + data(4) = 7MB used."
+  - "The third allocation (3MB) would require 10MB total, exceeding the 8MB limit."
+concept_tags:
+  - gpu-arrays
+  - host-device-transfer

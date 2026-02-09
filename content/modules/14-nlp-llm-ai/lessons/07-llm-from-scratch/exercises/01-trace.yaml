@@ -1,0 +1,59 @@
+type: trace
+id: "07-llm-from-scratch-trace-01"
+prompt: "Trace through this character tokenizer and training pair creation, then predict the output."
+code: |
+  class CharTokenizer:
+      def __init__(self, text):
+          chars = sorted(set(text))
+          self.c2i = {c: i for i, c in enumerate(chars)}
+          self.i2c = {i: c for i, c in enumerate(chars)}
+          self.vocab_size = len(chars)
+
+      def encode(self, text):
+          return [self.c2i[c] for c in text]
+
+  text = "abc"
+  tok = CharTokenizer(text)
+  print(tok.vocab_size)
+  ids = tok.encode("abc")
+  print(ids)
+
+  # Create one training pair with block_size=2
+  x = ids[0:2]
+  y = ids[1:3]
+  print(f"Input: {x} Target: {y}")
+steps:
+  - line: 11
+    variables: {"text": "abc"}
+    output: ""
+    explanation: "The training text 'abc' has 3 unique characters: a, b, c."
+  - line: 12
+    variables: {"tok": "CharTokenizer with c2i={'a':0, 'b':1, 'c':2}"}
+    output: ""
+    explanation: "sorted set of 'abc' is ['a','b','c'], mapped to indices 0, 1, 2."
+  - line: 13
+    variables: {}
+    output: "3"
+    explanation: "Vocabulary size is 3 (one per unique character)."
+  - line: 14
+    variables: {"ids": [0, 1, 2]}
+    output: ""
+    explanation: "a=0, b=1, c=2."
+  - line: 15
+    variables: {}
+    output: "[0, 1, 2]"
+    explanation: "The encoded token IDs are printed."
+  - line: 18
+    variables: {"x": [0, 1], "y": [1, 2]}
+    output: "Input: [0, 1] Target: [1, 2]"
+    explanation: "Input is first 2 tokens [a,b], target is shifted by 1: [b,c]."
+expected_output: |
+  3
+  [0, 1, 2]
+  Input: [0, 1] Target: [1, 2]
+hints:
+  - "sorted(set('abc')) produces ['a', 'b', 'c']."
+  - "Training pairs are created by shifting the sequence by one position."
+concept_tags:
+  - language-model
+  - token-prediction

@@ -1,0 +1,36 @@
+type: fill-in
+id: "04-stacks-queues-fill-in-01"
+prompt: "Fill in the blanks to implement a stack that reverses a string. Push each character, then pop them all to build the reversed string."
+template: |
+  word = "hello"
+  stack = []
+  for char in word:
+      stack.____(char)
+  reversed_word = ""
+  while ____:
+      reversed_word += stack.____()
+  print(reversed_word)
+blanks:
+  - position: 0
+    answer: "append"
+    hint: "the push operation for a Python list stack"
+  - position: 1
+    answer: "stack"
+    hint: "loop while the stack is not empty"
+  - position: 2
+    answer: "pop"
+    hint: "remove and return the top element"
+solution: |
+  word = "hello"
+  stack = []
+  for char in word:
+      stack.append(char)
+  reversed_word = ""
+  while stack:
+      reversed_word += stack.pop()
+  print(reversed_word)
+hints:
+  - "append() pushes onto the stack, pop() removes from the top."
+  - "Since a stack is LIFO, popping all characters reverses their order."
+concept_tags:
+  - stack-lifo

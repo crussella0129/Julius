@@ -1,0 +1,51 @@
+type: fill-in
+id: "03-tuples-sets-fill-in-01"
+prompt: "Fill in the blanks to create a tuple, unpack it, and perform set operations."
+template: |
+  # Create a single-element tuple (don't forget the comma!)
+  single = (42____)
+  print(type(single))
+
+  # Unpack a tuple into variables
+  colors = ("red", "green", "blue")
+  r, g, b ____ colors
+  print(r)
+
+  # Find elements in set a but NOT in set b
+  a = {1, 2, 3, 4}
+  b = {3, 4, 5, 6}
+  diff = a ____ b
+  print(sorted(diff))
+blanks:
+  - position: 0
+    answer: ","
+    hint: "single-element tuples need a trailing comma"
+  - position: 1
+    answer: "="
+    hint: "assignment operator for unpacking"
+  - position: 2
+    answer: "-"
+    hint: "set difference operator"
+solution: |
+  # Create a single-element tuple (don't forget the comma!)
+  single = (42,)
+  print(type(single))
+
+  # Unpack a tuple into variables
+  colors = ("red", "green", "blue")
+  r, g, b = colors
+  print(r)
+
+  # Find elements in set a but NOT in set b
+  a = {1, 2, 3, 4}
+  b = {3, 4, 5, 6}
+  diff = a - b
+  print(sorted(diff))
+hints:
+  - "Without the trailing comma, (42) is just the integer 42 in parentheses."
+  - "Tuple unpacking uses = to assign each element to a variable."
+  - "The - operator finds elements in the left set that are not in the right set."
+concept_tags:
+  - tuples
+  - sets
+  - set-operations

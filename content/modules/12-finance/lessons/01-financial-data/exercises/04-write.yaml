@@ -1,0 +1,18 @@
+type: write
+id: "01-financial-data-write-01"
+prompt: "Write a program that creates a list of OHLCV dictionaries for 5 trading days (with keys 'date', 'open', 'high', 'low', 'close', 'volume'). For each day, print whether it was an UP day (close > open) or DOWN day (close < open). Then print the day with the highest volume."
+starter_code: "# Write your code here\n"
+tests:
+  - description: "Output contains UP or DOWN for each day"
+    check: "output.lower().count('up') + output.lower().count('down') >= 5"
+  - description: "Output mentions highest volume"
+    check: "'volume' in output.lower() or 'highest' in output.lower() or 'max' in output.lower()"
+  - description: "Output has at least 6 lines"
+    check: "len(output.strip().splitlines()) >= 6"
+hints:
+  - "Compare close to open for each candle to determine UP or DOWN."
+  - "Use max() with a key function to find the day with the highest volume."
+  - "Each dictionary should have: date, open, high, low, close, volume."
+concept_tags:
+  - ohlcv
+  - time-series

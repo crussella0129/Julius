@@ -1,0 +1,25 @@
+type: write
+id: "05-transformers-write-01"
+prompt: "Write a softmax function that takes a list of numbers and returns a list of probabilities (they should sum to 1.0). Use the numerically stable version: subtract the max before exponentiating. Then write a function attention_weights that takes a query vector and a list of key vectors, computes scaled dot-product scores (divide by sqrt of dimension), applies softmax, and returns the weights. Print the attention weights for query=[1,0] with keys=[[1,0],[0,1],[1,1]]."
+starter_code: |
+  import math
+
+  # Write softmax and attention_weights here
+
+  query = [1, 0]
+  keys = [[1, 0], [0, 1], [1, 1]]
+  print([f"{w:.3f}" for w in attention_weights(query, keys)])
+tests:
+  - description: "Output is a list of 3 formatted numbers"
+    check: "output.count('.') == 3"
+  - description: "First weight is largest (query matches first key best)"
+    check: "float(output.strip().strip('[]').split(',')[0].strip().strip(\"'\")) >= float(output.strip().strip('[]').split(',')[1].strip().strip(\"'\"))"
+  - description: "Weights approximately sum to 1"
+    check: "True"
+hints:
+  - "Softmax: subtract max, exponentiate, divide by sum."
+  - "Dot product of [1,0] and [1,0] is 1; [1,0] and [0,1] is 0; [1,0] and [1,1] is 1."
+  - "Scale each score by dividing by math.sqrt(len(query))."
+concept_tags:
+  - self-attention
+  - transformer-architecture

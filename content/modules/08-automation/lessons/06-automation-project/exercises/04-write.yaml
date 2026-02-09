@@ -1,0 +1,24 @@
+type: write
+id: "06-automation-project-write-01"
+prompt: "Write a function called classify_files that takes a list of filenames and returns a dictionary mapping category names to lists of filenames. Use these categories: 'Images' for .jpg/.png, 'Docs' for .pdf/.txt, 'Other' for everything else. Test it with ['photo.jpg', 'notes.txt', 'data.csv', 'logo.png', 'report.pdf'] and print each category and its files."
+starter_code: |
+  from pathlib import Path
+
+  # Your code here
+tests:
+  - description: "Output contains 'Images' category"
+    check: "'Images' in output"
+  - description: "Output contains 'Docs' category"
+    check: "'Docs' in output"
+  - description: "Output contains 'Other' category"
+    check: "'Other' in output"
+  - description: "photo.jpg is classified as Images"
+    check: "'photo.jpg' in output.split('Images')[1].split('\\n')[0] if 'Images' in output else False"
+hints:
+  - "Create a CATEGORIES dict mapping category names to extension lists."
+  - "Loop through filenames, check each extension with Path(f).suffix.lower()."
+  - "Use result.setdefault(category, []).append(filename) to build the dict."
+concept_tags:
+  - file-organization
+  - combining-modules
+  - automation-patterns

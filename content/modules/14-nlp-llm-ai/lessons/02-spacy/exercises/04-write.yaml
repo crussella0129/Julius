@@ -1,0 +1,24 @@
+type: write
+id: "02-spacy-write-01"
+prompt: "Write a function called pos_summary that takes a list of (word, pos_tag) tuples and returns a dictionary mapping each POS tag to the count of words with that tag. Print the result for the input [('The', 'DET'), ('cat', 'NOUN'), ('sat', 'VERB'), ('on', 'ADP'), ('the', 'DET'), ('mat', 'NOUN')]."
+starter_code: |
+  # Write your pos_summary function here
+
+  words = [('The', 'DET'), ('cat', 'NOUN'), ('sat', 'VERB'), ('on', 'ADP'), ('the', 'DET'), ('mat', 'NOUN')]
+  print(pos_summary(words))
+tests:
+  - description: "Output contains DET with count 2"
+    check: "'DET' in output and '2' in output"
+  - description: "Output contains NOUN with count 2"
+    check: "'NOUN' in output and '2' in output"
+  - description: "Output contains VERB with count 1"
+    check: "'VERB' in output"
+  - description: "Output is a dictionary"
+    check: "output.strip().startswith('{')"
+hints:
+  - "Iterate over the tuples and unpack each into word and tag."
+  - "Use dict.get(key, 0) + 1 to count occurrences."
+  - "You only need the POS tag for counting, not the word text."
+concept_tags:
+  - pos-tagging
+  - spacy

@@ -1,0 +1,20 @@
+type: parsons
+id: "07-loops-parsons-01"
+prompt: "Arrange these lines to count how many vowels are in the word 'python' and print the count."
+blocks:
+  - 'word = "python"'
+  - "count = 0"
+  - "for char in word:"
+  - '    if char in "aeiou":'
+  - "        count += 1"
+  - "print(count)"
+solution_order: [0, 1, 2, 3, 4, 5]
+distractors:
+  - "for char in range(word):"
+  - '    if char == "aeiou":'
+hints:
+  - "You loop over the characters in a string directly, not with range()."
+  - "Use 'in' to check if a character is in a set of characters."
+concept_tags:
+  - for-loop
+  - break-continue

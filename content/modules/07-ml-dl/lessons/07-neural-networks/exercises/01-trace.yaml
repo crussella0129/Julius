@@ -1,0 +1,71 @@
+type: trace
+id: "07-neural-networks-trace-01"
+prompt: "Trace through this perceptron computation and predict the output."
+code: |
+  def sigmoid(x):
+      import math
+      return round(1 / (1 + math.exp(-x)), 4)
+
+  def neuron(inputs, weights, bias):
+      total = sum(x * w for x, w in zip(inputs, weights)) + bias
+      return sigmoid(total)
+
+  weights = [0.5, -0.3]
+  bias = 0.1
+
+  tests = [(0, 0), (1, 0), (0, 1), (1, 1)]
+  for x1, x2 in tests:
+      result = neuron([x1, x2], weights, bias)
+      print(f"({x1},{x2}) -> {result}")
+steps:
+  - line: 9
+    variables: {"weights": "[0.5, -0.3]", "bias": 0.1}
+    output: ""
+    explanation: "Define weights and bias for the neuron."
+  - line: 12
+    variables: {}
+    output: ""
+    explanation: "Test all four input combinations."
+  - line: 13
+    variables: {"x1": 0, "x2": 0}
+    output: ""
+    explanation: "total = 0*0.5 + 0*(-0.3) + 0.1 = 0.1. sigmoid(0.1) = 0.525."
+  - line: 14
+    variables: {}
+    output: "(0,0) -> 0.525"
+    explanation: "Print result for (0,0)."
+  - line: 13
+    variables: {"x1": 1, "x2": 0}
+    output: ""
+    explanation: "total = 1*0.5 + 0*(-0.3) + 0.1 = 0.6. sigmoid(0.6) = 0.6457."
+  - line: 14
+    variables: {}
+    output: "(1,0) -> 0.6457"
+    explanation: "Print result for (1,0)."
+  - line: 13
+    variables: {"x1": 0, "x2": 1}
+    output: ""
+    explanation: "total = 0*0.5 + 1*(-0.3) + 0.1 = -0.2. sigmoid(-0.2) = 0.4502."
+  - line: 14
+    variables: {}
+    output: "(0,1) -> 0.4502"
+    explanation: "Print result for (0,1)."
+  - line: 13
+    variables: {"x1": 1, "x2": 1}
+    output: ""
+    explanation: "total = 1*0.5 + 1*(-0.3) + 0.1 = 0.3. sigmoid(0.3) = 0.5744."
+  - line: 14
+    variables: {}
+    output: "(1,1) -> 0.5744"
+    explanation: "Print result for (1,1)."
+expected_output: |
+  (0,0) -> 0.525
+  (1,0) -> 0.6457
+  (0,1) -> 0.4502
+  (1,1) -> 0.5744
+hints:
+  - "Compute the weighted sum plus bias first, then apply sigmoid."
+  - "sigmoid(x) = 1 / (1 + e^(-x))."
+concept_tags:
+  - perceptron
+  - activation-functions

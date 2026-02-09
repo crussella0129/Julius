@@ -1,0 +1,11 @@
+id: "08-automation"
+title: "Automation & Scripting"
+description: "Automate tasks with filesystem, regex, and subprocess"
+order: 8
+lessons:
+  - 01-os-filesystem
+  - 02-regex
+  - 03-subprocess
+  - 04-scheduling
+  - 05-email-api
+  - 06-automation-project

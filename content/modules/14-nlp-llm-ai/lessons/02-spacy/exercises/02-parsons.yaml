@@ -1,0 +1,20 @@
+type: parsons
+id: "02-spacy-parsons-01"
+prompt: "Arrange these lines to create a function that extracts all named entities of a given type from a list of entity tuples (text, label)."
+blocks:
+  - "def extract_entities(entities, label_type):"
+  - "    result = []"
+  - "    for text, label in entities:"
+  - "        if label == label_type:"
+  - "            result.append(text)"
+  - "    return result"
+distractors:
+  - "        if text == label_type:"
+  - "    for label, text in entities:"
+solution_order: [0, 1, 2, 3, 4, 5]
+hints:
+  - "Each entity is a tuple of (text, label) -- unpack in that order."
+  - "You want to compare the label against the label_type parameter."
+concept_tags:
+  - named-entity-recognition
+  - spacy

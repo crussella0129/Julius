@@ -1,0 +1,19 @@
+type: write
+id: "07-neural-networks-write-01"
+prompt: "Write a class called `Perceptron` with: __init__(n_inputs) that initializes weights to 0 and bias to 0; predict(inputs) that returns 1 if weighted sum + bias >= 0 else 0; train(training_data, epochs, lr) where training_data is a list of (inputs, target) tuples. Use the update rule: w += lr * error * x, bias += lr * error. Train it on AND gate data [((0,0),0), ((0,1),0), ((1,0),0), ((1,1),1)] for 10 epochs with lr=0.1, then print predictions for all 4 inputs."
+starter_code: |
+  # Write your class here
+tests:
+  - description: "AND(0,0) = 0"
+    check: "'0' in output.splitlines()[0] if output.strip() else False"
+  - description: "AND(1,1) = 1"
+    check: "'1' in output.splitlines()[-1] if output.strip() else False"
+  - description: "4 predictions printed"
+    check: "len(output.strip().splitlines()) >= 4"
+hints:
+  - "Initialize weights as a list of zeros with length n_inputs."
+  - "In predict: total = sum(w*x) + bias, return 1 if >= 0 else 0."
+  - "In train: for each example, compute error = target - predict(inputs), then update."
+concept_tags:
+  - perceptron
+  - backpropagation

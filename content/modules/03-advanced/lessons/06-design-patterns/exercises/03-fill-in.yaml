@@ -1,0 +1,53 @@
+type: fill-in
+id: "06-design-patterns-fill-in-01"
+prompt: "Fill in the blanks to complete this Observer pattern implementation."
+template: |
+  class EventEmitter:
+      def __init__(self):
+          self._listeners = {}
+
+      def on(self, event, ____):
+          if event not in self._listeners:
+              self._listeners[event] = []
+          self._listeners[event].append(callback)
+
+      def ____(self, event, *args):
+          for cb in self._listeners.get(event, []):
+              ____(*args)
+
+  emitter = EventEmitter()
+  emitter.on("greet", lambda name: print(f"Hello, {name}!"))
+  emitter.emit("greet", "Alice")
+blanks:
+  - position: 0
+    answer: "callback"
+    hint: "the function to register"
+  - position: 1
+    answer: "emit"
+    hint: "the method that triggers the event"
+  - position: 2
+    answer: "cb"
+    hint: "call each registered callback"
+solution: |
+  class EventEmitter:
+      def __init__(self):
+          self._listeners = {}
+
+      def on(self, event, callback):
+          if event not in self._listeners:
+              self._listeners[event] = []
+          self._listeners[event].append(callback)
+
+      def emit(self, event, *args):
+          for cb in self._listeners.get(event, []):
+              cb(*args)
+
+  emitter = EventEmitter()
+  emitter.on("greet", lambda name: print(f"Hello, {name}!"))
+  emitter.emit("greet", "Alice")
+hints:
+  - "The 'on' method registers a callback function for an event."
+  - "The 'emit' method fires the event, calling all registered callbacks."
+  - "Each callback in the list is called with the provided arguments."
+concept_tags:
+  - observer-pattern

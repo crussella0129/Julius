@@ -1,0 +1,16 @@
+type: write
+id: "06-trees-write-01"
+prompt: "Define a TreeNode class (with val, left, right). Write a function count_leaves(node) that counts the number of leaf nodes (nodes with no children) in a binary tree. Build the tree: root=1, left=2 (with children 4,5), right=3. Print the leaf count."
+starter_code: |
+  # Define TreeNode, write count_leaves(node), build tree, print result
+tests:
+  - description: "There are 3 leaves (4, 5, 3)"
+    check: "'3' in output.strip()"
+  - description: "Output is a single number"
+    check: "output.strip().isdigit()"
+hints:
+  - "A leaf node has both node.left and node.right equal to None."
+  - "Use recursion: if it's a leaf return 1, otherwise return count_leaves(left) + count_leaves(right)."
+concept_tags:
+  - binary-tree
+  - recursion-on-trees

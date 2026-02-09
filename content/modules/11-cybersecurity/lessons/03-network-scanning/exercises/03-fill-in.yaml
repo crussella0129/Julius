@@ -1,0 +1,37 @@
+type: fill-in
+id: "03-network-scanning-fill-in-01"
+prompt: "Fill in the blanks to create a TCP socket, set a timeout, and check if a port is open."
+template: |
+  import socket
+
+  sock = socket.socket(socket.AF_INET, socket.____)
+  sock.settimeout(____)
+  result = sock.____(("127.0.0.1", 80))
+  if result == 0:
+      print("Port is open")
+  sock.close()
+blanks:
+  - position: 0
+    answer: "SOCK_STREAM"
+    hint: "TCP socket type constant"
+  - position: 1
+    answer: "1"
+    hint: "timeout in seconds"
+  - position: 2
+    answer: "connect_ex"
+    hint: "connect method that returns error code instead of raising"
+solution: |
+  import socket
+
+  sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+  sock.settimeout(1)
+  result = sock.connect_ex(("127.0.0.1", 80))
+  if result == 0:
+      print("Port is open")
+  sock.close()
+hints:
+  - "SOCK_STREAM is the constant for TCP connections."
+  - "connect_ex() returns 0 on success, unlike connect() which raises an exception."
+concept_tags:
+  - sockets
+  - port-scanning

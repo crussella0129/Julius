@@ -1,0 +1,21 @@
+type: parsons
+id: "01-opencv-basics-parsons-01"
+prompt: "Arrange these lines to create a function that converts a BGR image to grayscale using the luminosity formula (0.114*B + 0.587*G + 0.299*R)."
+blocks:
+  - "import numpy as np"
+  - "def bgr_to_gray(img):"
+  - "    b = img[:, :, 0].astype(float)"
+  - "    g = img[:, :, 1].astype(float)"
+  - "    r = img[:, :, 2].astype(float)"
+  - "    gray = (0.114 * b + 0.587 * g + 0.299 * r)"
+  - "    return gray.astype(np.uint8)"
+distractors:
+  - "    gray = (0.333 * b + 0.333 * g + 0.333 * r)"
+  - "    r = img[:, :, 0].astype(float)"
+solution_order: [0, 1, 2, 3, 4, 5, 6]
+hints:
+  - "In BGR format, channel 0 is Blue, channel 1 is Green, channel 2 is Red."
+  - "The luminosity weights are not equal -- green contributes most to perceived brightness."
+concept_tags:
+  - color-spaces
+  - opencv

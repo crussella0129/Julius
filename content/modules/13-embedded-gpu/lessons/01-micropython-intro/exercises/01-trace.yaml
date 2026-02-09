@@ -1,0 +1,90 @@
+type: trace
+id: "01-micropython-intro-trace-01"
+prompt: "Trace through this code that simulates GPIO pin toggling for an LED blink pattern and predict the output."
+code: |
+  class Pin:
+      def __init__(self, num):
+          self.num = num
+          self.state = 0
+
+      def toggle(self):
+          self.state = 1 - self.state
+          return "HIGH" if self.state else "LOW"
+
+  led = Pin(25)
+  pattern = [1, 1, 0, 1]
+
+  for step in pattern:
+      if step:
+          result = led.toggle()
+      else:
+          result = "skip"
+      print(f"Pin {led.num}: {result}")
+steps:
+  - line: 10
+    variables: {"led": "Pin(25, state=0)"}
+    output: ""
+    explanation: "Create a Pin object for GPIO 25, initial state is 0 (LOW)."
+  - line: 11
+    variables: {"pattern": "[1, 1, 0, 1]"}
+    output: ""
+    explanation: "Blink pattern: 1 means toggle, 0 means skip."
+  - line: 13
+    variables: {"step": 1}
+    output: ""
+    explanation: "First step: 1 (toggle)."
+  - line: 15
+    variables: {"result": "HIGH"}
+    output: ""
+    explanation: "Toggle: state goes from 0 to 1, returns 'HIGH'."
+  - line: 18
+    variables: {}
+    output: "Pin 25: HIGH"
+    explanation: "LED turns on."
+  - line: 13
+    variables: {"step": 1}
+    output: ""
+    explanation: "Second step: 1 (toggle again)."
+  - line: 15
+    variables: {"result": "LOW"}
+    output: ""
+    explanation: "Toggle: state goes from 1 to 0, returns 'LOW'."
+  - line: 18
+    variables: {}
+    output: "Pin 25: LOW"
+    explanation: "LED turns off."
+  - line: 13
+    variables: {"step": 0}
+    output: ""
+    explanation: "Third step: 0 (skip)."
+  - line: 17
+    variables: {"result": "skip"}
+    output: ""
+    explanation: "Step is 0, so we skip toggling."
+  - line: 18
+    variables: {}
+    output: "Pin 25: skip"
+    explanation: "No change to pin state."
+  - line: 13
+    variables: {"step": 1}
+    output: ""
+    explanation: "Fourth step: 1 (toggle)."
+  - line: 15
+    variables: {"result": "HIGH"}
+    output: ""
+    explanation: "Toggle: state goes from 0 to 1, returns 'HIGH'."
+  - line: 18
+    variables: {}
+    output: "Pin 25: HIGH"
+    explanation: "LED turns on again."
+expected_output: |
+  Pin 25: HIGH
+  Pin 25: LOW
+  Pin 25: skip
+  Pin 25: HIGH
+hints:
+  - "toggle() flips the state: 0 becomes 1, 1 becomes 0."
+  - "When step is 0, the pin state doesn't change."
+concept_tags:
+  - gpio-control
+  - micropython-basics

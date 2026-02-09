@@ -1,0 +1,19 @@
+type: write
+id: "08-deployment-write-01"
+prompt: "Write a class called `EnvConfig` that reads configuration from a dictionary (simulating environment variables). The constructor takes a dict. It should have properties: `debug` (bool, default False, key 'DEBUG' with value 'true'/'false'), `port` (int, default 8000, key 'PORT'), `secret_key` (str, key 'SECRET_KEY', required -- raise ValueError if missing). Demo with two configs: one with {'DEBUG': 'true', 'PORT': '3000', 'SECRET_KEY': 'mysecret'} and one with {'DEBUG': 'false'} (catch the ValueError)."
+starter_code: |
+  # Write your class here
+tests:
+  - description: "Shows debug=True for first config"
+    check: "'True' in output"
+  - description: "Shows port 3000"
+    check: "'3000' in output"
+  - description: "Shows ValueError or error for missing SECRET_KEY"
+    check: "'ValueError' in output or 'SECRET_KEY' in output or 'required' in output.lower()"
+hints:
+  - "Use dict.get(key, default) for optional values."
+  - "For required values, check if the key is in the dict and raise ValueError if not."
+  - "Convert 'true'/'false' strings to bool with == 'true'."
+concept_tags:
+  - environment-variables
+  - production-config

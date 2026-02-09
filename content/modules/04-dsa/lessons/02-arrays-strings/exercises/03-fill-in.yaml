@@ -1,0 +1,32 @@
+type: fill-in
+id: "02-arrays-strings-fill-in-01"
+prompt: "Fill in the blanks to build a prefix sum array and compute the sum of elements from index 2 to 4."
+template: |
+  nums = [3, 1, 4, 1, 5, 9]
+  prefix = [0] * (len(nums) + 1)
+  for i in range(len(nums)):
+      prefix[i + 1] = prefix[____] + nums[i]
+  result = prefix[____] - prefix[____]
+  print(result)
+blanks:
+  - position: 0
+    answer: "i"
+    hint: "previous prefix sum index"
+  - position: 1
+    answer: "5"
+    hint: "right boundary + 1 for the range sum"
+  - position: 2
+    answer: "2"
+    hint: "left boundary of the range"
+solution: |
+  nums = [3, 1, 4, 1, 5, 9]
+  prefix = [0] * (len(nums) + 1)
+  for i in range(len(nums)):
+      prefix[i + 1] = prefix[i] + nums[i]
+  result = prefix[5] - prefix[2]
+  print(result)
+hints:
+  - "prefix[i+1] = prefix[i] + nums[i] builds cumulative sums."
+  - "range_sum(left, right) = prefix[right+1] - prefix[left]. For indices 2 to 4: prefix[5] - prefix[2] = 10."
+concept_tags:
+  - prefix-sum

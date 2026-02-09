@@ -1,0 +1,18 @@
+type: parsons
+id: "05-input-output-parsons-01"
+prompt: "Arrange these lines to create a program that asks for a price, calculates 15% tip, and prints the tip amount formatted to 2 decimal places."
+blocks:
+  - 'price = float(input("Enter the price: "))'
+  - "tip = price * 0.15"
+  - 'print(f"Tip: ${tip:.2f}")'
+solution_order: [0, 1, 2]
+distractors:
+  - 'price = input("Enter the price: ")'
+  - 'print(f"Tip: ${tip}")'
+hints:
+  - "input() returns a string — you need float() to do math with decimals."
+  - ":.2f formats a number to exactly 2 decimal places."
+concept_tags:
+  - input-function
+  - f-strings
+  - type-conversion-input

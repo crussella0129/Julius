@@ -1,0 +1,68 @@
+type: trace
+id: "02-oop-inheritance-trace-01"
+prompt: "Trace through this code and predict the final output."
+code: |
+  class Vehicle:
+      def __init__(self, make, year):
+          self.make = make
+          self.year = year
+
+      def info(self):
+          return f"{self.year} {self.make}"
+
+  class Car(Vehicle):
+      def __init__(self, make, year, doors):
+          super().__init__(make, year)
+          self.doors = doors
+
+      def info(self):
+          return f"{super().info()} ({self.doors}-door)"
+
+  c = Car("Toyota", 2024, 4)
+  print(c.info())
+  print(isinstance(c, Vehicle))
+steps:
+  - line: 1
+    variables: {}
+    output: ""
+    explanation: "The Vehicle class is defined with __init__ and info methods."
+  - line: 8
+    variables: {}
+    output: ""
+    explanation: "The Car class is defined, inheriting from Vehicle."
+  - line: 16
+    variables: {}
+    output: ""
+    explanation: "Car('Toyota', 2024, 4) is called, which triggers Car.__init__."
+  - line: 10
+    variables: { "make": "Toyota", "year": "2024", "doors": "4" }
+    output: ""
+    explanation: "super().__init__('Toyota', 2024) calls Vehicle.__init__."
+  - line: 3
+    variables: { "self.make": "Toyota", "self.year": "2024" }
+    output: ""
+    explanation: "Vehicle.__init__ sets self.make and self.year."
+  - line: 11
+    variables: { "self.make": "Toyota", "self.year": "2024", "self.doors": "4" }
+    output: ""
+    explanation: "Back in Car.__init__, self.doors is set to 4."
+  - line: 17
+    variables: { "c": "Car object" }
+    output: "2024 Toyota (4-door)"
+    explanation: "c.info() calls Car's info, which calls super().info() to get '2024 Toyota', then appends '(4-door)'."
+  - line: 18
+    variables: {}
+    output: "True"
+    explanation: "c is an instance of Car, and Car inherits from Vehicle, so isinstance(c, Vehicle) is True."
+expected_output: |
+  2024 Toyota (4-door)
+  True
+hints:
+  - "super().__init__() calls the parent class's __init__ method."
+  - "super().info() inside Car.info() calls Vehicle.info() to get the base string."
+  - "isinstance() returns True for parent classes too, not just the exact class."
+concept_tags:
+  - inheritance
+  - super-function
+  - method-overriding
+  - isinstance-check

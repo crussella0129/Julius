@@ -1,0 +1,15 @@
+id: "04-dsa"
+title: "Data Structures & Algorithms"
+description: "Complexity analysis, classic data structures, and algorithm design"
+order: 4
+lessons:
+  - 01-complexity
+  - 02-arrays-strings
+  - 03-linked-lists
+  - 04-stacks-queues
+  - 05-hash-tables
+  - 06-trees
+  - 07-heaps-priority
+  - 08-graphs
+  - 09-sorting
+  - 10-dynamic-programming

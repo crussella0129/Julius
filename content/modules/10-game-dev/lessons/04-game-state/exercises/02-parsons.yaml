@@ -1,0 +1,26 @@
+type: parsons
+id: "04-game-state-parsons-01"
+prompt: "Arrange these lines to create a simple game state machine with menu, playing, and game over states."
+blocks:
+  - "state = 'menu'"
+  - "score = 0"
+  - "def handle_event(event):"
+  - "    global state, score"
+  - "    if state == 'menu' and event == 'start':"
+  - "        state = 'playing'"
+  - "        score = 0"
+  - "    elif state == 'playing' and event == 'collect':"
+  - "        score += 1"
+  - "    elif state == 'playing' and event == 'die':"
+  - "        state = 'game_over'"
+distractors:
+  - "    if event == 'start':"
+  - "    state = 'playing' or 'menu'"
+solution_order: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+hints:
+  - "Initialize state and score first."
+  - "Each condition checks BOTH the current state AND the event."
+  - "Use global to modify state and score from inside the function."
+concept_tags:
+  - game-states
+  - state-machine

@@ -1,0 +1,37 @@
+type: fill-in
+id: "05-email-api-fill-in-01"
+prompt: "Fill in the blanks to convert a Python dictionary to a JSON string and then parse it back."
+template: |
+  import ____
+
+  data = {"city": "Paris", "population": 2161000}
+  text = json.____(data)
+  print(type(text).__name__)
+
+  restored = json.____(text)
+  print(restored["city"])
+blanks:
+  - position: 0
+    answer: "json"
+    hint: "module for JSON encoding/decoding"
+  - position: 1
+    answer: "dumps"
+    hint: "function to serialize to string (dump-string)"
+  - position: 2
+    answer: "loads"
+    hint: "function to deserialize from string (load-string)"
+solution: |
+  import json
+
+  data = {"city": "Paris", "population": 2161000}
+  text = json.dumps(data)
+  print(type(text).__name__)
+
+  restored = json.loads(text)
+  print(restored["city"])
+hints:
+  - "json.dumps() converts a dict to a JSON string."
+  - "json.loads() parses a JSON string back to a dict."
+  - "The 's' in dumps/loads stands for 'string'."
+concept_tags:
+  - json-handling

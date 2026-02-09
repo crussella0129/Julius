@@ -1,0 +1,22 @@
+type: parsons
+id: "03-pandas-cleaning-parsons-01"
+prompt: "Arrange these lines to clean a DataFrame by filling missing ages with the median, removing duplicate names, and standardizing the name column to title case."
+blocks:
+  - "import pandas as pd"
+  - "import numpy as np"
+  - "df = pd.DataFrame({'name': ['alice', 'BOB', 'alice'], 'age': [25, np.nan, 25]})"
+  - "df['age'] = df['age'].fillna(df['age'].median())"
+  - "df['name'] = df['name'].str.title()"
+  - "df = df.drop_duplicates(subset=['name'])"
+  - "print(df)"
+distractors:
+  - "df['age'] = df['age'].dropna()"
+  - "df = df.remove_duplicates()"
+solution_order: [0, 1, 2, 3, 4, 5, 6]
+hints:
+  - "Fill missing values before dropping duplicates."
+  - "Use fillna() with .median() to fill missing ages."
+  - "drop_duplicates() removes duplicate rows, not dropna()."
+concept_tags:
+  - missing-data
+  - duplicates

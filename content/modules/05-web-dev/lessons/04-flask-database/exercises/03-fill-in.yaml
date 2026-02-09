@@ -1,0 +1,37 @@
+type: fill-in
+id: "04-flask-database-fill-in-01"
+prompt: "Fill in the blanks to query a User model, update a user's name, and commit the change."
+template: |
+  user = User.query.____(1)
+
+  if user is not ____:
+      user.name = \"New Name\"
+      db.session.____()
+      print(f\"Updated: {user.name}\")
+  else:
+      print(\"User not found\")
+blanks:
+  - position: 0
+    answer: "get"
+    hint: "method to retrieve a record by primary key"
+  - position: 1
+    answer: "None"
+    hint: "Python's null value"
+  - position: 2
+    answer: "commit"
+    hint: "method to save changes to the database"
+solution: |
+  user = User.query.get(1)
+
+  if user is not None:
+      user.name = "New Name"
+      db.session.commit()
+      print(f"Updated: {user.name}")
+  else:
+      print("User not found")
+hints:
+  - "query.get() retrieves a single record by its primary key."
+  - "After modifying attributes, call commit() to save to the database."
+concept_tags:
+  - flask-sqlalchemy
+  - orm

@@ -1,0 +1,56 @@
+type: trace
+id: "04-pandas-aggregation-trace-01"
+prompt: "Trace through this groupby aggregation code and predict the output."
+code: |
+  data = [
+      {"dept": "Sales", "salary": 50000},
+      {"dept": "Sales", "salary": 60000},
+      {"dept": "Engineering", "salary": 80000},
+      {"dept": "Engineering", "salary": 90000},
+      {"dept": "Engineering", "salary": 100000},
+  ]
+
+  groups = {}
+  for row in data:
+      dept = row["dept"]
+      if dept not in groups:
+          groups[dept] = []
+      groups[dept].append(row["salary"])
+
+  for dept, salaries in sorted(groups.items()):
+      avg = sum(salaries) / len(salaries)
+      print(f"{dept}: avg={avg:.0f}, count={len(salaries)}")
+steps:
+  - line: 1
+    variables: {}
+    output: ""
+    explanation: "Define a list of employee records."
+  - line: 9
+    variables: {"groups": "{}"}
+    output: ""
+    explanation: "Initialize empty groups dictionary."
+  - line: 10
+    variables: {}
+    output: ""
+    explanation: "Loop through all 5 records, grouping salaries by department."
+  - line: 14
+    variables: {"groups": "{'Sales': [50000, 60000], 'Engineering': [80000, 90000, 100000]}"}
+    output: ""
+    explanation: "After the loop, Sales has 2 salaries, Engineering has 3."
+  - line: 16
+    variables: {"dept": "Engineering", "salaries": "[80000, 90000, 100000]"}
+    output: "Engineering: avg=90000, count=3"
+    explanation: "Engineering: (80000+90000+100000)/3 = 90000, 3 employees."
+  - line: 16
+    variables: {"dept": "Sales", "salaries": "[50000, 60000]"}
+    output: "Sales: avg=55000, count=2"
+    explanation: "Sales: (50000+60000)/2 = 55000, 2 employees."
+expected_output: |
+  Engineering: avg=90000, count=3
+  Sales: avg=55000, count=2
+hints:
+  - "sorted() on dict.items() iterates alphabetically by key."
+  - "Engineering comes before Sales alphabetically."
+concept_tags:
+  - groupby
+  - aggregation-functions

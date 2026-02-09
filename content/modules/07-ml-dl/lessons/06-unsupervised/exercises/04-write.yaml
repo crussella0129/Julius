@@ -1,0 +1,19 @@
+type: write
+id: "06-unsupervised-write-01"
+prompt: "Write a function called `kmeans_1d` that clusters a list of 1D numbers into k groups. It should: initialize centroids as the first k unique values, iterate up to 20 times assigning each point to the nearest centroid and updating centroids to the mean of their cluster. Return a dict mapping centroid to list of points. Test with data [1, 2, 3, 10, 11, 12, 20, 21, 22] and k=3. Print each cluster."
+starter_code: |
+  # Write your function here
+tests:
+  - description: "Shows 3 clusters"
+    check: "output.count('[') >= 3 or output.count(':') >= 3"
+  - description: "Low values (1,2,3) are in one cluster"
+    check: "'1' in output and '2' in output and '3' in output"
+  - description: "High values (20,21,22) are in one cluster"
+    check: "'20' in output and '21' in output and '22' in output"
+hints:
+  - "For 1D data, distance is just abs(point - centroid)."
+  - "Update centroid as sum(cluster_points) / len(cluster_points)."
+  - "Stop when assignments don't change between iterations."
+concept_tags:
+  - k-means
+  - clustering

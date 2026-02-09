@@ -1,0 +1,12 @@
+id: "06-data-science"
+title: "Data Science"
+description: "NumPy, pandas, and data visualization with matplotlib"
+order: 6
+lessons:
+  - 01-numpy-fundamentals
+  - 02-pandas-series
+  - 03-pandas-cleaning
+  - 04-pandas-aggregation
+  - 05-matplotlib
+  - 06-seaborn
+  - 07-eda-project

@@ -1,0 +1,79 @@
+type: trace
+id: "06-rest-api-trace-01"
+prompt: "Trace through this REST API simulation and predict the output."
+code: |
+  todos = {}
+  next_id = 1
+
+  def create(title):
+      global next_id
+      todos[next_id] = {"id": next_id, "title": title, "done": False}
+      result = next_id
+      next_id += 1
+      return result
+
+  def toggle(todo_id):
+      if todo_id in todos:
+          todos[todo_id]["done"] = not todos[todo_id]["done"]
+          return True
+      return False
+
+  def list_all():
+      return [t["title"] for t in todos.values()]
+
+  id1 = create("Buy milk")
+  id2 = create("Write code")
+  print(f"Created: {list_all()}")
+  toggle(id1)
+  print(f"Todo 1 done: {todos[id1]['done']}")
+  toggle(id1)
+  print(f"Todo 1 done: {todos[id1]['done']}")
+  print(f"Count: {len(todos)}")
+steps:
+  - line: 1
+    variables: {"todos": "{}", "next_id": 1}
+    output: ""
+    explanation: "Initialize empty todos dict and ID counter."
+  - line: 21
+    variables: {"id1": 1, "next_id": 2}
+    output: ""
+    explanation: "Create 'Buy milk' with id 1, increment next_id to 2."
+  - line: 22
+    variables: {"id1": 1, "id2": 2, "next_id": 3}
+    output: ""
+    explanation: "Create 'Write code' with id 2, increment next_id to 3."
+  - line: 23
+    variables: {}
+    output: "Created: ['Buy milk', 'Write code']"
+    explanation: "list_all() extracts titles from all todos."
+  - line: 24
+    variables: {}
+    output: ""
+    explanation: "Toggle todo 1: done changes from False to True."
+  - line: 25
+    variables: {}
+    output: "Todo 1 done: True"
+    explanation: "After toggle, done is True."
+  - line: 26
+    variables: {}
+    output: ""
+    explanation: "Toggle todo 1 again: done changes from True to False."
+  - line: 27
+    variables: {}
+    output: "Todo 1 done: False"
+    explanation: "After second toggle, done is back to False."
+  - line: 28
+    variables: {}
+    output: "Count: 2"
+    explanation: "Two todos in the dictionary."
+expected_output: |
+  Created: ['Buy milk', 'Write code']
+  Todo 1 done: True
+  Todo 1 done: False
+  Count: 2
+hints:
+  - "toggle() uses 'not' to flip the boolean value of 'done'."
+  - "Toggling twice returns the value to its original state."
+concept_tags:
+  - crud-endpoints
+  - rest-principles

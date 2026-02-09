@@ -1,0 +1,22 @@
+type: parsons
+id: "06-huggingface-parsons-01"
+prompt: "Arrange these lines to create a Tokenizer class with encode (text to IDs) and decode (IDs to text) methods, using a vocabulary list."
+blocks:
+  - "class Tokenizer:"
+  - "    def __init__(self, vocab):"
+  - "        self.token_to_id = {t: i for i, t in enumerate(vocab)}"
+  - "        self.id_to_token = {i: t for i, t in enumerate(vocab)}"
+  - "    def encode(self, text):"
+  - "        return [self.token_to_id.get(w, 0) for w in text.split()]"
+  - "    def decode(self, ids):"
+  - "        return ' '.join(self.id_to_token[i] for i in ids)"
+distractors:
+  - "        self.token_to_id = {i: t for i, t in enumerate(vocab)}"
+  - "        return [self.id_to_token.get(w, 0) for w in text.split()]"
+solution_order: [0, 1, 2, 3, 4, 5, 6, 7]
+hints:
+  - "token_to_id maps string to int; id_to_token maps int to string."
+  - "encode() uses token_to_id to convert words to numbers."
+concept_tags:
+  - tokenizers
+  - huggingface-pipeline

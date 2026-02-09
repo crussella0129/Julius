@@ -4,6 +4,7 @@ import { useAppStore } from './stores/app'
 import { useProgressStore } from './stores/progress'
 import Sidebar from './components/Sidebar'
 import Dashboard from './views/Dashboard'
+import Placement from './views/Placement'
 import Lesson from './views/Lesson'
 import Exercise from './views/Exercise'
 import Review from './views/Review'
@@ -28,6 +29,7 @@ export default function App(): JSX.Element {
         <div className="app-content">
           <Routes>
             <Route path="/" element={<Dashboard />} />
+            <Route path="/placement" element={<Placement />} />
             <Route path="/lesson/:moduleId/:lessonId" element={<Lesson />} />
             <Route path="/exercise/:moduleId/:lessonId/:exerciseFile" element={<Exercise />} />
             <Route path="/review" element={<Review />} />

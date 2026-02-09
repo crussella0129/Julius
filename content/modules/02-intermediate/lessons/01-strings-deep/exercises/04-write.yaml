@@ -1,0 +1,30 @@
+type: write
+id: "01-strings-deep-write-01"
+prompt: "Write a program that takes the string 'Hello, World! Hello, Python!' and: (1) counts how many times 'Hello' appears, (2) replaces all 'Hello' with 'Hi', (3) splits the result on ', ' and prints each part on its own line. Print the count first, then the replaced string, then each split part."
+starter_code: |
+  text = "Hello, World! Hello, Python!"
+
+  # Count occurrences of "Hello"
+
+  # Replace "Hello" with "Hi"
+
+  # Split on ", " and print each part
+tests:
+  - description: "First line is the count: 2"
+    check: "output.strip().splitlines()[0] == '2'"
+  - description: "Second line is the replaced string"
+    check: "output.strip().splitlines()[1] == 'Hi, World! Hi, Python!'"
+  - description: "Third line is 'Hi'"
+    check: "output.strip().splitlines()[2] == 'Hi'"
+  - description: "Fourth line is 'World! Hi'"
+    check: "output.strip().splitlines()[3] == 'World! Hi'"
+  - description: "Fifth line is 'Python!'"
+    check: "output.strip().splitlines()[4] == 'Python!'"
+hints:
+  - "Use text.count('Hello') to count occurrences."
+  - "Use text.replace('Hello', 'Hi') to get the new string."
+  - "Use .split(', ') to split on comma-space, then loop and print each part."
+  - "text = 'Hello, World! Hello, Python!'\nprint(text.count('Hello'))\nnew_text = text.replace('Hello', 'Hi')\nprint(new_text)\nfor part in new_text.split(', '):\n    print(part)"
+concept_tags:
+  - string-methods
+  - string-immutability

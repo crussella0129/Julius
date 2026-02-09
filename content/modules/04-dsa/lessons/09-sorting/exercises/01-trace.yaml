@@ -1,0 +1,79 @@
+type: trace
+id: "09-sorting-trace-01"
+prompt: "Trace through this merge operation and predict the output."
+code: |
+  def merge(left, right):
+      result = []
+      i = j = 0
+      while i < len(left) and j < len(right):
+          if left[i] <= right[j]:
+              result.append(left[i])
+              i += 1
+          else:
+              result.append(right[j])
+              j += 1
+      result.extend(left[i:])
+      result.extend(right[j:])
+      return result
+
+  print(merge([1, 4, 6], [2, 3, 5]))
+steps:
+  - line: 2
+    variables: { "result": "[]", "i": "0", "j": "0" }
+    output: ""
+    explanation: "Initialize empty result, two pointers at 0."
+  - line: 4
+    variables: { "i": "0", "j": "0" }
+    output: ""
+    explanation: "left[0]=1 <= right[0]=2. Append 1, i becomes 1."
+  - line: 5
+    variables: { "result": "[1]", "i": "1", "j": "0" }
+    output: ""
+    explanation: "result = [1]."
+  - line: 4
+    variables: { "i": "1", "j": "0" }
+    output: ""
+    explanation: "left[1]=4 > right[0]=2. Append 2, j becomes 1."
+  - line: 8
+    variables: { "result": "[1, 2]", "i": "1", "j": "1" }
+    output: ""
+    explanation: "result = [1, 2]."
+  - line: 4
+    variables: { "i": "1", "j": "1" }
+    output: ""
+    explanation: "left[1]=4 > right[1]=3. Append 3, j becomes 2."
+  - line: 8
+    variables: { "result": "[1, 2, 3]", "i": "1", "j": "2" }
+    output: ""
+    explanation: "result = [1, 2, 3]."
+  - line: 4
+    variables: { "i": "1", "j": "2" }
+    output: ""
+    explanation: "left[1]=4 <= right[2]=5. Append 4, i becomes 2."
+  - line: 5
+    variables: { "result": "[1, 2, 3, 4]", "i": "2", "j": "2" }
+    output: ""
+    explanation: "result = [1, 2, 3, 4]."
+  - line: 4
+    variables: { "i": "2", "j": "2" }
+    output: ""
+    explanation: "left[2]=6 > right[2]=5. Append 5, j becomes 3."
+  - line: 8
+    variables: { "result": "[1, 2, 3, 4, 5]", "i": "2", "j": "3" }
+    output: ""
+    explanation: "result = [1, 2, 3, 4, 5]. j=3 = len(right), exit loop."
+  - line: 10
+    variables: { "result": "[1, 2, 3, 4, 5, 6]" }
+    output: ""
+    explanation: "Extend with left[2:] = [6]. result = [1, 2, 3, 4, 5, 6]."
+  - line: 14
+    variables: {}
+    output: "[1, 2, 3, 4, 5, 6]"
+    explanation: "Print the merged sorted list."
+expected_output: |
+  [1, 2, 3, 4, 5, 6]
+hints:
+  - "Merge compares the front of each sorted list, always taking the smaller element."
+  - "When one list runs out, extend with the remainder of the other."
+concept_tags:
+  - merge-sort

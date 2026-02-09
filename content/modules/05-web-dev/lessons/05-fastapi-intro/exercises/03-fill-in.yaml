@@ -1,0 +1,48 @@
+type: fill-in
+id: "05-fastapi-intro-fill-in-01"
+prompt: "Fill in the blanks to create a Pydantic model and a FastAPI GET endpoint with a path parameter."
+template: |
+  from fastapi import FastAPI
+  from pydantic import ____
+
+  app = FastAPI()
+
+  class User(____):
+      name: str
+      age: ____
+
+  @app.____(\"\/users\/{user_id}\")
+  def get_user(user_id: int):
+      return {\"user_id\": user_id, \"name\": \"Alice\"}
+blanks:
+  - position: 0
+    answer: "BaseModel"
+    hint: "base class for Pydantic models"
+  - position: 1
+    answer: "BaseModel"
+    hint: "same base class the model inherits from"
+  - position: 2
+    answer: "int"
+    hint: "Python type for whole numbers"
+  - position: 3
+    answer: "get"
+    hint: "HTTP method for retrieving data"
+solution: |
+  from fastapi import FastAPI
+  from pydantic import BaseModel
+
+  app = FastAPI()
+
+  class User(BaseModel):
+      name: str
+      age: int
+
+  @app.get("/users/{user_id}")
+  def get_user(user_id: int):
+      return {"user_id": user_id, "name": "Alice"}
+hints:
+  - "Pydantic models inherit from BaseModel."
+  - "Type annotations use Python built-in types like str, int, float."
+concept_tags:
+  - pydantic-models
+  - type-hints

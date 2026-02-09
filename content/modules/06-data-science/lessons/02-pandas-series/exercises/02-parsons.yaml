@@ -1,0 +1,21 @@
+type: parsons
+id: "02-pandas-series-parsons-01"
+prompt: "Arrange these lines to create a DataFrame, add a calculated column, filter rows, and sort the result."
+blocks:
+  - "import pandas as pd"
+  - "df = pd.DataFrame({'product': ['A', 'B', 'C'], 'price': [10, 25, 15], 'qty': [100, 40, 75]})"
+  - "df['revenue'] = df['price'] * df['qty']"
+  - "high_rev = df[df['revenue'] > 1000]"
+  - "result = high_rev.sort_values('revenue', ascending=False)"
+  - "print(result[['product', 'revenue']])"
+distractors:
+  - "df['revenue'] = df.price + df.qty"
+  - "result = high_rev.order_by('revenue')"
+solution_order: [0, 1, 2, 3, 4, 5]
+hints:
+  - "Calculate revenue as price * quantity before filtering."
+  - "Filter first, then sort the filtered result."
+  - "sort_values() is the pandas method for sorting."
+concept_tags:
+  - dataframe
+  - column-operations

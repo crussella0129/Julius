@@ -1,0 +1,44 @@
+type: fill-in
+id: "05-transformers-fill-in-01"
+prompt: "Fill in the blanks to complete this positional encoding function using sine and cosine."
+template: |
+  import math
+
+  def positional_encoding(position, d_model):
+      pe = []
+      for i in range(d_model):
+          if i % 2 == 0:
+              pe.append(math.____(position / (10000 ** (i / d_model))))
+          else:
+              pe.append(math.____(position / (10000 ** ((i - 1) / d_model))))
+      return pe
+
+  enc = positional_encoding(0, 4)
+  print([f"{v:.3f}" for v in enc])
+blanks:
+  - position: 0
+    answer: "sin"
+    hint: "even indices use this trigonometric function"
+  - position: 1
+    answer: "cos"
+    hint: "odd indices use this trigonometric function"
+solution: |
+  import math
+
+  def positional_encoding(position, d_model):
+      pe = []
+      for i in range(d_model):
+          if i % 2 == 0:
+              pe.append(math.sin(position / (10000 ** (i / d_model))))
+          else:
+              pe.append(math.cos(position / (10000 ** ((i - 1) / d_model))))
+      return pe
+
+  enc = positional_encoding(0, 4)
+  print([f"{v:.3f}" for v in enc])
+hints:
+  - "Even dimensions use sin, odd dimensions use cos."
+  - "This pattern was introduced in the original 'Attention Is All You Need' paper."
+concept_tags:
+  - positional-encoding
+  - transformer-architecture

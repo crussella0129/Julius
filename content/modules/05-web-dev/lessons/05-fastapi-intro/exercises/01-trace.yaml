@@ -1,0 +1,76 @@
+type: trace
+id: "05-fastapi-intro-trace-01"
+prompt: "Trace through this Pydantic model validation simulation and predict the output."
+code: |
+  def validate_user(data):
+      errors = []
+      if not isinstance(data.get("name"), str):
+          errors.append("name must be a string")
+      if not isinstance(data.get("age"), int):
+          errors.append("age must be an integer")
+      if not isinstance(data.get("email"), str):
+          errors.append("email must be a string")
+      if errors:
+          return {"valid": False, "errors": errors}
+      return {"valid": True, "data": data}
+
+  tests = [
+      {"name": "Alice", "age": 30, "email": "a@b.com"},
+      {"name": "Bob", "age": "old", "email": "b@c.com"},
+      {"name": 123, "age": 25},
+  ]
+
+  for t in tests:
+      result = validate_user(t)
+      print(result["valid"])
+steps:
+  - line: 13
+    variables: {}
+    output: ""
+    explanation: "Define the list of test data dictionaries."
+  - line: 19
+    variables: {"t": "{'name': 'Alice', 'age': 30, 'email': 'a@b.com'}"}
+    output: ""
+    explanation: "First test case: all fields valid."
+  - line: 20
+    variables: {"result": "{'valid': True, 'data': {'name': 'Alice', 'age': 30, 'email': 'a@b.com'}}"}
+    output: ""
+    explanation: "All type checks pass, returns valid=True."
+  - line: 21
+    variables: {}
+    output: "True"
+    explanation: "Print True."
+  - line: 19
+    variables: {"t": "{'name': 'Bob', 'age': 'old', 'email': 'b@c.com'}"}
+    output: ""
+    explanation: "Second test: age is a string, not int."
+  - line: 20
+    variables: {"result": "{'valid': False, 'errors': ['age must be an integer']}"}
+    output: ""
+    explanation: "age check fails, returns valid=False."
+  - line: 21
+    variables: {}
+    output: "False"
+    explanation: "Print False."
+  - line: 19
+    variables: {"t": "{'name': 123, 'age': 25}"}
+    output: ""
+    explanation: "Third test: name is int, email is missing."
+  - line: 20
+    variables: {"result": "{'valid': False, 'errors': ['name must be a string', 'email must be a string']}"}
+    output: ""
+    explanation: "name and email checks fail. dict.get('email') returns None, which is not a string."
+  - line: 21
+    variables: {}
+    output: "False"
+    explanation: "Print False."
+expected_output: |
+  True
+  False
+  False
+hints:
+  - "isinstance() checks the type of a value."
+  - "dict.get() returns None for missing keys, and None is not a string."
+concept_tags:
+  - pydantic-models
+  - type-hints

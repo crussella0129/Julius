@@ -1,0 +1,95 @@
+type: trace
+id: "04-web-security-trace-01"
+prompt: "Trace through this code that demonstrates SQL injection vulnerability and its fix, then predict the output."
+code: |
+  import html
+
+  def make_query_unsafe(username):
+      return f"SELECT * FROM users WHERE name='{username}'"
+
+  def make_query_safe(username):
+      return ("SELECT * FROM users WHERE name=?", (username,))
+
+  inputs = ["alice", "admin' OR 1=1--"]
+
+  for user in inputs:
+      unsafe = make_query_unsafe(user)
+      safe_query, safe_params = make_query_safe(user)
+      escaped = html.escape(user)
+      print(f"Input: {escaped}")
+      print(f"  Unsafe: {unsafe}")
+      print(f"  Safe: {safe_query} with {safe_params}")
+steps:
+  - line: 9
+    variables: {"inputs": "['alice', \"admin' OR 1=1--\"]"}
+    output: ""
+    explanation: "Two inputs: a normal username and a malicious SQL injection attempt."
+  - line: 11
+    variables: {"user": "alice"}
+    output: ""
+    explanation: "First iteration: normal input 'alice'."
+  - line: 12
+    variables: {"unsafe": "SELECT * FROM users WHERE name='alice'"}
+    output: ""
+    explanation: "The unsafe query directly interpolates 'alice' -- looks fine for normal input."
+  - line: 13
+    variables: {"safe_query": "SELECT * FROM users WHERE name=?", "safe_params": "('alice',)"}
+    output: ""
+    explanation: "The safe version uses a placeholder and passes the value separately."
+  - line: 14
+    variables: {"escaped": "alice"}
+    output: ""
+    explanation: "html.escape('alice') returns 'alice' unchanged -- no special characters."
+  - line: 15
+    variables: {}
+    output: "Input: alice"
+    explanation: "Print the escaped input."
+  - line: 16
+    variables: {}
+    output: "  Unsafe: SELECT * FROM users WHERE name='alice'"
+    explanation: "The unsafe query is valid SQL -- no issue with normal input."
+  - line: 17
+    variables: {}
+    output: "  Safe: SELECT * FROM users WHERE name=? with ('alice',)"
+    explanation: "The safe query keeps the value separate from the SQL."
+  - line: 11
+    variables: {"user": "admin' OR 1=1--"}
+    output: ""
+    explanation: "Second iteration: malicious input with SQL injection."
+  - line: 12
+    variables: {"unsafe": "SELECT * FROM users WHERE name='admin' OR 1=1--'"}
+    output: ""
+    explanation: "The quote in the input breaks out of the string, injecting 'OR 1=1' which is always true."
+  - line: 13
+    variables: {"safe_query": "SELECT * FROM users WHERE name=?", "safe_params": "(\"admin' OR 1=1--\",)"}
+    output: ""
+    explanation: "The safe version treats the entire input as a single string parameter."
+  - line: 14
+    variables: {"escaped": "admin&#x27; OR 1=1--"}
+    output: ""
+    explanation: "html.escape converts the single quote to &#x27;."
+  - line: 15
+    variables: {}
+    output: "Input: admin&#x27; OR 1=1--"
+    explanation: "The escaped input is safe to display."
+  - line: 16
+    variables: {}
+    output: "  Unsafe: SELECT * FROM users WHERE name='admin' OR 1=1--'"
+    explanation: "The unsafe query is now broken SQL that bypasses authentication."
+  - line: 17
+    variables: {}
+    output: "  Safe: SELECT * FROM users WHERE name=? with (\"admin' OR 1=1--\",)"
+    explanation: "The safe query still treats the entire input as one parameter value."
+expected_output: |
+  Input: alice
+    Unsafe: SELECT * FROM users WHERE name='alice'
+    Safe: SELECT * FROM users WHERE name=? with ('alice',)
+  Input: admin&#x27; OR 1=1--
+    Unsafe: SELECT * FROM users WHERE name='admin' OR 1=1--'
+    Safe: SELECT * FROM users WHERE name=? with ("admin' OR 1=1--",)
+hints:
+  - "The SQL injection works because the quote in the input closes the string in the query."
+  - "Parameterized queries never embed user input directly in the SQL string."
+concept_tags:
+  - sql-injection
+  - input-validation

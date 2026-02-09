@@ -1,0 +1,42 @@
+type: fill-in
+id: "03-test-patterns-fill-in-01"
+prompt: "Fill in the blanks to create a Mock that simulates an API call and verify it was called with the right argument."
+template: |
+  from unittest.mock import ____
+
+  api = Mock()
+  api.get_user.____ = {"name": "Alice"}
+
+  result = api.get_user(42)
+  print(result["name"])
+
+  api.get_user.assert_called_once_with(____)
+  print("Mock test passed!")
+blanks:
+  - position: 0
+    answer: "Mock"
+    hint: "class that creates mock objects"
+  - position: 1
+    answer: "return_value"
+    hint: "attribute that sets what the mock returns"
+  - position: 2
+    answer: "42"
+    hint: "the argument we called it with"
+solution: |
+  from unittest.mock import Mock
+
+  api = Mock()
+  api.get_user.return_value = {"name": "Alice"}
+
+  result = api.get_user(42)
+  print(result["name"])
+
+  api.get_user.assert_called_once_with(42)
+  print("Mock test passed!")
+hints:
+  - "Mock() creates a mock object that accepts any method call."
+  - "return_value controls what the mock method returns."
+  - "assert_called_once_with verifies the mock was called exactly once with specific args."
+concept_tags:
+  - mocking
+  - test-doubles

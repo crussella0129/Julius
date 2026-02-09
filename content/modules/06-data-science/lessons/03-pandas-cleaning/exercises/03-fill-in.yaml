@@ -1,0 +1,49 @@
+type: fill-in
+id: "03-pandas-cleaning-fill-in-01"
+prompt: "Fill in the blanks to detect and handle missing data in a DataFrame."
+template: |
+  import pandas as pd
+  import numpy as np
+
+  df = pd.DataFrame({
+      \"name\": [\"Alice\", None, \"Charlie\"],
+      \"score\": [90, 85, np.nan],
+  })
+
+  missing_count = df.____().sum()
+  print(missing_count)
+
+  df[\"score\"] = df[\"score\"].____(df[\"score\"].mean())
+  df = df.____(subset=[\"name\"])
+  print(len(df))
+blanks:
+  - position: 0
+    answer: "isnull"
+    hint: "method that returns True for missing values"
+  - position: 1
+    answer: "fillna"
+    hint: "method that replaces NaN with a value"
+  - position: 2
+    answer: "dropna"
+    hint: "method that removes rows with missing values"
+solution: |
+  import pandas as pd
+  import numpy as np
+
+  df = pd.DataFrame({
+      "name": ["Alice", None, "Charlie"],
+      "score": [90, 85, np.nan],
+  })
+
+  missing_count = df.isnull().sum()
+  print(missing_count)
+
+  df["score"] = df["score"].fillna(df["score"].mean())
+  df = df.dropna(subset=["name"])
+  print(len(df))
+hints:
+  - "isnull() creates a boolean DataFrame of missing values."
+  - "fillna() replaces NaN; dropna() removes rows with NaN."
+concept_tags:
+  - missing-data
+  - type-conversion

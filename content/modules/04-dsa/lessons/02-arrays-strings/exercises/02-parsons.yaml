@@ -1,0 +1,20 @@
+type: parsons
+id: "02-arrays-strings-parsons-01"
+prompt: "Arrange these lines to implement a sliding window that finds the maximum sum of any contiguous subarray of size k."
+blocks:
+  - "def max_subarray_sum(nums, k):"
+  - "    window_sum = sum(nums[:k])"
+  - "    best = window_sum"
+  - "    for i in range(k, len(nums)):"
+  - "        window_sum += nums[i] - nums[i - k]"
+  - "        best = max(best, window_sum)"
+  - "    return best"
+solution_order: [0, 1, 2, 3, 4, 5, 6]
+distractors:
+  - "    window_sum += nums[i] - nums[i - 1]"
+  - "    for i in range(len(nums)):"
+hints:
+  - "First compute the sum of the initial window (first k elements)."
+  - "When sliding, you add the new element entering the window and subtract the one leaving."
+concept_tags:
+  - sliding-window

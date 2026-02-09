@@ -1,0 +1,27 @@
+type: write
+id: "03-tuples-sets-write-01"
+prompt: "Write a program that: (1) Creates two sets — enrolled = {'Alice', 'Bob', 'Charlie', 'Diana'} and passed = {'Bob', 'Diana', 'Eve'}. (2) Prints the students who are enrolled AND passed (intersection, sorted). (3) Prints the students enrolled but did NOT pass (difference, sorted). (4) Prints the total number of unique students across both sets."
+starter_code: |
+  enrolled = {"Alice", "Bob", "Charlie", "Diana"}
+  passed = {"Bob", "Diana", "Eve"}
+
+  # Students who enrolled AND passed (sorted)
+
+  # Students enrolled but did NOT pass (sorted)
+
+  # Total unique students
+tests:
+  - description: "First line shows enrolled AND passed"
+    check: "output.strip().splitlines()[0] == \"['Bob', 'Diana']\""
+  - description: "Second line shows enrolled but not passed"
+    check: "output.strip().splitlines()[1] == \"['Alice', 'Charlie']\""
+  - description: "Third line shows total unique count: 5"
+    check: "output.strip().splitlines()[2] == '5'"
+hints:
+  - "Use & for intersection, - for difference, | for union."
+  - "sorted() converts a set to a sorted list for consistent output."
+  - "len() on a union set gives the total unique students."
+  - "enrolled = {'Alice', 'Bob', 'Charlie', 'Diana'}\npassed = {'Bob', 'Diana', 'Eve'}\nprint(sorted(enrolled & passed))\nprint(sorted(enrolled - passed))\nprint(len(enrolled | passed))"
+concept_tags:
+  - sets
+  - set-operations

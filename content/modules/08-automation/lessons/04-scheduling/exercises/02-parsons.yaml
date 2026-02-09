@@ -1,0 +1,22 @@
+type: parsons
+id: "04-scheduling-parsons-01"
+prompt: "Arrange these lines to create a scheduler that runs a task after a 2-second delay and prints a message."
+blocks:
+  - "import sched"
+  - "import time"
+  - "s = sched.scheduler(time.time, time.sleep)"
+  - "def announce():"
+  - "    print('Task complete!')"
+  - "s.enter(2, 1, announce)"
+  - "s.run()"
+distractors:
+  - "s.schedule(2, announce)"
+  - "s.start()"
+solution_order: [0, 1, 2, 3, 4, 5, 6]
+hints:
+  - "Import both sched and time."
+  - "Use sched.scheduler() with time.time and time.sleep."
+  - "s.enter(delay, priority, function) schedules the event."
+concept_tags:
+  - schedule-module
+  - time-module

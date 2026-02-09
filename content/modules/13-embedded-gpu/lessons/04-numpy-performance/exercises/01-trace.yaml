@@ -1,0 +1,56 @@
+type: trace
+id: "04-numpy-performance-trace-01"
+prompt: "Trace through this code that demonstrates NumPy broadcasting and predict the output."
+code: |
+  import numpy as np
+
+  a = np.array([[1, 2, 3],
+                [4, 5, 6]])
+  b = np.array([10, 20, 30])
+
+  result = a + b
+  print(result)
+
+  col = np.array([[100], [200]])
+  result2 = a + col
+  print(result2)
+steps:
+  - line: 3
+    variables: {"a": "array([[1,2,3],[4,5,6]]), shape (2,3)"}
+    output: ""
+    explanation: "Create a 2x3 array."
+  - line: 5
+    variables: {"b": "array([10,20,30]), shape (3,)"}
+    output: ""
+    explanation: "Create a 1D array with 3 elements."
+  - line: 7
+    variables: {"result": "array([[11,22,33],[14,25,36]])"}
+    output: ""
+    explanation: "Broadcasting: b is added to each row of a. [1+10,2+20,3+30] and [4+10,5+20,6+30]."
+  - line: 8
+    variables: {}
+    output: "[[11 22 33]\n [14 25 36]]"
+    explanation: "Print the broadcasted addition result."
+  - line: 10
+    variables: {"col": "array([[100],[200]]), shape (2,1)"}
+    output: ""
+    explanation: "Create a column vector with 2 elements."
+  - line: 11
+    variables: {"result2": "array([[101,102,103],[204,205,206]])"}
+    output: ""
+    explanation: "Broadcasting: col is added to each column. Row 0 gets +100, row 1 gets +200."
+  - line: 12
+    variables: {}
+    output: "[[101 102 103]\n [204 205 206]]"
+    explanation: "Print the column-broadcasted result."
+expected_output: |
+  [[ 11  22  33]
+   [ 14  25  36]]
+  [[101 102 103]
+   [204 205 206]]
+hints:
+  - "Row vector [10,20,30] is broadcast across rows (added to each row)."
+  - "Column vector [[100],[200]] is broadcast across columns (added to each column)."
+concept_tags:
+  - broadcasting
+  - vectorization

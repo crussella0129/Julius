@@ -1,0 +1,44 @@
+type: fill-in
+id: "08-langchain-fill-in-01"
+prompt: "Fill in the blanks to complete this RAG-style function that retrieves the most relevant document and builds a prompt."
+template: |
+  def rag_answer(question, documents, scores):
+      # Find the document with the highest score
+      best_idx = scores.____(max(scores))
+      context = documents[____]
+
+      template = "Context: {context}\nQuestion: {question}\nAnswer:"
+      prompt = template.replace("{context}", context).replace("{____}", question)
+      return prompt
+
+  docs = ["Python is a language.", "The sky is blue.", "AI is growing."]
+  scores = [0.9, 0.1, 0.5]
+  print(rag_answer("What is Python?", docs, scores))
+blanks:
+  - position: 0
+    answer: "index"
+    hint: "list method that finds the position of a value"
+  - position: 1
+    answer: "best_idx"
+    hint: "use the index we just found"
+  - position: 2
+    answer: "question"
+    hint: "the template placeholder to replace"
+solution: |
+  def rag_answer(question, documents, scores):
+      best_idx = scores.index(max(scores))
+      context = documents[best_idx]
+
+      template = "Context: {context}\nQuestion: {question}\nAnswer:"
+      prompt = template.replace("{context}", context).replace("{question}", question)
+      return prompt
+
+  docs = ["Python is a language.", "The sky is blue.", "AI is growing."]
+  scores = [0.9, 0.1, 0.5]
+  print(rag_answer("What is Python?", docs, scores))
+hints:
+  - "list.index(value) returns the position of the first occurrence of value."
+  - "The highest score (0.9) is at index 0, which corresponds to the Python document."
+concept_tags:
+  - retrieval-augmented-generation
+  - langchain

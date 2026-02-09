@@ -1,0 +1,35 @@
+type: fill-in
+id: "01-complexity-fill-in-01"
+prompt: "Fill in the blanks to complete the function that checks if a list has duplicates in O(n) time using a set."
+template: |
+  def has_duplicate(nums):
+      ____ = set()
+      for num in nums:
+          if num in ____:
+              return True
+          ____.add(num)
+      return False
+blanks:
+  - position: 0
+    answer: "seen"
+    hint: "name for the set that tracks values we have encountered"
+  - position: 1
+    answer: "seen"
+    hint: "check if the current number is already in our set"
+  - position: 2
+    answer: "seen"
+    hint: "add the current number to the tracking set"
+solution: |
+  def has_duplicate(nums):
+      seen = set()
+      for num in nums:
+          if num in seen:
+              return True
+          seen.add(num)
+      return False
+hints:
+  - "A set provides O(1) average lookup, making the whole function O(n)."
+  - "Without a set, you would need nested loops for O(n^2) time."
+concept_tags:
+  - time-complexity
+  - space-complexity

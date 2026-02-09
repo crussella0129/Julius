@@ -1,0 +1,32 @@
+type: write
+id: "07-file-io-write-01"
+prompt: "Write a program that: (1) Creates a list of names ['Alice', 'Bob', 'Charlie', 'Diana']. (2) Writes each name on a separate line to 'names.txt'. (3) Reads 'names.txt' back and prints each name in uppercase. (4) Prints the total number of names read."
+starter_code: |
+  names = ["Alice", "Bob", "Charlie", "Diana"]
+
+  # Write names to names.txt (one per line)
+
+  # Read names back and print each in uppercase
+
+  # Print total count
+tests:
+  - description: "First line is ALICE"
+    check: "output.strip().splitlines()[0] == 'ALICE'"
+  - description: "Second line is BOB"
+    check: "output.strip().splitlines()[1] == 'BOB'"
+  - description: "Third line is CHARLIE"
+    check: "output.strip().splitlines()[2] == 'CHARLIE'"
+  - description: "Fourth line is DIANA"
+    check: "output.strip().splitlines()[3] == 'DIANA'"
+  - description: "Fifth line is the count: 4"
+    check: "output.strip().splitlines()[4] == '4'"
+hints:
+  - "Use 'with open(\"names.txt\", \"w\") as f:' to write."
+  - "Remember to add '\\n' after each name when writing."
+  - "Use strip() when reading to remove trailing newlines, then .upper() to capitalize."
+  - "names = ['Alice', 'Bob', 'Charlie', 'Diana']\nwith open('names.txt', 'w') as f:\n    for name in names:\n        f.write(name + '\\n')\ncount = 0\nwith open('names.txt', 'r') as f:\n    for line in f:\n        print(line.strip().upper())\n        count += 1\nprint(count)"
+concept_tags:
+  - file-writing
+  - file-reading
+  - with-statement
+  - file-modes

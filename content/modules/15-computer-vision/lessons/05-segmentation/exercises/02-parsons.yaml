@@ -1,0 +1,27 @@
+type: parsons
+id: "05-segmentation-parsons-01"
+prompt: "Arrange these lines to create a function that finds boundary pixels in a binary mask (pixels that are foreground but have at least one background or out-of-bounds neighbor)."
+blocks:
+  - "def find_boundary(mask):"
+  - "    h, w = mask.shape"
+  - "    boundary = []"
+  - "    for i in range(h):"
+  - "        for j in range(w):"
+  - "            if mask[i, j] == 0:"
+  - "                continue"
+  - "            for di, dj in [(-1,0),(1,0),(0,-1),(0,1)]:"
+  - "                ni, nj = i + di, j + dj"
+  - "                if ni < 0 or ni >= h or nj < 0 or nj >= w or mask[ni, nj] == 0:"
+  - "                    boundary.append((i, j))"
+  - "                    break"
+  - "    return boundary"
+distractors:
+  - "            if mask[i, j] == 1:"
+  - "                if ni < 0 or ni >= h or nj < 0 or nj >= w:"
+solution_order: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+hints:
+  - "Skip background pixels (value 0) immediately."
+  - "A foreground pixel is on the boundary if ANY neighbor is background or out of bounds."
+concept_tags:
+  - contour-detection
+  - connected-components
