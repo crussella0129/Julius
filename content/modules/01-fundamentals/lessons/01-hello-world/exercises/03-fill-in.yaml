@@ -1,0 +1,22 @@
+type: fill-in
+id: "01-hello-world-fill-in-01"
+prompt: "Fill in the blanks to make this program print 'Hello' on the first line and 'World' on the second line."
+template: |
+  ____(\"Hello\")
+  ____(\"World\")
+blanks:
+  - position: 0
+    answer: "print"
+    hint: "function name"
+  - position: 1
+    answer: "print"
+    hint: "function name"
+solution: |
+  print("Hello")
+  print("World")
+hints:
+  - "What function displays text to the screen?"
+  - "It's the same function for both lines."
+concept_tags:
+  - print
+  - strings

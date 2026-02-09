@@ -1,0 +1,36 @@
+type: trace
+id: "01-hello-world-trace-01"
+prompt: "Trace through this code and predict what will be printed."
+code: |
+  print("Welcome!")
+  print("Python is fun.")
+  print()
+  print("Let's code!")
+steps:
+  - line: 1
+    variables: {}
+    output: "Welcome!"
+    explanation: "print() displays the string 'Welcome!' and moves to the next line."
+  - line: 2
+    variables: {}
+    output: "Python is fun."
+    explanation: "print() displays 'Python is fun.' on a new line."
+  - line: 3
+    variables: {}
+    output: ""
+    explanation: "print() with no argument outputs an empty line."
+  - line: 4
+    variables: {}
+    output: "Let's code!"
+    explanation: "print() displays 'Let's code!' on the next line."
+expected_output: |
+  Welcome!
+  Python is fun.
+
+  Let's code!
+hints:
+  - "Each print() call outputs on its own line."
+  - "print() with no argument creates a blank line."
+concept_tags:
+  - print
+  - program-execution

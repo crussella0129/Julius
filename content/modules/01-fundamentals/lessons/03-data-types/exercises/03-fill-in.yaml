@@ -1,0 +1,34 @@
+type: fill-in
+id: "03-data-types-fill-in-01"
+prompt: "Fill in the blanks to convert between types and print the results."
+template: |
+  price = 9.99
+  whole_price = ____(price)
+  print(whole_price)
+
+  count = 7
+  message = "Items: " + ____(count)
+  print(message)
+blanks:
+  - position: 0
+    answer: "int"
+    hint: "convert to whole number"
+  - position: 1
+    answer: "str"
+    hint: "convert to text"
+solution: |
+  price = 9.99
+  whole_price = int(price)
+  print(whole_price)
+
+  count = 7
+  message = "Items: " + str(count)
+  print(message)
+hints:
+  - "int() converts a float to a whole number (truncates the decimal)."
+  - "str() converts a number to text so you can concatenate it with other strings."
+concept_tags:
+  - type-conversion
+  - integers
+  - floats
+  - strings

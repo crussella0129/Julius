@@ -1,0 +1,22 @@
+type: write
+id: "02-variables-write-01"
+prompt: "Create a variable called `greeting` with the value 'Hello, World!' and print it. Then change `greeting` to 'Goodbye, World!' and print it again."
+starter_code: |
+  # Create greeting and print it
+
+  # Change greeting and print it again
+tests:
+  - description: "Output has exactly 2 lines"
+    check: "len(output.strip().splitlines()) == 2"
+  - description: "First line contains 'Hello'"
+    check: "'Hello' in output.strip().splitlines()[0]"
+  - description: "Second line contains 'Goodbye'"
+    check: "'Goodbye' in output.strip().splitlines()[1]"
+hints:
+  - "Create a variable with: greeting = 'Hello, World!'"
+  - "Print it with: print(greeting)"
+  - "Reassign with: greeting = 'Goodbye, World!'"
+concept_tags:
+  - variables
+  - assignment
+  - print

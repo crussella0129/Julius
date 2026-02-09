@@ -1,0 +1,33 @@
+appId: com.julius.app
+productName: Julius
+directories:
+  buildResources: resources
+  output: dist
+files:
+  - '!**/.vscode/*'
+  - '!src/*'
+  - '!electron.vite.config.{js,ts,mts,cts}'
+  - '!{.eslintignore,.eslintrc.cjs,.prettierignore,.prettierrc.yaml,dev-app-update.yml,CHANGELOG.md,README.md}'
+  - '!{tsconfig.json,tsconfig.node.json,tsconfig.web.json}'
+extraResources:
+  - from: content
+    to: content
+asarUnpack:
+  - node_modules/better-sqlite3
+linux:
+  target:
+    - AppImage
+  category: Education
+  icon: resources/icon.png
+win:
+  target:
+    - nsis
+  icon: resources/icon.png
+mac:
+  target:
+    - dmg
+  icon: resources/icon.png
+  category: public.app-category.education
+nsis:
+  oneClick: false
+  allowToChangeInstallationDirectory: true

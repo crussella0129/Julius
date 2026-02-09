@@ -1,0 +1,18 @@
+type: parsons
+id: "02-variables-parsons-01"
+prompt: "Arrange these lines to create a program that stores a name, stores an age, then prints both using an f-string."
+blocks:
+  - 'name = "Julius"'
+  - "age = 3"
+  - 'print(f"{name} is {age} years old.")'
+distractors:
+  - 'print(f"name is age years old.")'
+  - "name = Julius"
+solution_order: [0, 1, 2]
+hints:
+  - "Variables must be created before they can be used."
+  - "String values need quotes; variable names in f-strings go inside { }."
+concept_tags:
+  - variables
+  - assignment
+  - print

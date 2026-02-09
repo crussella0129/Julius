@@ -1,0 +1,44 @@
+type: trace
+id: "02-variables-trace-01"
+prompt: "Trace through this code and predict what the final output will be."
+code: |
+  x = 5
+  y = 10
+  x = y
+  y = 20
+  print(x)
+  print(y)
+steps:
+  - line: 1
+    variables: { "x": "5" }
+    output: ""
+    explanation: "x is assigned the value 5."
+  - line: 2
+    variables: { "x": "5", "y": "10" }
+    output: ""
+    explanation: "y is assigned the value 10."
+  - line: 3
+    variables: { "x": "10", "y": "10" }
+    output: ""
+    explanation: "x is reassigned to the current value of y, which is 10."
+  - line: 4
+    variables: { "x": "10", "y": "20" }
+    output: ""
+    explanation: "y is reassigned to 20. This does NOT change x — x still holds 10."
+  - line: 5
+    variables: { "x": "10", "y": "20" }
+    output: "10"
+    explanation: "Prints the value of x, which is 10."
+  - line: 6
+    variables: { "x": "10", "y": "20" }
+    output: "20"
+    explanation: "Prints the value of y, which is 20."
+expected_output: |
+  10
+  20
+hints:
+  - "When you assign x = y, x gets the current value of y at that moment."
+  - "Changing y later does NOT retroactively change x."
+concept_tags:
+  - variables
+  - assignment

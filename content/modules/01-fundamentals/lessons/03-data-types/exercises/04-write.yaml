@@ -1,0 +1,25 @@
+type: write
+id: "03-data-types-write-01"
+prompt: "Create variables for your name (string), your age (integer), and your height in meters (float). Print each one along with its type using type()."
+starter_code: |
+  # Create your variables
+
+  # Print each value and its type
+tests:
+  - description: "Output has at least 6 lines (3 values + 3 types)"
+    check: "len(output.strip().splitlines()) >= 6"
+  - description: "Output contains <class 'str'>"
+    check: "\"<class 'str'>\" in output"
+  - description: "Output contains <class 'int'>"
+    check: "\"<class 'int'>\" in output"
+  - description: "Output contains <class 'float'>"
+    check: "\"<class 'float'>\" in output"
+hints:
+  - "Use type() to get the type of a variable, e.g. print(type(name))"
+  - "A float has a decimal point, like 1.75"
+  - "Print each variable on one line and its type() on the next"
+concept_tags:
+  - integers
+  - floats
+  - strings
+  - type-function

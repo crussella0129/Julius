@@ -1,0 +1,16 @@
+type: write
+id: "01-hello-world-write-01"
+prompt: "Write a program that prints your name on one line and your favorite food on the next line."
+starter_code: "# Write your code here\n"
+tests:
+  - description: "Output has exactly 2 lines"
+    check: "len(output.strip().splitlines()) == 2"
+  - description: "Each line is non-empty"
+    check: "all(line.strip() for line in output.strip().splitlines())"
+hints:
+  - "Use print() to display text."
+  - "Call print() twice — once for each line."
+  - "Remember to put your text in quotes."
+concept_tags:
+  - print
+  - strings

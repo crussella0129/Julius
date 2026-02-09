@@ -1,0 +1,19 @@
+type: parsons
+id: "03-data-types-parsons-01"
+prompt: "Arrange these lines to: create a string variable with a number, convert it to an integer, add 10 to it, and print the result."
+blocks:
+  - 'text = "42"'
+  - "number = int(text)"
+  - "result = number + 10"
+  - "print(result)"
+distractors:
+  - "result = text + 10"
+  - 'number = str(text)'
+solution_order: [0, 1, 2, 3]
+hints:
+  - "You can't add a string and an integer directly — you need to convert first."
+  - "int() converts a string to a number; str() goes the other direction."
+concept_tags:
+  - type-conversion
+  - integers
+  - strings

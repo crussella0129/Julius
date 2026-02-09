@@ -1,0 +1,17 @@
+type: parsons
+id: "01-hello-world-parsons-01"
+prompt: "Arrange these lines to print a greeting on three lines: the word 'Hello', then a person's name, then 'Welcome!'."
+blocks:
+  - 'print("Hello")'
+  - 'print("Alice")'
+  - 'print("Welcome!")'
+distractors:
+  - 'print(Hello)'
+  - 'print "Welcome!"'
+solution_order: [0, 1, 2]
+hints:
+  - "Strings need quotes around them."
+  - "In Python 3, print requires parentheses."
+concept_tags:
+  - print
+  - strings

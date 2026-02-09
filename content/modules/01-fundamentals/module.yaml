@@ -1,0 +1,8 @@
+id: "01-fundamentals"
+title: "Python Fundamentals"
+description: "Variables, types, control flow, and your first programs"
+order: 1
+lessons:
+  - 01-hello-world
+  - 02-variables
+  - 03-data-types

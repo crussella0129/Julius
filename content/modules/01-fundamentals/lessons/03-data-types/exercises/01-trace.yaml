@@ -1,0 +1,41 @@
+type: trace
+id: "03-data-types-trace-01"
+prompt: "Trace through this code and predict the final output."
+code: |
+  x = "5"
+  y = 3
+  z = int(x) + y
+  print(z)
+  print(type(z))
+steps:
+  - line: 1
+    variables: { "x": "'5' (str)" }
+    output: ""
+    explanation: "x is assigned the string '5' — note the quotes, this is text, not a number."
+  - line: 2
+    variables: { "x": "'5' (str)", "y": "3 (int)" }
+    output: ""
+    explanation: "y is assigned the integer 3."
+  - line: 3
+    variables: { "x": "'5' (str)", "y": "3 (int)", "z": "8 (int)" }
+    output: ""
+    explanation: "int(x) converts the string '5' to integer 5. Then 5 + 3 = 8."
+  - line: 4
+    variables: { "x": "'5' (str)", "y": "3 (int)", "z": "8 (int)" }
+    output: "8"
+    explanation: "Prints the value of z, which is 8."
+  - line: 5
+    variables: { "x": "'5' (str)", "y": "3 (int)", "z": "8 (int)" }
+    output: "<class 'int'>"
+    explanation: "type(z) returns <class 'int'> because z is an integer."
+expected_output: |
+  8
+  <class 'int'>
+hints:
+  - "The string '5' must be converted to an integer before you can add it to another integer."
+  - "int() converts a string to an integer."
+concept_tags:
+  - type-conversion
+  - integers
+  - strings
+  - type-function

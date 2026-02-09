@@ -1,0 +1,30 @@
+type: fill-in
+id: "02-variables-fill-in-01"
+prompt: "Fill in the blanks to create two variables and print their sum."
+template: |
+  a ____ 10
+  b ____ 20
+  result = a + b
+  print(____)
+blanks:
+  - position: 0
+    answer: "="
+    hint: "assignment operator"
+  - position: 1
+    answer: "="
+    hint: "assignment operator"
+  - position: 2
+    answer: "result"
+    hint: "variable name"
+solution: |
+  a = 10
+  b = 20
+  result = a + b
+  print(result)
+hints:
+  - "The assignment operator in Python is a single equals sign."
+  - "To print a variable, put its name inside print() without quotes."
+concept_tags:
+  - variables
+  - assignment
+  - print
