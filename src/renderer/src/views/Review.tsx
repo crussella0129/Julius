@@ -31,25 +31,16 @@ export default function Review(): JSX.Element {
     setDueCards(due)
     if (due.length === 0 && fsrsCards.length > 0) setSessionComplete(true)
 
-    // Look up routes for due exercises via attempt records
+    // Look up routes for due exercises via pre-built index
     const lookupRoutes = async (): Promise<void> => {
+      const index = await window.julius.buildExerciseIndex()
       const routes: Record<string, ExerciseRoute> = {}
       const prompts: Record<string, string> = {}
-      const modules = await window.julius.listModules()
-
       for (const card of due) {
-        // Find the exercise by searching modules
-        for (const mod of modules) {
-          for (const lessonId of mod.lessons) {
-            const files = await window.julius.listExercises(mod.id, lessonId)
-            for (const file of files) {
-              const ex = await window.julius.loadExercise(mod.id, lessonId, file)
-              if (ex && ex.id === card.exercise_id) {
-                routes[card.exercise_id] = { moduleId: mod.id, lessonId, exerciseFile: file }
-                prompts[card.exercise_id] = ex.prompt
-              }
-            }
-          }
+        const entry = index[card.exercise_id]
+        if (entry) {
+          routes[card.exercise_id] = { moduleId: entry.moduleId, lessonId: entry.lessonId, exerciseFile: entry.exerciseFile }
+          prompts[card.exercise_id] = entry.prompt
         }
       }
       setExerciseRoutes(routes)

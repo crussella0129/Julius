@@ -12,6 +12,7 @@ export interface JuliusAPI {
   loadExercise: (moduleId: string, lessonId: string, exerciseFile: string) => Promise<unknown>
   listExercises: (moduleId: string, lessonId: string) => Promise<string[]>
   getLessonTitles: (moduleId: string) => Promise<Record<string, string>>
+  buildExerciseIndex: () => Promise<Record<string, { moduleId: string; lessonId: string; exerciseFile: string; prompt: string }>>
 
   // Python execution
   runPython: (code: string, timeout?: number) => Promise<{
@@ -69,6 +70,7 @@ const api: JuliusAPI = {
     ipcRenderer.invoke('list-exercises', moduleId, lessonId),
   getLessonTitles: (moduleId) =>
     ipcRenderer.invoke('get-lesson-titles', moduleId),
+  buildExerciseIndex: () => ipcRenderer.invoke('build-exercise-index'),
 
   runPython: (code, timeout) => ipcRenderer.invoke('run-python', code, timeout),
 

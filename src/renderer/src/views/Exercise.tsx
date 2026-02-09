@@ -254,7 +254,7 @@ function FillInExercise({ exercise, onResult }: { exercise: ExerciseData; onResu
   )
 }
 
-function WriteExercise({ exercise, onResult }: { exercise: ExerciseData; onResult: (correct: boolean) => void }): JSX.Element {
+function WriteExercise({ exercise, onResult }: { exercise: ExerciseData; onResult: (correct: boolean, code?: string) => void }): JSX.Element {
   const [code, setCode] = useState(exercise.starter_code || '# Write your code here\n')
   const [output, setOutput] = useState<{ stdout: string; stderr: string; friendlyError?: string } | null>(null)
   const [running, setRunning] = useState(false)
@@ -268,17 +268,19 @@ function WriteExercise({ exercise, onResult }: { exercise: ExerciseData; onResul
 
     // Run tests if defined
     if (exercise.tests && exercise.tests.length > 0 && result.exitCode === 0) {
-      const checks = exercise.tests.map((t) => t.check)
+      // Build test checks as a Python list to avoid string interpolation issues
+      const checksJson = JSON.stringify(exercise.tests.map((t) => t.check))
       const testCode = [
+        `import json`,
         `output = ${JSON.stringify(result.stdout)}`,
+        `checks = json.loads(${JSON.stringify(checksJson)})`,
         `results = []`,
-        ...checks.map((check, i) => [
-          `try:`,
-          `    _passed = bool(${check})`,
-          `    results.append("${i}:" + ("1" if _passed else "0"))`,
-          `except Exception:`,
-          `    results.append("${i}:0")`
-        ].join('\n')),
+        `for i, check in enumerate(checks):`,
+        `    try:`,
+        `        _passed = bool(eval(check))`,
+        `        results.append(str(i) + ":" + ("1" if _passed else "0"))`,
+        `    except Exception:`,
+        `        results.append(str(i) + ":0")`,
         `print("TESTS:" + ",".join(results))`
       ].join('\n')
 
@@ -292,7 +294,7 @@ function WriteExercise({ exercise, onResult }: { exercise: ExerciseData; onResul
         }))
         setTestResults(results)
         const allPassed = results.every((r) => r.passed)
-        onResult(allPassed)
+        onResult(allPassed, code)
       }
     }
 
@@ -375,7 +377,7 @@ export default function Exercise(): JSX.Element {
   const prevExercise = currentExIndex > 0 ? exerciseFiles[currentExIndex - 1] : null
   const nextExercise = currentExIndex < exerciseFiles.length - 1 ? exerciseFiles[currentExIndex + 1] : null
 
-  const handleResult = async (correct: boolean): Promise<void> => {
+  const handleResult = async (correct: boolean, userCode?: string): Promise<void> => {
     if (!exercise || !moduleId || !lessonId) return
 
     const timeSpentMs = Date.now() - startTime.current
@@ -385,6 +387,7 @@ export default function Exercise(): JSX.Element {
       moduleId,
       type: exercise.type,
       success: correct,
+      code: userCode,
       timeSpentMs
     })
 

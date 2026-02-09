@@ -26,14 +26,16 @@ export default function Lesson(): JSX.Element {
       setLoading(false)
     })
 
-    // Load exercise file list and their IDs
+    // Load exercise file list and their IDs in parallel
     window.julius.listExercises(moduleId, lessonId).then(async (files) => {
       setExercises(files)
+      const results = await Promise.all(
+        files.map((file) => window.julius.loadExercise(moduleId, lessonId, file))
+      )
       const ids: Record<string, string> = {}
-      for (const file of files) {
-        const ex = await window.julius.loadExercise(moduleId, lessonId, file)
-        if (ex) ids[file] = ex.id
-      }
+      files.forEach((file, i) => {
+        if (results[i]) ids[file] = results[i]!.id
+      })
       setExerciseIds(ids)
     })
 

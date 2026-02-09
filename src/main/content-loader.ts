@@ -1,6 +1,5 @@
 import { readFileSync, readdirSync, existsSync } from 'fs'
 import { join } from 'path'
-import { app } from 'electron'
 import { is } from '@electron-toolkit/utils'
 import { parse as parseYaml } from 'yaml'
 import matter from 'gray-matter'
@@ -53,8 +52,12 @@ export function listModules(): ModuleMeta[] {
   for (const dir of dirs) {
     const yamlPath = join(modulesDir, dir, 'module.yaml')
     if (existsSync(yamlPath)) {
-      const raw = readFileSync(yamlPath, 'utf-8')
-      modules.push(parseYaml(raw) as ModuleMeta)
+      try {
+        const raw = readFileSync(yamlPath, 'utf-8')
+        modules.push(parseYaml(raw) as ModuleMeta)
+      } catch (err) {
+        console.error(`Failed to parse module YAML: ${yamlPath}`, err)
+      }
     }
   }
 
@@ -65,7 +68,12 @@ export function loadModule(moduleId: string): ModuleMeta | null {
   const root = getContentRoot()
   const yamlPath = join(root, 'modules', moduleId, 'module.yaml')
   if (!existsSync(yamlPath)) return null
-  return parseYaml(readFileSync(yamlPath, 'utf-8')) as ModuleMeta
+  try {
+    return parseYaml(readFileSync(yamlPath, 'utf-8')) as ModuleMeta
+  } catch (err) {
+    console.error(`Failed to parse module YAML: ${yamlPath}`, err)
+    return null
+  }
 }
 
 export function loadLesson(moduleId: string, lessonId: string): LessonMeta | null {
@@ -73,18 +81,23 @@ export function loadLesson(moduleId: string, lessonId: string): LessonMeta | nul
   const mdPath = join(root, 'modules', moduleId, 'lessons', lessonId, 'lesson.md')
   if (!existsSync(mdPath)) return null
 
-  const raw = readFileSync(mdPath, 'utf-8')
-  const { data, content } = matter(raw)
+  try {
+    const raw = readFileSync(mdPath, 'utf-8')
+    const { data, content } = matter(raw)
 
-  return {
-    id: data.id || lessonId,
-    moduleId,
-    title: data.title || lessonId,
-    concepts: data.concepts || [],
-    why: data.why || '',
-    prerequisites: data.prerequisites || [],
-    sources: data.sources || [],
-    content
+    return {
+      id: data.id || lessonId,
+      moduleId,
+      title: data.title || lessonId,
+      concepts: data.concepts || [],
+      why: data.why || '',
+      prerequisites: data.prerequisites || [],
+      sources: data.sources || [],
+      content
+    }
+  } catch (err) {
+    console.error(`Failed to parse lesson: ${mdPath}`, err)
+    return null
   }
 }
 
@@ -93,8 +106,13 @@ export function loadExercise(moduleId: string, lessonId: string, exerciseFile: s
   const exPath = join(root, 'modules', moduleId, 'lessons', lessonId, 'exercises', exerciseFile)
   if (!existsSync(exPath)) return null
 
-  const raw = readFileSync(exPath, 'utf-8')
-  return parseYaml(raw) as ExerciseData
+  try {
+    const raw = readFileSync(exPath, 'utf-8')
+    return parseYaml(raw) as ExerciseData
+  } catch (err) {
+    console.error(`Failed to parse exercise YAML: ${exPath}`, err)
+    return null
+  }
 }
 
 export function getLessonTitles(moduleId: string): Record<string, string> {
@@ -106,14 +124,37 @@ export function getLessonTitles(moduleId: string): Record<string, string> {
   for (const lessonId of mod.lessons) {
     const mdPath = join(root, 'modules', moduleId, 'lessons', lessonId, 'lesson.md')
     if (existsSync(mdPath)) {
-      const raw = readFileSync(mdPath, 'utf-8')
-      const { data } = matter(raw)
-      titles[lessonId] = data.title || lessonId
+      try {
+        const raw = readFileSync(mdPath, 'utf-8')
+        const { data } = matter(raw)
+        titles[lessonId] = data.title || lessonId
+      } catch {
+        titles[lessonId] = lessonId
+      }
     } else {
       titles[lessonId] = lessonId
     }
   }
   return titles
+}
+
+export function buildExerciseIndex(): Record<string, { moduleId: string; lessonId: string; exerciseFile: string; prompt: string }> {
+  const index: Record<string, { moduleId: string; lessonId: string; exerciseFile: string; prompt: string }> = {}
+  const modules = listModules()
+
+  for (const mod of modules) {
+    for (const lessonId of mod.lessons) {
+      const files = listExercises(mod.id, lessonId)
+      for (const file of files) {
+        const ex = loadExercise(mod.id, lessonId, file)
+        if (ex) {
+          index[ex.id] = { moduleId: mod.id, lessonId, exerciseFile: file, prompt: ex.prompt }
+        }
+      }
+    }
+  }
+
+  return index
 }
 
 export function listExercises(moduleId: string, lessonId: string): string[] {

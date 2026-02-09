@@ -37,7 +37,6 @@ export function runPython(code: string, timeout = 10000): Promise<PythonResult> 
     let killed = false
 
     const proc = spawn('python3', ['-u', '-c', code], {
-      timeout,
       stdio: ['pipe', 'pipe', 'pipe'],
       env: { ...process.env, PYTHONDONTWRITEBYTECODE: '1' }
     })

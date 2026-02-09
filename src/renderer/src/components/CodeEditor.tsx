@@ -46,7 +46,7 @@ const darkTheme = EditorView.theme({
   '.cm-selectionBackground': {
     backgroundColor: 'rgba(100, 181, 246, 0.2) !important'
   }
-}, { dark: false })
+})
 
 export default function CodeEditor({ value, onChange, readOnly = false }: CodeEditorProps): JSX.Element {
   const containerRef = useRef<HTMLDivElement>(null)
