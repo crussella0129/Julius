@@ -3,7 +3,7 @@ import { join } from 'path'
 import { electronApp, optimizer, is } from '@electron-toolkit/utils'
 import { initDatabase, getDb } from './db'
 import { runPython } from './python-runner'
-import { loadModule, loadLesson, loadExercise, listModules, listExercises } from './content-loader'
+import { loadModule, loadLesson, loadExercise, listModules, listExercises, getLessonTitles } from './content-loader'
 
 function createWindow(): void {
   const mainWindow = new BrowserWindow({
@@ -58,11 +58,24 @@ function setupIPC(): void {
   ipcMain.handle('list-exercises', (_event, moduleId: string, lessonId: string) =>
     listExercises(moduleId, lessonId)
   )
+  ipcMain.handle('get-lesson-titles', (_event, moduleId: string) =>
+    getLessonTitles(moduleId)
+  )
 
   // Python execution
   ipcMain.handle('run-python', (_event, code: string, timeout?: number) =>
     runPython(code, timeout)
   )
+
+  // Data export
+  ipcMain.handle('export-progress', () => {
+    const db = getDb()
+    const mastery = db.prepare('SELECT * FROM concept_mastery').all()
+    const attempts = db.prepare('SELECT * FROM exercise_attempts').all()
+    const cards = db.prepare('SELECT * FROM fsrs_cards').all()
+    const lessons = db.prepare('SELECT * FROM lesson_progress').all()
+    return { mastery, attempts, cards, lessons, exportedAt: new Date().toISOString() }
+  })
 
   // Progress database
   ipcMain.handle('db-get-progress', () => {

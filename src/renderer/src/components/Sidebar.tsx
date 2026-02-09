@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { NavLink, useNavigate } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 import { useAppStore } from '../stores/app'
 import { useProgressStore } from '../stores/progress'
 
@@ -8,11 +8,22 @@ export default function Sidebar(): JSX.Element {
   const reviewDueCount = useProgressStore((s) => s.reviewDueCount)
   const lessonProgress = useProgressStore((s) => s.lessonProgress)
   const [expandedModules, setExpandedModules] = useState<Record<string, boolean>>({})
+  const [lessonTitles, setLessonTitles] = useState<Record<string, Record<string, string>>>({})
 
   useEffect(() => {
     if (modules.length > 0 && Object.keys(expandedModules).length === 0) {
       setExpandedModules({ [modules[0].id]: true })
     }
+
+    // Load lesson titles for all modules
+    const loadTitles = async (): Promise<void> => {
+      const titles: Record<string, Record<string, string>> = {}
+      for (const mod of modules) {
+        titles[mod.id] = await window.julius.getLessonTitles(mod.id)
+      }
+      setLessonTitles(titles)
+    }
+    if (modules.length > 0) loadTitles()
   }, [modules])
 
   const toggleModule = (moduleId: string): void => {
@@ -61,6 +72,7 @@ export default function Sidebar(): JSX.Element {
             {expandedModules[mod.id] &&
               mod.lessons.map((lessonId) => {
                 const mastery = getLessonMastery(lessonId)
+                const title = lessonTitles[mod.id]?.[lessonId] || lessonId.replace(/^\d+-/, '').replace(/-/g, ' ')
                 return (
                   <NavLink
                     key={lessonId}
@@ -68,7 +80,7 @@ export default function Sidebar(): JSX.Element {
                     className={({ isActive }) => `sidebar-link ${isActive ? 'active' : ''}`}
                   >
                     <span className={`mastery-dot ${mastery}`} />
-                    {lessonId.replace(/^\d+-/, '').replace(/-/g, ' ')}
+                    {title}
                   </NavLink>
                 )
               })}

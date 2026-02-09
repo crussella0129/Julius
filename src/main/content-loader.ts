@@ -97,6 +97,25 @@ export function loadExercise(moduleId: string, lessonId: string, exerciseFile: s
   return parseYaml(raw) as ExerciseData
 }
 
+export function getLessonTitles(moduleId: string): Record<string, string> {
+  const root = getContentRoot()
+  const mod = loadModule(moduleId)
+  if (!mod) return {}
+
+  const titles: Record<string, string> = {}
+  for (const lessonId of mod.lessons) {
+    const mdPath = join(root, 'modules', moduleId, 'lessons', lessonId, 'lesson.md')
+    if (existsSync(mdPath)) {
+      const raw = readFileSync(mdPath, 'utf-8')
+      const { data } = matter(raw)
+      titles[lessonId] = data.title || lessonId
+    } else {
+      titles[lessonId] = lessonId
+    }
+  }
+  return titles
+}
+
 export function listExercises(moduleId: string, lessonId: string): string[] {
   const root = getContentRoot()
   const exDir = join(root, 'modules', moduleId, 'lessons', lessonId, 'exercises')

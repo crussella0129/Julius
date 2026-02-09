@@ -9,6 +9,8 @@ export default function Lesson(): JSX.Element {
   const { moduleId, lessonId } = useParams<{ moduleId: string; lessonId: string }>()
   const [lesson, setLesson] = useState<LessonMeta | null>(null)
   const [exercises, setExercises] = useState<string[]>([])
+  const [exerciseIds, setExerciseIds] = useState<Record<string, string>>({})
+  const [completedExercises, setCompletedExercises] = useState<Set<string>>(new Set())
   const [loading, setLoading] = useState(true)
   const modules = useAppStore((s) => s.modules)
   const lessonProgress = useProgressStore((s) => s.lessonProgress)
@@ -24,9 +26,23 @@ export default function Lesson(): JSX.Element {
       setLoading(false)
     })
 
-    // Load exercise file list from content directory
-    window.julius.listExercises(moduleId, lessonId).then((files) => {
+    // Load exercise file list and their IDs
+    window.julius.listExercises(moduleId, lessonId).then(async (files) => {
       setExercises(files)
+      const ids: Record<string, string> = {}
+      for (const file of files) {
+        const ex = await window.julius.loadExercise(moduleId, lessonId, file)
+        if (ex) ids[file] = ex.id
+      }
+      setExerciseIds(ids)
+    })
+
+    // Load which exercises have been completed
+    window.julius.getLessonAttempts(lessonId).then((attempts) => {
+      const passed = new Set(
+        attempts.filter((a) => a.best_success === 1).map((a) => a.exercise_id)
+      )
+      setCompletedExercises(passed)
     })
   }, [moduleId, lessonId])
 
@@ -87,6 +103,8 @@ export default function Lesson(): JSX.Element {
             {exercises.map((ex) => {
               const label = ex.replace('.yaml', '').replace(/^\d+-/, '').replace(/-/g, ' ')
               const type = label.split(' ')[0]
+              const exId = exerciseIds[ex]
+              const isCompleted = exId ? completedExercises.has(exId) : false
               return (
                 <button
                   key={ex}
@@ -94,6 +112,11 @@ export default function Lesson(): JSX.Element {
                   style={{ justifyContent: 'flex-start', textTransform: 'capitalize' }}
                   onClick={() => navigate(`/exercise/${moduleId}/${lessonId}/${ex}`)}
                 >
+                  {isCompleted ? (
+                    <span style={{ color: 'var(--accent-success)', fontWeight: 600 }}>{'\u2713'}</span>
+                  ) : (
+                    <span style={{ color: 'var(--text-tertiary)' }}>{'\u25CB'}</span>
+                  )}
                   <span className="badge badge-info">{type}</span>
                   {label}
                 </button>
