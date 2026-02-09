@@ -4,7 +4,7 @@
   "description": "A cross-platform Python teaching app with research-backed pedagogy",
   "main": "./out/main/index.js",
   "author": "crussella0129",
-  "license": "MIT",
+  "license": "GPL-3.0-only",
   "scripts": {
     "dev": "electron-vite dev",
     "build": "electron-vite build",
