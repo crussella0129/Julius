@@ -3,7 +3,7 @@ Name=Julius
 Comment=Learn Python with research-backed pedagogy
 Exec=bash -c "export NVM_DIR=$HOME/.nvm && [ -s $NVM_DIR/nvm.sh ] && . $NVM_DIR/nvm.sh && cd /home/charles/Git_Repos/Julius && npm run dev"
 Path=/home/charles/Git_Repos/Julius
-Icon=julius
+Icon=/home/charles/Git_Repos/Julius/resources/icon.png
 Type=Application
 Terminal=false
 Categories=Education;Development;
