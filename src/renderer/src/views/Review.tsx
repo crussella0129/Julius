@@ -1,32 +1,62 @@
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useProgressStore } from '../stores/progress'
-import { createEmptyCard, fsrs, generatorParameters, Rating } from 'ts-fsrs'
+import { fsrs, generatorParameters, Rating } from 'ts-fsrs'
 
 const f = fsrs(generatorParameters())
+
+interface ExerciseRoute {
+  moduleId: string
+  lessonId: string
+  exerciseFile: string
+}
 
 export default function Review(): JSX.Element {
   const { fsrsCards, loadFsrsCards, upsertFsrsCard, loadAll } = useProgressStore()
   const [dueCards, setDueCards] = useState<FsrsCardRow[]>([])
+  const [exerciseRoutes, setExerciseRoutes] = useState<Record<string, ExerciseRoute>>({})
+  const [exercisePrompts, setExercisePrompts] = useState<Record<string, string>>({})
   const [currentIndex, setCurrentIndex] = useState(0)
   const [sessionComplete, setSessionComplete] = useState(false)
   const navigate = useNavigate()
 
   useEffect(() => {
-    loadFsrsCards().then(() => {
-      const now = new Date()
-      const due = fsrsCards.filter((c) => new Date(c.due) <= now)
-      setDueCards(due)
-      if (due.length === 0) setSessionComplete(true)
-    })
+    loadFsrsCards()
   }, [])
 
-  // Re-derive due cards when fsrsCards changes
+  // Derive due cards and look up exercise routes
   useEffect(() => {
     const now = new Date()
     const due = fsrsCards.filter((c) => new Date(c.due) <= now)
     setDueCards(due)
     if (due.length === 0 && fsrsCards.length > 0) setSessionComplete(true)
+
+    // Look up routes for due exercises via attempt records
+    const lookupRoutes = async (): Promise<void> => {
+      const routes: Record<string, ExerciseRoute> = {}
+      const prompts: Record<string, string> = {}
+      const modules = await window.julius.listModules()
+
+      for (const card of due) {
+        // Find the exercise by searching modules
+        for (const mod of modules) {
+          for (const lessonId of mod.lessons) {
+            const files = await window.julius.listExercises(mod.id, lessonId)
+            for (const file of files) {
+              const ex = await window.julius.loadExercise(mod.id, lessonId, file)
+              if (ex && ex.id === card.exercise_id) {
+                routes[card.exercise_id] = { moduleId: mod.id, lessonId, exerciseFile: file }
+                prompts[card.exercise_id] = ex.prompt
+              }
+            }
+          }
+        }
+      }
+      setExerciseRoutes(routes)
+      setExercisePrompts(prompts)
+    }
+
+    if (due.length > 0) lookupRoutes()
   }, [fsrsCards])
 
   const handleRating = async (rating: Rating): Promise<void> => {
@@ -113,24 +143,24 @@ export default function Review(): JSX.Element {
 
       <div className="card" style={{ marginBottom: '1.5rem' }}>
         <p style={{ fontSize: '1.05rem', fontWeight: 500, marginBottom: '0.5rem' }}>
-          Exercise: {current.exercise_id}
+          {exercisePrompts[current.exercise_id] || current.exercise_id}
         </p>
         <p style={{ color: 'var(--text-secondary)', fontSize: '0.875rem' }}>
           Reps: {current.reps} | Lapses: {current.lapses} | Stability: {current.stability.toFixed(1)}
         </p>
-        <div style={{ marginTop: '1rem' }}>
-          <button
-            className="btn btn-secondary"
-            onClick={() => {
-              // Navigate to the exercise
-              const parts = current.exercise_id.split('-')
-              // Best-effort: redirect to exercise route
-              navigate(`/`)
-            }}
-          >
-            Open Exercise
-          </button>
-        </div>
+        {exerciseRoutes[current.exercise_id] && (
+          <div style={{ marginTop: '1rem' }}>
+            <button
+              className="btn btn-secondary"
+              onClick={() => {
+                const route = exerciseRoutes[current.exercise_id]
+                navigate(`/exercise/${route.moduleId}/${route.lessonId}/${route.exerciseFile}`)
+              }}
+            >
+              Open Exercise
+            </button>
+          </div>
+        )}
       </div>
 
       <p style={{ marginBottom: '0.75rem', fontWeight: 500 }}>How well did you remember?</p>

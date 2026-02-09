@@ -39,6 +39,8 @@ function ParsonsExercise({ exercise, onResult }: { exercise: ExerciseData; onRes
     setDragIdx(null)
   }
 
+  const [isCorrectResult, setIsCorrectResult] = useState(false)
+
   const check = (): void => {
     const solutionOrder = exercise.solution_order || []
     const numBlocks = exercise.blocks?.length || 0
@@ -58,6 +60,7 @@ function ParsonsExercise({ exercise, onResult }: { exercise: ExerciseData; onRes
 
     setCorrectness(corr)
     setChecked(true)
+    setIsCorrectResult(isCorrect)
     onResult(isCorrect)
   }
 
@@ -90,6 +93,13 @@ function ParsonsExercise({ exercise, onResult }: { exercise: ExerciseData; onRes
       <div className="exercise-actions">
         <button className="btn btn-primary" onClick={check}>Check Answer</button>
       </div>
+      {checked && (
+        <Feedback
+          correct={isCorrectResult}
+          message={isCorrectResult ? 'Lines are in the correct order!' : 'The order isn\'t right yet. Think about what needs to happen first.'}
+          hints={exercise.hints}
+        />
+      )}
     </div>
   )
 }
@@ -338,6 +348,7 @@ export default function Exercise(): JSX.Element {
     exerciseFile: string
   }>()
   const [exercise, setExercise] = useState<ExerciseData | null>(null)
+  const [exerciseFiles, setExerciseFiles] = useState<string[]>([])
   const [loading, setLoading] = useState(true)
   const [completed, setCompleted] = useState(false)
   const startTime = useRef(Date.now())
@@ -349,11 +360,20 @@ export default function Exercise(): JSX.Element {
     startTime.current = Date.now()
     setCompleted(false)
     setLoading(true)
-    window.julius.loadExercise(moduleId, lessonId, exerciseFile).then((data) => {
+
+    Promise.all([
+      window.julius.loadExercise(moduleId, lessonId, exerciseFile),
+      window.julius.listExercises(moduleId, lessonId)
+    ]).then(([data, files]) => {
       setExercise(data)
+      setExerciseFiles(files)
       setLoading(false)
     })
   }, [moduleId, lessonId, exerciseFile])
+
+  const currentExIndex = exerciseFiles.indexOf(exerciseFile!)
+  const prevExercise = currentExIndex > 0 ? exerciseFiles[currentExIndex - 1] : null
+  const nextExercise = currentExIndex < exerciseFiles.length - 1 ? exerciseFiles[currentExIndex + 1] : null
 
   const handleResult = async (correct: boolean): Promise<void> => {
     if (!exercise || !moduleId || !lessonId) return
@@ -447,17 +467,40 @@ export default function Exercise(): JSX.Element {
       {exercise.type === 'fill-in' && <FillInExercise exercise={exercise} onResult={handleResult} />}
 
       <div className="lesson-nav" style={{ marginTop: '2rem' }}>
-        <button
-          className="btn btn-secondary"
-          onClick={() => navigate(`/lesson/${moduleId}/${lessonId}`)}
-        >
-          Back to Lesson
-        </button>
-        {completed && (
-          <button className="btn btn-primary" onClick={() => navigate(`/lesson/${moduleId}/${lessonId}`)}>
-            Continue
+        <div style={{ display: 'flex', gap: '0.5rem' }}>
+          <button
+            className="btn btn-secondary"
+            onClick={() => navigate(`/lesson/${moduleId}/${lessonId}`)}
+          >
+            Back to Lesson
           </button>
-        )}
+          {prevExercise && (
+            <button
+              className="btn btn-secondary"
+              onClick={() => navigate(`/exercise/${moduleId}/${lessonId}/${prevExercise}`)}
+            >
+              Previous
+            </button>
+          )}
+        </div>
+        <div>
+          {completed && nextExercise && (
+            <button
+              className="btn btn-primary"
+              onClick={() => navigate(`/exercise/${moduleId}/${lessonId}/${nextExercise}`)}
+            >
+              Next Exercise
+            </button>
+          )}
+          {completed && !nextExercise && (
+            <button
+              className="btn btn-success"
+              onClick={() => navigate(`/lesson/${moduleId}/${lessonId}`)}
+            >
+              Lesson Complete
+            </button>
+          )}
+        </div>
       </div>
     </div>
   )

@@ -12,6 +12,7 @@ export default function Lesson(): JSX.Element {
   const [loading, setLoading] = useState(true)
   const modules = useAppStore((s) => s.modules)
   const lessonProgress = useProgressStore((s) => s.lessonProgress)
+  const conceptMastery = useProgressStore((s) => s.conceptMastery)
   const navigate = useNavigate()
 
   useEffect(() => {
@@ -67,7 +68,7 @@ export default function Lesson(): JSX.Element {
           <span style={{ fontSize: '0.8rem', color: 'var(--text-tertiary)', marginRight: '0.5rem' }}>Concepts:</span>
           <div className="concept-map" style={{ display: 'inline-flex' }}>
             {lesson.concepts.map((c) => (
-              <span key={c} className="concept-tag">{c}</span>
+              <span key={c} className={`concept-tag ${conceptMastery[c] || ''}`}>{c}</span>
             ))}
           </div>
         </div>
