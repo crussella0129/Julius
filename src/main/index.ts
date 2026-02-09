@@ -1,5 +1,6 @@
 import { app, shell, BrowserWindow, ipcMain, nativeTheme } from 'electron'
 import { join } from 'path'
+import { execFile } from 'child_process'
 import { electronApp, optimizer, is } from '@electron-toolkit/utils'
 import { initDatabase, getDb } from './db'
 import { runPython } from './python-runner'
@@ -22,6 +23,16 @@ function createWindow(): void {
 
   mainWindow.on('ready-to-show', () => {
     mainWindow.show()
+
+    // On Linux X11, Electron dev mode hardcodes WM_CLASS to "Chromium" (binary name).
+    // Use xdotool to override it so GNOME matches our julius.desktop file and shows
+    // the correct dock icon. This is a no-op on Wayland or if xdotool isn't installed.
+    if (process.platform === 'linux') {
+      const nativeHandle = mainWindow.getNativeWindowHandle()
+      // X11 window ID is a 32-bit uint in the native handle buffer
+      const xid = nativeHandle.readUInt32LE(0)
+      execFile('xdotool', ['set_window', '--class', 'julius', '--classname', 'julius', String(xid)], () => {})
+    }
   })
 
   mainWindow.webContents.setWindowOpenHandler((details) => {
@@ -184,6 +195,13 @@ function setupIPC(): void {
       'SELECT exercise_id, MAX(success) as best_success FROM exercise_attempts WHERE lesson_id = ? GROUP BY exercise_id'
     ).all(lessonId)
   })
+}
+
+// On Linux, fix the dock icon by setting WM_CLASS to match our .desktop file.
+// In production, electron-builder handles this. In dev mode, the electron binary
+// hardcodes WM_CLASS to "Chromium", so we use xdotool to override it on X11.
+if (process.platform === 'linux') {
+  app.setDesktopName('julius.desktop')
 }
 
 app.whenReady().then(() => {

@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=Julius
+Comment=Learn Python with research-backed pedagogy
+Exec=julius
+Icon=julius
+Type=Application
+Categories=Education;Development;
+StartupWMClass=julius
