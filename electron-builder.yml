@@ -22,11 +22,11 @@ linux:
 win:
   target:
     - nsis
-  icon: resources/icon.png
+  icon: resources/icon.ico
 mac:
   target:
     - dmg
-  icon: resources/icon.png
+  icon: resources/icon.icns
   category: public.app-category.education
 nsis:
   oneClick: false

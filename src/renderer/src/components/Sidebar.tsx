@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { NavLink } from 'react-router-dom'
 import { useAppStore } from '../stores/app'
 import { useProgressStore } from '../stores/progress'
+import logo from '../assets/logo.svg'
 
 export default function Sidebar(): JSX.Element {
   const modules = useAppStore((s) => s.modules)
@@ -37,6 +38,7 @@ export default function Sidebar(): JSX.Element {
   return (
     <aside className="sidebar">
       <div className="sidebar-header">
+        <img src={logo} alt="Julius logo" width={32} height={32} />
         <h1>Julius</h1>
       </div>
 
